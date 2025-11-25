@@ -656,7 +656,7 @@ export function BlogContent() {
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
                     Latest Update</h3>
-                  <form className="footer-widget-two__newsletter-form mc-form" data-url="MC_FORM_URL" noValidate="novalidate">
+                  <form className="footer-widget-two__newsletter-form mc-form" data-url="MC_FORM_URL" noValidate>
                     <div className="footer-widget-two__newsletter-form-input-box">
                       <input type="email" placeholder="Enter email" name="EMAIL" />
                     </div>
@@ -840,7 +840,13 @@ export function BlogContent() {
           <button className="close-search"><span className="far fa-times fa-fw" /></button>
           <form method="post" action="blog.html">
             <div className="form-group">
-              <input type="search" name="search-field" defaultValue placeholder="Search Here" required />
+              <input
+                type="search"
+                name="search-field"
+                defaultValue=""
+                placeholder="Search Here"
+                required
+              />
               <button type="submit"><i className="fas fa-search" /></button>
             </div>
           </form>
