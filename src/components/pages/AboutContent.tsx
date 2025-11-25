@@ -368,7 +368,7 @@ export function AboutContent() {
           </section>
           {/*Page Header End*/}
           {/*About One Start */}
-          <section className="about-one about-five">
+          <section id="our-history" className="about-one about-five">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6">
@@ -404,54 +404,79 @@ export function AboutContent() {
                 <div className="col-xl-6">
                   <div className="about-one__right">
                     <div className="section-title text-left sec-title-animation animation-style2">
-                      <div className="section-title__tagline-box">
-                        <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
-                        </div>
-                        <h6 className="section-title__tagline">ABOUT US</h6>
-                        <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
-                        </div>
+                    <div className="section-title__tagline-box">
+                      <div className="section-title__shape-1">
+                        <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
                       </div>
-                      <h3 className="section-title__title title-animation">Connecting Farms With <br />The Future
-                      </h3>
+                      <h6 className="section-title__tagline">Our History</h6>
+                      <div className="section-title__shape-1">
+                        <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
+                      </div>
                     </div>
-                    <p className="about-one__text">At Farmology, we believe in transforming agriculture with
-                      innovation, sustainability, and trust. Our mission is to bridge the gap between
-                      traditional farming and modern solutions—helping farmers grow.</p>
-                    <h4 className="about-one__title-1">With a strong commitment</h4>
+                    <h3 className="section-title__title title-animation">History</h3>
+                  </div>
+                  <p className="about-one__text">Welcome to Ajeet Seeds Pvt. Ltd.</p>
+                  <p className="about-one__text">
+                    Ajeet Seeds has played a significant role in producing and supplying quality hybrid seeds
+                    to farmers at affordable prices. Ajeet-11, a cotton hybrid introduced in 1992, is known
+                    for its seed quality and tolerance to both biotic and abiotic stresses. Ajeet-11 was
+                    followed by Ajeet-33, which offered distinguishing differences and attributes. Continued
+                    research led to the development of many hybrids in crops such as Jowar, Bajra, Maize,
+                    Sunflower, and Vegetables. The hybrid Bhendi Ajeet-311 was launched in 2002, followed by
+                    hybrids of Chilies, Brinjal, Tomato, Bottle Gourd, Bitter Gourd, and more.
+                  </p>
+                  <p className="about-one__text">
+                    Ajeet Seeds is the first private seed company to introduce a proprietary variety of
+                    wheat, Ajeet-102. Our progress continues to be robust and dynamic. Today, our product
+                    portfolio covers 22 crops and 55 different hybrid varieties.
+                  </p>
+                  <p className="about-one__text">
+                    Understanding the pivotal role of biotechnology in the seed industry, Ajeet Seeds
+                    established the Plant Biotechnology Research Center (PBRC) in 2003 at Hanumantgaon,
+                    Taluka Gangapur. PBRC has been recognized as a research center by Dr. Babasaheb Ambedkar
+                    Marathwada University.
+                  </p>
+                  <p className="about-one__text">
+                    We have also built a State-of-the-Art laboratory, backed by expert scientists led by a
+                    veteran biotech specialist. Our teams are developing indigenous transgenic technology to
+                    accelerate progress. Ajeet Seeds remains committed to farm prosperity and is actively
+                    engaged in genetic research using crop biotechnology to improve the lives of Indian
+                    farmers. In line with this, we introduced three genetically modified Bt cotton hybrids in
+                    the Kharif season of 2006.
+                  </p>
+                  <h4 className="about-one__title-1">A legacy of innovation</h4>
                     <div className="about-one__points-box-and-since">
                       <ul className="about-one__points list-unstyled">
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Premium quality seeds, eco<br />-friendly fertilizers</p>
+                        <p>Ajeet-11 &amp; Ajeet-33 set the benchmark<br />for resilient cotton hybrids.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Automation to maximize yield<br /> and efficiency.</p>
+                        <p>India's first private wheat variety<br />Ajeet-102 pioneered diversification.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Building strong communities<br /> with training</p>
+                        <p>22 crops &amp; 55 hybrids support<br />farm prosperity nationwide.</p>
                         </li>
                       </ul>
                       <div className="about-one__since-box">
                         <div className="about-one__since-icon">
                           <span className="icon-harvester" />
                         </div>
-                        <h5 className="about-one__since-title">Harvesting since</h5>
-                        <h4 className="about-one__since-year">2000</h4>
+                      <h5 className="about-one__since-title">Progress since</h5>
+                      <h4 className="about-one__since-year">1992</h4>
                       </div>
                     </div>
                     <div className="about-one__btn-and-video">
                       <div className="about-one__btn-box">
-                        <a className="thm-btn" href="/about">More About Us
+                      <a className="thm-btn" href="/about#our-history">Explore Our Journey
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
@@ -469,7 +494,7 @@ export function AboutContent() {
                           </a>
                         </div>
                         <p className="about-one__video-text">
-                          Watch Our Story</p>
+                          Research in Action</p>
                       </div>
                     </div>
                   </div>
@@ -478,6 +503,28 @@ export function AboutContent() {
             </div>
           </section>
           {/*About One End */}
+          {/*Leaders Overview Start */}
+          <section className="services-three leaders-overview">
+            <div className="container">
+              <div className="section-title text-center sec-title-animation animation-style1">
+                <div className="section-title__tagline-box">
+                  <div className="section-title__shape-1">
+                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                  </div>
+                  <h6 className="section-title__tagline">Agriculture Professional Leaders</h6>
+                  <div className="section-title__shape-1">
+                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                  </div>
+                </div>
+                <h3 className="section-title__title title-animation">Trading Activity</h3>
+              </div>
+              <div className="leaders-overview__text wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
+                <p>Our leadership team combines decades of experience with an unwavering commitment to
+                  innovation in Indian agriculture.</p>
+              </div>
+            </div>
+          </section>
+          {/*Leaders Overview End */}
           {/*Author One Start */}
           <section className="author-one">
             <div className="container">
@@ -487,16 +534,7 @@ export function AboutContent() {
                     <h4 className="author-one__Vission-mission-title">Our Vision </h4>
                     <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p>Smarter farming for all</p>
-                      </li>
-                      <li>
-                        <p>Sustainable and eco-friendly</p>
-                      </li>
-                      <li>
-                        <p>Inclusive growth for farmers</p>
-                      </li>
-                      <li>
-                        <p>Innovation-driven agriculture</p>
+                        <p>To acquire and apply the latest technologies to enhance crop productivity.</p>
                       </li>
                     </ul>
                   </div>
@@ -510,10 +548,11 @@ export function AboutContent() {
                       <div className="author-one__text-box-shape-1">
                         <img src="assets/images/shapes/author-one-text-box-shape-1.png" alt="author-one-text-box-shape-1" />
                       </div>
-                      <p className="author-one__text">Empowering Farmers for a Sustainable Future</p>
+                      <p className="author-one__text">The Plant Biotechnology Research Center guides our scientific
+                        rigor, ensuring every hybrid seed delivers on performance, resilience, and farmer prosperity.</p>
                       <div className="author-one__info">
-                        <h4>Joseph C. Jensen</h4>
-                        <p>Founder</p>
+                        <h4>Padmakar Mulay</h4>
+                        <p>Chairman</p>
                       </div>
                       <div className="author-one__sign">
                         <img src="assets/images/resources/author-one-sign.png" alt="author-one-sign" />
@@ -548,16 +587,7 @@ export function AboutContent() {
                     <h4 className="author-one__Vission-mission-title">Our Mission </h4>
                     <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p>Ensure efficient use of resources</p>
-                      </li>
-                      <li>
-                        <p>Help farmers grow better crops</p>
-                      </li>
-                      <li>
-                        <p>Make sustainable farming easy</p>
-                      </li>
-                      <li>
-                        <p>Provide tools &amp; knowledge</p>
+                        <p>To provide high-quality seeds with the right genotype, at the right time, and at an affordable price.</p>
                       </li>
                     </ul>
                   </div>
@@ -567,21 +597,19 @@ export function AboutContent() {
           </section>
           {/*Author One End */}
           {/*Services Two Start */}
-          <section className="services-two">
+          <section className="services-two departments-section">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
                     <img src="assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Farmology Services</h6>
+                  <h6 className="section-title__tagline">What we're doing</h6>
                   <div className="section-title__shape-1">
                     <img src="assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Bringing Sustainable Farming &amp; <br />Organic Growth
-                  Solutions
-                </h3>
+                <h3 className="section-title__title title-animation">Our Departments</h3>
               </div>
               <div className="services-two__inner">
                 <div className="services-two__carousel owl-theme owl-carousel">
@@ -597,14 +625,12 @@ export function AboutContent() {
                         <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
                         </div>
                         <div className="services-two__icon">
-                          <span className="icon-hen-1" />
+                          <span className="icon-plant-1" />
                         </div>
-                        <h3 className="services-two__title"><a href="livestock.html">Livestock<br />
-                            Management</a></h3>
-                        <p className="services-two__text">Professional care &amp; modern techniques for cattle.
-                        </p>
+                        <h3 className="services-two__title"><a href="/services">R &amp; D</a></h3>
+                        <p className="services-two__text">Genetic research and hybrid development led by the Plant Biotechnology Research Center.</p>
                         <div className="services-two__read-more">
-                          <a href="livestock.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -618,18 +644,16 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-2.jpg" alt="" />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                        <div className="services-two__content">
                         <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
                         </div>
                         <div className="services-two__icon">
-                          <span className="icon-cow" />
+                          <span className="icon-harvester-1" />
                         </div>
-                        <h3 className="services-two__title"><a href="dairy-products.html">Dairy Farming
-                            Services</a></h3>
-                        <p className="services-two__text">High-quality dairy production, processing solutions.
-                        </p>
+                        <h3 className="services-two__title"><a href="/services">Production</a></h3>
+                        <p className="services-two__text">Seed multiplication and large-scale production adhering to strict agronomic protocols.</p>
                         <div className="services-two__read-more">
-                          <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -643,18 +667,16 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-3.jpg" alt="" />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                        <div className="services-two__content">
                         <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
                         </div>
                         <div className="services-two__icon">
-                          <span className="icon-plant-1" />
+                          <span className="icon-precision-agriculture" />
                         </div>
-                        <h3 className="services-two__title"><a href="grains-cereals.html">Soil &amp; Crop<br />
-                            Analysis</a></h3>
-                        <p className="services-two__text">Scientific soil testing and crop consultancy.
-                        </p>
+                        <h3 className="services-two__title"><a href="/services">Quality Control</a></h3>
+                        <p className="services-two__text">Multi-stage lab and field testing to guarantee purity, vigor, and farmer-ready performance.</p>
                         <div className="services-two__read-more">
-                          <a href="grains-cereals.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -668,19 +690,16 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-4.jpg" alt="" />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                        <div className="services-two__content">
                         <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
                         </div>
                         <div className="services-two__icon">
-                          <span className="icon-hydroponic-gardening" />
+                          <span className="icon-supply-chain" />
                         </div>
-                        <h3 className="services-two__title"><a href="herbs-spices.html">Smart Irrigation
-                            System</a></h3>
-                        <p className="services-two__text">Modern irrigation technology to save water boost
-                          growth.
-                        </p>
+                        <h3 className="services-two__title"><a href="/services">Processing</a></h3>
+                        <p className="services-two__text">State-of-the-art conditioning ensures clean, graded, and well-packed seed lots.</p>
                         <div className="services-two__read-more">
-                          <a href="herbs-spices.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -694,196 +713,16 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-5.jpg" alt="" />
                         </div>
                       </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-harvester-1" />
-                        </div>
-                        <h3 className="services-two__title"><a href="fresh-produce.html">Farm-to-Table
-                            Delivery</a></h3>
-                        <p className="services-two__text">Direct delivery of fresh organic products to
-                          customers.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-6.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
+                        <div className="services-two__content">
                         <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-farming" />
                         </div>
-                        <h3 className="services-two__title"><a href="fresh-produce.html">Training &amp;<br />
-                            Workshops</a></h3>
-                        <p className="services-two__text">Farmers &amp; entrepreneurs modern
-                          agriculture.
-                        </p>
+                        <h3 className="services-two__title"><a href="/services">Marketing</a></h3>
+                        <p className="services-two__text">Closer farmer engagement, timely availability, and trusted advisory support.</p>
                         <div className="services-two__read-more">
-                          <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-7.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-precision-agriculture" />
-                        </div>
-                        <h3 className="services-two__title"><a href="fresh-produce.html">Organic Farming
-                            Solutions</a></h3>
-                        <p className="services-two__text">Sustainable and eco-friendly farming practices.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-8.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-supply-chain" />
-                        </div>
-                        <h3 className="services-two__title"><a href="dairy-products.html">Farm Equipment
-                            Supply</a></h3>
-                        <p className="services-two__text">Modern tools &amp; machinery for efficient farming.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-1.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-hen-1" />
-                        </div>
-                        <h3 className="services-two__title"><a href="livestock.html">Livestock<br />
-                            Management</a></h3>
-                        <p className="services-two__text">Professional care &amp; modern techniques for cattle.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="livestock.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-2.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-cow" />
-                        </div>
-                        <h3 className="services-two__title"><a href="dairy-products.html">Dairy Farming
-                            Services</a></h3>
-                        <p className="services-two__text">High-quality dairy production, processing solutions.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-3.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-plant-1" />
-                        </div>
-                        <h3 className="services-two__title"><a href="herbs-spices.html">Soil &amp; Crop<br />
-                            Analysis</a></h3>
-                        <p className="services-two__text">Scientific soil testing and crop consultancy.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="herbs-spices.html">Read More<span className="fas fa-arrow-right" /></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/*Services Two Single End*/}
-                  {/*Services Two Single Start*/}
-                  <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-4.jpg" alt="" />
-                        </div>
-                      </div>
-                      <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                        </div>
-                        <div className="services-two__icon">
-                          <span className="icon-hydroponic-gardening" />
-                        </div>
-                        <h3 className="services-two__title"><a href="fresh-produce.html">Smart Irrigation
-                            System</a></h3>
-                        <p className="services-two__text">Modern irrigation technology to save water boost
-                          growth.
-                        </p>
-                        <div className="services-two__read-more">
-                          <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -895,23 +734,23 @@ export function AboutContent() {
           </section>
           {/*Services Two End */}
           {/*Team One Start */}
-          <section className="team-one about-page-team">
+          <section id="team" className="team-one about-page-team">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
                     <img src="assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Our Farmer</h6>
+                  <h6 className="section-title__tagline">Professional People</h6>
                   <div className="section-title__shape-1">
                     <img src="assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Dedicated To Growth &amp; Quality</h3>
+                <h3 className="section-title__title title-animation">Board of Directors</h3>
               </div>
               <div className="row">
                 {/*Team One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
+                <div className="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
                   <div className="team-one__single">
                     <div className="team-one__img-box">
                       <div className="team-one__img">
@@ -921,8 +760,8 @@ export function AboutContent() {
                     <div className="team-one__content">
                       <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
                       </div>
-                      <h3 className="team-one__title"><a href="team-details.html">Dapper John</a></h3>
-                      <p className="team-one__sub-title">Co-Founder</p>
+                      <h3 className="team-one__title"><a href="/about#team">Padmakar Mulay</a></h3>
+                      <p className="team-one__sub-title">Chairman</p>
                       <div className="team-one__social">
                         <a href="/about#"><span className="fab fa-facebook-f" /></a>
                         <a href="/about#"><span className="fab fa-twitter" /></a>
@@ -934,7 +773,7 @@ export function AboutContent() {
                 </div>
                 {/*Team One Single End*/}
                 {/*Team One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
+                <div className="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
                   <div className="team-one__single">
                     <div className="team-one__img-box">
                       <div className="team-one__img">
@@ -944,8 +783,8 @@ export function AboutContent() {
                     <div className="team-one__content">
                       <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
                       </div>
-                      <h3 className="team-one__title"><a href="team-details.html">Frankie Dykes</a></h3>
-                      <p className="team-one__sub-title">Quality Manager</p>
+                      <h3 className="team-one__title"><a href="/about#team">Sameer Mulay</a></h3>
+                      <p className="team-one__sub-title">Managing Director</p>
                       <div className="team-one__social">
                         <a href="/about#"><span className="fab fa-facebook-f" /></a>
                         <a href="/about#"><span className="fab fa-twitter" /></a>
@@ -957,7 +796,7 @@ export function AboutContent() {
                 </div>
                 {/*Team One Single End*/}
                 {/*Team One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
+                <div className="col-xl-4 col-lg-4 col-md-6 wow fadeInRight" data-wow-delay="300ms">
                   <div className="team-one__single">
                     <div className="team-one__img-box">
                       <div className="team-one__img">
@@ -967,31 +806,8 @@ export function AboutContent() {
                     <div className="team-one__content">
                       <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
                       </div>
-                      <h3 className="team-one__title"><a href="team-details.html">David Crum</a></h3>
-                      <p className="team-one__sub-title">Head of Farm Care</p>
-                      <div className="team-one__social">
-                        <a href="/about#"><span className="fab fa-facebook-f" /></a>
-                        <a href="/about#"><span className="fab fa-twitter" /></a>
-                        <a href="/about#"><span className="fab fa-pinterest-p" /></a>
-                        <a href="/about#"><span className="fab fa-instagram" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Team One Single End*/}
-                {/*Team One Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
-                  <div className="team-one__single">
-                    <div className="team-one__img-box">
-                      <div className="team-one__img">
-                        <img src="assets/images/team/team-1-4.jpg" alt="team-one__img" />
-                      </div>
-                    </div>
-                    <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
-                      </div>
-                      <h3 className="team-one__title"><a href="team-details.html">Charles Halvorson</a></h3>
-                      <p className="team-one__sub-title">Sales Manager</p>
+                      <h3 className="team-one__title"><a href="/about#team">Ranjeet Mulay</a></h3>
+                      <p className="team-one__sub-title">Director</p>
                       <div className="team-one__social">
                         <a href="/about#"><span className="fab fa-facebook-f" /></a>
                         <a href="/about#"><span className="fab fa-twitter" /></a>
@@ -1006,827 +822,17 @@ export function AboutContent() {
             </div>
           </section>
           {/*Team One End */}
-          {/*Faq One Start*/}
-          <section className="faq-one faq-two">
+          {/*Closing Statement Start*/}
+          <section className="cta-two closing-message">
             <div className="container">
-              <div className="row">
-                <div className="col-xl-6 col-lg-5">
-                  <div className="faq-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <div className="faq-one__contact-box">
-                      <div className="faq-one__contact-box-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/faq-one-contact-box-bg-shape.png)'}}>
-                      </div>
-                      <div className="faq-one__contact-shape-1">
-                        <img src="assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
-                      </div>
-                      <div className="faq-one__author-box-inner">
-                        <div className="faq-one__author-shape-1">
-                          <img src="assets/images/shapes/faq-one-author-shape-1.png" alt="" />
-                        </div>
-                        <div className="faq-one__author-box">
-                          <div className="faq-one__author-img">
-                            <img src="assets/images/resources/faq-one-author-img.png" alt="" />
-                          </div>
-                          <h4 className="faq-one__author-name"><a href="/about">Adam Smith</a></h4>
-                          <p className="faq-one__author-sub-title">Founder</p>
-                        </div>
-                      </div>
-                      <h3 className="faq-one__contact-title">Do you have more questions?</h3>
-                      <p className="faq-one__contact-text">Have any questions about our farm, products, or
-                        activities? Don’t hesitate to reach out!
-                        Our team is always ready to assist you with details about fresh produce, farm tours,
-                        or partnership opportunities.</p>
-                      <div className="faq-one__contact-social">
-                        <a href="/about#"><span className="fab fa-facebook-f" /></a>
-                        <a href="/about#"><span className="fab fa-twitter" /></a>
-                        <a href="/about#"><span className="fab fa-pinterest-p" /></a>
-                        <a href="/about#"><span className="fab fa-instagram" /></a>
-                      </div>
-                      <div className="faq-one__contact-number">
-                        <a href="tel:885747546027">+88 574 7546 027</a>
-                      </div>
-                      <div className="faq-one__contact-btn">
-                        <a className="thm-btn" href="/contact">Shoot a Direct Call
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-6 col-lg-7">
-                  <div className="faq-one__right">
-                    <div className="section-title text-left sec-title-animation animation-style2">
-                      <div className="section-title__tagline-box">
-                        <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-1.png" alt="" />
-                        </div>
-                        <h6 className="section-title__tagline">Got Questions?</h6>
-                        <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-2.png" alt="" />
-                        </div>
-                      </div>
-                      <h3 className="section-title__title title-animation">We’ve Got The Answers<br /> You Need.
-                      </h3>
-                    </div>
-                    <div className="accrodion-grp" data-grp-name="faq-one-accrodion">
-                      <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                        <div className="accrodion-title">
-                          <h4>Are your fruits and vegetables organic?</h4>
-                        </div>
-                        <div className="accrodion-content">
-                          <div className="inner">
-                            <p>Yes, we strictly follow organic farming methods without harmful
-                              chemicals.
-                            </p>
-                          </div>{/* /.inner */}
-                        </div>
-                      </div>
-                      <div className="accrodion active wow fadeInRight" data-wow-delay="100ms" data-wow-duration="1500ms">
-                        <div className="accrodion-title">
-                          <h4>Do you deliver products at home?</h4>
-                        </div>
-                        <div className="accrodion-content">
-                          <div className="inner">
-                            <p>Yes, we provide safe and fast home delivery within selected areas. Don’t
-                              hesitate to reach out!
-                            </p>
-                          </div>{/* /.inner */}
-                        </div>
-                      </div>
-                      <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                        <div className="accrodion-title">
-                          <h4>What payment methods do you accept?</h4>
-                        </div>
-                        <div className="accrodion-content">
-                          <div className="inner">
-                            <p>We accept cash on delivery, mobile banking, and online payments.
-                            </p>
-                          </div>{/* /.inner */}
-                        </div>
-                      </div>
-                      <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                        <div className="accrodion-title">
-                          <h4>How can I visit your farm?</h4>
-                        </div>
-                        <div className="accrodion-content">
-                          <div className="inner">
-                            <p>You can book a farm tour from our website or contact us directly.
-                            </p>
-                          </div>{/* /.inner */}
-                        </div>
-                      </div>
-                      <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-                        <div className="accrodion-title">
-                          <h4>Where are your farm products sourced from?</h4>
-                        </div>
-                        <div className="accrodion-content">
-                          <div className="inner">
-                            <p>All of our products are directly harvested from our own organic farm to
-                              ensure freshness.
-                            </p>
-                          </div>{/* /.inner */}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="cta-two__inner text-center">
+                <h3>Ajeet Seeds Pvt. Ltd.</h3>
+                <p>A company with excellence and earnestly dedicated to agriculture farming.</p>
               </div>
             </div>
           </section>
-          {/*Faq One End*/}
-          {/*Testimonial Three Start*/}
-          <section className="testimonial-three">
-            <div className="testimonial-three__bg-shape" style={{backgroundImage: 'url(assets/images/shapes/testimonial-three-bg-shape.png)'}} />
-            <div className="container">
-              <div className="row">
-                <div className="col-xl-4">
-                  <div className="testimonial-three__left">
-                    <div className="section-title text-left sec-title-animation animation-style2">
-                      <div className="section-title__tagline-box">
-                        <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-1.png" alt="" />
-                        </div>
-                        <h6 className="section-title__tagline">Our Feedbacks</h6>
-                        <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-2.png" alt="" />
-                        </div>
-                      </div>
-                      <h3 className="section-title__title title-animation">What They’re Talking About Our Company?
-                      </h3>
-                    </div>
-                    <p className="testimonial-three__left-text">Aliquam viverra arcu. Donec aliquet blandit enim
-                      feugiat. Suspendisse id quam sed eros tincidunt luctus sit amet eu nibh tempus turpis
-                    </p>
-                    <div className="testimonial-three__btn-box">
-                      <a className="thm-btn" href="/about">View all testimonials
-                        <i className="fal fa-long-arrow-right" />
-                        <span className="hover-btn hover-bx" />
-                        <span className="hover-btn hover-bx2" />
-                        <span className="hover-btn hover-bx3" />
-                        <span className="hover-btn hover-bx4" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-8">
-                  <div className="testimonial-three__right">
-                    <div className="testimonial-three__img-1">
-                      <img src="assets/images/testimonial/testimonial-three-img-1.jpg" alt="" />
-                    </div>
-                    <div className="testimonial-three__shape-2">
-                      <img src="assets/images/shapes/testimonial-three-shape-2.png" alt="" />
-                    </div>
-                    <div className="testimonial-three__carousel swiper-container">
-                      <div className="swiper-wrapper">
-                        {/*Testimonial Three Single Start*/}
-                        <div className="swiper-slide">
-                          <div className="testimonial-three__single">
-                            <div className="testimonial-three__content">
-                              <div className="testimonial-three__quote">
-                                <span className="icon-left" />
-                              </div>
-                              <p className="testimonial-three__text">Having been a host farmer for three
-                                seasons, we’ve seen
-                                firsthand the difference this
-                                internship makes in beginning
-                                farmers and host farms a like As
-                                a farmer.</p>
-                              <div className="testimonial-three__client-info">
-                                <h3><a href="testimonials.html">Adam Smith</a></h3>
-                                <p>Ceo Farmology</p>
-                              </div>
-                              <div className="testimonial-three__shape-1">
-                                <img src="assets/images/shapes/testimonial-three-shape-1.png" alt="" />
-                              </div>
-                            </div>
-                            <div className="testimonial-three__img">
-                              <img src="assets/images/testimonial/testimonial-3-1.jpg" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        {/*Testimonial Three Single End*/}
-                        {/*Testimonial Three Single Start*/}
-                        <div className="swiper-slide">
-                          <div className="testimonial-three__single">
-                            <div className="testimonial-three__content">
-                              <div className="testimonial-three__quote">
-                                <span className="icon-left" />
-                              </div>
-                              <p className="testimonial-three__text">Having been a host farmer for three
-                                seasons, we’ve seen
-                                firsthand the difference this
-                                internship makes in beginning
-                                farmers and host farms a like As
-                                a farmer.</p>
-                              <div className="testimonial-three__client-info">
-                                <h3><a href="testimonials.html">Alisha Martin</a></h3>
-                                <p>Ceo Farmology</p>
-                              </div>
-                              <div className="testimonial-three__shape-1">
-                                <img src="assets/images/shapes/testimonial-three-shape-1.png" alt="" />
-                              </div>
-                            </div>
-                            <div className="testimonial-three__img">
-                              <img src="assets/images/testimonial/testimonial-3-2.jpg" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        {/*Testimonial Three Single End*/}
-                        {/*Testimonial Three Single Start*/}
-                        <div className="swiper-slide">
-                          <div className="testimonial-three__single">
-                            <div className="testimonial-three__content">
-                              <div className="testimonial-three__quote">
-                                <span className="icon-left" />
-                              </div>
-                              <p className="testimonial-three__text">Having been a host farmer for three
-                                seasons, we’ve seen
-                                firsthand the difference this
-                                internship makes in beginning
-                                farmers and host farms a like As
-                                a farmer.</p>
-                              <div className="testimonial-three__client-info">
-                                <h3><a href="testimonials.html">Dapper John</a></h3>
-                                <p>Ceo Farmology</p>
-                              </div>
-                              <div className="testimonial-three__shape-1">
-                                <img src="assets/images/shapes/testimonial-three-shape-1.png" alt="" />
-                              </div>
-                            </div>
-                            <div className="testimonial-three__img">
-                              <img src="assets/images/testimonial/testimonial-3-3.jpg" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                        {/*Testimonial Three Single End*/}
-                      </div>
-                    </div>
-                    <div className="testimonial-three__nav">
-                      <div className="swiper-button-next1">
-                        <i className="fas fa-arrow-left" />
-                      </div>
-                      <div className="swiper-button-prev1">
-                        <i className="fas fa-arrow-right" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          {/*Testimonial Three End*/}
-          {/*Shop Now Start */}
-          <section className="shop-now">
-            <div className="container">
-              <div className="section-title text-center sec-title-animation animation-style1">
-                <div className="section-title__tagline-box">
-                  <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
-                  </div>
-                  <h6 className="section-title__tagline">Shop Now</h6>
-                  <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
-                  </div>
-                </div>
-                <h3 className="section-title__title title-animation">Shop Fresh, 100% Organic <br />&amp; Chemical-Free.
-                </h3>
-              </div>
-              <div className="row">
-                {/*Shop Now Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
-                  <div className="shop-now__single">
-                    <div className="shop-now__img">
-                      <img src="assets/images/shop/shop-now-1-1.png" alt="" />
-                      <img src="assets/images/shop/shop-now-1-1.png" alt="" />
-                      <div className="shop-now__review">
-                        <i className="fa fa-star" />
-                        <p>4.9</p>
-                      </div>
-                    </div>
-                    <div className="shop-now__content">
-                      <div className="shop-now__content-left">
-                        <p><del>$33.00</del> $28.00</p>
-                        <h4>
-                          <a href="product-details.html">
-                            Golden Ginger
-                          </a>
-                        </h4>
-                      </div>
-                      <ul className="shop-now__info list-unstyled">
-                        <li>
-                          <a href="/about#" title="Add to Wishlist">
-                            <i className="fa fa-regular fa-heart" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Add to cart">
-                            <i className="fa fa-solid fa-cart-plus" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Quick View">
-                            <i className="fa fa-regular fa-eye" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Compare">
-                            <i className="fa fa-solid fa-repeat" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/*Shop Now Single End*/}
-                {/*Shop Now Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
-                  <div className="shop-now__single">
-                    <div className="shop-now__img">
-                      <img src="assets/images/shop/shop-now-1-2.png" alt="" />
-                      <img src="assets/images/shop/shop-now-1-2.png" alt="" />
-                      <div className="shop-now__review">
-                        <i className="fa fa-star" />
-                        <p>5.0</p>
-                      </div>
-                    </div>
-                    <div className="shop-now__content">
-                      <div className="shop-now__content-left">
-                        <p>$42.00</p>
-                        <h4>
-                          <a href="product-details.html">
-                            Farm Fresh Eggs (30p)
-                          </a>
-                        </h4>
-                      </div>
-                      <ul className="shop-now__info list-unstyled">
-                        <li>
-                          <a href="/about#" title="Add to Wishlist">
-                            <i className="fa fa-regular fa-heart" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Add to cart">
-                            <i className="fa fa-solid fa-cart-plus" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Quick View">
-                            <i className="fa fa-regular fa-eye" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Compare">
-                            <i className="fa fa-solid fa-repeat" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/*Shop Now Single End*/}
-                {/*Shop Now Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
-                  <div className="shop-now__single">
-                    <div className="shop-now__img">
-                      <img src="assets/images/shop/shop-now-1-3.png" alt="" />
-                      <img src="assets/images/shop/shop-now-1-3.png" alt="" />
-                      <div className="shop-now__review">
-                        <i className="fa fa-star" />
-                        <p>4.7</p>
-                      </div>
-                    </div>
-                    <div className="shop-now__content">
-                      <div className="shop-now__content-left">
-                        <p><del>$55.00</del>$45.00</p>
-                        <h4>
-                          <a href="product-details.html">
-                            Pure &amp; Fresh Milk (11)
-                          </a>
-                        </h4>
-                      </div>
-                      <ul className="shop-now__info list-unstyled">
-                        <li>
-                          <a href="/about#" title="Add to Wishlist">
-                            <i className="fa fa-regular fa-heart" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Add to cart">
-                            <i className="fa fa-solid fa-cart-plus" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Quick View">
-                            <i className="fa fa-regular fa-eye" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Compare">
-                            <i className="fa fa-solid fa-repeat" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/*Shop Now Single End*/}
-                {/*Shop Now Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
-                  <div className="shop-now__single">
-                    <div className="shop-now__img">
-                      <img src="assets/images/shop/shop-now-1-4.png" alt="" />
-                      <img src="assets/images/shop/shop-now-1-4.png" alt="" />
-                      <div className="shop-now__review">
-                        <i className="fa fa-star" />
-                        <p>4.5</p>
-                      </div>
-                    </div>
-                    <div className="shop-now__content">
-                      <div className="shop-now__content-left">
-                        <p> $38.00</p>
-                        <h4>
-                          <a href="product-details.html">
-                            Sweet Corn
-                          </a>
-                        </h4>
-                      </div>
-                      <ul className="shop-now__info list-unstyled">
-                        <li>
-                          <a href="/about#" title="Add to Wishlist">
-                            <i className="fa fa-regular fa-heart" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Add to cart">
-                            <i className="fa fa-solid fa-cart-plus" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Quick View">
-                            <i className="fa fa-regular fa-eye" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="/about#" title="Compare">
-                            <i className="fa fa-solid fa-repeat" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                {/*Shop Now Single End*/}
-              </div>
-              <div className="shop-now__btn-box">
-                <a className="thm-btn" href="/products">View All Products
-                  <i className="fal fa-long-arrow-right" />
-                  <span className="hover-btn hover-bx" />
-                  <span className="hover-btn hover-bx2" />
-                  <span className="hover-btn hover-bx3" />
-                  <span className="hover-btn hover-bx4" />
-                </a>
-              </div>
-            </div>
-          </section>
-          {/*Shop Now End */}
-          {/*Video One Start*/}
-          <section className="video-one">
-            <div className="video-one__bg jarallax" data-jarallax data-speed="0.2" data-imgposition="50% 0%" style={{backgroundImage: 'url(assets/images/backgrounds/video-one-bg.jpg)'}} />
-            <div className="container">
-              <div className="row">
-                <div className="col-xl-12">
-                  <div className="video-one__inner">
-                    <div className="video-one__video-link">
-                      <a href="https://www.youtube.com/watch?v=3Ww2TP_tU7o" className="video-popup">
-                        <div className="video-one__icon">
-                          <span className="fa fa-play" />
-                          <i className="ripple" />
-                        </div>
-                      </a>
-                    </div>
-                    <p className="video-one__sub-title">Watch How We Cultivate the Future</p>
-                    <h2 className="video-one__title">A glimpse into our journey of innovation<br /> and
-                      sustainability
-                    </h2>
-                    <div className="video-one__round-text">
-                      <div className="video-one__curved-circle">
-                        Always 100% Fresh from Our Fields
-                      </div>
-                    </div>
-                    <div className="video-one__round-text-2">
-                      <div className="video-one__curved-circle-2">
-                        Always 100% Fresh from Our Fields
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="brand-one">
-                <div className="brand-one__carousel swiper-container">
-                  <div className="swiper-wrapper">
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/about#"><img src="assets/images/brand/brand-1-1.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/about#"><img src="assets/images/brand/brand-1-2.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/about#"><img src="assets/images/brand/brand-1-3.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/about#"><img src="assets/images/brand/brand-1-4.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/about#"><img src="assets/images/brand/brand-1-5.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          {/*Video One End*/}
-          {/*Process One Start */}
-          <section className="process-one">
-            <div className="container">
-              <div className="process-one__inner">
-                <div className="process-one__bg" style={{backgroundImage: 'url(assets/images/shapes/process-one-bg-shape.png)'}} />
-                <div className="process-one__shape-four">
-                  <img src="assets/images/shapes/process-one-shape-four.png" alt="" />
-                </div>
-                <ul className="row">
-                  {/*Process One Single Start*/}
-                  <li className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
-                    <div className="process-one__single">
-                      <div className="process-one__icon">
-                        <span className="icon-harvester" />
-                      </div>
-                      <div className="process-one__shape-1">
-                        <div className="process-one__shape-2">
-                          <img src="assets/images/shapes/process-one-shape-2.png" alt="" />
-                        </div>
-                        <div className="process-one__shape-3">
-                          <img src="assets/images/shapes/process-one-shape-3.png" alt="" />
-                        </div>
-                      </div>
-                      <div className="process-one__content">
-                        <div className="process-one__count" />
-                        <h3 className="process-one__title">Harvesting</h3>
-                        <p className="process-one__text">Committed to eco-friendly
-                          &amp; chemicalfree farming
-                          practices.</p>
-                      </div>
-                    </div>
-                  </li>
-                  {/*Process One Single End*/}
-                  {/*Process One Single Start*/}
-                  <li className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
-                    <div className="process-one__single">
-                      <div className="process-one__content">
-                        <div className="process-one__count" />
-                        <h3 className="process-one__title">Cleaning &amp; Sorting</h3>
-                        <p className="process-one__text">Committed to eco-friendly
-                          &amp; chemicalfree farming
-                          practices.</p>
-                      </div>
-                      <div className="process-one__shape-1">
-                        <div className="process-one__shape-2">
-                          <img src="assets/images/shapes/process-one-shape-4.png" alt="" />
-                        </div>
-                        <div className="process-one__shape-3">
-                          <img src="assets/images/shapes/process-one-shape-5.png" alt="" />
-                        </div>
-                      </div>
-                      <div className="process-one__icon">
-                        <span className="icon-hydroponic-gardening" />
-                      </div>
-                    </div>
-                  </li>
-                  {/*Process One Single End*/}
-                  {/*Process One Single Start*/}
-                  <li className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
-                    <div className="process-one__single">
-                      <div className="process-one__icon">
-                        <span className="icon-product" />
-                      </div>
-                      <div className="process-one__shape-1">
-                        <div className="process-one__shape-2">
-                          <img src="assets/images/shapes/process-one-shape-2.png" alt="" />
-                        </div>
-                        <div className="process-one__shape-3">
-                          <img src="assets/images/shapes/process-one-shape-3.png" alt="" />
-                        </div>
-                      </div>
-                      <div className="process-one__content">
-                        <div className="process-one__count" />
-                        <h3 className="process-one__title">Packaging</h3>
-                        <p className="process-one__text">Committed to eco-friendly
-                          &amp; chemicalfree farming
-                          practices.</p>
-                      </div>
-                    </div>
-                  </li>
-                  {/*Process One Single End*/}
-                  {/*Process One Single Start*/}
-                  <li className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
-                    <div className="process-one__single">
-                      <div className="process-one__content">
-                        <div className="process-one__count" />
-                        <h3 className="process-one__title">Distribution</h3>
-                        <p className="process-one__text">Committed to eco-friendly
-                          &amp; chemicalfree farming
-                          practices.</p>
-                      </div>
-                      <div className="process-one__shape-1">
-                        <div className="process-one__shape-2">
-                          <img src="assets/images/shapes/process-one-shape-4.png" alt="" />
-                        </div>
-                        <div className="process-one__shape-3">
-                          <img src="assets/images/shapes/process-one-shape-5.png" alt="" />
-                        </div>
-                      </div>
-                      <div className="process-one__icon">
-                        <span className="icon-supply-chain" />
-                      </div>
-                    </div>
-                  </li>
-                  {/*Process One Single End*/}
-                </ul>
-              </div>
-            </div>
-          </section>
-          {/*Process One End */}
-          {/* Blog Two Start */}
-          <section className="blog-two blog-five">
-            <div className="container">
-              <div className="section-title text-center sec-title-animation animation-style1">
-                <div className="section-title__tagline-box">
-                  <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
-                  </div>
-                  <h6 className="section-title__tagline">Our Blogs</h6>
-                  <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
-                  </div>
-                </div>
-                <h3 className="section-title__title title-animation">Get Updates On Farm Life
-                </h3>
-              </div>
-              <div className="row">
-                {/*Blog Two Single Start*/}
-                <div className="col-xl-6 wow fadeInLeft" data-wow-delay="100ms">
-                  <div className="blog-two__single">
-                    <div className="blog-two__img">
-                      <img src="assets/images/blog/blog-2-1.jpg" alt="" />
-                      <div className="blog-two__tags">
-                        <span>Dairy Farming</span>
-                        <span>Milk Production</span>
-                      </div>
-                    </div>
-                    <div className="blog-two__content">
-                      <div className="blog-two__user">
-                        <div className="blog-two__user-img">
-                          <img src="assets/images/blog/blog-two-user-1.jpg" alt="" />
-                        </div>
-                        <p className="blog-two__user-title">Malaika alise</p>
-                      </div>
-                      <ul className="blog-two__meta list-unstyled">
-                        <li>
-                          <a href="/blog"><span className="far fa-calendar-alt" />April 5,
-                            2025</a>
-                        </li>
-                        <li>
-                          <a href="/blog"><span className="fal fa-comments" />80
-                            Comments</a>
-                        </li>
-                      </ul>
-                      <h3 className="blog-two__title"><a href="/blog">How small-scale Livestock
-                          farming is changing rural livelihoods.</a></h3>
-                      <p className="blog-two__text">Explore feeding techniques and modern tools that ensure better
-                        milk quality. Goat Farming for Sustainable Income</p>
-                      <div className="blog-two__btn-box">
-                        <a href="/blog" className="thm-btn">Reed More
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Blog Two Single End*/}
-                <div className="col-xl-6">
-                  {/* Blog Two Single Two Start */}
-                  <div className="blog-two__single-two wow fadeInUp" data-wow-delay="200ms">
-                    <div className="blog-two__img-two">
-                      <img src="assets/images/blog/blog-2-2.jpg" alt="" />
-                      <div className="blog-two__tags-two">
-                        <span>Organic Farming</span>
-                      </div>
-                    </div>
-                    <div className="blog-two__content-two">
-                      <div className="blog-two__user-two">
-                        <div className="blog-two__user-two-img">
-                          <img src="assets/images/blog/blog-two-user-2.jpg" alt="" />
-                        </div>
-                        <p className="blog-two__user-two-title">John Smith</p>
-                      </div>
-                      <ul className="blog-two__meta-two list-unstyled">
-                        <li>
-                          <a href="/blog"><span className="far fa-calendar-alt" />Feb 25,
-                            2025</a>
-                        </li>
-                        <li>
-                          <a href="/blog"><span className="fal fa-comments" />22
-                            Comments</a>
-                        </li>
-                      </ul>
-                      <h3 className="blog-two__title-two"><a href="/blog">Benefits of Organic
-                          Vegetable Farming.</a></h3>
-                      <p className="blog-two__text-two">Organic methods improve soil health and boost
-                        yields naturally.</p>
-                      <div className="blog-two__btn-box-two">
-                        <a href="/blog" className="thm-btn">Reed More
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Blog Two Single Two End */}
-                  {/* Blog Two Single Two Start */}
-                  <div className="blog-two__single-two wow fadeInUp" data-wow-delay="300ms">
-                    <div className="blog-two__img-two">
-                      <img src="assets/images/blog/blog-2-3.jpg" alt="" />
-                      <div className="blog-two__tags-two">
-                        <span>Poultry Farming</span>
-                      </div>
-                    </div>
-                    <div className="blog-two__content-two">
-                      <div className="blog-two__user-two  blog-two__user-three">
-                        <div className="blog-two__user-two-img">
-                          <img src="assets/images/blog/blog-two-user-3.jpg" alt="" />
-                        </div>
-                        <p className="blog-two__user-two-title">Jerin jara</p>
-                      </div>
-                      <ul className="blog-two__meta-two list-unstyled">
-                        <li>
-                          <a href="/blog"><span className="far fa-calendar-alt" />May 19,
-                            2025</a>
-                        </li>
-                        <li>
-                          <a href="/blog"><span className="fal fa-comments" />15
-                            Comments</a>
-                        </li>
-                      </ul>
-                      <h3 className="blog-two__title-two"><a href="/blog">Free-Range Poultry Farming
-                          Explained.</a></h3>
-                      <p className="blog-two__text-two">Practical tips for efficient feeding and disease
-                        management.</p>
-                      <div className="blog-two__btn-box-two">
-                        <a href="/blog" className="thm-btn">Reed More
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Blog Two Single Two End */}
-                </div>
-              </div>
-            </div>
-          </section>
-          {/* Blog Two End */}
+          {/*Closing Statement End*/}
+
           {/*Site Footer Two Start*/}
           <footer className="site-footer-two">
             <div className="site-footer-two__top">
