@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { TemplateRenderer } from "../../components/TemplateRenderer";
-import { loadTemplate } from "../../lib/loadTemplate";
+import { FaqContent } from "@/components/pages/FaqContent";
 
 export const metadata: Metadata = {
   title: "FAQ",
 };
 
 export default function FaqPage() {
-  const markup = loadTemplate("faq");
-  return <TemplateRenderer html={markup} />;
+  return <FaqContent />;
 }

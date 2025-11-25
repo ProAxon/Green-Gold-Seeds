@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { TemplateRenderer } from "../components/TemplateRenderer";
-import { loadTemplate } from "../lib/loadTemplate";
+import { HomeContent } from "@/components/pages/HomeContent";
 
 export const metadata: Metadata = {
   title: "Home",
 };
 
 export default function HomePage() {
-  const markup = loadTemplate("home");
-  return <TemplateRenderer html={markup} />;
+  return <HomeContent />;
 }
