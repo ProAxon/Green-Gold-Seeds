@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { TemplateRenderer } from "../../components/TemplateRenderer";
-import { loadTemplate } from "../../lib/loadTemplate";
+import { ContactContent } from "@/components/pages/ContactContent";
 
 export const metadata: Metadata = {
   title: "Contact",
 };
 
 export default function ContactPage() {
-  const markup = loadTemplate("contact");
-  return <TemplateRenderer html={markup} />;
+  return <ContactContent />;
 }

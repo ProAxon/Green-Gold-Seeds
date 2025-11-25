@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import { NavHighlighter } from "@/components/NavHighlighter";
 
 const cssAssets = [
   "/assets/css/bootstrap.min.css",
@@ -101,6 +102,7 @@ export default function RootLayout({
         ))}
       </head>
       <body className="custom-cursor" suppressHydrationWarning>
+        <NavHighlighter />
         {children}
         {scriptAssets.map((src) => (
           <Script key={src} src={src} strategy="afterInteractive" />
