@@ -54,7 +54,7 @@ export function AboutContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function AboutContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -351,7 +351,7 @@ export function AboutContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -404,79 +404,79 @@ export function AboutContent() {
                 <div className="col-xl-6">
                   <div className="about-one__right">
                     <div className="section-title text-left sec-title-animation animation-style2">
-                    <div className="section-title__tagline-box">
-                      <div className="section-title__shape-1">
-                        <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
+                      <div className="section-title__tagline-box">
+                        <div className="section-title__shape-1">
+                          <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
+                        </div>
+                        <h6 className="section-title__tagline">Our History</h6>
+                        <div className="section-title__shape-1">
+                          <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
+                        </div>
                       </div>
-                      <h6 className="section-title__tagline">Our History</h6>
-                      <div className="section-title__shape-1">
-                        <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
-                      </div>
+                      <h3 className="section-title__title title-animation">History</h3>
                     </div>
-                    <h3 className="section-title__title title-animation">History</h3>
-                  </div>
-                  <p className="about-one__text">Welcome to Ajeet Seeds Pvt. Ltd.</p>
-                  <p className="about-one__text">
-                    Ajeet Seeds has played a significant role in producing and supplying quality hybrid seeds
-                    to farmers at affordable prices. Ajeet-11, a cotton hybrid introduced in 1992, is known
-                    for its seed quality and tolerance to both biotic and abiotic stresses. Ajeet-11 was
-                    followed by Ajeet-33, which offered distinguishing differences and attributes. Continued
-                    research led to the development of many hybrids in crops such as Jowar, Bajra, Maize,
-                    Sunflower, and Vegetables. The hybrid Bhendi Ajeet-311 was launched in 2002, followed by
-                    hybrids of Chilies, Brinjal, Tomato, Bottle Gourd, Bitter Gourd, and more.
-                  </p>
-                  <p className="about-one__text">
-                    Ajeet Seeds is the first private seed company to introduce a proprietary variety of
-                    wheat, Ajeet-102. Our progress continues to be robust and dynamic. Today, our product
-                    portfolio covers 22 crops and 55 different hybrid varieties.
-                  </p>
-                  <p className="about-one__text">
-                    Understanding the pivotal role of biotechnology in the seed industry, Ajeet Seeds
-                    established the Plant Biotechnology Research Center (PBRC) in 2003 at Hanumantgaon,
-                    Taluka Gangapur. PBRC has been recognized as a research center by Dr. Babasaheb Ambedkar
-                    Marathwada University.
-                  </p>
-                  <p className="about-one__text">
-                    We have also built a State-of-the-Art laboratory, backed by expert scientists led by a
-                    veteran biotech specialist. Our teams are developing indigenous transgenic technology to
-                    accelerate progress. Ajeet Seeds remains committed to farm prosperity and is actively
-                    engaged in genetic research using crop biotechnology to improve the lives of Indian
-                    farmers. In line with this, we introduced three genetically modified Bt cotton hybrids in
-                    the Kharif season of 2006.
-                  </p>
-                  <h4 className="about-one__title-1">A legacy of innovation</h4>
+                    <p className="about-one__text">Welcome to Ajeet Seeds Pvt. Ltd.</p>
+                    <p className="about-one__text">
+                      Ajeet Seeds has played a significant role in producing and supplying quality hybrid seeds
+                      to farmers at affordable prices. Ajeet-11, a cotton hybrid introduced in 1992, is known
+                      for its seed quality and tolerance to both biotic and abiotic stresses. Ajeet-11 was
+                      followed by Ajeet-33, which offered distinguishing differences and attributes. Continued
+                      research led to the development of many hybrids in crops such as Jowar, Bajra, Maize,
+                      Sunflower, and Vegetables. The hybrid Bhendi Ajeet-311 was launched in 2002, followed by
+                      hybrids of Chilies, Brinjal, Tomato, Bottle Gourd, Bitter Gourd, and more.
+                    </p>
+                    <p className="about-one__text">
+                      Ajeet Seeds is the first private seed company to introduce a proprietary variety of
+                      wheat, Ajeet-102. Our progress continues to be robust and dynamic. Today, our product
+                      portfolio covers 22 crops and 55 different hybrid varieties.
+                    </p>
+                    <p className="about-one__text">
+                      Understanding the pivotal role of biotechnology in the seed industry, Ajeet Seeds
+                      established the Plant Biotechnology Research Center (PBRC) in 2003 at Hanumantgaon,
+                      Taluka Gangapur. PBRC has been recognized as a research center by Dr. Babasaheb Ambedkar
+                      Marathwada University.
+                    </p>
+                    <p className="about-one__text">
+                      We have also built a State-of-the-Art laboratory, backed by expert scientists led by a
+                      veteran biotech specialist. Our teams are developing indigenous transgenic technology to
+                      accelerate progress. Ajeet Seeds remains committed to farm prosperity and is actively
+                      engaged in genetic research using crop biotechnology to improve the lives of Indian
+                      farmers. In line with this, we introduced three genetically modified Bt cotton hybrids in
+                      the Kharif season of 2006.
+                    </p>
+                    <h4 className="about-one__title-1">A legacy of innovation</h4>
                     <div className="about-one__points-box-and-since">
                       <ul className="about-one__points list-unstyled">
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                        <p>Ajeet-11 &amp; Ajeet-33 set the benchmark<br />for resilient cotton hybrids.</p>
+                          <p>Ajeet-11 &amp; Ajeet-33 set the benchmark<br />for resilient cotton hybrids.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                        <p>India's first private wheat variety<br />Ajeet-102 pioneered diversification.</p>
+                          <p>India's first private wheat variety<br />Ajeet-102 pioneered diversification.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                        <p>22 crops &amp; 55 hybrids support<br />farm prosperity nationwide.</p>
+                          <p>22 crops &amp; 55 hybrids support<br />farm prosperity nationwide.</p>
                         </li>
                       </ul>
                       <div className="about-one__since-box">
                         <div className="about-one__since-icon">
                           <span className="icon-harvester" />
                         </div>
-                      <h5 className="about-one__since-title">Progress since</h5>
-                      <h4 className="about-one__since-year">1992</h4>
+                        <h5 className="about-one__since-title">Progress since</h5>
+                        <h4 className="about-one__since-year">1992</h4>
                       </div>
                     </div>
                     <div className="about-one__btn-and-video">
                       <div className="about-one__btn-box">
-                      <a className="thm-btn" href="/about#our-history">Explore Our Journey
+                        <a className="thm-btn" href="/about#our-history">Explore Our Journey
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
@@ -622,7 +622,7 @@ export function AboutContent() {
                         </div>
                       </div>
                       <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-plant-1" />
@@ -644,8 +644,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-2.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-harvester-1" />
@@ -667,8 +667,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-3.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-precision-agriculture" />
@@ -690,8 +690,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-4.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-supply-chain" />
@@ -713,8 +713,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-5.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-farming" />
@@ -758,7 +758,7 @@ export function AboutContent() {
                       </div>
                     </div>
                     <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
+                      <div className="team-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)' }}>
                       </div>
                       <h3 className="team-one__title"><a href="/about#team">Padmakar Mulay</a></h3>
                       <p className="team-one__sub-title">Chairman</p>
@@ -781,7 +781,7 @@ export function AboutContent() {
                       </div>
                     </div>
                     <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
+                      <div className="team-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)' }}>
                       </div>
                       <h3 className="team-one__title"><a href="/about#team">Sameer Mulay</a></h3>
                       <p className="team-one__sub-title">Managing Director</p>
@@ -804,7 +804,7 @@ export function AboutContent() {
                       </div>
                     </div>
                     <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
+                      <div className="team-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)' }}>
                       </div>
                       <h3 className="team-one__title"><a href="/about#team">Ranjeet Mulay</a></h3>
                       <p className="team-one__sub-title">Director</p>
@@ -838,7 +838,7 @@ export function AboutContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -907,16 +907,16 @@ export function AboutContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>

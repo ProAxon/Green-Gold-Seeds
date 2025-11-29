@@ -54,7 +54,7 @@ export function ProductsContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function ProductsContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -351,7 +351,7 @@ export function ProductsContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -2129,7 +2129,7 @@ export function ProductsContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -2198,16 +2198,16 @@ export function ProductsContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>

@@ -54,7 +54,7 @@ export function ServicesContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function ServicesContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -351,7 +351,7 @@ export function ServicesContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -371,207 +371,160 @@ export function ServicesContent() {
           <section className="services-page">
             <div className="container">
               <div className="row">
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-1.jpg" alt="" />
+                <div className="col-xl-12">
+                  <div className="about-one__right">
+
+                    <div className="section-title text-left">
+                      <h3 className="section-title__title">Diagnostics Test</h3>
+                      <span className="section-title__tagline">Home Diagnostics Test</span>
+                    </div>
+
+                    <p className="about-one__text">The Success of the seed company is correlated with the consistency in the quality. Obviously, Quality Assurance Department is the backbone of the seed business.</p>
+                    <p className="about-one__text">Quality Assurance Department functions at farm level to ensure the genetic purity during seed production and second wing i.e., Seed Testing Laboratory ensures the Physical purity, Germination, Viability/Vigour, Seed Health and the ‘n’ number of Qualitative parameters.</p>
+                    <p className="about-one__text">We are strictly adhered to maintain the Indian Minimum Seed Certification Standards and also ISTA norms. Once the samples goes through stringent testing activities and qualifies in all the parameters then only released for the marketing.</p>
+                    <p className="about-one__text">A well established Seed Testing Laboratory with ultra-modern equipments with all facilities, trained and dedicated manpower are the strength of the Quality Assurance Department of Ajeet Seeds Private Limited. To maintain the sanctity of seed quality, obviously Quality Assurance Department is working round the clock with due emphasis on Physical Purity, Seed Health, Germination, Viability/Vigour tests, Genetic Purity and Trait Purity as per ISTA standards.</p>
+                    <p className="about-one__text">Quality Assurance not only assures the quality of the seeds but also assures the quality during Processing, Treatment, Packing, Logistics and finally the dispatches to the market till it goes in the hands of the end user i.e., FARMER. It also ensures the performance in the farmer’s fields by visiting randomly to Re-reassurance and farmer’s satisfaction.</p>
+
+                    <br />
+                    <div className="section-title text-left">
+                      <h3 className="section-title__title">Ajeet Seeds</h3>
+                    </div>
+                    <p className="about-one__text"><strong>Plant Biotechnology Research Centre (PBRC), Ajeet Seeds Pvt. Ltd.</strong></p>
+                    <p className="about-one__text">24 Jan, 2022<br />NABL (ISO/IEC 17025:2017) accredited Laboratory (Conformity Assessment Body) since 2022</p>
+                    <p className="about-one__text">10 May, 2022<br />Department of Scientific and Industrial Research (DSIR) recognized Laboratory since 2000</p>
+                    <p className="about-one__text">27 July, 2021<br />Dr. Babasaheb Ambedkar Marathwada University’s Ph.D. research Laboratory</p>
+
+                    <br />
+                    <div className="section-title text-left">
+                      <h3 className="section-title__title">Research Centre</h3>
+                      <span className="section-title__tagline">Ajeet Seeds Pvt. Ltd.</span>
+                    </div>
+                    <p className="about-one__text"><strong>Research and Development (Crop Improvement for Biotic and Abiotic Stresses)</strong></p>
+                    <p className="about-one__text">ASPL has developed a state-of-the-art facility for research in biotechnology for crop improvement.</p>
+
+                    <ul className="about-one__points list-unstyled">
+                      <li>
+                        <div className="icon"><span className="fa fa-check" /></div>
+                        <div className="text"><p>Protein Diagnostic Laboratory (ELISA/LFS)</p></div>
+                      </li>
+                      <li>
+                        <div className="icon"><span className="fa fa-check" /></div>
+                        <div className="text"><p>DNA Diagnostic Laboratory (M-GOT, Hybrid Purity, Parental Line purity, DNA Fingerprinting)</p></div>
+                      </li>
+                    </ul>
+
+                    <br />
+                    <div className="section-title text-left">
+                      <h3 className="section-title__title">Testing Services</h3>
+                    </div>
+                    <p className="about-one__text">DNA Testing services at PBRC include DNA based Hybrid purity (M-GOT), Line purity, DNA Fingerprinting etc.</p>
+                    <p className="about-one__text">ELISA Testing services at PBRC include detection of Bt-genes (Cry1Ac, Cry2Ab/Aa, VIP3a), RRF- CP4EPSPS using Double antibody Sandwich ELISA (DAS-ELISA) and Lateral Flow Strips (LFS)</p>
+
+                    <br />
+                    <div className="section-title text-left">
+                      <h3 className="section-title__title">Quality Policy</h3>
+                      <span className="section-title__tagline">and Objectives</span>
+                    </div>
+                    <h4 className="about-one__title-1">NABL Scope of Accreditation</h4>
+                    <h4 className="about-one__title-1">Diagnostic Testing Services</h4>
+
+                    <br />
+                    <h5 className="about-one__text"><strong>1. DNA Diagnostic Services (Testing) at PBRC</strong></h5>
+                    <div className="table-responsive">
+                      <table className="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Sr.No</th>
+                            <th>DNA Diagnostic Services</th>
+                            <th>Service Code</th>
+                            <th>Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1</td><td>GMO testing for presence of genetic materials (End point PCR method)</td><td>ASPL-SRV-006</td><td>NABL accredited (Check crop list)</td></tr>
+                          <tr><td>2</td><td>Determination of hybrid purity (Molecular GOT / M-GOT)</td><td>ASPL-SRV-007</td><td>NABL accredited (Check crop list)</td></tr>
+                          <tr><td>3</td><td>DNA Fingerprinting for crop plants</td><td>ASPL-SRV-008</td><td>NABL accredited (Check crop list)</td></tr>
+                          <tr><td>4</td><td>Parental line purity analysis using Molecular markers</td><td>ASPL-SRV-009</td><td>NABL accredited (Check crop list)</td></tr>
+                          <tr><td>5</td><td>Screening of Tomato for Tomato Yellow Leaf curl virus) (TY) using molecular markers</td><td>ASPL-SRV-010</td><td>Project mode</td></tr>
+                          <tr><td>6</td><td>Customized screening of germplasm for selective traits</td><td>ASPL-SRV-011</td><td>Project mode, Check feasibility</td></tr>
+                          <tr><td>7</td><td>Assistance in molecular marker assisted breeding</td><td>ASPL-SRV-012</td><td>Project mode, Check feasibility</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <br />
+                    <h5 className="about-one__text"><strong>2. ELISA Diagnostic Services (Testing) at PBRC</strong></h5>
+                    <div className="table-responsive">
+                      <table className="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Sr.No</th>
+                            <th>ELISA Diagnostic Services</th>
+                            <th>Service Code</th>
+                            <th>Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1</td><td>Trait Purity (Cotton) by ELISA (Cry1Ac)</td><td>ASPL-SRV-001</td><td>NABL accredited</td></tr>
+                          <tr><td>2</td><td>Trait Purity (Cotton) by ELISA (Cry2Ab)</td><td>ASPL-SRV-002</td><td>NABL accredited</td></tr>
+                          <tr><td>3</td><td>Trait Purity (Cotton) by ELISA (CP4EPSPS)</td><td>ASPL-SRV-003</td><td>NABL accredited</td></tr>
+                          <tr><td>4</td><td>Quantitative ELISA for Cry1Ac</td><td>ASPL-SRV-004</td><td>NABL accredited</td></tr>
+                          <tr><td>5</td><td>Quantitative ELISA for Cry2Ab</td><td>ASPL-SRV-005</td><td>NABL accredited</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <br />
+                    <h5 className="about-one__text"><strong>3. ELISA Diagnostic Products</strong></h5>
+                    <div className="table-responsive">
+                      <table className="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Sr.No</th>
+                            <th>ELISA Diagnostic Products</th>
+                            <th>Product Code</th>
+                            <th>Details</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><td>1</td><td>Qualitative ELISA kit for Cry1Ac (05 plates)</td><td>ASPL-001</td><td>Sample kits available</td></tr>
+                          <tr><td>2</td><td>Qualitative ELISA kit for Cry2Ab (05 plates)</td><td>ASPL-002</td><td>Sample kits available</td></tr>
+                          <tr><td>3</td><td>Qualitative ELISA kit for Cry1Ac/Cry2Ab (05 plates)</td><td>ASPL-003</td><td>Sample kits available</td></tr>
+                          <tr><td>4</td><td>Lateral Flow strip for detection of Cry1Ac (50 Strips)</td><td>ASPL-004</td><td>Sample kits available</td></tr>
+                          <tr><td>5</td><td>Lateral Flow strip for detection of Cry2Ab (50 Strips)</td><td>ASPL-005</td><td>Sample kits available</td></tr>
+                          <tr><td>6</td><td>Lateral Flow strip for detection of CP4EPSPS (50 Strips)</td><td>ASPL-006</td><td>Sample kits available</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <br />
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="section-title text-left">
+                          <h3 className="section-title__title">Address</h3>
+                        </div>
+                        <p className="about-one__text">
+                          <a href="tel:+919922933999">+91-9922933999</a><br />
+                          <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a><br />
+                          Gut No. 233, Chitegaon, Tq. Paithan, Dist. Chhatrapati Sambhaji Nagar (Aurangabad) - 431105 (Maharashtra)
+                        </p>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="section-title text-left">
+                          <h3 className="section-title__title">PM Group</h3>
+                        </div>
+                        <ul className="about-one__points list-unstyled">
+                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>Gangamai Industries & Construction Ltd.</p></div></li>
+                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>Arya Hybrid Seeds Ltd.</p></div></li>
+                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>ASPL Nature Pure Pvt. Ltd.</p></div></li>
+                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>Omkara Techno Infra Pvt. Ltd.</p></div></li>
+                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>C.S.M.S.S</p></div></li>
+                        </ul>
                       </div>
                     </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-hen-1" />
-                      </div>
-                      <h3 className="services-two__title"><a href="livestock.html">Livestock<br /> Management</a>
-                      </h3>
-                      <p className="services-two__text">Professional care &amp; modern techniques for cattle.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="livestock.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-2.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-cow" />
-                      </div>
-                      <h3 className="services-two__title"><a href="dairy-products.html">Dairy Farming<br />
-                          Services</a></h3>
-                      <p className="services-two__text">High-quality dairy production, processing.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-3.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-plant-1" />
-                      </div>
-                      <h3 className="services-two__title"><a href="fresh-produce.html">Fresh from nature<br />
-                          goodness</a></h3>
-                      <p className="services-two__text">Scientific soil testing and crop consultancy.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-4.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-hydroponic-gardening" />
-                      </div>
-                      <h3 className="services-two__title"><a href="grains-cereals.html">Smart Irrigation<br />
-                          System</a></h3>
-                      <p className="services-two__text">Modern irrigation technology to save water.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="grains-cereals.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-5.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-harvester-1" />
-                      </div>
-                      <h3 className="services-two__title"><a href="poultry-eggs.html">Farm-to-Table<br />
-                          Delivery</a></h3>
-                      <p className="services-two__text">Direct delivery of fresh organic products.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="poultry-eggs.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="500ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-6.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-farming" />
-                      </div>
-                      <h3 className="services-two__title"><a href="fresh-produce.html">Training &amp;<br />
-                          Workshops</a></h3>
-                      <p className="services-two__text">Farmers &amp; entrepreneurs modern
-                        agriculture.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="600ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-7.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-precision-agriculture" />
-                      </div>
-                      <h3 className="services-two__title"><a href="fresh-produce.html">Organic Farming<br />
-                          Solutions</a></h3>
-                      <p className="services-two__text">Sustainable and eco-friendly farming practices.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="700ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-8.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-supply-chain" />
-                      </div>
-                      <h3 className="services-two__title"><a href="dairy-products.html">Farm Equipment<br />
-                          Supply</a></h3>
-                      <p className="services-two__text">Modern tools &amp; machinery for efficient farming.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
               </div>
             </div>
           </section>
@@ -581,7 +534,7 @@ export function ServicesContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -650,16 +603,16 @@ export function ServicesContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>

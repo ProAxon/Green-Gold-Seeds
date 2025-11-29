@@ -54,7 +54,7 @@ export function ContactContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function ContactContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -351,7 +351,7 @@ export function ContactContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -375,10 +375,10 @@ export function ContactContent() {
                 <div className="col-xl-4 col-lg-4 wow fadeInLeft" data-wow-delay="100ms">
                   <div className="contact-info__single">
                     <div className="contact-info__icon">
-                      <span className="icon-call" />
+                      <span className="icon-pin" />
                     </div>
-                    <p>Contact Us</p>
-                    <h3><a href="tel:558270575405">+55 827 057 5405</a></h3>
+                    <p>Visit Our Company</p>
+                    <h3>Gut No. 233, Chitegaon, Tq. Paithan, Dist. Aurangabad- 431105 (Maharashtra)</h3>
                   </div>
                 </div>
                 {/*Contact Two Single End*/}
@@ -388,8 +388,8 @@ export function ContactContent() {
                     <div className="contact-info__icon">
                       <span className="icon-email" />
                     </div>
-                    <p>Mail Us</p>
-                    <h3><a href="mailto:example@gamil.com">example@gamil.com</a></h3>
+                    <p>Send Email</p>
+                    <h3><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a></h3>
                   </div>
                 </div>
                 {/*Contact Two Single End*/}
@@ -397,10 +397,10 @@ export function ContactContent() {
                 <div className="col-xl-4 col-lg-4 wow fadeInRight" data-wow-delay="300ms">
                   <div className="contact-info__single">
                     <div className="contact-info__icon">
-                      <span className="icon-pin" />
+                      <span className="icon-call" />
                     </div>
-                    <p>Our Office Location</p>
-                    <h3>12 Green Road 05 New Yark</h3>
+                    <p>Call Anytime</p>
+                    <h3><a href="tel:+919922933999">+919922933999</a></h3>
                   </div>
                 </div>
                 {/*Contact Two Single End*/}
@@ -420,7 +420,11 @@ export function ContactContent() {
                   </div>
                   <div className="col-xl-6">
                     <div className="contact-page__right">
-                      <h3 className="contact-page__form-title">Get A Free Quote</h3>
+                      <div className="section-title text-left">
+                        <span className="section-title__tagline">Contact now</span>
+                        <h3 className="section-title__title">Get in Touch with Us</h3>
+                      </div>
+                      <p className="about-one__text">We are committed to providing our customers with exceptional service while offering our employees the best training.</p>
                       <form id="contact-form" className="contact-form-validated contact-page__form" action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/mail.php" method="POST">
                         <div className="row">
                           <div className="col-xl-6 col-lg-6 col-md-6">
@@ -430,26 +434,26 @@ export function ContactContent() {
                           </div>
                           <div className="col-xl-6 col-lg-6 col-md-6">
                             <div className="contact-page__input-box">
-                              <input type="email" name="email" placeholder="Your Email" required />
+                              <input type="email" name="email" placeholder="Email address" required />
                             </div>
                           </div>
                           <div className="col-xl-6 col-lg-6 col-md-6">
                             <div className="contact-page__input-box">
-                              <input type="text" placeholder="Mobile" name="number" />
+                              <input type="text" placeholder="Phone number" name="number" />
                             </div>
                           </div>
                           <div className="col-xl-6 col-lg-6 col-md-6">
                             <div className="contact-page__input-box">
-                              <input type="text" placeholder="Company" name="company" />
+                              <input type="text" placeholder="Subject" name="subject" />
                             </div>
                           </div>
                           <div className="col-xl-12">
                             <div className="contact-page__input-box text-message-box">
-                              <textarea name="message" placeholder="Messege" defaultValue={""} />
+                              <textarea name="message" placeholder="Write message" defaultValue={""} />
                             </div>
                             <div className="contact-page__btn-box">
                               <button type="submit" className="thm-btn contact-page__btn" data-loading-text="Please wait...">
-                                Send A Message
+                                Send a message
                                 <i className="fal fa-long-arrow-right" />
                                 <span className="hover-btn hover-bx" />
                                 <span className="hover-btn hover-bx2" />
@@ -473,7 +477,7 @@ export function ContactContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -542,16 +546,16 @@ export function ContactContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>
