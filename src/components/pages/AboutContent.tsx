@@ -104,160 +104,8 @@ export function AboutContent() {
                     <div className="main-menu-two__main-menu-box">
                       <a href="/about#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
-                        <li className="dropdown megamenu">
-                          <a href="/about#">Home </a>
-                          <ul>
-                            <li>
-                              <section className="home-showcase">
-                                <div className="container">
-                                  <div className="home-showcase__inner">
-                                    <div className="row">
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            01</h3>
-                                          {/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            02
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            03
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            04
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                                Dark Home
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Dark Home
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                    </div>{/* /.row */}
-                                  </div>{/* /.home-showcase__inner */}
-                                </div>{/* /.container */}
-                              </section>
-                            </li>
-                          </ul>
+                        <li>
+                          <a href="/">Home</a>
                         </li>
                         <li className="dropdown">
                           <a href="/about#">About</a>
@@ -351,7 +199,7 @@ export function AboutContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -404,79 +252,60 @@ export function AboutContent() {
                 <div className="col-xl-6">
                   <div className="about-one__right">
                     <div className="section-title text-left sec-title-animation animation-style2">
-                    <div className="section-title__tagline-box">
-                      <div className="section-title__shape-1">
-                        <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
+                      <div className="section-title__tagline-box">
+                        <div className="section-title__shape-1">
+                          <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
+                        </div>
+                        <h6 className="section-title__tagline">Our Story</h6>
+                        <div className="section-title__shape-1">
+                          <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
+                        </div>
                       </div>
-                      <h6 className="section-title__tagline">Our History</h6>
-                      <div className="section-title__shape-1">
-                        <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
-                      </div>
+                      <h3 className="section-title__title title-animation">Growing with Indian farmers</h3>
                     </div>
-                    <h3 className="section-title__title title-animation">History</h3>
-                  </div>
-                  <p className="about-one__text">Welcome to Ajeet Seeds Pvt. Ltd.</p>
-                  <p className="about-one__text">
-                    Ajeet Seeds has played a significant role in producing and supplying quality hybrid seeds
-                    to farmers at affordable prices. Ajeet-11, a cotton hybrid introduced in 1992, is known
-                    for its seed quality and tolerance to both biotic and abiotic stresses. Ajeet-11 was
-                    followed by Ajeet-33, which offered distinguishing differences and attributes. Continued
-                    research led to the development of many hybrids in crops such as Jowar, Bajra, Maize,
-                    Sunflower, and Vegetables. The hybrid Bhendi Ajeet-311 was launched in 2002, followed by
-                    hybrids of Chilies, Brinjal, Tomato, Bottle Gourd, Bitter Gourd, and more.
-                  </p>
-                  <p className="about-one__text">
-                    Ajeet Seeds is the first private seed company to introduce a proprietary variety of
-                    wheat, Ajeet-102. Our progress continues to be robust and dynamic. Today, our product
-                    portfolio covers 22 crops and 55 different hybrid varieties.
-                  </p>
-                  <p className="about-one__text">
-                    Understanding the pivotal role of biotechnology in the seed industry, Ajeet Seeds
-                    established the Plant Biotechnology Research Center (PBRC) in 2003 at Hanumantgaon,
-                    Taluka Gangapur. PBRC has been recognized as a research center by Dr. Babasaheb Ambedkar
-                    Marathwada University.
-                  </p>
-                  <p className="about-one__text">
-                    We have also built a State-of-the-Art laboratory, backed by expert scientists led by a
-                    veteran biotech specialist. Our teams are developing indigenous transgenic technology to
-                    accelerate progress. Ajeet Seeds remains committed to farm prosperity and is actively
-                    engaged in genetic research using crop biotechnology to improve the lives of Indian
-                    farmers. In line with this, we introduced three genetically modified Bt cotton hybrids in
-                    the Kharif season of 2006.
-                  </p>
-                  <h4 className="about-one__title-1">A legacy of innovation</h4>
+                    <p className="about-one__text">
+                      Since 1992, Ajeet Seeds has focused on dependable hybrid seeds for Indian farms—starting
+                      with Ajeet-11/33 cotton and growing into 22 crops and 55 hybrids that balance quality and
+                      affordability.
+                    </p>
+                    <p className="about-one__text">
+                      Our Plant Biotechnology Research Center (est. 2003) and in-house labs keep innovation
+                      close to the field, from early Bt cotton work to today’s farmer-first genetics and
+                      agronomy support.
+                    </p>
+                    <h4 className="about-one__title-1">Highlights at a glance</h4>
                     <div className="about-one__points-box-and-since">
                       <ul className="about-one__points list-unstyled">
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                        <p>Ajeet-11 &amp; Ajeet-33 set the benchmark<br />for resilient cotton hybrids.</p>
+                          <p>Ajeet-11 &amp; Ajeet-33 set the benchmark<br />for resilient cotton hybrids.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                        <p>India's first private wheat variety<br />Ajeet-102 pioneered diversification.</p>
+                          <p>India's first private wheat variety<br />Ajeet-102 pioneered diversification.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                        <p>22 crops &amp; 55 hybrids support<br />farm prosperity nationwide.</p>
+                          <p>22 crops &amp; 55 hybrids support<br />farm prosperity nationwide.</p>
                         </li>
                       </ul>
                       <div className="about-one__since-box">
                         <div className="about-one__since-icon">
                           <span className="icon-harvester" />
                         </div>
-                      <h5 className="about-one__since-title">Progress since</h5>
-                      <h4 className="about-one__since-year">1992</h4>
+                        <h5 className="about-one__since-title">Progress since</h5>
+                        <h4 className="about-one__since-year">1992</h4>
                       </div>
                     </div>
                     <div className="about-one__btn-and-video">
                       <div className="about-one__btn-box">
-                      <a className="thm-btn" href="/about#our-history">Explore Our Journey
+                        <a className="thm-btn" href="/about#our-history">Explore Our Journey
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
@@ -503,28 +332,30 @@ export function AboutContent() {
             </div>
           </section>
           {/*About One End */}
-          {/*Leaders Overview Start */}
-          <section className="services-three leaders-overview">
+          {/*Vision & Mission Start */}
+          {/* <section className="services-three leaders-overview">
             <div className="container">
-              <div className="section-title text-center sec-title-animation animation-style1">
-                <div className="section-title__tagline-box">
-                  <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
-                  </div>
-                  <h6 className="section-title__tagline">Agriculture Professional Leaders</h6>
-                  <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+              <div className="row justify-content-center">
+                <div className="col-md-6 col-xl-5 wow fadeInLeft" data-wow-delay="100ms" data-wow-duration="1200ms">
+                  <div className="leaders-overview__card">
+                    <h4 className="leaders-overview__card-title">Our Vision</h4>
+                    <p className="leaders-overview__card-text">
+                      To acquire and apply the latest technologies to enhance crop productivity.
+                    </p>
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Trading Activity</h3>
-              </div>
-              <div className="leaders-overview__text wow fadeInUp" data-wow-delay="100ms" data-wow-duration="1500ms">
-                <p>Our leadership team combines decades of experience with an unwavering commitment to
-                  innovation in Indian agriculture.</p>
+                <div className="col-md-6 col-xl-5 wow fadeInRight" data-wow-delay="150ms" data-wow-duration="1200ms">
+                  <div className="leaders-overview__card">
+                    <h4 className="leaders-overview__card-title">Our Mission</h4>
+                    <p className="leaders-overview__card-text">
+                      To provide high-quality seeds with the right genotype, at the right time, and at an affordable price.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </section>
-          {/*Leaders Overview End */}
+          </section> */}
+          {/*Vision & Mission End */}
           {/*Author One Start */}
           <section className="author-one">
             <div className="container">
@@ -548,11 +379,10 @@ export function AboutContent() {
                       <div className="author-one__text-box-shape-1">
                         <img src="assets/images/shapes/author-one-text-box-shape-1.png" alt="author-one-text-box-shape-1" />
                       </div>
-                      <p className="author-one__text">The Plant Biotechnology Research Center guides our scientific
-                        rigor, ensuring every hybrid seed delivers on performance, resilience, and farmer prosperity.</p>
+                      <p className="author-one__text">Agriculture Matters to the <br /> Future of Development</p>
                       <div className="author-one__info">
-                        <h4>Padmakar Mulay</h4>
-                        <p>Chairman</p>
+                        <h4>Joseph C. Jensen</h4>
+                        <p>Founder</p>
                       </div>
                       <div className="author-one__sign">
                         <img src="assets/images/resources/author-one-sign.png" alt="author-one-sign" />
@@ -622,7 +452,7 @@ export function AboutContent() {
                         </div>
                       </div>
                       <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-plant-1" />
@@ -644,8 +474,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-2.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-harvester-1" />
@@ -667,8 +497,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-3.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-precision-agriculture" />
@@ -690,8 +520,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-4.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-supply-chain" />
@@ -713,8 +543,8 @@ export function AboutContent() {
                           <img src="assets/images/services/services-2-5.jpg" alt="" />
                         </div>
                       </div>
-                        <div className="services-two__content">
-                        <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content">
+                        <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
                           <span className="icon-farming" />
@@ -758,7 +588,7 @@ export function AboutContent() {
                       </div>
                     </div>
                     <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
+                      <div className="team-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)' }}>
                       </div>
                       <h3 className="team-one__title"><a href="/about#team">Padmakar Mulay</a></h3>
                       <p className="team-one__sub-title">Chairman</p>
@@ -781,7 +611,7 @@ export function AboutContent() {
                       </div>
                     </div>
                     <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
+                      <div className="team-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)' }}>
                       </div>
                       <h3 className="team-one__title"><a href="/about#team">Sameer Mulay</a></h3>
                       <p className="team-one__sub-title">Managing Director</p>
@@ -804,7 +634,7 @@ export function AboutContent() {
                       </div>
                     </div>
                     <div className="team-one__content">
-                      <div className="team-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)'}}>
+                      <div className="team-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/team-one-content-bg-shape.png)' }}>
                       </div>
                       <h3 className="team-one__title"><a href="/about#team">Ranjeet Mulay</a></h3>
                       <p className="team-one__sub-title">Director</p>
@@ -838,7 +668,7 @@ export function AboutContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -907,16 +737,16 @@ export function AboutContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>

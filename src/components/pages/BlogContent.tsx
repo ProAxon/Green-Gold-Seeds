@@ -104,160 +104,8 @@ export function BlogContent() {
                     <div className="main-menu-two__main-menu-box">
                       <a href="/blog#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
-                        <li className="dropdown megamenu">
-                          <a href="/blog#">Home </a>
-                          <ul>
-                            <li>
-                              <section className="home-showcase">
-                                <div className="container">
-                                  <div className="home-showcase__inner">
-                                    <div className="row">
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            01</h3>
-                                          {/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            02
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            03
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            04
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                                Dark Home
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Dark Home
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                    </div>{/* /.row */}
-                                  </div>{/* /.home-showcase__inner */}
-                                </div>{/* /.container */}
-                              </section>
-                            </li>
-                          </ul>
+                        <li>
+                          <a href="/">Home</a>
                         </li>
                         <li className="dropdown">
                           <a href="/blog#">About</a>
@@ -351,7 +199,7 @@ export function BlogContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -390,7 +238,7 @@ export function BlogContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)'}}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -405,8 +253,8 @@ export function BlogContent() {
                           </li>
                         </ul>
                         <h3 className="blog-one__title"><a href="/blog">Why Fresh, Organic
-                            Vegetables
-                            Matter</a></h3>
+                          Vegetables
+                          Matter</a></h3>
                         <p className="blog-one__text">Learn how organic vegetables benefit your health and the
                           planet at the same time.</p>
                       </div>
@@ -436,7 +284,7 @@ export function BlogContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)'}}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -451,7 +299,7 @@ export function BlogContent() {
                           </li>
                         </ul>
                         <h3 className="blog-one__title"><a href="/blog">Health Benefits of Organic
-                            Vegetables</a></h3>
+                          Vegetables</a></h3>
                         <p className="blog-one__text">Learn how organic vegetables benefit your health and the
                           planet at the same time.</p>
                       </div>
@@ -481,7 +329,7 @@ export function BlogContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)'}}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -496,7 +344,7 @@ export function BlogContent() {
                           </li>
                         </ul>
                         <h3 className="blog-one__title"><a href="/blog">How Technology is Changing
-                            Farming</a></h3>
+                          Farming</a></h3>
                         <p className="blog-one__text">Learn how organic vegetables benefit your health and the
                           planet at the same time.</p>
                       </div>
@@ -526,7 +374,7 @@ export function BlogContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)'}}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -541,7 +389,7 @@ export function BlogContent() {
                           </li>
                         </ul>
                         <h3 className="blog-one__title"><a href="/blog">A Green Promise for the Next
-                            Generation</a></h3>
+                          Generation</a></h3>
                         <p className="blog-one__text">Learn how organic vegetables benefit your health and the
                           planet at the same time.</p>
                       </div>
@@ -571,7 +419,7 @@ export function BlogContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)'}}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -586,7 +434,7 @@ export function BlogContent() {
                           </li>
                         </ul>
                         <h3 className="blog-one__title"><a href="/blog">Healthy Livestock, Safer
-                            Food for the Future</a></h3>
+                          Food for the Future</a></h3>
                         <p className="blog-one__text">Learn how organic vegetables benefit your health and the
                           planet at the same time.</p>
                       </div>
@@ -616,7 +464,7 @@ export function BlogContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)'}}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -631,7 +479,7 @@ export function BlogContent() {
                           </li>
                         </ul>
                         <h3 className="blog-one__title"><a href="/blog">From the Scent Comes
-                            the Message of Growth</a></h3>
+                          the Message of Growth</a></h3>
                         <p className="blog-one__text">Learn how organic vegetables benefit your health and the
                           planet at the same time.</p>
                       </div>
@@ -651,7 +499,7 @@ export function BlogContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -720,16 +568,16 @@ export function BlogContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>

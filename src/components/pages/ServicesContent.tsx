@@ -104,160 +104,8 @@ export function ServicesContent() {
                     <div className="main-menu-two__main-menu-box">
                       <a href="/services#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
-                        <li className="dropdown megamenu">
-                          <a href="/services#">Home </a>
-                          <ul>
-                            <li>
-                              <section className="home-showcase">
-                                <div className="container">
-                                  <div className="home-showcase__inner">
-                                    <div className="row">
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            01</h3>
-                                          {/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            02
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            03
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            04
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                                Dark Home
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Dark Home
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                    </div>{/* /.row */}
-                                  </div>{/* /.home-showcase__inner */}
-                                </div>{/* /.container */}
-                              </section>
-                            </li>
-                          </ul>
+                        <li>
+                          <a href="/">Home</a>
                         </li>
                         <li className="dropdown">
                           <a href="/services#">About</a>
@@ -351,7 +199,7 @@ export function ServicesContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)'}}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
@@ -380,7 +228,7 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-hen-1" />
@@ -405,13 +253,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-cow" />
                       </div>
                       <h3 className="services-two__title"><a href="dairy-products.html">Dairy Farming<br />
-                          Services</a></h3>
+                        Services</a></h3>
                       <p className="services-two__text">High-quality dairy production, processing.
                       </p>
                       <div className="services-two__read-more">
@@ -430,13 +278,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-plant-1" />
                       </div>
                       <h3 className="services-two__title"><a href="fresh-produce.html">Fresh from nature<br />
-                          goodness</a></h3>
+                        goodness</a></h3>
                       <p className="services-two__text">Scientific soil testing and crop consultancy.
                       </p>
                       <div className="services-two__read-more">
@@ -455,13 +303,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-hydroponic-gardening" />
                       </div>
                       <h3 className="services-two__title"><a href="grains-cereals.html">Smart Irrigation<br />
-                          System</a></h3>
+                        System</a></h3>
                       <p className="services-two__text">Modern irrigation technology to save water.
                       </p>
                       <div className="services-two__read-more">
@@ -480,13 +328,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-harvester-1" />
                       </div>
                       <h3 className="services-two__title"><a href="poultry-eggs.html">Farm-to-Table<br />
-                          Delivery</a></h3>
+                        Delivery</a></h3>
                       <p className="services-two__text">Direct delivery of fresh organic products.
                       </p>
                       <div className="services-two__read-more">
@@ -505,13 +353,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-farming" />
                       </div>
                       <h3 className="services-two__title"><a href="fresh-produce.html">Training &amp;<br />
-                          Workshops</a></h3>
+                        Workshops</a></h3>
                       <p className="services-two__text">Farmers &amp; entrepreneurs modern
                         agriculture.
                       </p>
@@ -531,13 +379,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-precision-agriculture" />
                       </div>
                       <h3 className="services-two__title"><a href="fresh-produce.html">Organic Farming<br />
-                          Solutions</a></h3>
+                        Solutions</a></h3>
                       <p className="services-two__text">Sustainable and eco-friendly farming practices.
                       </p>
                       <div className="services-two__read-more">
@@ -556,13 +404,13 @@ export function ServicesContent() {
                       </div>
                     </div>
                     <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)'}}>
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                       </div>
                       <div className="services-two__icon">
                         <span className="icon-supply-chain" />
                       </div>
                       <h3 className="services-two__title"><a href="dairy-products.html">Farm Equipment<br />
-                          Supply</a></h3>
+                        Supply</a></h3>
                       <p className="services-two__text">Modern tools &amp; machinery for efficient farming.
                       </p>
                       <div className="services-two__read-more">
@@ -581,7 +429,7 @@ export function ServicesContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)'}}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
                   <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
                     Get
@@ -650,16 +498,16 @@ export function ServicesContent() {
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                            Produce</a></li>
+                          Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                            Products</a>
+                          Products</a>
                         </li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                            Products</a></li>
+                          Products</a></li>
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                            Farming</a></li>
+                          Farming</a></li>
                         <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                            Grains</a></li>
+                          Grains</a></li>
                         <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
                       </ul>
                     </div>
