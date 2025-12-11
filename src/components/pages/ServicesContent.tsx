@@ -54,7 +54,7 @@ export function ServicesContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function ServicesContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -83,10 +83,10 @@ export function ServicesContent() {
                       <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="/services#"><i className="fab fa-twitter" /></a>
-                      <a href="/services#"><i className="fab fa-facebook-f" /></a>
-                      <a href="/services#"><i className="fab fa-pinterest-p" /></a>
-                      <a href="/services#"><i className="fab fa-instagram" /></a>
+                      <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                      <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                      <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -107,36 +107,14 @@ export function ServicesContent() {
                         <li>
                           <a href="/">Home</a>
                         </li>
-                        <li className="dropdown">
-                          <a href="/services#">About</a>
-                          <ul className="shadow-box">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="history.html">History</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/services#">Pages</a>
-                          <ul className="shadow-box">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="/faq">FAQs</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                          </ul>
+                        <li>
+                          <a href="/about">About</a>
                         </li>
                         <li className="dropdown">
                           <a href="/services#">services</a>
                           <ul className="shadow-box">
                             <li><a href="/services">Services</a></li>
-                            <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                            <li><a href="dairy-products.html">Dairy Products</a></li>
-                            <li><a href="livestock.html">Livestock</a></li>
-                            <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                            <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                            <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
+                            <li><a href="/diagnostics-test">Diagnostic Test</a></li>
                           </ul>
                         </li>
                         <li className="dropdown">
@@ -203,12 +181,12 @@ export function ServicesContent() {
             </div>
             <div className="container">
               <div className="page-header__inner">
-                <h3>Services </h3>
+                <h3>Diagnostics Test</h3>
                 <div className="thm-breadcrumb__inner">
                   <ul className="thm-breadcrumb list-unstyled">
                     <li><a href="/">Home</a></li>
                     <li><span className="fas fa-angle-right" /></li>
-                    <li>Services </li>
+                    <li>Diagnostics Test</li>
                   </ul>
                 </div>
               </div>
@@ -218,164 +196,13 @@ export function ServicesContent() {
           {/*Services Page Start*/}
           <section className="services-page">
             <div className="container">
-              <div className="row">
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0ms">
+              <div className="row justify-content-center">
+                {/*Diagnostics Test Single Start*/}
+                <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0ms">
                   <div className="services-two__single">
                     <div className="services-two__img-box">
                       <div className="services-two__img">
-                        <img src="assets/images/services/services-2-1.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-hen-1" />
-                      </div>
-                      <h3 className="services-two__title"><a href="livestock.html">Livestock<br /> Management</a>
-                      </h3>
-                      <p className="services-two__text">Professional care &amp; modern techniques for cattle.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="livestock.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-2.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-cow" />
-                      </div>
-                      <h3 className="services-two__title"><a href="dairy-products.html">Dairy Farming<br />
-                        Services</a></h3>
-                      <p className="services-two__text">High-quality dairy production, processing.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-3.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-plant-1" />
-                      </div>
-                      <h3 className="services-two__title"><a href="fresh-produce.html">Fresh from nature<br />
-                        goodness</a></h3>
-                      <p className="services-two__text">Scientific soil testing and crop consultancy.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-4.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-hydroponic-gardening" />
-                      </div>
-                      <h3 className="services-two__title"><a href="grains-cereals.html">Smart Irrigation<br />
-                        System</a></h3>
-                      <p className="services-two__text">Modern irrigation technology to save water.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="grains-cereals.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-5.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-harvester-1" />
-                      </div>
-                      <h3 className="services-two__title"><a href="poultry-eggs.html">Farm-to-Table<br />
-                        Delivery</a></h3>
-                      <p className="services-two__text">Direct delivery of fresh organic products.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="poultry-eggs.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="500ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-6.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-farming" />
-                      </div>
-                      <h3 className="services-two__title"><a href="fresh-produce.html">Training &amp;<br />
-                        Workshops</a></h3>
-                      <p className="services-two__text">Farmers &amp; entrepreneurs modern
-                        agriculture.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="600ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-7.jpg" alt="" />
+                        <img src="assets/images/services/services-2-1.jpg" alt="Diagnostics Test" />
                       </div>
                     </div>
                     <div className="services-two__content">
@@ -384,42 +211,16 @@ export function ServicesContent() {
                       <div className="services-two__icon">
                         <span className="icon-precision-agriculture" />
                       </div>
-                      <h3 className="services-two__title"><a href="fresh-produce.html">Organic Farming<br />
-                        Solutions</a></h3>
-                      <p className="services-two__text">Sustainable and eco-friendly farming practices.
-                      </p>
+                      <h3 className="services-two__title"><a href="/diagnostics-test">Diagnostics<br />Test</a>
+                      </h3>
+                      <p className="services-two__text">Comprehensive crop and soil diagnostics to improve yield quality.</p>
                       <div className="services-two__read-more">
-                        <a href="fresh-produce.html">Read More<span className="fas fa-arrow-right" /></a>
+                        <a href="/diagnostics-test">Read More<span className="fas fa-arrow-right" /></a>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/*Services Two Single End*/}
-                {/*Services Two Single Start*/}
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="700ms">
-                  <div className="services-two__single">
-                    <div className="services-two__img-box">
-                      <div className="services-two__img">
-                        <img src="assets/images/services/services-2-8.jpg" alt="" />
-                      </div>
-                    </div>
-                    <div className="services-two__content">
-                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
-                      </div>
-                      <div className="services-two__icon">
-                        <span className="icon-supply-chain" />
-                      </div>
-                      <h3 className="services-two__title"><a href="dairy-products.html">Farm Equipment<br />
-                        Supply</a></h3>
-                      <p className="services-two__text">Modern tools &amp; machinery for efficient farming.
-                      </p>
-                      <div className="services-two__read-more">
-                        <a href="dairy-products.html">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Services Two Single End*/}
+                {/*Diagnostics Test Single End*/}
               </div>
             </div>
           </section>
@@ -467,10 +268,10 @@ export function ServicesContent() {
                         </li>
                       </ul>
                       <div className="site-footer-two__social">
-                        <a href="/services#"><i className="fab fa-facebook-f" /></a>
-                        <a href="/services#"><i className="fab fa-twitter" /></a>
-                        <a href="/services#"><i className="fab fa-instagram" /></a>
-                        <a href="/services#"><i className="fab fa-pinterest-p" /></a>
+                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
                       </div>
                     </div>
                   </div>
@@ -593,19 +394,19 @@ export function ServicesContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+919922933999">+91-9922933999</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/services#" className="fab fa-twitter" />
-                <a href="/services#" className="fab fa-facebook-square" />
-                <a href="/services#" className="fab fa-pinterest-p" />
-                <a href="/services#" className="fab fa-instagram" />
+                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
+                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
+                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
@@ -634,3 +435,4 @@ export function ServicesContent() {
     </>
   );
 }
+

@@ -54,7 +54,7 @@ export function AboutContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function AboutContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -83,10 +83,10 @@ export function AboutContent() {
                       <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="/about#"><i className="fab fa-twitter" /></a>
-                      <a href="/about#"><i className="fab fa-facebook" /></a>
-                      <a href="/about#"><i className="fab fa-pinterest-p" /></a>
-                      <a href="/about#"><i className="fab fa-instagram" /></a>
+                      <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                      <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook" /></a>
+                      <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                      <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -107,36 +107,14 @@ export function AboutContent() {
                         <li>
                           <a href="/">Home</a>
                         </li>
-                        <li className="dropdown">
-                          <a href="/about#">About</a>
-                          <ul className="shadow-box">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="history.html">History</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/about#">Pages</a>
-                          <ul className="shadow-box">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="/faq">FAQs</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                          </ul>
+                        <li>
+                          <a href="/about">About</a>
                         </li>
                         <li className="dropdown">
                           <a href="/about#">services</a>
                           <ul className="shadow-box">
                             <li><a href="/services">Services</a></li>
-                            <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                            <li><a href="dairy-products.html">Dairy Products</a></li>
-                            <li><a href="livestock.html">Livestock</a></li>
-                            <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                            <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                            <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
+                            <li><a href="/diagnostics-test">Diagnostic Test</a></li>
                           </ul>
                         </li>
                         <li className="dropdown">
@@ -372,42 +350,14 @@ export function AboutContent() {
                 </div>
                 <div className="col-xl-6">
                   <div className="author-one__img-box">
-                    <div className="author-one__img">
-                      <img src="assets/images/resources/author-one-img-1.png" alt="author-one-img-1" />
+                    <div className="author-one__img" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <img src="assets/images/board_member/sameer-mulay.jpg" alt="author-one-img-1" style={{ borderRadius: '20px', width: '352px', height: '426px', objectFit: 'cover' }} />
                     </div>
                     <div className="author-one__text-box">
-                      <div className="author-one__text-box-shape-1">
-                        <img src="assets/images/shapes/author-one-text-box-shape-1.png" alt="author-one-text-box-shape-1" />
-                      </div>
-                      <p className="author-one__text">Agriculture Matters to the <br /> Future of Development</p>
+                      <p className="author-one__text">Agriculture Matters to the<br />Future of Development</p>
                       <div className="author-one__info">
-                        <h4>Joseph C. Jensen</h4>
-                        <p>Founder</p>
-                      </div>
-                      <div className="author-one__sign">
-                        <img src="assets/images/resources/author-one-sign.png" alt="author-one-sign" />
-                      </div>
-                    </div>
-                    <div className="author-one__img-shape">
-                      <img src="assets/images/shapes/author-one-img-shape.png" alt="author-one-img-shape" />
-                    </div>
-                    <div className="author-one__ratting-box">
-                      <div className="author-one__ratting-box-shape float-bob-x">
-                        <img src="assets/images/shapes/author-one-ratting-box-shape.png" alt="author-one-ratting-box-shape" />
-                      </div>
-                      <div className="author-one__ratting-box-content">
-                        <span className="author-one__ratting-title">Top Rated</span>
-                        <div className="author-one__ratting">
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                        </div>
-                        <p className="author-one__ratting-text count-box">From <span className="count-text" data-stop="2.5" data-speed={1500} />Million<br /> Customers</p>
-                        <div className="author-one__ratting-text-two">
-                          <span>4.9 out of 5</span>
-                        </div>
+                        <h4>Sameer Mulay</h4>
+                        <p>Managing Director</p>
                       </div>
                     </div>
                   </div>
@@ -582,9 +532,9 @@ export function AboutContent() {
                 {/*Team One Single Start*/}
                 <div className="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
                   <div className="team-one__single">
-                    <div className="team-one__img-box">
-                      <div className="team-one__img">
-                        <img src="assets/images/team/team-1-1.jpg" alt="team-one__img" />
+                    <div className="team-one__img-box" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <div className="team-one__img" style={{ width: '100%', maxWidth: '370px', height: '448px', overflow: 'hidden', borderRadius: '10px' }}>
+                        <img src="assets/images/board_member/padmakar_mulay.jpg" alt="team-one__img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     </div>
                     <div className="team-one__content">
@@ -605,9 +555,9 @@ export function AboutContent() {
                 {/*Team One Single Start*/}
                 <div className="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
                   <div className="team-one__single">
-                    <div className="team-one__img-box">
-                      <div className="team-one__img">
-                        <img src="assets/images/team/team-1-2.jpg" alt="team-one__img" />
+                    <div className="team-one__img-box" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <div className="team-one__img" style={{ width: '100%', maxWidth: '370px', height: '448px', overflow: 'hidden', borderRadius: '10px' }}>
+                        <img src="assets/images/board_member/sameer-mulay.jpg" alt="team-one__img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     </div>
                     <div className="team-one__content">
@@ -628,9 +578,9 @@ export function AboutContent() {
                 {/*Team One Single Start*/}
                 <div className="col-xl-4 col-lg-4 col-md-6 wow fadeInRight" data-wow-delay="300ms">
                   <div className="team-one__single">
-                    <div className="team-one__img-box">
-                      <div className="team-one__img">
-                        <img src="assets/images/team/team-1-3.jpg" alt="team-one__img" />
+                    <div className="team-one__img-box" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <div className="team-one__img" style={{ width: '100%', maxWidth: '370px', height: '448px', overflow: 'hidden', borderRadius: '10px' }}>
+                        <img src="assets/images/board_member/ranjeet-mulay.jpg" alt="team-one__img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       </div>
                     </div>
                     <div className="team-one__content">
@@ -706,10 +656,10 @@ export function AboutContent() {
                         </li>
                       </ul>
                       <div className="site-footer-two__social">
-                        <a href="/about#"><i className="fab fa-facebook-f" /></a>
-                        <a href="/about#"><i className="fab fa-twitter" /></a>
-                        <a href="/about#"><i className="fab fa-instagram" /></a>
-                        <a href="/about#"><i className="fab fa-pinterest-p" /></a>
+                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
                       </div>
                     </div>
                   </div>
@@ -832,19 +782,19 @@ export function AboutContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+919922933999">+91-9922933999</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/about#" className="fab fa-twitter" />
-                <a href="/about#" className="fab fa-facebook-square" />
-                <a href="/about#" className="fab fa-pinterest-p" />
-                <a href="/about#" className="fab fa-instagram" />
+                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
+                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
+                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>

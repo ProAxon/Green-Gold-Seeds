@@ -98,27 +98,27 @@ export function HomeContent() {
                         </li>
                         <li>
                           <span className="icon-call" />
-                          <a href="tel:123456789">+1 555-9990-153</a>
+                          <a href="tel:+919922933999">+91-9922933999</a>
                         </li>
                         <li>
                           <span className="icon-email" />
-                          <a href="mailto:info@example.com">info@example.com</a>
+                          <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </li>
                       </ul>
                     </div>
                     <div className="thm-social-link1">
                       <ul className="social-box list-unstyled">
                         <li>
-                          <a href="/#"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
+                          <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="/#"><i className="fab fa-twitter" aria-hidden="true" /></a>
+                          <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="/#"><i className="fab fa-pinterest-p" aria-hidden="true" /></a>
+                          <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="/#"><i className="fab fa-instagram" aria-hidden="true" /></a>
+                          <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" aria-hidden="true" /></a>
                         </li>
                       </ul>
                     </div>
@@ -139,7 +139,7 @@ export function HomeContent() {
                       <i className="icon-email" />
                     </div>
                     <div className="text">
-                      <p><a href="mailto:info@Farmology24.com">info@Farmology25.com</a>
+                      <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                       </p>
                     </div>
                   </li>
@@ -157,10 +157,10 @@ export function HomeContent() {
                 <div className="main-menu__top-right">
                   <p className="main-menu__social-title">Follow Us On:</p>
                   <div className="main-menu__social">
-                    <a href="/#"><i className="fab fa-twitter" /></a>
-                    <a href="/#"><i className="fab fa-facebook-f" /></a>
-                    <a href="/#"><i className="fab fa-pinterest-p" /></a>
-                    <a href="/#"><i className="fab fa-instagram" /></a>
+                    <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                    <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                    <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                    <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                   </div>
                 </div>
               </div>
@@ -179,36 +179,14 @@ export function HomeContent() {
                       <li>
                         <a href="/">Home</a>
                       </li>
-                      <li className="dropdown">
-                        <a href="/#">About</a>
-                        <ul className="shadow-box">
-                          <li><a href="/about">About</a></li>
-                          <li><a href="history.html">History</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown">
-                        <a href="/#">Pages</a>
-                        <ul className="shadow-box">
-                          <li><a href="team.html">Team</a></li>
-                          <li><a href="team-details.html">Team Details</a></li>
-                          <li><a href="projects.html">Projects</a></li>
-                          <li><a href="project-details.html">Project Details</a></li>
-                          <li><a href="testimonials.html">Testimonials</a></li>
-                          <li><a href="pricing.html">Pricing</a></li>
-                          <li><a href="/faq">FAQs</a></li>
-                          <li><a href="404.html">404 Error</a></li>
-                        </ul>
+                      <li>
+                        <a href="/about">About</a>
                       </li>
                       <li className="dropdown">
                         <a href="/#">services</a>
                         <ul className="shadow-box">
                           <li><a href="/services">Services</a></li>
-                          <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                          <li><a href="dairy-products.html">Dairy Products</a></li>
-                          <li><a href="livestock.html">Livestock</a></li>
-                          <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                          <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                          <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
+                          <li><a href="/diagnostics-test">Diagnostic Test</a></li>
                         </ul>
                       </li>
                       <li className="dropdown">
@@ -245,8 +223,7 @@ export function HomeContent() {
                       </div>
                       <div className="main-menu__call-content">
                         <p className="main-menu__call-sub-title">Call Anytime</p>
-                        <h5 className="main-menu__call-number"><a href="tel:9288006780">+92 ( 8800 ) -
-                          6780</a></h5>
+                        <h5 className="main-menu__call-number"><a href="tel:+919922933999">+91-9922933999</a></h5>
                       </div>
                     </div>
                     <div className="main-menu__search-cart-box">
@@ -311,32 +288,25 @@ export function HomeContent() {
                   <div className="col-xl-6 col-lg-6">
                     <div className="banner-one__left">
                       <div className="banner-one__title-box">
-                        <div className="banner-one__sub-title">
-                          <p>100% Natural &amp; Fresh</p>
-                        </div>
-                        <h2 className="banner-one__title">Choose A Better Life With <span>Organic Farming</span>
-                        </h2>
+                      <div className="banner-one__sub-title">
+                        <p>Since 1992 • Farmer-first hybrids</p>
                       </div>
-                      <p className="banner-one__text">From farm to table, we deliver pure organic products that
-                        ensure a sustainable lifestyle and better tomorrow.</p>
+                      <h2 className="banner-one__title">Welcome to Ajeet Seeds Pvt. Ltd.</h2>
+                      </div>
+                    <p className="banner-one__text">
+                      Ajeet Seeds supplies high-quality, affordable hybrids across cotton, corn, rice, millet, wheat,
+                      pulses, oilseeds, and vegetables. Advanced breeding, biotech, and processing drive better yields,
+                      stress tolerance, and nutrition. Our programs stay dynamic and farmer-focused.
+                    </p>
                       <div className="banner-one__thm-and-other-btn-box">
                         <div className="banner-one__btn-box">
-                          <a className="thm-btn" href="/about">Discover More
+                          <a className="thm-btn" href="/about#our-history">Explore Our Journey
                             <i className="fal fa-long-arrow-right" />
                             <span className="hover-btn hover-bx" />
                             <span className="hover-btn hover-bx2" />
                             <span className="hover-btn hover-bx3" />
                             <span className="hover-btn hover-bx4" />
                           </a>
-                        </div>
-                        <div className="banner-one__video-link">
-                          <a href="https://www.youtube.com/watch?v=Get7rqXYrbQ" className="video-popup">
-                            <div className="banner-one__video-icon">
-                              <span className="fa fa-play" />
-                              <i className="ripple" />
-                            </div>
-                          </a>
-                          <h4 className="banner-one__video-title">Watch Video</h4>
                         </div>
                       </div>
                     </div>
@@ -419,7 +389,7 @@ export function HomeContent() {
           </section>
           {/*Banner One End */}
           {/*Feature One Start */}
-          <section className="feature-one">
+          {false && <section className="feature-one">
             <div className="container">
               <div className="row">
                 {/*Feature One Single Start*/}
@@ -482,7 +452,7 @@ export function HomeContent() {
                 {/*Feature One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Feature One End */}
           {/*About One Start */}
           <section className="about-one">
@@ -525,50 +495,56 @@ export function HomeContent() {
                         <div className="section-title__shape-1">
                           <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
                         </div>
-                        <h6 className="section-title__tagline">ABOUT US</h6>
+                        <h6 className="section-title__tagline">Our Story</h6>
                         <div className="section-title__shape-1">
                           <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
                         </div>
                       </div>
-                      <h3 className="section-title__title title-animation">Connecting Farms With <br />The Future
-                      </h3>
+                      <h3 className="section-title__title title-animation">Growing with Indian farmers</h3>
                     </div>
-                    <p className="about-one__text">At Farmology, we believe in transforming agriculture with
-                      innovation, sustainability, and trust. Our mission is to bridge the gap between
-                      traditional farming and modern solutions—helping farmers grow.</p>
-                    <h4 className="about-one__title-1">With a strong commitment</h4>
+                    <p className="about-one__text">
+                      Since 1992, Ajeet Seeds has focused on dependable hybrid seeds for Indian farms—starting
+                      with Ajeet-11/33 cotton and growing into 22 crops and 55 hybrids that balance quality and
+                      affordability.
+                    </p>
+                    <p className="about-one__text">
+                      Our Plant Biotechnology Research Center (est. 2003) and in-house labs keep innovation
+                      close to the field, from early Bt cotton work to today’s farmer-first genetics and
+                      agronomy support.
+                    </p>
+                    <h4 className="about-one__title-1">Highlights at a glance</h4>
                     <div className="about-one__points-box-and-since">
                       <ul className="about-one__points list-unstyled">
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Premium quality seeds, eco<br />-friendly fertilizers</p>
+                          <p>Ajeet-11 &amp; Ajeet-33 set the benchmark<br />for resilient cotton hybrids.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Automation to maximize yield<br /> and efficiency.</p>
+                          <p>India's first private wheat variety<br />Ajeet-102 pioneered diversification.</p>
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Building strong communities<br /> with training</p>
+                          <p>22 crops &amp; 55 hybrids support<br />farm prosperity nationwide.</p>
                         </li>
                       </ul>
                       <div className="about-one__since-box">
                         <div className="about-one__since-icon">
                           <span className="icon-harvester" />
                         </div>
-                        <h5 className="about-one__since-title">Harvesting since</h5>
-                        <h4 className="about-one__since-year">2000</h4>
+                        <h5 className="about-one__since-title">Progress since</h5>
+                        <h4 className="about-one__since-year">1992</h4>
                       </div>
                     </div>
                     <div className="about-one__btn-and-video">
                       <div className="about-one__btn-box">
-                        <a className="thm-btn" href="/about">More About Us
+                        <a className="thm-btn" href="/about#our-history">Explore Our Journey
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
@@ -586,7 +562,7 @@ export function HomeContent() {
                           </a>
                         </div>
                         <p className="about-one__video-text">
-                          Watch Our Story</p>
+                          Research in Action</p>
                       </div>
                     </div>
                   </div>
@@ -611,42 +587,14 @@ export function HomeContent() {
                 </div>
                 <div className="col-xl-6">
                   <div className="author-one__img-box">
-                    <div className="author-one__img">
-                      <img src="assets/images/resources/author-one-img-1.png" alt="author-one-img-1" />
+                    <div className="author-one__img" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                      <img src="assets/images/board_member/sameer-mulay.jpg" alt="author-one-img-1" style={{ borderRadius: '20px', width: '352px', height: '426px', objectFit: 'cover' }} />
                     </div>
                     <div className="author-one__text-box">
-                      <div className="author-one__text-box-shape-1">
-                        <img src="assets/images/shapes/author-one-text-box-shape-1.png" alt="author-one-text-box-shape-1" />
-                      </div>
-                      <p className="author-one__text">Empowering Farmers for a Sustainable Future</p>
+                      <p className="author-one__text">Agriculture Matters to the<br />Future of Development</p>
                       <div className="author-one__info">
-                        <h4>Joseph C. Jensen</h4>
-                        <p>Founder</p>
-                      </div>
-                      <div className="author-one__sign">
-                        <img src="assets/images/resources/author-one-sign.png" alt="author-one-sign" />
-                      </div>
-                    </div>
-                    <div className="author-one__img-shape">
-                      <img src="assets/images/shapes/author-one-img-shape.png" alt="author-one-img-shape" />
-                    </div>
-                    <div className="author-one__ratting-box">
-                      <div className="author-one__ratting-box-shape float-bob-x">
-                        <img src="assets/images/shapes/author-one-ratting-box-shape.png" alt="author-one-ratting-box-shape" />
-                      </div>
-                      <div className="author-one__ratting-box-content">
-                        <span className="author-one__ratting-title">Top Rated</span>
-                        <div className="author-one__ratting">
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                        </div>
-                        <p className="author-one__ratting-text count-box">From <span className="count-text" data-stop="2.5" data-speed={1500} />Million<br /> Customers</p>
-                        <div className="author-one__ratting-text-two">
-                          <span>4.9 out of 5</span>
-                        </div>
+                        <h4>Sameer Mulay</h4>
+                        <p>Managing Director</p>
                       </div>
                     </div>
                   </div>
@@ -666,7 +614,7 @@ export function HomeContent() {
           </section>
           {/*Author One End */}
           {/*Services One Start */}
-          <section className="services-one">
+          {false && <section className="services-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
@@ -812,7 +760,7 @@ export function HomeContent() {
                 {/*Services One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Services One End */}
           {/*Video One Start*/}
           <section className="video-one">
@@ -822,68 +770,21 @@ export function HomeContent() {
                 <div className="col-xl-12">
                   <div className="video-one__inner">
                     <div className="video-one__video-link">
-                      <a href="https://www.youtube.com/watch?v=3Ww2TP_tU7o" className="video-popup">
+                      <a href="https://www.youtube.com/watch?v=3Q-wfEYY2JI" className="video-popup">
                         <div className="video-one__icon">
                           <span className="fa fa-play" />
                           <i className="ripple" />
                         </div>
                       </a>
                     </div>
-                    <p className="video-one__sub-title">Watch How We Cultivate the Future</p>
-                    <h2 className="video-one__title">A glimpse into our journey of innovation<br /> and
-                      sustainability
+                    <p className="video-one__sub-title">Watch Our Journey of Seed Innovation</p>
+                    <h2 className="video-one__title">From Research to Field: Transforming<br /> Indian Agriculture
                     </h2>
                     <div className="video-one__round-text">
                       <div className="video-one__curved-circle">
-                        Always 100% Fresh from Our Fields
+                        Quality Seeds for Better Harvests
                       </div>
                     </div>
-                    <div className="video-one__round-text-2">
-                      <div className="video-one__curved-circle-2">
-                        Always 100% Fresh from Our Fields
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="brand-one">
-                <div className="brand-one__carousel swiper-container">
-                  <div className="swiper-wrapper">
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-1.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-2.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-3.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-4.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-5.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
                   </div>
                 </div>
               </div>
@@ -1110,7 +1011,7 @@ export function HomeContent() {
           </section>
           {/*Counter One End*/}
           {/*Why Choose One Start*/}
-          <section className="why-choose-one">
+          {false && <section className="why-choose-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
@@ -1251,10 +1152,10 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Why Choose One End*/}
           {/*Project One Start*/}
-          <section className="project-one">
+          {false && <section className="project-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
@@ -1402,10 +1303,10 @@ export function HomeContent() {
                 {/*Project One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Project One End*/}
           {/*Do And Donts Start*/}
-          <section className="do-and-donts">
+          {false && <section className="do-and-donts">
             <div className="do-and-donts__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
             </div>
             <div className="container">
@@ -1559,10 +1460,10 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Do And Donts End*/}
           {/*Faq One Start*/}
-          <section className="faq-one">
+          {false && <section className="faq-one">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6 col-lg-5">
@@ -1591,13 +1492,13 @@ export function HomeContent() {
                         Our team is always ready to assist you with details about fresh produce, farm tours,
                         or partnership opportunities.</p>
                       <div className="faq-one__contact-social">
-                        <a href="/#"><span className="fab fa-facebook-f" /></a>
-                        <a href="/#"><span className="fab fa-twitter" /></a>
-                        <a href="/#"><span className="fab fa-pinterest-p" /></a>
-                        <a href="/#"><span className="fab fa-instagram" /></a>
+                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
+                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><span className="fab fa-twitter" /></a>
+                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><span className="fab fa-linkedin" /></a>
+                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><span className="fab fa-instagram" /></a>
                       </div>
                       <div className="faq-one__contact-number">
-                        <a href="tel:885747546027">+88 574 7546 027</a>
+                        <a href="tel:+919922933999">+91-9922933999</a>
                       </div>
                       <div className="faq-one__contact-btn">
                         <a className="thm-btn" href="/contact">Shoot a Direct Call
@@ -1690,10 +1591,10 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Faq One End*/}
           {/*Testimonial One Start*/}
-          <section className="testimonial-one">
+          {false && <section className="testimonial-one">
             <div className="testimonial-one__bg jarallax" data-jarallax data-speed="0.2" data-imgposition="50% 0%" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -1955,10 +1856,10 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Testimonial One End*/}
           {/*Start Cta One*/}
-          <section className="cta-one">
+          {false && <section className="cta-one">
             <div className="container">
               <div className="cta-one__inner">
                 <div className="cta-one__img">
@@ -2008,10 +1909,10 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*End Cta One*/}
           {/*Blog One Start */}
-          <section className="blog-one">
+          {false && <section className="blog-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
@@ -2166,7 +2067,7 @@ export function HomeContent() {
                 {/*Blog One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Blog One End */}
           {/*Site Footer Start*/}
           <footer className="site-footer">
@@ -2241,8 +2142,8 @@ export function HomeContent() {
                               <span className="icon-call" />
                             </div>
                             <p>
-                              <a href="tel:885747546027">+88 574 7546 027</a><br />
-                              <a href="tel:885747546027">+88 574 7546 027</a>
+                              <a href="tel:+919922933999">+91-9922933999</a><br />
+                              <a href="tel:+919922933999">+91-9922933999</a>
                             </p>
                           </li>
                           <li>
@@ -2250,8 +2151,8 @@ export function HomeContent() {
                               <span className="icon-email" />
                             </div>
                             <p>
-                              <a href="mailto:Farmology@gmail.com">Farmology@gmail.com</a><br />
-                              <a href="mailto:Farmology@gmail.com">Farmology@gmail.com</a>
+                              <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a><br />
+                              <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                             </p>
                           </li>
                         </ul>
@@ -2298,19 +2199,19 @@ export function HomeContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+919922933999">+91-9922933999</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/#" className="fab fa-twitter" />
-                <a href="/#" className="fab fa-facebook-square" />
-                <a href="/#" className="fab fa-pinterest-p" />
-                <a href="/#" className="fab fa-instagram" />
+                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
+                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
+                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>

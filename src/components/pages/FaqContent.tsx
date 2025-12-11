@@ -54,7 +54,7 @@ export function FaqContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:15502505260">+1 (550) 250 5260</a></p>
+                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,7 +62,7 @@ export function FaqContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:info@Servixa24.com">info@Servixa24.com</a>
+                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                         </p>
                       </div>
                     </li>
@@ -83,10 +83,10 @@ export function FaqContent() {
                       <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="/faq#"><i className="fab fa-twitter" /></a>
-                      <a href="/faq#"><i className="fab fa-facebook-f" /></a>
-                      <a href="/faq#"><i className="fab fa-pinterest-p" /></a>
-                      <a href="/faq#"><i className="fab fa-instagram" /></a>
+                      <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                      <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                      <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -107,36 +107,14 @@ export function FaqContent() {
                         <li>
                           <a href="/">Home</a>
                         </li>
-                        <li className="dropdown">
-                          <a href="/faq#">About</a>
-                          <ul className="shadow-box">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="history.html">History</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/faq#">Pages</a>
-                          <ul className="shadow-box">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="/faq">FAQs</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                          </ul>
+                        <li>
+                          <a href="/about">About</a>
                         </li>
                         <li className="dropdown">
                           <a href="/faq#">services</a>
                           <ul className="shadow-box">
                             <li><a href="/services">Services</a></li>
-                            <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                            <li><a href="dairy-products.html">Dairy Products</a></li>
-                            <li><a href="livestock.html">Livestock</a></li>
-                            <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                            <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                            <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
+                            <li><a href="/diagnostics-test">Diagnostic Test</a></li>
                           </ul>
                         </li>
                         <li className="dropdown">
@@ -394,10 +372,10 @@ export function FaqContent() {
                         </li>
                       </ul>
                       <div className="site-footer-two__social">
-                        <a href="/faq#"><i className="fab fa-facebook-f" /></a>
-                        <a href="/faq#"><i className="fab fa-twitter" /></a>
-                        <a href="/faq#"><i className="fab fa-instagram" /></a>
-                        <a href="/faq#"><i className="fab fa-pinterest-p" /></a>
+                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
                       </div>
                     </div>
                   </div>
@@ -520,19 +498,19 @@ export function FaqContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+919922933999">+91-9922933999</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/faq#" className="fab fa-twitter" />
-                <a href="/faq#" className="fab fa-facebook-square" />
-                <a href="/faq#" className="fab fa-pinterest-p" />
-                <a href="/faq#" className="fab fa-instagram" />
+                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
+                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
+                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
