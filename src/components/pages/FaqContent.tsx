@@ -5,9 +5,25 @@ const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { useEffect, useState } from 'react';
 
 export function FaqContent() {
   const t = useTranslations();
+  const [showPreloader, setShowPreloader] = useState(true);
+  
+  useEffect(() => {
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+    
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+      setTimeout(hidePreloader, 1000);
+    }
+  }, []);
+  
   return (
     <>
       <NavHighlighter />
@@ -15,12 +31,14 @@ export function FaqContent() {
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        <div id="preloader">
-          <div className="preloader">
-            <span />
-            <span />
+        {showPreloader && (
+          <div id="preloader" style={{ opacity: showPreloader ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+            <div className="preloader">
+              <span />
+              <span />
+            </div>
           </div>
-        </div>
+        )}
         {/*End Preloader*/}
         <div className="chat-icon"><button type="button" className="chat-toggler"><i className="fa fa-comment" /></button></div>
         {/*Chat Popup*/}

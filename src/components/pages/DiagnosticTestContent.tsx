@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
@@ -9,8 +9,21 @@ import { Link } from '@/i18n/routing';
 
 export function DiagnosticTestContent() {
   const t = useTranslations();
+  const [showPreloader, setShowPreloader] = useState(true);
   
   useEffect(() => {
+    // Hide preloader after component mounts
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+    
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+      setTimeout(hidePreloader, 1000);
+    }
+    
     // Custom accordion toggle functionality
     const initAccordion = () => {
       const accordionGroup = document.querySelector('[data-custom-toggle="true"]');
@@ -137,12 +150,14 @@ export function DiagnosticTestContent() {
       <NavHighlighter />
       <div className="custom-cursor__cursor" />
       <div className="custom-cursor__cursor-two" />
-      <div id="preloader">
-        <div className="preloader">
-          <span />
-          <span />
+      {showPreloader && (
+        <div id="preloader" style={{ opacity: showPreloader ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+          <div className="preloader">
+            <span />
+            <span />
+          </div>
         </div>
-      </div>
+      )}
       <div className="chat-icon">
         <button type="button" className="chat-toggler">
           <i className="fa fa-comment" />

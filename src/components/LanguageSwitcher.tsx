@@ -2,26 +2,18 @@
 
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, startTransition } from 'react';
 import { localeNames } from '@/i18n/config';
 
 export function LanguageSwitcher() {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isMainMenuTwo, setIsMainMenuTwo] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setMounted(true);
-    // Load saved preference from localStorage
-    const savedLocale = localStorage.getItem('preferred-locale');
-    if (savedLocale && savedLocale !== locale && ['en', 'hi', 'mr'].includes(savedLocale)) {
-      router.replace(pathname, { locale: savedLocale as 'en' | 'hi' | 'mr' });
-    }
-    
     // Detect if we're in main-menu-two (white navbar) or main-menu (black navbar)
     const checkNavbarType = () => {
       const parent = dropdownRef.current?.closest('.main-menu-two__right, .main-menu__right');
@@ -36,7 +28,7 @@ export function LanguageSwitcher() {
     const timeout = setTimeout(checkNavbarType, 100);
     
     return () => clearTimeout(timeout);
-  }, [locale, pathname, router]);
+  }, [locale, pathname]);
 
   useEffect(() => {
     // Close dropdown when clicking outside
@@ -63,14 +55,17 @@ export function LanguageSwitcher() {
     
     // Save preference to localStorage
     localStorage.setItem('preferred-locale', newLocale);
-    // Navigate to new locale
-    router.replace(pathname, { locale: newLocale as 'en' | 'hi' | 'mr' });
+    
+    // Close dropdown immediately for better UX
     setIsOpen(false);
+    
+    // Use startTransition for smoother navigation without blocking UI
+    startTransition(() => {
+      // pathname from usePathname() already excludes the locale prefix
+      // router.push() with locale option will automatically add the locale
+      router.push(pathname, { locale: newLocale as 'en' | 'hi' | 'mr' });
+    });
   };
-
-  if (!mounted) {
-    return null;
-  }
 
   const locales = [
     { code: 'en', name: localeNames.en },

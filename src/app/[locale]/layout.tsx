@@ -121,9 +121,36 @@ export default async function LocaleLayout({
         ))}
       </head>
       <body className="custom-cursor" suppressHydrationWarning>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           {children}
         </NextIntlClientProvider>
+        <Script id="preloader-fallback" strategy="beforeInteractive">
+          {`
+            // Fallback to hide preloader if jQuery doesn't load
+            (function() {
+              function hidePreloader() {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                  preloader.style.display = 'none';
+                  preloader.style.opacity = '0';
+                  preloader.style.transition = 'opacity 0.5s ease';
+                }
+              }
+              
+              // Try to hide immediately if DOM is ready
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', hidePreloader);
+              } else {
+                hidePreloader();
+              }
+              
+              // Fallback after page load
+              window.addEventListener('load', function() {
+                setTimeout(hidePreloader, 500);
+              });
+            })();
+          `}
+        </Script>
         {scriptAssets.map((src) => (
           <Script key={src} src={src} strategy="afterInteractive" />
         ))}
