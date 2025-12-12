@@ -1,6 +1,13 @@
-import { NavHighlighter } from "@/components/NavHighlighter";
+"use client";
+
+import dynamic from 'next/dynamic';
+const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export function ProductsContent() {
+  const t = useTranslations();
   return (
     <>
       <NavHighlighter />
@@ -21,19 +28,19 @@ export function ProductsContent() {
           <div className="popup-inner">
             <div className="close-chat"><i className="fa fa-times" /></div>
             <div className="chat-form">
-              <p>Please fill out the form below and we will get back to you as soon as possible.</p>
+              <p>{t('sidebar.pleaseFillForm')}</p>
               <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
                 <div className="form-group">
-                  <input type="text" name="name" placeholder="Your Name" required />
+                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
                 </div>
                 <div className="form-group">
-                  <input type="email" name="email" placeholder="Your Email" required />
+                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
                 </div>
                 <div className="form-group">
-                  <textarea name="message" placeholder="Your Text" required defaultValue={""} />
+                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
                 </div>
                 <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> Submit Now
+                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
                     <i className="fal fa-long-arrow-right" />
                     <span className="hover-btn hover-bx" />
                     <span className="hover-btn hover-bx2" />
@@ -75,7 +82,7 @@ export function ProductsContent() {
                       <div className="main-menu-two__top-time-icon">
                         <span className="fas fa-clock" />
                       </div>
-                      <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
+                      <p className="main-menu-two__top-text">{t('common.businessHours')}</p>
                     </div>
                     <div className="main-menu-two__social">
                       <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
@@ -93,73 +100,74 @@ export function ProductsContent() {
                   <div className="main-menu-two__wrapper-inner">
                     <div className="main-menu-two__left">
                       <div className="main-menu-two__logo">
-                        <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                        <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                       </div>
                     </div>
                     <div className="main-menu-two__main-menu-box">
                       <a href="/products#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
                         <li>
-                          <a href="/">Home</a>
+                          <Link href="/">{t('nav.home')}</Link>
                         </li>
                           <li>
-                            <a href="/about">About</a>
+                            <Link href="/about">{t('nav.about')}</Link>
                           </li>
                           <li className="dropdown">
-                            <a href="/products#">services</a>
+                            <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
                             <ul className="shadow-box">
-                              <li><a href="/services">Services</a></li>
-                              <li><a href="/diagnostics-test">Diagnostic Test</a></li>
+                              <li><Link href="/services">{t('nav.services')}</Link></li>
+                              <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                             </ul>
                           </li>
                         <li className="dropdown">
-                          <a href="/products#">Shop</a>
+                          <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.shop')}</a>
                           <ul className="shadow-box">
-                            <li><a href="/products">Products</a></li>
-                            <li><a href="/products">Product Details</a></li>
-                            <li><a href="/products">Cart</a></li>
-                            <li><a href="/products">Checkout</a></li>
-                            <li><a href="/products">Wishlist</a></li>
-                            <li><a href="/contact">Sign Up</a></li>
-                            <li><a href="/contact">Login</a></li>
+                            <li><Link href="/products">{t('nav.products')}</Link></li>
+                            <li><Link href="/products">{t('nav.productDetails')}</Link></li>
+                            <li><Link href="/products">{t('nav.cart')}</Link></li>
+                            <li><Link href="/products">{t('nav.checkout')}</Link></li>
+                            <li><Link href="/products">{t('nav.wishlist')}</Link></li>
+                            <li><Link href="/contact">{t('nav.signUp')}</Link></li>
+                            <li><Link href="/contact">{t('nav.login')}</Link></li>
                           </ul>
                         </li>
                         <li className="dropdown">
-                          <a href="/products#">Blog</a>
+                          <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
                           <ul className="shadow-box">
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="/blog">Blog Standard</a></li>
-                            <li><a href="/blog">Blog Left Sidebar</a></li>
-                            <li><a href="/blog">Blog Right Sidebar</a></li>
-                            <li><a href="/blog">Blog Details</a></li>
+                            <li><Link href="/blog">{t('nav.blog')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogStandard')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogLeftSidebar')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogRightSidebar')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
                           </ul>
                         </li>
                         <li>
-                          <a href="/contact">Contact</a>
+                          <Link href="/contact">{t('nav.contact')}</Link>
                         </li>
                       </ul>
                     </div>
                     <div className="main-menu-two__right">
+                      <LanguageSwitcher />
                       <div className="main-menu-two__search-box">
                         <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
                       </div>
                       <div className="main-menu-two__cart">
-                        <a href="/products">
+                        <Link href="/products">
                           <span className="fal fa-shopping-cart" />
                           <span className="main-menu-two__cart-count">02</span>
-                        </a>
+                        </Link>
                       </div>
                       <div className="main-menu-two__user">
-                        <a href="/contact"><span className="far fa-users" /></a>
+                        <Link href="/contact"><span className="far fa-users" /></Link>
                       </div>
                       <div className="main-menu-two__btn-box">
-                        <a className="thm-btn" href="/contact">Get A Quote
+                        <Link className="thm-btn" href="/contact">{t('common.getAQuote')}
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
                           <span className="hover-btn hover-bx3" />
                           <span className="hover-btn hover-bx4" />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -172,16 +180,16 @@ export function ProductsContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
-                <h3>Products </h3>
+                <h3>{t('products.pageTitle')}</h3>
                 <div className="thm-breadcrumb__inner">
                   <ul className="thm-breadcrumb list-unstyled">
-                    <li><a href="/">Home</a></li>
+                    <li><Link href="/">{t('nav.home')}</Link></li>
                     <li><span className="fas fa-angle-right" /></li>
-                    <li>Porducts </li>
+                    <li>{t('products.pageTitle')}</li>
                   </ul>
                 </div>
               </div>
@@ -198,15 +206,15 @@ export function ProductsContent() {
                       <div className="col-xl-12">
                         <div className="product__showing-result">
                           <div className="product__showing-text-box">
-                            <p className="product__showing-text">Showing 1–12/14 of 14 results</p>
+                            <p className="product__showing-text">{t('products.showingResults')}</p>
                           </div>
                           <div className="product__showing-sort">
                             <div className="select-box">
                               <select className="wide">
-                                <option data-display="Sort by popular">Sort by popular</option>
-                                <option value={1}>Sort by popular</option>
-                                <option value={2}>Sort by Price</option>
-                                <option value={3}>Sort by Ratings</option>
+                                <option data-display={t('products.sortByPopular')}>{t('products.sortByPopular')}</option>
+                                <option value={1}>{t('products.sortByPopular')}</option>
+                                <option value={2}>{t('products.sortByPrice')}</option>
+                                <option value={3}>{t('products.sortByRatings')}</option>
                               </select>
                             </div>
                           </div>
@@ -240,8 +248,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-1.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-1.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-1.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-1.jpg" alt="" />
                                         <ul className="single-product-style1__overlay">
                                           <li>
                                             <p>New</p>
@@ -293,8 +301,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-2.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-2.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-2.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-2.jpg" alt="" />
                                         <ul className="single-product-style1__info">
                                           <li>
                                             <a href="/products#" title="Add to Wishlist">
@@ -341,8 +349,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-3.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-3.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-3.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-3.jpg" alt="" />
                                         <ul className="single-product-style1__overlay">
                                           <li>
                                             <p>5% Off</p>
@@ -394,8 +402,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-4.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-4.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-4.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-4.jpg" alt="" />
                                         <ul className="single-product-style1__info">
                                           <li>
                                             <a href="/products#" title="Add to Wishlist">
@@ -442,8 +450,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-5.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-5.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-5.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-5.jpg" alt="" />
                                         <ul className="single-product-style1__overlay">
                                           <li>
                                             <p>5% Off</p>
@@ -495,8 +503,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-6.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-6.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-6.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-6.jpg" alt="" />
                                         <ul className="single-product-style1__info">
                                           <li>
                                             <a href="/products#" title="Add to Wishlist">
@@ -543,8 +551,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-7.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-7.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-7.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-7.jpg" alt="" />
                                         <ul className="single-product-style1__overlay">
                                           <li>
                                             <p>New</p>
@@ -596,8 +604,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-8.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-8.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-8.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-8.jpg" alt="" />
                                         <ul className="single-product-style1__info">
                                           <li>
                                             <a href="/products#" title="Add to Wishlist">
@@ -644,8 +652,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-9.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-9.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-9.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-9.jpg" alt="" />
                                         <ul className="single-product-style1__overlay">
                                           <li>
                                             <p>3% Off</p>
@@ -697,8 +705,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-10.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-10.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-10.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-10.jpg" alt="" />
                                         <ul className="single-product-style1__info">
                                           <li>
                                             <a href="/products#" title="Add to Wishlist">
@@ -745,8 +753,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-11.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-11.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-11.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-11.jpg" alt="" />
                                         <ul className="single-product-style1__overlay">
                                           <li>
                                             <p>New</p>
@@ -801,8 +809,8 @@ export function ProductsContent() {
                                   <div className="col-xl-4 col-lg-6 col-md-6">
                                     <div className="single-product-style1">
                                       <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-12.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-12.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-12.jpg" alt="" />
+                                        <img src="/assets/images/shop/shop-product-1-12.jpg" alt="" />
                                         <ul className="single-product-style1__info">
                                           <li>
                                             <a href="/products#" title="Add to Wishlist">
@@ -861,8 +869,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-1.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-1.jpg" alt="" />
                                             <ul className="single-product-style1__overlay">
                                               <li>
                                                 <p>New</p>
@@ -925,8 +933,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-2.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-2.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -984,8 +992,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-3.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-3.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-3.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-3.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -1043,8 +1051,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-4.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-4.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-4.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-4.jpg" alt="" />
                                           </div>
                                           <ul className="single-product-style1__overlay">
                                             <li>
@@ -1107,8 +1115,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-5.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-5.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-5.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-5.jpg" alt="" />
                                           </div>
                                           <ul className="single-product-style1__overlay">
                                             <li>
@@ -1171,8 +1179,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-6.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-6.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-6.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-6.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -1230,8 +1238,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-7.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-7.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-7.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-7.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -1289,8 +1297,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-8.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-8.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-8.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-8.jpg" alt="" />
                                             <ul className="single-product-style1__overlay">
                                               <li>
                                                 <p>New</p>
@@ -1353,8 +1361,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-9.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-9.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-9.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-9.jpg" alt="" />
                                             <ul className="single-product-style1__overlay">
                                               <li>
                                                 <p>3% Off</p>
@@ -1417,8 +1425,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-10.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-10.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-10.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-10.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -1476,8 +1484,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-11.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-11.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-11.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-11.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -1535,8 +1543,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-12.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-12.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-12.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-12.jpg" alt="" />
                                           </div>
                                           <ul className="single-product-style1__overlay">
                                             <li>
@@ -1602,8 +1610,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-1.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-1.jpg" alt="" />
                                             <ul className="single-product-style1__overlay">
                                               <li>
                                                 <p>New</p>
@@ -1666,8 +1674,8 @@ export function ProductsContent() {
                                       <div className="row">
                                         <div className="col-xl-6 col-lg-6 col-md-6">
                                           <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-2.jpg" alt="" />
+                                            <img src="/assets/images/shop/shop-product-2-2.jpg" alt="" />
                                           </div>
                                         </div>
                                         <div className="col-xl-6 col-lg-6 col-md-6">
@@ -1749,12 +1757,12 @@ export function ProductsContent() {
                   <div className="product__sidebar">
                     <div className="shop-search product__sidebar-single">
                       <form action="/products">
-                        <input type="text" placeholder="Search" />
+                        <input type="text" placeholder={t('products.search')} />
                         <button type="submit"><i className="fa fa-search" /></button>
                       </form>
                     </div>
                     <div className="product__price-ranger product__sidebar-single">
-                      <h3 className="product__sidebar-title">Price</h3>
+                      <h3 className="product__sidebar-title">{t('products.price')}</h3>
                       <div className="price-ranger">
                         <div id="slider-range" />
                         <div className="ranger-min-max-block">
@@ -1766,26 +1774,26 @@ export function ProductsContent() {
                       </div>
                     </div>
                     <div className="shop-category product__sidebar-single">
-                      <h3 className="product__sidebar-title">Categories</h3>
+                      <h3 className="product__sidebar-title">{t('footer.categories')}</h3>
                       <ul className="list-unstyled">
-                        <li><a href="/products#">Crop Cultivation</a></li>
-                        <li className="active"><a href="/products#">Tips &amp; Tricks</a></li>
-                        <li><a href="/products#">Technology</a></li>
-                        <li><a href="/products#">Animal care</a></li>
-                        <li><a href="/products#">Natural &amp; Organic</a></li>
+                        <li><Link href="/products#">{t('products.cropCultivation')}</Link></li>
+                        <li className="active"><Link href="/products#">{t('footer.tipsTricks')}</Link></li>
+                        <li><Link href="/products#">{t('footer.technology')}</Link></li>
+                        <li><Link href="/products#">{t('products.animalCare')}</Link></li>
+                        <li><Link href="/products#">{t('footer.naturalOrganic')}</Link></li>
                       </ul>
                     </div>
                     <div className="shop-product-recent-products product__sidebar-single">
-                      <h3 className="product__sidebar-title">Recent Products</h3>
+                      <h3 className="product__sidebar-title">{t('products.recentProducts')}</h3>
                       <ul className="clearfix list-unstyled">
                         <li>
                           <div className="img">
-                            <img src="assets/images/shop/product-thumb-1.jpg" alt="Product" />
-                            <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
+                            <img src="/assets/images/shop/product-thumb-1.jpg" alt="Product" />
+                            <Link href="/products#"><i className="fa fa-link" aria-hidden="true" /></Link>
                           </div>
                           <div className="content">
                             <div className="title">
-                              <h5><a href="/products#">Organic Capsicum</a></h5>
+                              <h5><Link href="/products#">{t('products.organicCapsicum')}</Link></h5>
                             </div>
                             <div className="price">
                               <p>$33.00</p>
@@ -1801,12 +1809,12 @@ export function ProductsContent() {
                         </li>
                         <li>
                           <div className="img">
-                            <img src="assets/images/shop/product-thumb-2.jpg" alt="Product" />
+                            <img src="/assets/images/shop/product-thumb-2.jpg" alt="Product" />
                             <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
                           </div>
                           <div className="content">
                             <div className="title">
-                              <h5><a href="/products#">Natural Green Peas</a></h5>
+                              <h5><Link href="/products#">{t('products.naturalGreenPeas')}</Link></h5>
                             </div>
                             <div className="price">
                               <p>$39.00</p>
@@ -1822,12 +1830,12 @@ export function ProductsContent() {
                         </li>
                         <li>
                           <div className="img">
-                            <img src="assets/images/shop/product-thumb-3.jpg" alt="Product" />
+                            <img src="/assets/images/shop/product-thumb-3.jpg" alt="Product" />
                             <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
                           </div>
                           <div className="content">
                             <div className="title">
-                              <h5><a href="/products#">Natural Lemon</a></h5>
+                              <h5><Link href="/products#">{t('products.naturalLemon')}</Link></h5>
                             </div>
                             <div className="price">
                               <p>$54.00</p>
@@ -1843,12 +1851,12 @@ export function ProductsContent() {
                         </li>
                         <li>
                           <div className="img">
-                            <img src="assets/images/shop/product-thumb-4.jpg" alt="Product" />
+                            <img src="/assets/images/shop/product-thumb-4.jpg" alt="Product" />
                             <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
                           </div>
                           <div className="content">
                             <div className="title">
-                              <h5><a href="/products#">Organic Mango</a></h5>
+                              <h5><Link href="/products#">{t('products.organicMango')}</Link></h5>
                             </div>
                             <div className="price">
                               <p>$44.00</p>
@@ -1865,19 +1873,19 @@ export function ProductsContent() {
                       </ul>
                     </div>
                     <div className="shop-product-tags product__sidebar-single">
-                      <h3 className="product__sidebar-title">Product Tags</h3>
+                      <h3 className="product__sidebar-title">{t('products.productTags')}</h3>
                       <div className="shop-product__tags-list">
-                        <a href="/products#">Aggrotech</a>
-                        <a href="/products#">Crop</a>
-                        <a href="/products#">Grain</a>
-                        <a href="/products#">Organic</a>
-                        <a href="/products#">Cultivation</a>
-                        <a href="/products#">Agro</a>
+                        <Link href="/products#">{t('footer.tags.aggrotech')}</Link>
+                        <Link href="/products#">{t('footer.tags.crop')}</Link>
+                        <Link href="/products#">{t('footer.tags.grain')}</Link>
+                        <Link href="/products#">{t('footer.tags.organic')}</Link>
+                        <Link href="/products#">{t('products.cultivation')}</Link>
+                        <Link href="/products#">{t('footer.tags.agro')}</Link>
                       </div>
                     </div>
                     {/*Start Products Style1 Single Sidear */}
                     <div className="shop-product-tags product__sidebar-single style">
-                      <h3 className="product__sidebar-title">Reviews</h3>
+                      <h3 className="product__sidebar-title">{t('footer.reviews')}</h3>
                       <div className="sidebar-rating-box sidebar-rating-box--style2">
                         <ul className="list-unstyled">
                           <li>
@@ -1950,16 +1958,14 @@ export function ProductsContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
-                  <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
-                    Get
-                    Latest Update</h3>
+                  <h3 className="footer-widget-two__newsletter-title" dangerouslySetInnerHTML={{ __html: t('footer.newsletter.title') }} />
                   <form className="footer-widget-two__newsletter-form mc-form" data-url="MC_FORM_URL" noValidate>
                     <div className="footer-widget-two__newsletter-form-input-box">
                       <input type="email" placeholder="Enter email" name="EMAIL" />
                     </div>
-                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">Subscribe
+                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">{t('common.subscribe')}
                       <i className="fal fa-long-arrow-right" />
                       <span className="hover-btn hover-bx" />
                       <span className="hover-btn hover-bx2" />
@@ -1975,16 +1981,16 @@ export function ProductsContent() {
                 <div className="row">
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
                     <div className="footer-widget-two__working-box">
-                      <h3 className="footer-widget-two__working-title">opening time:</h3>
+                      <h3 className="footer-widget-two__working-title">{t('footer.openingTime.title')}:</h3>
                       <ul className="footer-widget-two__working-hour list-unstyled">
                         <li>
-                          <p>Mon - Fri<span>9:00 AM - 5:00 PM</span></p>
+                          <p>{t('common.businessHoursFull')}<span>{t('common.businessHoursTime')}</span></p>
                         </li>
                         <li>
-                          <p>Saturday<span>8:00 AM - 6:00 PM</span></p>
+                          <p>{t('footer.openingTime.saturday')}<span>{t('footer.openingTime.saturdayHours')}</span></p>
                         </li>
                         <li>
-                          <p>Sunday<span>Closed</span></p>
+                          <p>{t('footer.openingTime.sunday')}<span>{t('footer.openingTime.sundayHours')}</span></p>
                         </li>
                       </ul>
                       <div className="site-footer-two__social">
@@ -1998,16 +2004,16 @@ export function ProductsContent() {
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
                     <div className="footer-widget-two__column footer-widget-two__usefull-link">
                       <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Quick Links</h3>
+                        <h3 className="footer-widget-two__title">{t('footer.quickLinks.title')}</h3>
                       </div>
                       <div className="footer-widget-two__link-box">
                         <ul className="footer-widget-two__link list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/services">Portfolio</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/blog">Blog</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/services">Services</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/contact">Contact</a></li>
+                          <li><span className="fas fa-wheat" /><Link href="/about">{t('footer.quickLinks.aboutUs')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.portfolio')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/faq">{t('footer.quickLinks.helpFaqs')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/blog">{t('footer.quickLinks.blog')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.services')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/contact">{t('footer.quickLinks.contact')}</Link></li>
                         </ul>
                       </div>
                     </div>
@@ -2015,27 +2021,21 @@ export function ProductsContent() {
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
                     <div className="footer-widget-two__column footer-widget-two__products">
                       <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Our Products</h3>
+                        <h3 className="footer-widget-two__title">{t('footer.ourProducts.title')}</h3>
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
-                        <li><span className="fas fa-wheat" /><a href="/products">Fresh
-                          Produce</a></li>
-                        <li><span className="fas fa-wheat" /><a href="/products">Dairy
-                          Products</a>
-                        </li>
-                        <li><span className="fas fa-wheat" /><a href="/products">Livestock
-                          Products</a></li>
-                        <li><span className="fas fa-wheat" /><a href="/products">Organic
-                          Farming</a></li>
-                        <li><span className="fas fa-wheat" /><a href="/products">Crops &amp;
-                          Grains</a></li>
-                        <li><span className="fas fa-wheat" /><a href="/products">Poultry</a></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.freshProduce')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.dairyProducts')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.livestockProducts')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.organicFarming')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.cropsGrains')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.poultry')}</Link></li>
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div className="footer-widget-two__logo">
-                  <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                  <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                 </div>
               </div>
             </div>
@@ -2044,9 +2044,9 @@ export function ProductsContent() {
                 <div className="site-footer-two__bottom-inner">
                   <p className="site-footer-two__bottom-text">© Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
                   <ul className="list-unstyled site-footer-two__bottom-menu">
-                    <li><a href="/contact">Support</a></li>
-                    <li><a href="/about">Terms and Condition</a></li>
-                    <li><a href="/about">Privacy and Policy</a></li>
+                    <li><Link href="/contact">{t('footer.support')}</Link></li>
+                    <li><Link href="/about">{t('footer.termsAndCondition')}</Link></li>
+                    <li><Link href="/about">{t('footer.privacyAndPolicy')}</Link></li>
                   </ul>
                 </div>
               </div>
@@ -2060,7 +2060,7 @@ export function ProductsContent() {
           <div className="mobile-nav__content">
             <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
             <div className="logo-box">
-              <a href="/" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width={150} alt="" /></a>
+              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-1.png" width={150} alt="" /></Link>
             </div>
             {/* /.logo-box */}
             <div className="mobile-nav__container" />
@@ -2093,16 +2093,16 @@ export function ProductsContent() {
           <button className="close-search"><span className="far fa-times fa-fw" /></button>
           <form method="post" action="/blog">
             <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
+              <input type="search" name="search-field" defaultValue="" placeholder={t('common.searchHere')} required />
               <button type="submit"><i className="fas fa-search" /></button>
             </div>
           </form>
         </div>
         {/* End Search Popup */}
-        <a href="/products#" data-target="html" className="scroll-to-target scroll-to-top">
+        <Link href="/products#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
-          <span className="scroll-to-top__text"> Go Back Top</span>
-        </a>
+          <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
+        </Link>
         {/* template js */}
       </div>
 
