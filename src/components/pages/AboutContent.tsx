@@ -1,6 +1,9 @@
+import { NavHighlighter } from "@/components/NavHighlighter";
+
 export function AboutContent() {
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
@@ -66,14 +69,6 @@ export function AboutContent() {
                         </p>
                       </div>
                     </li>
-                    <li>
-                      <div className="icon">
-                        <i className="icon-pin" />
-                      </div>
-                      <div className="text">
-                        <p>4124 Cimmaron Road, CA 92806</p>
-                      </div>
-                    </li>
                   </ul>
                   <div className="main-menu-two__top-right">
                     <div className="main-menu-two__top-time">
@@ -121,21 +116,21 @@ export function AboutContent() {
                           <a href="/about#">Shop</a>
                           <ul className="shadow-box">
                             <li><a href="/products">Products</a></li>
-                            <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
-                            <li><a href="login.html">Login</a></li>
+                            <li><a href="/products">Product Details</a></li>
+                            <li><a href="/products">Cart</a></li>
+                            <li><a href="/products">Checkout</a></li>
+                            <li><a href="/products">Wishlist</a></li>
+                            <li><a href="/contact">Sign Up</a></li>
+                            <li><a href="/contact">Login</a></li>
                           </ul>
                         </li>
                         <li className="dropdown">
                           <a href="/about#">Blog</a>
                           <ul className="shadow-box">
                             <li><a href="/blog">Blog</a></li>
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                            <li><a href="/blog">Blog Standard</a></li>
+                            <li><a href="/blog">Blog Left Sidebar</a></li>
+                            <li><a href="/blog">Blog Right Sidebar</a></li>
                             <li><a href="/blog">Blog Details</a></li>
                           </ul>
                         </li>
@@ -149,13 +144,13 @@ export function AboutContent() {
                         <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
                       </div>
                       <div className="main-menu-two__cart">
-                        <a href="cart.html">
+                        <a href="/products">
                           <span className="fal fa-shopping-cart" />
                           <span className="main-menu-two__cart-count">02</span>
                         </a>
                       </div>
                       <div className="main-menu-two__user">
-                        <a href="sign-up.html"><span className="far fa-users" /></a>
+                        <a href="/contact"><span className="far fa-users" /></a>
                       </div>
                       <div className="main-menu-two__btn-box">
                         <a className="thm-btn" href="/contact">Get A Quote
@@ -200,7 +195,7 @@ export function AboutContent() {
                 <div className="col-xl-6">
                   <div className="about-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                     <div className="about-one__img">
-                      <img src="assets/images/resources/about-one-image-1.jpg" alt="about-one-image-1" />
+                      <img src="assets/images/backgrounds/farming_4.jpg" alt="about-one-image-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       <div className="about-one__crop-harvest">
                         <div className="about-one__crop-harvest-icon">
                           <span className="icon-tractor" />
@@ -395,13 +390,13 @@ export function AboutContent() {
                 <div className="services-two__carousel owl-theme owl-carousel">
                   {/*Services Two Single Start*/}
                   <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-1.jpg" alt="" />
+                    <div className="services-two__single" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <div className="services-two__img-box" style={{ height: '280px', overflow: 'hidden' }}>
+                        <div className="services-two__img" style={{ width: '100%', height: '100%' }}>
+                          <img src="assets/images/backgrounds/cotton-field-1.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                      <div className="services-two__content" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
                         <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
@@ -409,7 +404,7 @@ export function AboutContent() {
                         </div>
                         <h3 className="services-two__title"><a href="/services">R &amp; D</a></h3>
                         <p className="services-two__text">Genetic research and hybrid development led by the Plant Biotechnology Research Center.</p>
-                        <div className="services-two__read-more">
+                        <div className="services-two__read-more" style={{ marginTop: 'auto' }}>
                           <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
@@ -418,13 +413,13 @@ export function AboutContent() {
                   {/*Services Two Single End*/}
                   {/*Services Two Single Start*/}
                   <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-2.jpg" alt="" />
+                    <div className="services-two__single" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <div className="services-two__img-box" style={{ height: '280px', overflow: 'hidden' }}>
+                        <div className="services-two__img" style={{ width: '100%', height: '100%' }}>
+                          <img src="assets/images/backgrounds/cotton-field-2.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                      <div className="services-two__content" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
                         <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
@@ -432,7 +427,7 @@ export function AboutContent() {
                         </div>
                         <h3 className="services-two__title"><a href="/services">Production</a></h3>
                         <p className="services-two__text">Seed multiplication and large-scale production adhering to strict agronomic protocols.</p>
-                        <div className="services-two__read-more">
+                        <div className="services-two__read-more" style={{ marginTop: 'auto' }}>
                           <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
@@ -441,13 +436,13 @@ export function AboutContent() {
                   {/*Services Two Single End*/}
                   {/*Services Two Single Start*/}
                   <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-3.jpg" alt="" />
+                    <div className="services-two__single" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <div className="services-two__img-box" style={{ height: '280px', overflow: 'hidden' }}>
+                        <div className="services-two__img" style={{ width: '100%', height: '100%' }}>
+                          <img src="assets/images/backgrounds/quality-control-inspection.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                      <div className="services-two__content" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
                         <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
@@ -455,7 +450,7 @@ export function AboutContent() {
                         </div>
                         <h3 className="services-two__title"><a href="/services">Quality Control</a></h3>
                         <p className="services-two__text">Multi-stage lab and field testing to guarantee purity, vigor, and farmer-ready performance.</p>
-                        <div className="services-two__read-more">
+                        <div className="services-two__read-more" style={{ marginTop: 'auto' }}>
                           <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
@@ -464,13 +459,13 @@ export function AboutContent() {
                   {/*Services Two Single End*/}
                   {/*Services Two Single Start*/}
                   <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-4.jpg" alt="" />
+                    <div className="services-two__single" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <div className="services-two__img-box" style={{ height: '280px', overflow: 'hidden' }}>
+                        <div className="services-two__img" style={{ width: '100%', height: '100%' }}>
+                          <img src="assets/images/backgrounds/lab-equipment.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                      <div className="services-two__content" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
                         <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
@@ -478,7 +473,7 @@ export function AboutContent() {
                         </div>
                         <h3 className="services-two__title"><a href="/services">Processing</a></h3>
                         <p className="services-two__text">State-of-the-art conditioning ensures clean, graded, and well-packed seed lots.</p>
-                        <div className="services-two__read-more">
+                        <div className="services-two__read-more" style={{ marginTop: 'auto' }}>
                           <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
@@ -487,13 +482,13 @@ export function AboutContent() {
                   {/*Services Two Single End*/}
                   {/*Services Two Single Start*/}
                   <div className="item">
-                    <div className="services-two__single">
-                      <div className="services-two__img-box">
-                        <div className="services-two__img">
-                          <img src="assets/images/services/services-2-5.jpg" alt="" />
+                    <div className="services-two__single" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                      <div className="services-two__img-box" style={{ height: '280px', overflow: 'hidden' }}>
+                        <div className="services-two__img" style={{ width: '100%', height: '100%' }}>
+                          <img src="assets/images/backgrounds/marketing.jpeg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                         </div>
                       </div>
-                      <div className="services-two__content">
+                      <div className="services-two__content" style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
                         <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-two-content-bg-shape.png)' }}>
                         </div>
                         <div className="services-two__icon">
@@ -501,7 +496,7 @@ export function AboutContent() {
                         </div>
                         <h3 className="services-two__title"><a href="/services">Marketing</a></h3>
                         <p className="services-two__text">Closer farmer engagement, timely availability, and trusted advisory support.</p>
-                        <div className="services-two__read-more">
+                        <div className="services-two__read-more" style={{ marginTop: 'auto' }}>
                           <a href="/services">Learn More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
@@ -671,7 +666,7 @@ export function AboutContent() {
                       <div className="footer-widget-two__link-box">
                         <ul className="footer-widget-two__link list-unstyled">
                           <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Portfolio</a></li>
+                          <li><span className="fas fa-wheat" /><a href="/services">Portfolio</a></li>
                           <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
                           <li><span className="fas fa-wheat" /><a href="/blog">Blog</a></li>
                           <li><span className="fas fa-wheat" /><a href="/services">Services</a></li>
@@ -686,63 +681,18 @@ export function AboutContent() {
                         <h3 className="footer-widget-two__title">Our Products</h3>
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
+                        <li><span className="fas fa-wheat" /><a href="/products">Fresh
                           Produce</a></li>
-                        <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
+                        <li><span className="fas fa-wheat" /><a href="/products">Dairy
                           Products</a>
                         </li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
+                        <li><span className="fas fa-wheat" /><a href="/products">Livestock
                           Products</a></li>
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
+                        <li><span className="fas fa-wheat" /><a href="/products">Organic
                           Farming</a></li>
-                        <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
+                        <li><span className="fas fa-wheat" /><a href="/products">Crops &amp;
                           Grains</a></li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                    <div className="footer-widget-two__instagram">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">instagram</h3>
-                      </div>
-                      <ul className="footer-widget-two__instagram-list list-unstyled clearfix">
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-1.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-2.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-3.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-4.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-5.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-6.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
+                        <li><span className="fas fa-wheat" /><a href="/products">Poultry</a></li>
                       </ul>
                     </div>
                   </div>
@@ -755,8 +705,7 @@ export function AboutContent() {
             <div className="site-footer-two__bottom">
               <div className="container">
                 <div className="site-footer-two__bottom-inner">
-                  <p className="site-footer-two__bottom-text">Copyright@ 2025 <a href="/">Farmology</a>. All
-                    Rights Reserved.</p>
+                  <p className="site-footer-two__bottom-text">© Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
                   <ul className="list-unstyled site-footer-two__bottom-menu">
                     <li><a href="/contact">Support</a></li>
                     <li><a href="/about">Terms and Condition</a></li>
@@ -805,7 +754,7 @@ export function AboutContent() {
         <div className="search-popup">
           <div className="color-layer" />
           <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
+          <form method="post" action="/blog">
             <div className="form-group">
               <input
                 type="search"

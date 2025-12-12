@@ -1,6 +1,11 @@
+"use client";
+
+import { NavHighlighter } from "@/components/NavHighlighter";
+
 export function HomeContent() {
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
@@ -143,14 +148,6 @@ export function HomeContent() {
                       </p>
                     </div>
                   </li>
-                  <li>
-                    <div className="icon">
-                      <i className="icon-pin" />
-                    </div>
-                    <div className="text">
-                      <p>4124 Cimmaron Road, CA 92806</p>
-                    </div>
-                  </li>
                 </ul>
                 <p className="main-menu__top-welcome-text">Welcome to Farmology
                   our Best Farming HTML5 Template</p>
@@ -183,31 +180,31 @@ export function HomeContent() {
                         <a href="/about">About</a>
                       </li>
                       <li className="dropdown">
-                        <a href="/#">services</a>
+                        <a href="/#" onClick={(e) => e.preventDefault()}>services</a>
                         <ul className="shadow-box">
                           <li><a href="/services">Services</a></li>
                           <li><a href="/diagnostics-test">Diagnostic Test</a></li>
                         </ul>
                       </li>
                       <li className="dropdown">
-                        <a href="/#">Shop</a>
+                        <a href="/#" onClick={(e) => e.preventDefault()}>Shop</a>
                         <ul className="shadow-box">
                           <li><a href="/products">Products</a></li>
-                          <li><a href="product-details.html">Product Details</a></li>
-                          <li><a href="cart.html">Cart</a></li>
-                          <li><a href="checkout.html">Checkout</a></li>
-                          <li><a href="wishlist.html">Wishlist</a></li>
-                          <li><a href="sign-up.html">Sign Up</a></li>
-                          <li><a href="login.html">Login</a></li>
+                          <li><a href="/products">Product Details</a></li>
+                          <li><a href="/products">Cart</a></li>
+                          <li><a href="/products">Checkout</a></li>
+                          <li><a href="/products">Wishlist</a></li>
+                          <li><a href="/contact">Sign Up</a></li>
+                          <li><a href="/contact">Login</a></li>
                         </ul>
                       </li>
                       <li className="dropdown">
-                        <a href="/#">Blog</a>
+                        <a href="/#" onClick={(e) => e.preventDefault()}>Blog</a>
                         <ul className="shadow-box">
                           <li><a href="/blog">Blog</a></li>
-                          <li><a href="blog-standard.html">Blog Standard</a></li>
-                          <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                          <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                          <li><a href="/blog">Blog Standard</a></li>
+                          <li><a href="/blog">Blog Left Sidebar</a></li>
+                          <li><a href="/blog">Blog Right Sidebar</a></li>
                           <li><a href="/blog">Blog Details</a></li>
                         </ul>
                       </li>
@@ -232,7 +229,7 @@ export function HomeContent() {
                           <a href="/#" className="main-menu__search searcher-toggler-box fal fa-search" />
                         </div>
                         <div className="main-menu__cart-box">
-                          <a href="cart.html" className="main-menu__cart">
+                          <a href="/products" className="main-menu__cart">
                             <span className="fal fa-shopping-cart" />
                             <span className="main-menu__cart-count">02</span>
                           </a>
@@ -315,7 +312,7 @@ export function HomeContent() {
                     <div className="banner-one__right">
                       <div className="banner-one__img-box">
                         <div className="banner-one__img">
-                          <img src="assets/images/resources/banner-one-img-1.png" alt="" />
+                          <img src="assets/images/backgrounds/sameer-mulay-removebg-preview.png" alt="" />
                           <div className="banner-one__img-shape-box rotate-me">
                             <div className="banner-one__img-shape-1">
                               <div className="banner-one__img-shape-2" />
@@ -328,55 +325,6 @@ export function HomeContent() {
                             </div>
                             <div className="banner-one__shape-3">
                               <img src="assets/images/shapes/banner-one-shape-3.png" alt="" />
-                            </div>
-                          </div>
-                          <div className="banner-one__discount-box">
-                            <h3>50%</h3>
-                            <p>Discount</p>
-                          </div>
-                          <div className="banner-one__client-review">
-                            <div className="banner-one__client-review-img">
-                              <img src="assets/images/resources/banner-one-review-img.jpg" alt="" />
-                            </div>
-                            <div className="banner-one__client-review-text">
-                              <h4>Review</h4>
-                            </div>
-                            <div className="banner-one__client-review-client-info">
-                              <p className="banner-one__client-review-client-name">Alisa Olivia/</p>
-                              <div className="banner-one__client-review-star">
-                                <span className="icon-pointed-star" />
-                                <span className="icon-pointed-star" />
-                                <span className="icon-pointed-star" />
-                                <span className="icon-pointed-star" />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="banner-one__happy-customer">
-                            <ul className="list-unstyled banner-one__happy-customer-list">
-                              <li>
-                                <div className="banner-one__happy-customer-img">
-                                  <img src="assets/images/resources/banner-one-happy-customer-img-1-1.jpg" alt="" />
-                                </div>
-                              </li>
-                              <li>
-                                <div className="banner-one__happy-customer-img">
-                                  <img src="assets/images/resources/banner-one-happy-customer-img-1-2.jpg" alt="" />
-                                </div>
-                              </li>
-                              <li>
-                                <div className="banner-one__happy-customer-img">
-                                  <div className="banner-one__happy-customer-plus">
-                                    <i className="fas fa-plus" />
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                            <div className="banner-one__happy-customer-count-box">
-                              <div className="banner-one__happy-customer-count-box-inner count-box">
-                                <p className="count-text" data-stop={2000} data-speed={3000}>00</p>
-                                <span>+</span>
-                              </div>
-                              <p className="banner-one__happy-customer-text">Happy Customers</p>
                             </div>
                           </div>
                         </div>
@@ -461,7 +409,7 @@ export function HomeContent() {
                 <div className="col-xl-6">
                   <div className="about-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                     <div className="about-one__img">
-                      <img src="assets/images/resources/about-one-image-1.jpg" alt="about-one-image-1" />
+                      <img src="assets/images/backgrounds/farming_4.jpg" alt="about-one-image-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                       <div className="about-one__crop-harvest">
                         <div className="about-one__crop-harvest-icon">
                           <span className="icon-tractor" />
@@ -650,7 +598,7 @@ export function HomeContent() {
                       <div className="services-one__icon">
                         <span className="icon-farming" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">Organic Farming
+                      <h3 className="services-one__title"><a href="/services">Organic Farming
                         Solutions</a></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
@@ -682,7 +630,7 @@ export function HomeContent() {
                       <div className="services-one__icon">
                         <span className="icon-precision-agriculture" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">Smart Agriculture
+                      <h3 className="services-one__title"><a href="/services">Smart Agriculture
                         Technology</a></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
@@ -714,7 +662,7 @@ export function HomeContent() {
                       <div className="services-one__icon">
                         <span className="icon-seeding" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">High-Quality Seeds &amp;
+                      <h3 className="services-one__title"><a href="/services">High-Quality Seeds &amp;
                         Crops</a></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
@@ -746,7 +694,7 @@ export function HomeContent() {
                       <div className="services-one__icon">
                         <span className="icon-farmer" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">Farmer Training &amp;
+                      <h3 className="services-one__title"><a href="/services">Farmer Training &amp;
                         Support</a></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
@@ -819,7 +767,7 @@ export function HomeContent() {
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Fresh Vegetables</a>
+                        <h3 className="products-one__title"><a href="/products">Fresh Vegetables</a>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-vegetable" />
@@ -831,7 +779,7 @@ export function HomeContent() {
                         <p className="products-one__text">Our vegetables are cultivated naturally to bring you
                           the best of every season.</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/products">Read More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -848,7 +796,7 @@ export function HomeContent() {
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Dairy Product</a>
+                        <h3 className="products-one__title"><a href="/products">Dairy Product</a>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-cow" />
@@ -860,7 +808,7 @@ export function HomeContent() {
                         <p className="products-one__text">From fresh milk to our dairy products ensure
                           farm-fresh quality every day.</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/products">Read More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -877,7 +825,7 @@ export function HomeContent() {
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Livestock
+                        <h3 className="products-one__title"><a href="/products">Livestock
                           Product</a>
                         </h3>
                         <div className="products-one__icon">
@@ -890,7 +838,7 @@ export function HomeContent() {
                         <p className="products-one__text">From organic eggs, our Livestock Product ensure
                           farm-fresh quality every day.</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/products">Read More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -907,7 +855,7 @@ export function HomeContent() {
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Organic Fruits</a>
+                        <h3 className="products-one__title"><a href="/products">Organic Fruits</a>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-healthy-food" />
@@ -919,7 +867,7 @@ export function HomeContent() {
                         <p className="products-one__text">Handpicked from our orchards fruits are packed with
                           freshness and nutrients.</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <a href="/products">Read More<span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -945,9 +893,10 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Happy Farmers</h3>
+                      <h3 className="counter-one__title">Farmers Served</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={1200} data-speed={1500} />
+                        <h3 className="count-text" data-stop="1.2" data-speed={1500}></h3>
+                        <span>M</span>
                         <span>+</span>
                       </div>
                     </div>
@@ -962,10 +911,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Crops Harvested</h3>
+                      <h3 className="counter-one__title">Hybrids Developed</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop="1.5" data-speed={1500} />
-                        <span>M</span>
+                        <h3 className="count-text" data-stop={55} data-speed={1500}></h3>
                         <span>+</span>
                       </div>
                     </div>
@@ -980,10 +928,10 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Sustainable Practices</h3>
+                      <h3 className="counter-one__title">Research Acres</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={100} data-speed={1500} />
-                        <span>%</span>
+                        <h3 className="count-text" data-stop={400} data-speed={1500}></h3>
+                        <span>+</span>
                       </div>
                     </div>
                   </div>
@@ -996,10 +944,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Livestock Raised</h3>
+                      <h3 className="counter-one__title">Testing Locations</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop="1.2" data-speed={1500} />
-                        <span>M</span>
+                        <h3 className="count-text" data-stop={35} data-speed={1500}></h3>
                         <span>+</span>
                       </div>
                     </div>
@@ -1181,12 +1128,12 @@ export function HomeContent() {
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Vegetable</p>
-                        <h3 className="project-one__title"><a href="project-details.html">Organic Farming
+                        <h3 className="project-one__title"><a href="/services">Organic Farming
                           Projects</a></h3>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Vegetable</p>
-                        <h4 className="project-one__title-2"><a href="project-details.html">Organic Farming
+                        <h4 className="project-one__title-2"><a href="/services">Organic Farming
                           Projects</a></h4>
                         <p className="project-one__text">Blending tradition with technology for smarter
                           agriculture</p>
@@ -1207,12 +1154,12 @@ export function HomeContent() {
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Dairy</p>
-                        <h3 className="project-one__title"><a href="project-details.html">Dairy Delight
+                        <h3 className="project-one__title"><a href="/services">Dairy Delight
                           Project</a></h3>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Dairy</p>
-                        <h4 className="project-one__title-2"><a href="project-details.html">Dairy Delight
+                        <h4 className="project-one__title-2"><a href="/services">Dairy Delight
                           Project</a></h4>
                         <p className="project-one__text">Proper health, and feeding, essential for productivity.
                         </p>
@@ -1233,12 +1180,12 @@ export function HomeContent() {
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">NutriHarvest</p>
-                        <h3 className="project-one__title"><a href="project-details.html">Healthy Harvest
+                        <h3 className="project-one__title"><a href="/services">Healthy Harvest
                           Initiative</a></h3>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">NutriHarvest</p>
-                        <h4 className="project-one__title-2"><a href="project-details.html">Healthy Harvest
+                        <h4 className="project-one__title-2"><a href="/services">Healthy Harvest
                           Initiative</a></h4>
                         <p className="project-one__text">Dedicated to every stage of farming excellence</p>
                         <div className="project-one__arrow">
@@ -1258,12 +1205,12 @@ export function HomeContent() {
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Livestock</p>
-                        <h4 className="project-one__title"><a href="project-details.html">Livestock Farming
+                        <h4 className="project-one__title"><a href="/services">Livestock Farming
                           Projects</a></h4>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Livestock</p>
-                        <h3 className="project-one__title-2"><a href="project-details.html">Livestock Farming
+                        <h3 className="project-one__title-2"><a href="/services">Livestock Farming
                           Projects</a></h3>
                         <p className="project-one__text">Blending tradition with technology for smarter
                           agriculture</p>
@@ -1284,12 +1231,12 @@ export function HomeContent() {
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Agri-Tech</p>
-                        <h4 className="project-one__title"><a href="project-details.html">Agri-Tech Innovation
+                        <h4 className="project-one__title"><a href="/services">Agri-Tech Innovation
                         </a></h4>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Agri-Tech</p>
-                        <h3 className="project-one__title-2"><a href="project-details.html">Agri-Tech
+                        <h3 className="project-one__title-2"><a href="/services">Agri-Tech
                           Innovation</a></h3>
                         <p className="project-one__text">Eco-friendly fertilizers &amp; natural crop protection.
                         </p>
@@ -1623,7 +1570,7 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Adam
+                              <h4 className="testimonial-one__client-name"><a href="/about">Adam
                                 Smith</a></h4>
                               <p className="testimonial-one__client-sub-title">Ceo Agency</p>
                             </div>
@@ -1662,7 +1609,7 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Rowena E. Smith</a></h4>
+                              <h4 className="testimonial-one__client-name"><a href="/about">Rowena E. Smith</a></h4>
                               <p className="testimonial-one__client-sub-title">Ceo Agency</p>
                             </div>
                             <div className="testimonial-one__ratting">
@@ -1700,7 +1647,7 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">David J. Mahmoud</a></h4>
+                              <h4 className="testimonial-one__client-name"><a href="/about">David J. Mahmoud</a></h4>
                               <p className="testimonial-one__client-sub-title">Ceo Agency</p>
                             </div>
                             <div className="testimonial-one__ratting">
@@ -1738,7 +1685,7 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">James S. Adams</a></h4>
+                              <h4 className="testimonial-one__client-name"><a href="/about">James S. Adams</a></h4>
                               <p className="testimonial-one__client-sub-title">Ceo Agency</p>
                             </div>
                             <div className="testimonial-one__ratting">
@@ -1776,7 +1723,7 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Iris
+                              <h4 className="testimonial-one__client-name"><a href="/about">Iris
                                 W. Jackson</a></h4>
                               <p className="testimonial-one__client-sub-title">Ceo Agency</p>
                             </div>
@@ -1815,7 +1762,7 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Herman G. McClure</a></h4>
+                              <h4 className="testimonial-one__client-name"><a href="/about">Herman G. McClure</a></h4>
                               <p className="testimonial-one__client-sub-title">Ceo Agency</p>
                             </div>
                             <div className="testimonial-one__ratting">
@@ -2088,10 +2035,10 @@ export function HomeContent() {
                         <div className="footer-widget__payment">
                           <h3>We Accept</h3>
                           <div className="footer-widget__payment-card">
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-1.jpg" alt="" /></a>
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-2.jpg" alt="" /></a>
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-3.jpg" alt="" /></a>
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-4.jpg" alt="" /></a>
+                            <a href="/products"><img src="assets/images/resources/footer-widget-payment-card-1.jpg" alt="" /></a>
+                            <a href="/products"><img src="assets/images/resources/footer-widget-payment-card-2.jpg" alt="" /></a>
+                            <a href="/products"><img src="assets/images/resources/footer-widget-payment-card-3.jpg" alt="" /></a>
+                            <a href="/products"><img src="assets/images/resources/footer-widget-payment-card-4.jpg" alt="" /></a>
                           </div>
                         </div>
                       </div>
@@ -2101,8 +2048,8 @@ export function HomeContent() {
                         <h4 className="footer-widget__title">Quick links</h4>
                         <ul className="footer-widget__links-list list-unstyled">
                           <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="team.html">Meet Our Team</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Our Projects</a>
+                          <li><span className="fas fa-wheat" /><a href="/about">Meet Our Team</a></li>
+                          <li><span className="fas fa-wheat" /><a href="/services">Our Projects</a>
                           </li>
                           <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
                           <li><span className="fas fa-wheat" /><a href="/contact">Contact Us</a></li>
@@ -2113,15 +2060,15 @@ export function HomeContent() {
                       <div className="footer-widget__services">
                         <h4 className="footer-widget__title">Our Products</h4>
                         <ul className="footer-widget__links-list list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic &amp;
+                          <li><span className="fas fa-wheat" /><a href="/products">Organic &amp;
                             Processed</a></li>
-                          <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
+                          <li><span className="fas fa-wheat" /><a href="/products">Dairy
                             Products</a></li>
-                          <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
+                          <li><span className="fas fa-wheat" /><a href="/products">Livestock
                             Products</a></li>
-                          <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
+                          <li><span className="fas fa-wheat" /><a href="/products">Crops &amp;
                             Grains</a></li>
-                          <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
+                          <li><span className="fas fa-wheat" /><a href="/products">Fresh
                             Vegetables</a></li>
                         </ul>
                       </div>
@@ -2132,17 +2079,9 @@ export function HomeContent() {
                         <ul className="footer-widget__contact-list list-unstyled">
                           <li>
                             <div className="icon">
-                              <span className="icon-pin" />
-                            </div>
-                            <p>4140 Parker Rd. Allentown, New
-                              <br /> Mexico 31134</p>
-                          </li>
-                          <li>
-                            <div className="icon">
                               <span className="icon-call" />
                             </div>
                             <p>
-                              <a href="tel:+919922933999">+91-9922933999</a><br />
                               <a href="tel:+919922933999">+91-9922933999</a>
                             </p>
                           </li>
@@ -2151,7 +2090,6 @@ export function HomeContent() {
                               <span className="icon-email" />
                             </div>
                             <p>
-                              <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a><br />
                               <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
                             </p>
                           </li>
@@ -2168,7 +2106,7 @@ export function HomeContent() {
                   <div className="col-xl-12">
                     <div className="site-footer__bottom-inner">
                       <div className="site-footer__copyright">
-                        <p className="site-footer__copyright-text">Copyright@ 2025 <a href="/">Farmology</a>. All Rights Reserved.</p>
+                        <p className="site-footer__copyright-text">© Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
                       </div>
                       <div className="site-footer__bottom-menu-box">
                         <ul className="list-unstyled site-footer__bottom-menu">
@@ -2222,7 +2160,7 @@ export function HomeContent() {
         <div className="search-popup">
           <div className="color-layer" />
           <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
+          <form method="post" action="/blog">
             <div className="form-group">
               <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
               <button type="submit"><i className="fas fa-search" /></button>

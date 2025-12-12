@@ -1,6 +1,9 @@
+import { NavHighlighter } from "@/components/NavHighlighter";
+
 export function ContactContent() {
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
@@ -66,14 +69,6 @@ export function ContactContent() {
                         </p>
                       </div>
                     </li>
-                    <li>
-                      <div className="icon">
-                        <i className="icon-pin" />
-                      </div>
-                      <div className="text">
-                        <p>4124 Cimmaron Road, CA 92806</p>
-                      </div>
-                    </li>
                   </ul>
                   <div className="main-menu-two__top-right">
                     <div className="main-menu-two__top-time">
@@ -121,21 +116,21 @@ export function ContactContent() {
                           <a href="/contact#">Shop</a>
                           <ul className="shadow-box">
                             <li><a href="/products">Products</a></li>
-                            <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
-                            <li><a href="login.html">Login</a></li>
+                            <li><a href="/products">Product Details</a></li>
+                            <li><a href="/products">Cart</a></li>
+                            <li><a href="/products">Checkout</a></li>
+                            <li><a href="/products">Wishlist</a></li>
+                            <li><a href="/contact">Sign Up</a></li>
+                            <li><a href="/contact">Login</a></li>
                           </ul>
                         </li>
                         <li className="dropdown">
                           <a href="/contact#">Blog</a>
                           <ul className="shadow-box">
                             <li><a href="/blog">Blog</a></li>
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                            <li><a href="/blog">Blog Standard</a></li>
+                            <li><a href="/blog">Blog Left Sidebar</a></li>
+                            <li><a href="/blog">Blog Right Sidebar</a></li>
                             <li><a href="/blog">Blog Details</a></li>
                           </ul>
                         </li>
@@ -149,13 +144,13 @@ export function ContactContent() {
                         <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
                       </div>
                       <div className="main-menu-two__cart">
-                        <a href="cart.html">
+                        <a href="/products">
                           <span className="fal fa-shopping-cart" />
                           <span className="main-menu-two__cart-count">02</span>
                         </a>
                       </div>
                       <div className="main-menu-two__user">
-                        <a href="sign-up.html"><span className="far fa-users" /></a>
+                        <a href="/contact"><span className="far fa-users" /></a>
                       </div>
                       <div className="main-menu-two__btn-box">
                         <a className="thm-btn" href="/contact">Get A Quote
@@ -226,7 +221,7 @@ export function ContactContent() {
                       <span className="icon-pin" />
                     </div>
                     <p>Our Office Location</p>
-                    <h3>12 Green Road 05 New Yark</h3>
+                    <h3>Chhatrapati Sambhaji Nagar, Maharashtra 431105</h3>
                   </div>
                 </div>
                 {/*Contact Two Single End*/}
@@ -241,12 +236,12 @@ export function ContactContent() {
                 <div className="row">
                   <div className="col-xl-6">
                     <div className="contact-page__left">
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4562.753041141002!2d-118.80123790098536!3d34.152323469614075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80e82469c2162619%3A0xba03efb7998eef6d!2sCostco+Wholesale!5e0!3m2!1sbn!2sbd!4v1562518641290!5m2!1sbn!2sbd" className="google-map__one" allowFullScreen />
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3754.7905253598688!2d75.28618421539039!3d19.7640525351185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9ef8b3ffd533%3A0xe6046698f7f28016!2sAjeet%20Seeds%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1665054123753!5m2!1sen!2sin" className="google-map__one" allowFullScreen />
                     </div>
                   </div>
                   <div className="col-xl-6">
                     <div className="contact-page__right">
-                      <h3 className="contact-page__form-title">Get A Free Quote</h3>
+                      <h3 className="contact-page__form-title">Get in Touch with Us</h3>
                       <form id="contact-form" className="contact-form-validated contact-page__form" action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/mail.php" method="POST">
                         <div className="row">
                           <div className="col-xl-6 col-lg-6 col-md-6">
@@ -352,7 +347,7 @@ export function ContactContent() {
                       <div className="footer-widget-two__link-box">
                         <ul className="footer-widget-two__link list-unstyled">
                           <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Portfolio</a></li>
+                          <li><span className="fas fa-wheat" /><a href="/services">Portfolio</a></li>
                           <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
                           <li><span className="fas fa-wheat" /><a href="/blog">Blog</a></li>
                           <li><span className="fas fa-wheat" /><a href="/services">Services</a></li>
@@ -367,63 +362,18 @@ export function ContactContent() {
                         <h3 className="footer-widget-two__title">Our Products</h3>
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
+                        <li><span className="fas fa-wheat" /><a href="/products">Fresh
                           Produce</a></li>
-                        <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
+                        <li><span className="fas fa-wheat" /><a href="/products">Dairy
                           Products</a>
                         </li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
+                        <li><span className="fas fa-wheat" /><a href="/products">Livestock
                           Products</a></li>
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
+                        <li><span className="fas fa-wheat" /><a href="/products">Organic
                           Farming</a></li>
-                        <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
+                        <li><span className="fas fa-wheat" /><a href="/products">Crops &amp;
                           Grains</a></li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                    <div className="footer-widget-two__instagram">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">instagram</h3>
-                      </div>
-                      <ul className="footer-widget-two__instagram-list list-unstyled clearfix">
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-1.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-2.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-3.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-4.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-5.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-6.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
+                        <li><span className="fas fa-wheat" /><a href="/products">Poultry</a></li>
                       </ul>
                     </div>
                   </div>
@@ -436,8 +386,7 @@ export function ContactContent() {
             <div className="site-footer-two__bottom">
               <div className="container">
                 <div className="site-footer-two__bottom-inner">
-                  <p className="site-footer-two__bottom-text">Copyright@ 2025 <a href="/">Farmology</a>. All
-                    Rights Reserved.</p>
+                  <p className="site-footer-two__bottom-text">© Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
                   <ul className="list-unstyled site-footer-two__bottom-menu">
                     <li><a href="/contact">Support</a></li>
                     <li><a href="/about">Terms and Condition</a></li>
@@ -486,7 +435,7 @@ export function ContactContent() {
         <div className="search-popup">
           <div className="color-layer" />
           <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
+          <form method="post" action="/blog">
             <div className="form-group">
               <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
               <button type="submit"><i className="fas fa-search" /></button>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { NavHighlighter } from "@/components/NavHighlighter";
 
 export function DiagnosticTestContent() {
   useEffect(() => {
@@ -127,6 +128,7 @@ export function DiagnosticTestContent() {
 
   return (
     <>
+      <NavHighlighter />
       <div className="custom-cursor__cursor" />
       <div className="custom-cursor__cursor-two" />
       <div id="preloader">
@@ -198,14 +200,6 @@ export function DiagnosticTestContent() {
                       </p>
                     </div>
                   </li>
-                  <li>
-                    <div className="icon">
-                      <i className="icon-pin" />
-                    </div>
-                    <div className="text">
-                      <p>4124 Cimmaron Road, CA 92806</p>
-                    </div>
-                  </li>
                 </ul>
                 <div className="main-menu-two__top-right">
                   <div className="main-menu-two__top-time">
@@ -238,7 +232,7 @@ export function DiagnosticTestContent() {
                 <div className="main-menu-two__wrapper-inner">
                   <div className="main-menu-two__left">
                     <div className="main-menu-two__logo">
-                      <a href="index.html">
+                      <a href="/">
                         <img src="assets/images/resources/logo-1.png" alt="" />
                       </a>
                     </div>
@@ -269,25 +263,25 @@ export function DiagnosticTestContent() {
                         <a href="/shop">Shop</a>
                         <ul className="shadow-box">
                           <li>
-                            <a href="products.html">Products</a>
+                            <a href="/products">Products</a>
                           </li>
                           <li>
-                            <a href="product-details.html">Product Details</a>
+                            <a href="/products">Product Details</a>
                           </li>
                           <li>
-                            <a href="cart.html">Cart</a>
+                            <a href="/products">Cart</a>
                           </li>
                           <li>
-                            <a href="checkout.html">Checkout</a>
+                            <a href="/products">Checkout</a>
                           </li>
                           <li>
-                            <a href="wishlist.html">Wishlist</a>
+                            <a href="/products">Wishlist</a>
                           </li>
                           <li>
-                            <a href="sign-up.html">Sign Up</a>
+                            <a href="/contact">Sign Up</a>
                           </li>
                           <li>
-                            <a href="login.html">Login</a>
+                            <a href="/contact">Login</a>
                           </li>
                         </ul>
                       </li>
@@ -295,24 +289,24 @@ export function DiagnosticTestContent() {
                         <a href="/blog">Blog</a>
                         <ul className="shadow-box">
                           <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="/blog">Blog</a>
                           </li>
                           <li>
-                            <a href="blog-standard.html">Blog Standard</a>
+                            <a href="/blog">Blog Standard</a>
                           </li>
                           <li>
-                            <a href="blog-left-sidebar.html">Blog Left Sidebar</a>
+                            <a href="/blog">Blog Left Sidebar</a>
                           </li>
                           <li>
-                            <a href="blog-right-sidebar.html">Blog Right Sidebar</a>
+                            <a href="/blog">Blog Right Sidebar</a>
                           </li>
                           <li>
-                            <a href="blog-details.html">Blog Details</a>
+                            <a href="/blog">Blog Details</a>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <a href="contact.html">Contact</a>
+                        <a href="/contact">Contact</a>
                       </li>
                     </ul>
                   </div>
@@ -321,18 +315,18 @@ export function DiagnosticTestContent() {
                       <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
                     </div>
                     <div className="main-menu-two__cart">
-                      <a href="cart.html">
+                      <a href="/products">
                         <span className="fal fa-shopping-cart" />
                         <span className="main-menu-two__cart-count">02</span>
                       </a>
                     </div>
                     <div className="main-menu-two__user">
-                      <a href="sign-up.html">
+                      <a href="/contact">
                         <span className="far fa-users" />
                       </a>
                     </div>
                     <div className="main-menu-two__btn-box">
-                      <a className="thm-btn" href="contact.html">
+                      <a className="thm-btn" href="/contact">
                         Get A Quote
                         <i className="fal fa-long-arrow-right" />
                         <span className="hover-btn hover-bx" />
@@ -411,7 +405,7 @@ export function DiagnosticTestContent() {
                         Contact With Us
                       </p>
                       <div className="service-details__sidebar-contact-btn-box">
-                        <a className="thm-btn" href="contact.html">
+                        <a className="thm-btn" href="/contact">
                           Contact Us
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
@@ -494,7 +488,7 @@ export function DiagnosticTestContent() {
               <div className="col-xl-8 col-lg-7">
                 <div className="service-details__left">
                   <div className="service-details__img">
-                    <img src="assets/images/services/service-details-img-3.jpg" alt="" />
+                    <img src="assets/images/backgrounds/004.jpg" alt="" />
                   </div>
                   <h3 className="service-details__title-1">Diagnostic Test</h3>
                   <p className="service-details__text-1">
@@ -534,7 +528,7 @@ export function DiagnosticTestContent() {
                       <div className="col-xl-6">
                         <div className="service-details__img-box-single">
                           <div className="service-details__img-box-img">
-                            <img src="assets/images/services/service-details-img-box-img-1.jpg" alt="" />
+                            <img src="assets/images/research_development/qaulity_assurance/005.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           </div>
                           <div className="service-details__img-box-content">
                             <div className="service-details__img-box-content-icon-and-title">
@@ -552,7 +546,7 @@ export function DiagnosticTestContent() {
                       <div className="col-xl-6">
                         <div className="service-details__img-box-single">
                           <div className="service-details__img-box-img">
-                            <img src="assets/images/services/service-details-img-box-img-2.jpg" alt="" />
+                            <img src="assets/images/quality_assurance/quality_4.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                           </div>
                           <div className="service-details__img-box-content">
                             <div className="service-details__img-box-content-icon-and-title">
@@ -831,27 +825,27 @@ export function DiagnosticTestContent() {
                       <ul className="footer-widget-two__link list-unstyled">
                         <li>
                           <span className="fas fa-wheat" />
-                          <a href="about.html">About Us</a>
+                          <a href="/about">About Us</a>
                         </li>
                         <li>
                           <span className="fas fa-wheat" />
-                          <a href="projects.html">Portfolio</a>
+                          <a href="/services">Portfolio</a>
                         </li>
                         <li>
                           <span className="fas fa-wheat" />
-                          <a href="faq.html">Help &amp; FAQs</a>
+                          <a href="/faq">Help &amp; FAQs</a>
                         </li>
                         <li>
                           <span className="fas fa-wheat" />
-                          <a href="blog.html">Blog</a>
+                          <a href="/blog">Blog</a>
                         </li>
                         <li>
                           <span className="fas fa-wheat" />
-                          <a href="services.html">Services</a>
+                          <a href="/services">Services</a>
                         </li>
                         <li>
                           <span className="fas fa-wheat" />
-                          <a href="contact.html">Contact</a>
+                          <a href="/contact">Contact</a>
                         </li>
                       </ul>
                     </div>
@@ -865,11 +859,11 @@ export function DiagnosticTestContent() {
                     <ul className="footer-widget-two__link list-unstyled">
                       <li>
                         <span className="fas fa-wheat" />
-                        <a href="fresh-produce.html">Fresh Produce</a>
+                        <a href="/products">Fresh Produce</a>
                       </li>
                       <li>
                         <span className="fas fa-wheat" />
-                        <a href="dairy-products.html">Dairy Products</a>
+                        <a href="/products">Dairy Products</a>
                       </li>
                       <li>
                         <span className="fas fa-wheat" />
@@ -877,11 +871,11 @@ export function DiagnosticTestContent() {
                       </li>
                       <li>
                         <span className="fas fa-wheat" />
-                        <a href="fresh-produce.html">Organic Farming</a>
+                        <a href="/products">Organic Farming</a>
                       </li>
                       <li>
                         <span className="fas fa-wheat" />
-                        <a href="grains-cereals.html">Crops &amp; Grains</a>
+                        <a href="/products">Crops &amp; Grains</a>
                       </li>
                       <li>
                         <span className="fas fa-wheat" />
@@ -890,66 +884,9 @@ export function DiagnosticTestContent() {
                     </ul>
                   </div>
                 </div>
-                <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                  <div className="footer-widget-two__instagram">
-                    <div className="footer-widget-two__title-box">
-                      <h3 className="footer-widget-two__title">instagram</h3>
-                    </div>
-                    <ul className="footer-widget-two__instagram-list list-unstyled clearfix">
-                      <li>
-                        <div className="footer-widget-two__instagram-img">
-                          <img src="assets/images/project/footer-widget-instagram-img-1.jpg" alt="" />
-                          <a href="project-details.html">
-                            <span className="fab fa-instagram" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="footer-widget-two__instagram-img">
-                          <img src="assets/images/project/footer-widget-instagram-img-2.jpg" alt="" />
-                          <a href="project-details.html">
-                            <span className="fab fa-instagram" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="footer-widget-two__instagram-img">
-                          <img src="assets/images/project/footer-widget-instagram-img-3.jpg" alt="" />
-                          <a href="project-details.html">
-                            <span className="fab fa-instagram" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="footer-widget-two__instagram-img">
-                          <img src="assets/images/project/footer-widget-instagram-img-4.jpg" alt="" />
-                          <a href="project-details.html">
-                            <span className="fab fa-instagram" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="footer-widget-two__instagram-img">
-                          <img src="assets/images/project/footer-widget-instagram-img-5.jpg" alt="" />
-                          <a href="project-details.html">
-                            <span className="fab fa-instagram" />
-                          </a>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="footer-widget-two__instagram-img">
-                          <img src="assets/images/project/footer-widget-instagram-img-6.jpg" alt="" />
-                          <a href="project-details.html">
-                            <span className="fab fa-instagram" />
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </div>
               <div className="footer-widget-two__logo">
-                <a href="index.html">
+                <a href="/">
                   <img src="assets/images/resources/logo-1.png" alt="" />
                 </a>
               </div>
@@ -959,17 +896,17 @@ export function DiagnosticTestContent() {
             <div className="container">
               <div className="site-footer-two__bottom-inner">
                 <p className="site-footer-two__bottom-text">
-                  Copyright@ 2025 <a href="index.html">Farmology</a>. All Rights Reserved.
+                  © Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a>
                 </p>
                 <ul className="list-unstyled site-footer-two__bottom-menu">
                   <li>
-                    <a href="contact.html">Support</a>
+                    <a href="/contact">Support</a>
                   </li>
                   <li>
-                    <a href="about.html">Terms and Condition</a>
+                    <a href="/about">Terms and Condition</a>
                   </li>
                   <li>
-                    <a href="about.html">Privacy and Policy</a>
+                    <a href="/about">Privacy and Policy</a>
                   </li>
                 </ul>
               </div>
@@ -984,7 +921,7 @@ export function DiagnosticTestContent() {
             <i className="fa fa-times" />
           </span>
           <div className="logo-box">
-            <a href="index.html" aria-label="logo image">
+            <a href="/" aria-label="logo image">
               <img src="assets/images/resources/logo-1.png" width={150} alt="" />
             </a>
           </div>
@@ -1014,7 +951,7 @@ export function DiagnosticTestContent() {
         <button className="close-search">
           <span className="far fa-times fa-fw" />
         </button>
-        <form method="post" action="blog.html">
+        <form method="post" action="/blog">
           <div className="form-group">
             <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
             <button type="submit">
