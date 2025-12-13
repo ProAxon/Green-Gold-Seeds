@@ -10,7 +10,10 @@ Icon
 .Trashes
 ._*
 
+<<<<<<< HEAD
 node_modules
+=======
+>>>>>>> filtering
 
 ############################
 # Linux

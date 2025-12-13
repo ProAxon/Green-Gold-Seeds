@@ -1,16 +1,44 @@
+"use client";
+
+import dynamic from 'next/dynamic';
+const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { useEffect, useState } from 'react';
+
 export function FaqContent() {
+  const t = useTranslations();
+  const [showPreloader, setShowPreloader] = useState(true);
+  
+  useEffect(() => {
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+    
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+      setTimeout(hidePreloader, 1000);
+    }
+  }, []);
+  
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        <div id="preloader">
-          <div className="preloader">
-            <span />
-            <span />
+        {showPreloader && (
+          <div id="preloader" style={{ opacity: showPreloader ? 1 : 0, transition: 'opacity 0.5s ease' }}>
+            <div className="preloader">
+              <span />
+              <span />
+            </div>
           </div>
-        </div>
+        )}
         {/*End Preloader*/}
         <div className="chat-icon"><button type="button" className="chat-toggler"><i className="fa fa-comment" /></button></div>
         {/*Chat Popup*/}
@@ -18,19 +46,19 @@ export function FaqContent() {
           <div className="popup-inner">
             <div className="close-chat"><i className="fa fa-times" /></div>
             <div className="chat-form">
-              <p>Please fill out the form below and we will get back to you as soon as possible.</p>
+              <p>{t('sidebar.pleaseFillForm')}</p>
               <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
                 <div className="form-group">
-                  <input type="text" name="name" placeholder="Your Name" required />
+                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
                 </div>
                 <div className="form-group">
-                  <input type="email" name="email" placeholder="Your Email" required />
+                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
                 </div>
                 <div className="form-group">
-                  <textarea name="message" placeholder="Your Text" required defaultValue={""} />
+                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
                 </div>
                 <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> Submit Now
+                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
                     <i className="fal fa-long-arrow-right" />
                     <span className="hover-btn hover-bx" />
                     <span className="hover-btn hover-bx2" />
@@ -66,27 +94,19 @@ export function FaqContent() {
                         </p>
                       </div>
                     </li>
-                    <li>
-                      <div className="icon">
-                        <i className="icon-pin" />
-                      </div>
-                      <div className="text">
-                        <p>4124 Cimmaron Road, CA 92806</p>
-                      </div>
-                    </li>
                   </ul>
                   <div className="main-menu-two__top-right">
                     <div className="main-menu-two__top-time">
                       <div className="main-menu-two__top-time-icon">
                         <span className="fas fa-clock" />
                       </div>
-                      <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
+                      <p className="main-menu-two__top-text">{t('common.businessHours')}</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="/faq#"><i className="fab fa-twitter" /></a>
-                      <a href="/faq#"><i className="fab fa-facebook-f" /></a>
-                      <a href="/faq#"><i className="fab fa-pinterest-p" /></a>
-                      <a href="/faq#"><i className="fab fa-instagram" /></a>
+                      <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                      <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
+                      <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -98,247 +118,74 @@ export function FaqContent() {
                   <div className="main-menu-two__wrapper-inner">
                     <div className="main-menu-two__left">
                       <div className="main-menu-two__logo">
-                        <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                        <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                       </div>
                     </div>
                     <div className="main-menu-two__main-menu-box">
                       <a href="/faq#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
-                        <li className="dropdown megamenu">
-                          <a href="/faq#">Home </a>
-                          <ul>
-                            <li>
-                              <section className="home-showcase">
-                                <div className="container">
-                                  <div className="home-showcase__inner">
-                                    <div className="row">
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            01</h3>
-                                          {/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            02
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            03
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            04
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                                Dark Home
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Dark Home
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                    </div>{/* /.row */}
-                                  </div>{/* /.home-showcase__inner */}
-                                </div>{/* /.container */}
-                              </section>
-                            </li>
+                        <li>
+                          <Link href="/">{t('nav.home')}</Link>
+                        </li>
+                        <li>
+                          <Link href="/about">{t('nav.about')}</Link>
+                        </li>
+                        <li className="dropdown">
+                          <a href="/faq#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
+                          <ul className="shadow-box">
+                            <li><Link href="/services">{t('nav.services')}</Link></li>
+                            <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                           </ul>
                         </li>
                         <li className="dropdown">
-                          <a href="/faq#">About</a>
+                          <a href="/faq#" onClick={(e) => e.preventDefault()}>{t('nav.shop')}</a>
                           <ul className="shadow-box">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="history.html">History</a></li>
+                            <li><Link href="/products">{t('nav.products')}</Link></li>
+                            <li><Link href="/products">{t('nav.productDetails')}</Link></li>
+                            <li><Link href="/products">{t('nav.cart')}</Link></li>
+                            <li><Link href="/products">{t('nav.checkout')}</Link></li>
+                            <li><Link href="/products">{t('nav.wishlist')}</Link></li>
+                            <li><Link href="/contact">{t('nav.signUp')}</Link></li>
+                            <li><Link href="/contact">{t('nav.login')}</Link></li>
                           </ul>
                         </li>
                         <li className="dropdown">
-                          <a href="/faq#">Pages</a>
+                          <a href="/faq#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
                           <ul className="shadow-box">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="/faq">FAQs</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/faq#">services</a>
-                          <ul className="shadow-box">
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                            <li><a href="dairy-products.html">Dairy Products</a></li>
-                            <li><a href="livestock.html">Livestock</a></li>
-                            <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                            <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                            <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/faq#">Shop</a>
-                          <ul className="shadow-box">
-                            <li><a href="/products">Products</a></li>
-                            <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
-                            <li><a href="login.html">Login</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/faq#">Blog</a>
-                          <ul className="shadow-box">
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="/blog">Blog Details</a></li>
+                            <li><Link href="/blog">{t('nav.blog')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogStandard')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogLeftSidebar')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogRightSidebar')}</Link></li>
+                            <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
                           </ul>
                         </li>
                         <li>
-                          <a href="/contact">Contact</a>
+                          <Link href="/contact">{t('nav.contact')}</Link>
                         </li>
                       </ul>
                     </div>
                     <div className="main-menu-two__right">
+                      <LanguageSwitcher />
                       <div className="main-menu-two__search-box">
                         <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
                       </div>
                       <div className="main-menu-two__cart">
-                        <a href="cart.html">
+                        <Link href="/products">
                           <span className="fal fa-shopping-cart" />
                           <span className="main-menu-two__cart-count">02</span>
-                        </a>
+                        </Link>
                       </div>
                       <div className="main-menu-two__user">
-                        <a href="sign-up.html"><span className="far fa-users" /></a>
+                        <Link href="/contact"><span className="far fa-users" /></Link>
                       </div>
                       <div className="main-menu-two__btn-box">
-                        <a className="thm-btn" href="/contact">Get A Quote
+                        <Link className="thm-btn" href="/contact">{t('common.getAQuote')}
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
                           <span className="hover-btn hover-bx3" />
                           <span className="hover-btn hover-bx4" />
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -351,14 +198,18 @@ export function FaqContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
+<<<<<<< HEAD
             <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
+=======
+            <div className="page-header__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/page-header-bg.jpg)' }}>
+>>>>>>> filtering
             </div>
             <div className="container">
               <div className="page-header__inner">
                 <h3>Our Faq </h3>
                 <div className="thm-breadcrumb__inner">
                   <ul className="thm-breadcrumb list-unstyled">
-                    <li><a href="/">Home</a></li>
+                    <li><Link href="/">{t('nav.home')}</Link></li>
                     <li><span className="fas fa-angle-right" /></li>
                     <li>Faq </li>
                   </ul>
@@ -508,16 +359,18 @@ export function FaqContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter">
+<<<<<<< HEAD
                   <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
+=======
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
+>>>>>>> filtering
                   </div>
-                  <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
-                    Get
-                    Latest Update</h3>
+                  <h3 className="footer-widget-two__newsletter-title" dangerouslySetInnerHTML={{ __html: t('footer.newsletter.title') }} />
                   <form className="footer-widget-two__newsletter-form mc-form" data-url="MC_FORM_URL" noValidate>
                     <div className="footer-widget-two__newsletter-form-input-box">
                       <input type="email" placeholder="Enter email" name="EMAIL" />
                     </div>
-                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">Subscribe
+                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">{t('common.subscribe')}
                       <i className="fal fa-long-arrow-right" />
                       <span className="hover-btn hover-bx" />
                       <span className="hover-btn hover-bx2" />
@@ -533,39 +386,39 @@ export function FaqContent() {
                 <div className="row">
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
                     <div className="footer-widget-two__working-box">
-                      <h3 className="footer-widget-two__working-title">opening time:</h3>
+                      <h3 className="footer-widget-two__working-title">{t('footer.openingTime.title')}:</h3>
                       <ul className="footer-widget-two__working-hour list-unstyled">
                         <li>
-                          <p>Mon - Fri<span>9:00 AM - 5:00 PM</span></p>
+                          <p>{t('common.businessHoursFull')}<span>{t('common.businessHoursTime')}</span></p>
                         </li>
                         <li>
-                          <p>Saturday<span>8:00 AM - 6:00 PM</span></p>
+                          <p>{t('footer.openingTime.saturday')}<span>{t('footer.openingTime.saturdayHours')}</span></p>
                         </li>
                         <li>
-                          <p>Sunday<span>Closed</span></p>
+                          <p>{t('footer.openingTime.sunday')}<span>{t('footer.openingTime.sundayHours')}</span></p>
                         </li>
                       </ul>
                       <div className="site-footer-two__social">
-                        <a href="/faq#"><i className="fab fa-facebook-f" /></a>
-                        <a href="/faq#"><i className="fab fa-twitter" /></a>
-                        <a href="/faq#"><i className="fab fa-instagram" /></a>
-                        <a href="/faq#"><i className="fab fa-pinterest-p" /></a>
+                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
+                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
                       </div>
                     </div>
                   </div>
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
                     <div className="footer-widget-two__column footer-widget-two__usefull-link">
                       <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Quick Links</h3>
+                        <h3 className="footer-widget-two__title">{t('footer.quickLinks.title')}</h3>
                       </div>
                       <div className="footer-widget-two__link-box">
                         <ul className="footer-widget-two__link list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Portfolio</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/blog">Blog</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/services">Services</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/contact">Contact</a></li>
+                          <li><span className="fas fa-wheat" /><Link href="/about">{t('footer.quickLinks.aboutUs')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.portfolio')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/faq">{t('footer.quickLinks.helpFaqs')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/blog">{t('footer.quickLinks.blog')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.services')}</Link></li>
+                          <li><span className="fas fa-wheat" /><Link href="/contact">{t('footer.quickLinks.contact')}</Link></li>
                         </ul>
                       </div>
                     </div>
@@ -573,9 +426,10 @@ export function FaqContent() {
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
                     <div className="footer-widget-two__column footer-widget-two__products">
                       <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Our Products</h3>
+                        <h3 className="footer-widget-two__title">{t('footer.ourProducts.title')}</h3>
                       </div>
                       <ul className="footer-widget-two__link list-unstyled">
+<<<<<<< HEAD
                         <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
                           Produce</a></li>
                         <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
@@ -633,24 +487,31 @@ export function FaqContent() {
                             <a href="project-details.html"><span className="fab fa-instagram" /></a>
                           </div>
                         </li>
+=======
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.freshProduce')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.dairyProducts')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.livestockProducts')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.organicFarming')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.cropsGrains')}</Link></li>
+                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.poultry')}</Link></li>
+>>>>>>> filtering
                       </ul>
                     </div>
                   </div>
                 </div>
                 <div className="footer-widget-two__logo">
-                  <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                  <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                 </div>
               </div>
             </div>
             <div className="site-footer-two__bottom">
               <div className="container">
                 <div className="site-footer-two__bottom-inner">
-                  <p className="site-footer-two__bottom-text">Copyright@ 2025 <a href="/">Farmology</a>. All
-                    Rights Reserved.</p>
+                  <p className="site-footer-two__bottom-text">© Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
                   <ul className="list-unstyled site-footer-two__bottom-menu">
-                    <li><a href="/contact">Support</a></li>
-                    <li><a href="/about">Terms and Condition</a></li>
-                    <li><a href="/about">Privacy and Policy</a></li>
+                    <li><Link href="/contact">{t('footer.support')}</Link></li>
+                    <li><Link href="/about">{t('footer.termsAndCondition')}</Link></li>
+                    <li><Link href="/about">{t('footer.privacyAndPolicy')}</Link></li>
                   </ul>
                 </div>
               </div>
@@ -664,7 +525,7 @@ export function FaqContent() {
           <div className="mobile-nav__content">
             <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
             <div className="logo-box">
-              <a href="/" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width={150} alt="" /></a>
+              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-1.png" width={150} alt="" /></Link>
             </div>
             {/* /.logo-box */}
             <div className="mobile-nav__container" />
@@ -672,19 +533,19 @@ export function FaqContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+919922933999">+91-9922933999</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/faq#" className="fab fa-twitter" />
-                <a href="/faq#" className="fab fa-facebook-square" />
-                <a href="/faq#" className="fab fa-pinterest-p" />
-                <a href="/faq#" className="fab fa-instagram" />
+                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
+                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
+                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
@@ -695,18 +556,18 @@ export function FaqContent() {
         <div className="search-popup">
           <div className="color-layer" />
           <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
+          <form method="post" action="/blog">
             <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
+              <input type="search" name="search-field" defaultValue="" placeholder={t('common.searchHere')} required />
               <button type="submit"><i className="fas fa-search" /></button>
             </div>
           </form>
         </div>
         {/* End Search Popup */}
-        <a href="/faq#" data-target="html" className="scroll-to-target scroll-to-top">
+        <Link href="/faq#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
-          <span className="scroll-to-top__text"> Go Back Top</span>
-        </a>
+          <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
+        </Link>
         {/* template js */}
       </div>
 

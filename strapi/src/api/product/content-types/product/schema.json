@@ -19,58 +19,41 @@
       "type": "string",
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
-      }
+      },
+      "required": true
     },
-    "Price": {
-      "type": "decimal",
+    "Variety_Name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true
+    },
+    "Description": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "required": true
     },
     "Image": {
       "type": "media",
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       },
-      "multiple": true,
+      "multiple": false,
       "allowedTypes": [
-        "images",
         "files",
-        "videos",
-        "audios"
+        "images"
       ]
-    },
-    "rating": {
-      "type": "integer",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "min": 0,
-      "max": 10
-    },
-    "Tag": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "link": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
     }
   }
 }
