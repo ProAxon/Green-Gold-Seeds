@@ -56,11 +56,11 @@ const scriptAssets = [
 
 export const metadata: Metadata = {
   title: {
-    default: "Ajeet Seeds | Quality Seeds for Better Harvests",
-    template: "%s | Ajeet Seeds",
+    default: "Green Gold Seeds | Quality Seeds for Better Harvests",
+    template: "%s | Green Gold Seeds",
   },
   description:
-    "Ajeet Seeds - Leading seed company providing quality seeds for better harvests.",
+    "Green Gold Seeds - Leading seed company providing quality seeds for better harvests.",
 };
 
 export function generateStaticParams() {

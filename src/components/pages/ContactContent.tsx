@@ -31,14 +31,21 @@ export function ContactContent() {
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        {showPreloader && (
-          <div id="preloader" style={{ opacity: showPreloader ? 1 : 0, transition: 'opacity 0.5s ease' }}>
-            <div className="preloader">
-              <span />
-              <span />
-            </div>
+        <div 
+          id="preloader" 
+          suppressHydrationWarning
+          style={{ 
+            opacity: showPreloader ? 1 : 0, 
+            transition: 'opacity 0.5s ease',
+            pointerEvents: showPreloader ? 'auto' : 'none',
+            display: showPreloader ? 'block' : 'none'
+          }}
+        >
+          <div className="preloader">
+            <span />
+            <span />
           </div>
-        )}
+        </div>
         {/*End Preloader*/}
         <div className="chat-icon"><button type="button" className="chat-toggler"><i className="fa fa-comment" /></button></div>
         {/*Chat Popup*/}
@@ -82,7 +89,7 @@ export function ContactContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
+                        <p><a href="tel:+918888866031">+91 88888 66031</a></p>
                       </div>
                     </li>
                     <li>
@@ -90,7 +97,7 @@ export function ContactContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                        <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                         </p>
                       </div>
                     </li>
@@ -103,10 +110,9 @@ export function ContactContent() {
                       <p className="main-menu-two__top-text">{t('common.businessHours')}</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
-                      <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
-                      <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
-                      <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                      <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+                      <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -130,6 +136,7 @@ export function ContactContent() {
                         <li>
                           <Link href="/about">{t('nav.about')}</Link>
                         </li>
+                        {/* Services dropdown commented out - temporarily disabled
                         <li className="dropdown">
                           <a href="/contact#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
                           <ul className="shadow-box">
@@ -137,18 +144,20 @@ export function ContactContent() {
                             <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                           </ul>
                         </li>
+                        */}
                         <li className="dropdown">
-                          <a href="/contact#" onClick={(e) => e.preventDefault()}>{t('nav.shop')}</a>
+                          <a href="/contact#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                           <ul className="shadow-box">
-                            <li><Link href="/products">{t('nav.products')}</Link></li>
-                            <li><Link href="/products">{t('nav.productDetails')}</Link></li>
-                            <li><Link href="/products">{t('nav.cart')}</Link></li>
-                            <li><Link href="/products">{t('nav.checkout')}</Link></li>
-                            <li><Link href="/products">{t('nav.wishlist')}</Link></li>
-                            <li><Link href="/contact">{t('nav.signUp')}</Link></li>
-                            <li><Link href="/contact">{t('nav.login')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                           </ul>
                         </li>
+                        {/* Blog dropdown commented out - temporarily disabled
                         <li className="dropdown">
                           <a href="/contact#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
                           <ul className="shadow-box">
@@ -159,6 +168,7 @@ export function ContactContent() {
                             <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
                           </ul>
                         </li>
+                        */}
                         <li>
                           <Link href="/contact">{t('nav.contact')}</Link>
                         </li>
@@ -166,27 +176,7 @@ export function ContactContent() {
                     </div>
                     <div className="main-menu-two__right">
                       <LanguageSwitcher />
-                      <div className="main-menu-two__search-box">
-                        <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
-                      </div>
-                      <div className="main-menu-two__cart">
-                        <Link href="/products">
-                          <span className="fal fa-shopping-cart" />
-                          <span className="main-menu-two__cart-count">02</span>
-                        </Link>
-                      </div>
-                      <div className="main-menu-two__user">
-                        <Link href="/contact"><span className="far fa-users" /></Link>
-                      </div>
-                      <div className="main-menu-two__btn-box">
-                        <Link className="thm-btn" href="/contact">{t('common.getAQuote')}
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </Link>
-                      </div>
+                      {/* Search, Cart, and Get A Quote components removed */}
                     </div>
                   </div>
                 </div>
@@ -225,7 +215,7 @@ export function ContactContent() {
                       <span className="icon-call" />
                     </div>
                     <p>{t('contact.title')}</p>
-                    <h3><a href="tel:+919922933999">+91-9922933999</a></h3>
+                    <h3><a href="tel:+918888866031">+91 88888 66031</a></h3>
                   </div>
                 </div>
                 {/*Contact Two Single End*/}
@@ -236,7 +226,7 @@ export function ContactContent() {
                       <span className="icon-email" />
                     </div>
                     <p>{t('contact.title')}</p>
-                    <h3><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a></h3>
+                    <h3><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a></h3>
                   </div>
                 </div>
                 {/*Contact Two Single End*/}
@@ -255,66 +245,7 @@ export function ContactContent() {
             </div>
           </section>
           {/*Contact Info End*/}
-          {/*Contact Page Start*/}
-          <section className="contact-page">
-            <div className="container">
-              <div className="contact-page__inner">
-                <div className="row">
-                  <div className="col-xl-6">
-                    <div className="contact-page__left">
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3754.7905253598688!2d75.28618421539039!3d19.7640525351185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdb9ef8b3ffd533%3A0xe6046698f7f28016!2sAjeet%20Seeds%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1665054123753!5m2!1sen!2sin" className="google-map__one" allowFullScreen />
-                    </div>
-                  </div>
-                  <div className="col-xl-6">
-                    <div className="contact-page__right">
-                      <h3 className="contact-page__form-title">{t('contact.getInTouch')}</h3>
-                      <form id="contact-form" className="contact-form-validated contact-page__form" action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/mail.php" method="POST">
-                        <div className="row">
-                          <div className="col-xl-6 col-lg-6 col-md-6">
-                            <div className="contact-page__input-box">
-                              <input type="text" name="name" placeholder={t('contact.yourName')} required />
-                            </div>
-                          </div>
-                          <div className="col-xl-6 col-lg-6 col-md-6">
-                            <div className="contact-page__input-box">
-                              <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
-                            </div>
-                          </div>
-                          <div className="col-xl-6 col-lg-6 col-md-6">
-                            <div className="contact-page__input-box">
-                              <input type="text" placeholder={t('contact.mobile')} name="number" />
-                            </div>
-                          </div>
-                          <div className="col-xl-6 col-lg-6 col-md-6">
-                            <div className="contact-page__input-box">
-                              <input type="text" placeholder={t('contact.company')} name="company" />
-                            </div>
-                          </div>
-                          <div className="col-xl-12">
-                            <div className="contact-page__input-box text-message-box">
-                              <textarea name="message" placeholder={t('contact.message')} defaultValue={""} />
-                            </div>
-                            <div className="contact-page__btn-box">
-                              <button type="submit" className="thm-btn contact-page__btn" data-loading-text="Please wait...">
-                                {t('contact.sendAMessage')}
-                                <i className="fal fa-long-arrow-right" />
-                                <span className="hover-btn hover-bx" />
-                                <span className="hover-btn hover-bx2" />
-                                <span className="hover-btn hover-bx3" />
-                                <span className="hover-btn hover-bx4" />
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                      <p className="ajax-response mb-0" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-          {/*Contact Page End*/}
+          {/*Contact Page section removed */}
           {/*Site Footer Two Start*/}
           <footer className="site-footer-two">
             <div className="site-footer-two__top">
@@ -338,78 +269,11 @@ export function ContactContent() {
                 </div>
               </div>
             </div>
-            <div className="site-footer-two__middle">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                    <div className="footer-widget-two__working-box">
-                      <h3 className="footer-widget-two__working-title">{t('footer.openingTime.title')}:</h3>
-                      <ul className="footer-widget-two__working-hour list-unstyled">
-                        <li>
-                          <p>{t('common.businessHoursFull')}<span>{t('common.businessHoursTime')}</span></p>
-                        </li>
-                        <li>
-                          <p>{t('footer.openingTime.saturday')}<span>{t('footer.openingTime.saturdayHours')}</span></p>
-                        </li>
-                        <li>
-                          <p>{t('footer.openingTime.sunday')}<span>{t('footer.openingTime.sundayHours')}</span></p>
-                        </li>
-                      </ul>
-                      <div className="site-footer-two__social">
-                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
-                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
-                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
-                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                    <div className="footer-widget-two__column footer-widget-two__usefull-link">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">{t('footer.quickLinks.title')}</h3>
-                      </div>
-                      <div className="footer-widget-two__link-box">
-                        <ul className="footer-widget-two__link list-unstyled">
-                          <li><span className="fas fa-wheat" /><Link href="/about">{t('footer.quickLinks.aboutUs')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.portfolio')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/faq">{t('footer.quickLinks.helpFaqs')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/blog">{t('footer.quickLinks.blog')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.services')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/contact">{t('footer.quickLinks.contact')}</Link></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                    <div className="footer-widget-two__column footer-widget-two__products">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">{t('footer.ourProducts.title')}</h3>
-                      </div>
-                      <ul className="footer-widget-two__link list-unstyled">
-                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.freshProduce')}</Link></li>
-                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.dairyProducts')}</Link></li>
-                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.livestockProducts')}</Link></li>
-                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.organicFarming')}</Link></li>
-                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.cropsGrains')}</Link></li>
-                        <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.poultry')}</Link></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="footer-widget-two__logo">
-                  <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
-                </div>
-              </div>
-            </div>
+            {/* site-footer-two__middle section removed */}
             <div className="site-footer-two__bottom">
               <div className="container">
                 <div className="site-footer-two__bottom-inner">
-                  <p className="site-footer-two__bottom-text">© Copyright 2023 by <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
-                  <ul className="list-unstyled site-footer-two__bottom-menu">
-                    <li><Link href="/contact">{t('footer.support')}</Link></li>
-                    <li><Link href="/about">{t('footer.termsAndCondition')}</Link></li>
-                    <li><Link href="/about">{t('footer.privacyAndPolicy')}</Link></li>
-                  </ul>
+                  <p className="site-footer-two__bottom-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
                 </div>
               </div>
             </div>
@@ -430,19 +294,18 @@ export function ContactContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:+919922933999">+91-9922933999</a>
+                <a href="tel:+918888866031">+91 88888 66031</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
-                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
-                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
-                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
+                <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
+                <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
@@ -450,17 +313,7 @@ export function ContactContent() {
         </div>
         {/* /.mobile-nav__wrapper */}
         {/* Search Popup */}
-        <div className="search-popup">
-          <div className="color-layer" />
-          <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="/blog">
-            <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder={t('common.searchHere')} required />
-              <button type="submit"><i className="fas fa-search" /></button>
-            </div>
-          </form>
-        </div>
-        {/* End Search Popup */}
+        {/* Search Popup removed */}
         <Link href="/contact#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
           <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>

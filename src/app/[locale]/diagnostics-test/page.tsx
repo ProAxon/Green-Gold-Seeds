@@ -12,7 +12,7 @@ export async function generateMetadata({
 
   return {
     title: t('diagnosticsTest'),
-  };
+};
 }
 
 export default async function DiagnosticsTestPage() {

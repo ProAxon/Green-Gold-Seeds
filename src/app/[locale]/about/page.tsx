@@ -12,7 +12,7 @@ export async function generateMetadata({
 
   return {
     title: t('about'),
-  };
+};
 }
 
 export default async function AboutPage() {

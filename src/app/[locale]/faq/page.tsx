@@ -12,7 +12,7 @@ export async function generateMetadata({
 
   return {
     title: t('faq'),
-  };
+};
 }
 
 export default async function FaqPage() {

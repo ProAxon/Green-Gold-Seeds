@@ -12,8 +12,8 @@ const normalizePath = (href: string | null) => {
     }
     // Handle full URLs only in browser
     if (typeof window !== "undefined") {
-      const url = new URL(href, window.location.origin);
-      return url.pathname.replace(/\/+$/, "") || "/";
+    const url = new URL(href, window.location.origin);
+    return url.pathname.replace(/\/+$/, "") || "/";
     }
     // Fallback for SSR
     return href.replace(/\/+$/, "") || "/";

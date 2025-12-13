@@ -12,7 +12,7 @@ export async function generateMetadata({
 
   return {
     title: t('contact'),
-  };
+};
 }
 
 export default async function ContactPage() {

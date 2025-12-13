@@ -34,14 +34,21 @@ export function HomeContent() {
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        {showPreloader && (
-          <div id="preloader" style={{ opacity: showPreloader ? 1 : 0, transition: 'opacity 0.5s ease' }}>
-            <div className="preloader">
-              <span />
-              <span />
-            </div>
+        <div 
+          id="preloader" 
+          suppressHydrationWarning
+          style={{ 
+            opacity: showPreloader ? 1 : 0, 
+            transition: 'opacity 0.5s ease',
+            pointerEvents: showPreloader ? 'auto' : 'none',
+            display: showPreloader ? 'block' : 'none'
+          }}
+        >
+          <div className="preloader">
+            <span />
+            <span />
           </div>
-        )}
+        </div>
         {/*End Preloader*/}
         <div className="chat-icon"><button type="button" className="chat-toggler"><i className="fa fa-comment" /></button></div>
         {/*Chat Popup*/}
@@ -95,59 +102,33 @@ export function HomeContent() {
                         </p>
                       </div>
                     </div>
-                    <div className="form-inner">
-                      <h4>{t('sidebar.getAFreeQuote')}</h4>
-                      <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
-                        <div className="form-group">
-                          <input type="text" name="name" placeholder={t('sidebar.name')} required />
-                        </div>
-                        <div className="form-group">
-                          <input type="email" name="email" placeholder={t('sidebar.email')} required />
-                        </div>
-                        <div className="form-group">
-                          <textarea name="message" placeholder={t('sidebar.message')} required defaultValue={""} />
-                        </div>
-                        <div className="form-group message-btn">
-                          <button className="thm-btn" data-text="Submit Now +" type="submit" data-loading-text="Please wait...">{t('common.submitNow')}
-                            <i className="fal fa-long-arrow-right" />
-                            <span className="hover-btn hover-bx" />
-                            <span className="hover-btn hover-bx2" />
-                            <span className="hover-btn hover-bx3" />
-                            <span className="hover-btn hover-bx4" />
-                          </button>
-                        </div>
-                        <div className="result" />
-                      </form>
-                    </div>
+                    {/* Get A Free Quote form removed */}
                     <div className="sidebar-contact-info">
                       <h4>{t('sidebar.contactInfo')}</h4>
                       <ul className="list-unstyled">
                         <li>
-                          <span className="icon-pin" /> 88 broklyn street, New York
+                          <span className="icon-pin" /> {t('contact.location')}
                         </li>
                         <li>
                           <span className="icon-call" />
-                          <a href="tel:+919922933999">+91-9922933999</a>
+                          <a href="tel:+918888866031">+91 88888 66031</a>
                         </li>
                         <li>
                           <span className="icon-email" />
-                          <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                          <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                         </li>
                       </ul>
                     </div>
                     <div className="thm-social-link1">
                       <ul className="social-box list-unstyled">
                         <li>
-                          <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
+                          <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" aria-hidden="true" /></a>
+                          <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" aria-hidden="true" /></a>
-                        </li>
-                        <li>
-                          <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" aria-hidden="true" /></a>
+                          <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" aria-hidden="true" /></a>
                         </li>
                       </ul>
                     </div>
@@ -168,19 +149,18 @@ export function HomeContent() {
                       <i className="icon-email" />
                     </div>
                     <div className="text">
-                      <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                      <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                       </p>
                     </div>
                   </li>
                 </ul>
-                <p className="main-menu__top-welcome-text">{t('topBar.welcomeText')}</p>
+                {/* Welcome text header removed */}
                 <div className="main-menu__top-right">
                   <p className="main-menu__social-title">{t('topBar.followUsOn')}</p>
                   <div className="main-menu__social">
-                    <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter" /></a>
-                    <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
-                    <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin" /></a>
-                    <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
+                    <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+                    <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                    <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                   </div>
                 </div>
               </div>
@@ -202,6 +182,7 @@ export function HomeContent() {
                       <li>
                         <Link href="/about">{t('nav.about')}</Link>
                       </li>
+                      {/* Services dropdown commented out - temporarily disabled
                       <li className="dropdown">
                         <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
                         <ul className="shadow-box">
@@ -209,18 +190,20 @@ export function HomeContent() {
                           <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                         </ul>
                       </li>
+                      */}
                       <li className="dropdown">
-                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.shop')}</a>
+                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                         <ul className="shadow-box">
-                          <li><Link href="/products">{t('nav.products')}</Link></li>
-                          <li><Link href="/products">{t('nav.productDetails')}</Link></li>
-                          <li><Link href="/products">{t('nav.cart')}</Link></li>
-                          <li><Link href="/products">{t('nav.checkout')}</Link></li>
-                          <li><Link href="/products">{t('nav.wishlist')}</Link></li>
-                          <li><Link href="/contact">{t('nav.signUp')}</Link></li>
-                          <li><Link href="/contact">{t('nav.login')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                         </ul>
                       </li>
+                      {/* Blog dropdown commented out - temporarily disabled
                       <li className="dropdown">
                         <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
                         <ul className="shadow-box">
@@ -231,6 +214,7 @@ export function HomeContent() {
                           <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
                         </ul>
                       </li>
+                      */}
                       <li>
                         <Link href="/contact">{t('nav.contact')}</Link>
                       </li>
@@ -243,23 +227,11 @@ export function HomeContent() {
                       </div>
                       <div className="main-menu__call-content">
                         <p className="main-menu__call-sub-title">{t('common.callAnytime')}</p>
-                        <h5 className="main-menu__call-number"><a href="tel:+919922933999">+91-9922933999</a></h5>
+                        <h5 className="main-menu__call-number"><a href="tel:+918888866031">+91 88888 66031</a></h5>
                       </div>
                     </div>
                     <LanguageSwitcher />
-                    <div className="main-menu__search-cart-box">
-                      <div className="main-menu__search-cart-box">
-                        <div className="main-menu__search-box">
-                          <a href="/#" className="main-menu__search searcher-toggler-box fal fa-search" />
-                        </div>
-                        <div className="main-menu__cart-box">
-                          <Link href="/products" className="main-menu__cart">
-                            <span className="fal fa-shopping-cart" />
-                            <span className="main-menu__cart-count">02</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
+                    {/* Search and Cart components removed */}
                     <div className="main-menu__nav-sidebar-icon">
                       <a className="navSidebar-button" href="/#">
                         <span className="icon-dots-menu-one" />
@@ -267,15 +239,7 @@ export function HomeContent() {
                         <span className="icon-dots-menu-three" />
                       </a>
                     </div>
-                    <div className="main-menu__btn-box">
-                      <Link className="thm-btn" href="/contact">{t('common.getAQuote')}
-                        <i className="fal fa-long-arrow-right" />
-                        <span className="hover-btn hover-bx" />
-                        <span className="hover-btn hover-bx2" />
-                        <span className="hover-btn hover-bx3" />
-                        <span className="hover-btn hover-bx4" />
-                      </Link>
-                    </div>
+                    {/* Get A Quote button removed */}
                   </div>
                 </div>
               </div>
@@ -332,25 +296,7 @@ export function HomeContent() {
                   </div>
                   <div className="col-xl-6 col-lg-6">
                     <div className="banner-one__right">
-                      <div className="banner-one__img-box">
-                        <div className="banner-one__img">
-                          <img src="/assets/images/backgrounds/sameer-mulay-removebg-preview.png" alt="" />
-                          <div className="banner-one__img-shape-box rotate-me">
-                            <div className="banner-one__img-shape-1">
-                              <div className="banner-one__img-shape-2" />
-                            </div>
-                            <div className="banner-one__shape-1">
-                              <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
-                            </div>
-                            <div className="banner-one__shape-2 rotate-me">
-                              <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
-                            </div>
-                            <div className="banner-one__shape-3">
-                              <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      {/* Image removed */}
                     </div>
                   </div>
                 </div>
@@ -429,32 +375,9 @@ export function HomeContent() {
             <div className="container">
               <div className="row">
                 <div className="col-xl-6">
-                  <div className="about-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <div className="about-one__img">
-                      <img src="/assets/images/backgrounds/farming_4.jpg" alt="about-one-image-1" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                      <div className="about-one__crop-harvest">
-                        <div className="about-one__crop-harvest-icon">
-                          <span className="icon-tractor" />
-                        </div>
-                        <h3 className="about-one__crop-harvest-title" dangerouslySetInnerHTML={{ __html: t('home.about.cropsHarvested') }} />
-                        <div className="about-one__crop-harvest-count count-box">
-                          <h3 className="count-text" data-stop="6.9" data-speed={1500} />
-                          <span>M+</span>
-                        </div>
-                      </div>
-                      <div className="about-one__img-shape-1 float-bob-y">
-                        <img src="/assets/images/shapes/about-one-img-shape-1.png" alt="about-one-img-shape-1" />
-                      </div>
-                      <div className="about-one__shape-1 float-bob-x">
-                        <img src="/assets/images/shapes/about-one-shape-1.png" alt="about-one-shape-1" />
-                      </div>
-                    </div>
-                    <div className="about-one__field-box">
-                      <div className="about-one__count-box count-box">
-                        <h3 className="count-text" data-stop={600} data-speed={1500} />
-                        <span>+</span>
-                      </div>
-                      <p className="about-one__field-text">{t('home.about.fieldsOfGrowth')}</p>
+                  <div className="about-one__left">
+                    <div className="about-one__img" style={{ width: '100%', height: '100%', minHeight: '500px' }}>
+                      <img src="/assets/images/backgrounds/services-one-single-bg-2.jpg" alt="Tractor tilling field" style={{ width: '100%', height: '100%', minHeight: '500px', objectFit: 'cover', borderRadius: '8px' }} />
                     </div>
                   </div>
                 </div>
@@ -479,8 +402,8 @@ export function HomeContent() {
                       {t('home.about.storyText2')}
                     </p>
                     <h4 className="about-one__title-1">{t('home.about.highlightsAtGlance')}</h4>
-                    <div className="about-one__points-box-and-since">
-                      <ul className="about-one__points list-unstyled">
+                    <div className="about-one__points-box-and-since" style={{ display: 'flex', alignItems: 'flex-start', gap: '60px', flexWrap: 'wrap' }}>
+                      <ul className="about-one__points list-unstyled" style={{ flex: '1', minWidth: '250px' }}>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
@@ -500,12 +423,12 @@ export function HomeContent() {
                           <p dangerouslySetInnerHTML={{ __html: t('home.about.highlight3') }} />
                         </li>
                       </ul>
-                      <div className="about-one__since-box">
+                      <div className="about-one__since-box" style={{ flexShrink: 0 }}>
                         <div className="about-one__since-icon">
                           <span className="icon-harvester" />
                         </div>
                         <h5 className="about-one__since-title">{t('home.about.progressSince')}</h5>
-                        <h4 className="about-one__since-year">1992</h4>
+                        <h4 className="about-one__since-year">2001</h4>
                       </div>
                     </div>
                     <div className="about-one__btn-and-video">
@@ -518,18 +441,6 @@ export function HomeContent() {
                           <span className="hover-btn hover-bx4" />
                         </Link>
                       </div>
-                      <div className="about-one__video-box">
-                        <div className="about-one__video-link">
-                          <a href="https://www.youtube.com/watch?v=Get7rqXYrbQ" className="video-popup">
-                            <div className="about-one__video-icon">
-                              <span className="fas fa-play" />
-                              <i className="ripple" />
-                            </div>
-                          </a>
-                        </div>
-                        <p className="about-one__video-text">
-                          {t('home.about.videoText')}</p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -541,36 +452,32 @@ export function HomeContent() {
           <section className="author-one">
             <div className="container">
               <div className="row">
-                <div className="col-xl-3">
+                <div className="col-xl-4">
                   <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">{t('home.vision.title')} </h4>
+                    <h4 className="author-one__Vission-mission-title">{t('about.ourVision')}</h4>
                     <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p>{t('home.vision.description')}</p>
+                        <p dangerouslySetInnerHTML={{ __html: t('about.visionText') }} />
                       </li>
                     </ul>
                   </div>
                 </div>
-                <div className="col-xl-6">
-                  <div className="author-one__img-box">
-                    <div className="author-one__img" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                      <img src="/assets/images/board_member/sameer-mulay.jpg" alt="author-one-img-1" style={{ borderRadius: '20px', width: '352px', height: '426px', objectFit: 'cover' }} />
-                    </div>
-                    <div className="author-one__text-box">
-                      <p className="author-one__text" dangerouslySetInnerHTML={{ __html: t('home.author.text') }} />
-                      <div className="author-one__info">
-                        <h4>{t('home.author.name')}</h4>
-                        <p>{t('home.author.position')}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3">
+                <div className="col-xl-4">
                   <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">{t('home.mission.title')} </h4>
+                    <h4 className="author-one__Vission-mission-title">{t('about.ourMission')}</h4>
                     <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p>{t('home.mission.description')}</p>
+                        <p dangerouslySetInnerHTML={{ __html: t('about.missionText') }} />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-xl-4">
+                  <div className="author-one__Vission-mission">
+                    <h4 className="author-one__Vission-mission-title">{t('home.values.title')}</h4>
+                    <ul className="author-one__Vission-mission-point list-unstyled">
+                      <li>
+                        <p>{t('home.values.description')}</p>
                       </li>
                     </ul>
                   </div>
@@ -728,35 +635,28 @@ export function HomeContent() {
             </div>
           </section>}
           {/*Services One End */}
-          {/*Video One Start*/}
-          <section className="video-one">
-            <div className="video-one__bg jarallax" data-jarallax data-speed="0.2" data-imgposition="50% 0%" style={{ backgroundImage: 'url(/assets/images/backgrounds/video-one-bg.jpg)' }} />
+          {/*Distributors Network Start*/}
+          <section id="distributors" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
             <div className="container">
+              <div className="section-title text-center">
+                <h2 style={{ fontSize: '36px', fontWeight: '700', color: '#190f06', marginBottom: '50px' }}>{t('home.distributorsNetwork.title')}</h2>
+              </div>
               <div className="row">
                 <div className="col-xl-12">
-                  <div className="video-one__inner">
-                    <div className="video-one__video-link">
-                      <a href="https://www.youtube.com/watch?v=3Q-wfEYY2JI" className="video-popup">
-                        <div className="video-one__icon">
-                          <span className="fa fa-play" />
-                          <i className="ripple" />
-                        </div>
-                      </a>
-                    </div>
-                    <p className="video-one__sub-title">{t('home.video.subtitle')}</p>
-                    <h2 className="video-one__title">{t('home.video.title')}
-                    </h2>
-                    <div className="video-one__round-text">
-                      <div className="video-one__curved-circle">
-                        {t('home.video.curvedText')}
-                      </div>
-                    </div>
+                  <div style={{ width: '100%', height: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                    <iframe 
+                      src="/map.html" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 'none' }}
+                      title={t('home.distributorsNetwork.title')}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </section>
-          {/*Video One End*/}
+          {/*Distributors Network End*/}
           {/*Products One Start*/}
           <section className="products-one">
             <div className="container">
@@ -904,11 +804,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">{t('home.counter.farmersServed')}</h3>
+                      <h3 className="counter-one__title">{t('home.counter.happyFarmers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop="1.2" data-speed={1500}></h3>
-                        <span>M</span>
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={340000} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -922,10 +820,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">{t('home.counter.hybridsDeveloped')}</h3>
+                      <h3 className="counter-one__title">{t('home.counter.dealers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={55} data-speed={1500}></h3>
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={943} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -939,10 +836,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">{t('home.counter.researchAcres')}</h3>
+                      <h3 className="counter-one__title">{t('home.counter.hardWorkers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={400} data-speed={1500}></h3>
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={1463} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -955,10 +851,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">{t('home.counter.testingLocations')}</h3>
+                      <h3 className="counter-one__title">{t('home.counter.products')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={35} data-speed={1500}></h3>
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={47} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -1450,13 +1345,12 @@ export function HomeContent() {
                         Our team is always ready to assist you with details about fresh produce, farm tours,
                         or partnership opportunities.</p>
                       <div className="faq-one__contact-social">
-                        <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
-                        <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer"><span className="fab fa-twitter" /></a>
-                        <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer"><span className="fab fa-linkedin" /></a>
-                        <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer"><span className="fab fa-instagram" /></a>
+                        <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
+                        <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><span className="fab fa-youtube" /></a>
+                        <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><span className="fab fa-instagram" /></a>
                       </div>
                       <div className="faq-one__contact-number">
-                        <a href="tel:+919922933999">+91-9922933999</a>
+                        <a href="tel:+918888866031">+91 88888 66031</a>
                       </div>
                       <div className="faq-one__contact-btn">
                         <a className="thm-btn" href="/contact">Shoot a Direct Call
@@ -2031,93 +1925,14 @@ export function HomeContent() {
           <footer className="site-footer">
             <div className="site-footer__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/site-footer-bg.jpg)' }}>
             </div>
-            <div className="site-footer__top">
-              <div className="container">
-                <div className="site-footer__top-inner">
-                  <div className="row">
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                      <div className="footer-widget__about">
-                        <div className="footer-widget__about-logo">
-                          <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
-                        </div>
-                        <p className="footer-widget__about-text">{t('footer.about.text')}</p>
-                        <div className="footer-widget__payment">
-                          <h3>{t('footer.about.weAccept')}</h3>
-                          <div className="footer-widget__payment-card">
-                            <a href="/products"><img src="/assets/images/resources/footer-widget-payment-card-1.jpg" alt="" /></a>
-                            <a href="/products"><img src="/assets/images/resources/footer-widget-payment-card-2.jpg" alt="" /></a>
-                            <a href="/products"><img src="/assets/images/resources/footer-widget-payment-card-3.jpg" alt="" /></a>
-                            <a href="/products"><img src="/assets/images/resources/footer-widget-payment-card-4.jpg" alt="" /></a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                      <div className="footer-widget__links">
-                        <h4 className="footer-widget__title">{t('footer.quickLinks.title')}</h4>
-                        <ul className="footer-widget__links-list list-unstyled">
-                          <li><span className="fas fa-wheat" /><Link href="/about">{t('footer.quickLinks.aboutUs')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/about">{t('footer.quickLinks.meetOurTeam')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/services">{t('footer.quickLinks.ourProjects')}</Link>
-                          </li>
-                          <li><span className="fas fa-wheat" /><Link href="/faq">{t('footer.quickLinks.helpFaqs')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/contact">{t('footer.quickLinks.contactUs')}</Link></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                      <div className="footer-widget__services">
-                        <h4 className="footer-widget__title">{t('footer.ourProducts.title')}</h4>
-                        <ul className="footer-widget__links-list list-unstyled">
-                          <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.organicProcessed')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.dairyProducts')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.livestockProducts')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.cropsGrains')}</Link></li>
-                          <li><span className="fas fa-wheat" /><Link href="/products">{t('footer.ourProducts.freshVegetables')}</Link></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                      <div className="footer-widget__contact">
-                        <h3 className="footer-widget__title">{t('footer.contactUs.title')}</h3>
-                        <ul className="footer-widget__contact-list list-unstyled">
-                          <li>
-                            <div className="icon">
-                              <span className="icon-call" />
-                            </div>
-                            <p>
-                              <a href="tel:+919922933999">+91-9922933999</a>
-                            </p>
-                          </li>
-                          <li>
-                            <div className="icon">
-                              <span className="icon-email" />
-                            </div>
-                            <p>
-                              <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* site-footer__top section removed */}
             <div className="site-footer__bottom">
               <div className="container">
                 <div className="row">
                   <div className="col-xl-12">
                     <div className="site-footer__bottom-inner">
                       <div className="site-footer__copyright">
-                        <p className="site-footer__copyright-text">{t('footer.copyright')} <a href="https://ajeetseed.co.in" target="_blank" rel="noopener noreferrer">ajeetseed.co.in</a></p>
-                      </div>
-                      <div className="site-footer__bottom-menu-box">
-                        <ul className="list-unstyled site-footer__bottom-menu">
-                          <li><Link href="/about">{t('footer.termsOfService')}</Link></li>
-                          <li><Link href="/about">{t('footer.privacyPolicy')}</Link></li>
-                          <li><Link href="/about">{t('footer.support')}</Link></li>
-                        </ul>
+                        <p className="site-footer__copyright-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
                       </div>
                     </div>
                   </div>
@@ -2141,37 +1956,25 @@ export function HomeContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:+919922933999">+91-9922933999</a>
+                <a href="tel:+918888866031">+91 88888 66031</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="https://x.com/ajeetseeds" target="_blank" rel="noopener noreferrer" className="fab fa-twitter" />
-                <a href="https://www.facebook.com/ajeetseedpvtltd" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
-                <a href="https://www.linkedin.com/company/ajeet-seeds-ltd/" target="_blank" rel="noopener noreferrer" className="fab fa-linkedin" />
-                <a href="https://www.instagram.com/ajeet.seeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
+                <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
+                <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
           {/* /.mobile-nav__content */}
         </div>
         {/* /.mobile-nav__wrapper */}
-        {/* Search Popup */}
-        <div className="search-popup">
-          <div className="color-layer" />
-          <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="/blog">
-            <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder={t('common.searchHere')} required />
-              <button type="submit"><i className="fas fa-search" /></button>
-            </div>
-          </form>
-        </div>
-        {/* End Search Popup */}
+        {/* Search Popup removed */}
         <a href="/#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
           <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
