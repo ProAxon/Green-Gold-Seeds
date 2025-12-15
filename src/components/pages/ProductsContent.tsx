@@ -57,7 +57,7 @@ export function ProductsContent() {
       }
       
       const response = await fetch(
-        `/strapi/api/products?locale=${locale}&populate=Image&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&pagination[page]=${page}&pagination[pageSize]=25`,
+        `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
         {
           headers,
         }
@@ -69,6 +69,7 @@ export function ProductsContent() {
       
       const data: ProductsResponse = await response.json();
       setProducts(data.data);
+      console.log(data.data);
       setPagination(data.meta.pagination);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -100,9 +101,17 @@ export function ProductsContent() {
   }, []);
 
   const getProductImage = (product: Product) => {
-    if (product.Image?.data?.attributes?.url) {
-      return `/strapi${product.Image.data.attributes.url}`;
+    // Handle both populated Strapi media objects and simple media objects with url
+    const nestedUrl = product.Image?.data?.attributes?.url;
+    if (nestedUrl) {
+      return `/strapi${nestedUrl}`;
     }
+
+    const flatUrl = (product.Image as { url?: string } | undefined)?.url;
+    if (flatUrl) {
+      return `/strapi${flatUrl}`;
+    }
+
     // Fallback to default product image
     return '/assets/images/shop/shop-product-1-1.jpg';
   };
