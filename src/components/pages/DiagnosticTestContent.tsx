@@ -312,28 +312,9 @@ export function DiagnosticTestContent() {
                           </li>
                         </ul>
                       </li>
-                      {/* Blog dropdown commented out - temporarily disabled
-                      <li className="dropdown">
-                        <a href="/blog" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
-                        <ul className="shadow-box">
-                          <li>
-                            <Link href="/blog">{t('nav.blog')}</Link>
-                          </li>
-                          <li>
-                            <Link href="/blog">{t('nav.blogStandard')}</Link>
-                          </li>
-                          <li>
-                            <Link href="/blog">{t('nav.blogLeftSidebar')}</Link>
-                          </li>
-                          <li>
-                            <Link href="/blog">{t('nav.blogRightSidebar')}</Link>
-                          </li>
-                          <li>
-                            <Link href="/blog">{t('nav.blogDetails')}</Link>
-                          </li>
-                        </ul>
+                      <li>
+                        <Link href="/blog">{t('nav.blog')}</Link>
                       </li>
-                      */}
                       <li>
                         <Link href="/contact">{t('nav.contact')}</Link>
                       </li>
