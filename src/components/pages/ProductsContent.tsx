@@ -49,8 +49,19 @@ export function ProductsContent() {
     try {
       setLoading(true);
       setError(null);
+      const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+      const baseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
+      const headers: HeadersInit = {};
+      
+      if (apiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+      
       const response = await fetch(
-        `http://localhost:1337/api/products?locale=${locale}&populate=Image&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&pagination[page]=${page}&pagination[pageSize]=25`
+        `${baseUrl}/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
+        {
+          headers,
+        }
       );
       
       if (!response.ok) {
@@ -59,6 +70,7 @@ export function ProductsContent() {
       
       const data: ProductsResponse = await response.json();
       setProducts(data.data);
+      console.log(data.data);
       setPagination(data.meta.pagination);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -90,11 +102,19 @@ export function ProductsContent() {
   }, []);
 
   const getProductImage = (product: Product) => {
-    if (product.Image?.data?.attributes?.url) {
-      return `http://localhost:1337${product.Image.data.attributes.url}`;
+    // Handle both populated Strapi media objects and simple media objects with url
+    const nestedUrl = product.Image?.data?.attributes?.url;
+    if (nestedUrl) {
+      return `/strapi${nestedUrl}`;
     }
+
+    const flatUrl = (product.Image as { url?: string } | undefined)?.url;
+    if (flatUrl) {
+      return `/strapi${flatUrl}`;
+    }
+
     // Fallback to default product image
-    return '/assets/images/shop/shop-product-1-1.jpg';
+    return '/assets/images/backgrounds/1-1.png';
   };
 
   const renderGridProduct = (product: Product, index: number) => {
@@ -359,18 +379,9 @@ export function ProductsContent() {
                             <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                           </ul>
                         </li>
-                        {/* Blog dropdown commented out - temporarily disabled
-                        <li className="dropdown">
-                          <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
-                          <ul className="shadow-box">
-                            <li><Link href="/blog">{t('nav.blog')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogStandard')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogLeftSidebar')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogRightSidebar')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
-                          </ul>
+                        <li>
+                          <Link href="/blog">{t('nav.blog')}</Link>
                         </li>
-                        */}
                         <li>
                           <Link href="/contact">{t('nav.contact')}</Link>
                         </li>
