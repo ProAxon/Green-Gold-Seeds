@@ -113,7 +113,7 @@ export function ProductsContent() {
     }
 
     // Fallback to default product image
-    return '/assets/images/shop/shop-product-1-1.jpg';
+    return '/assets/images/backgrounds/1-1.png';
   };
 
   const renderGridProduct = (product: Product, index: number) => {
@@ -378,18 +378,9 @@ export function ProductsContent() {
                             <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                           </ul>
                         </li>
-                        {/* Blog dropdown commented out - temporarily disabled
-                        <li className="dropdown">
-                          <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
-                          <ul className="shadow-box">
-                            <li><Link href="/blog">{t('nav.blog')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogStandard')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogLeftSidebar')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogRightSidebar')}</Link></li>
-                            <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
-                          </ul>
+                        <li>
+                          <Link href="/blog">{t('nav.blog')}</Link>
                         </li>
-                        */}
                         <li>
                           <Link href="/contact">{t('nav.contact')}</Link>
                         </li>

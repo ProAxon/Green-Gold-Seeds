@@ -203,18 +203,9 @@ export function HomeContent() {
                           <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                         </ul>
                       </li>
-                      {/* Blog dropdown commented out - temporarily disabled
-                      <li className="dropdown">
-                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.blog')}</a>
-                        <ul className="shadow-box">
-                          <li><Link href="/blog">{t('nav.blog')}</Link></li>
-                          <li><Link href="/blog">{t('nav.blogStandard')}</Link></li>
-                          <li><Link href="/blog">{t('nav.blogLeftSidebar')}</Link></li>
-                          <li><Link href="/blog">{t('nav.blogRightSidebar')}</Link></li>
-                          <li><Link href="/blog">{t('nav.blogDetails')}</Link></li>
-                        </ul>
+                      <li>
+                        <Link href="/blog">{t('nav.blog')}</Link>
                       </li>
-                      */}
                       <li>
                         <Link href="/contact">{t('nav.contact')}</Link>
                       </li>
@@ -296,7 +287,38 @@ export function HomeContent() {
                   </div>
                   <div className="col-xl-6 col-lg-6">
                     <div className="banner-one__right">
-                      {/* Image removed */}
+                      <div className="banner-one__img-box">
+                        <div className="banner-one__img">
+                          <img
+                            className="img-bounce"
+                            src="/assets/images/backgrounds/1-removebg-preview.png"
+                            alt={t('home.banner.title')}
+                            style={{
+                              width: '100%',
+                              height: 'auto',
+                              objectFit: 'contain',
+                              maxWidth: 540,
+                              maxHeight: 520,
+                              margin: '0 auto',
+                              display: 'block',
+                            }}
+                          />
+                          <div className="banner-one__img-shape-box rotate-me">
+                            <div className="banner-one__img-shape-1">
+                              <div className="banner-one__img-shape-2" />
+                            </div>
+                            <div className="banner-one__shape-1">
+                              <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
+                            </div>
+                            <div className="banner-one__shape-2 rotate-me">
+                              <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
+                            </div>
+                            <div className="banner-one__shape-3">
+                              <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -377,7 +399,7 @@ export function HomeContent() {
                 <div className="col-xl-6">
                   <div className="about-one__left">
                     <div className="about-one__img" style={{ width: '100%', height: '100%', minHeight: '500px' }}>
-                      <img src="/assets/images/backgrounds/services-one-single-bg-2.jpg" alt="Tractor tilling field" style={{ width: '100%', height: '100%', minHeight: '500px', objectFit: 'cover', borderRadius: '8px' }} />
+                      <img src="/assets/images/backgrounds/homepage_1.jpg" alt="Tractor tilling field" style={{ width: '100%', height: '100%', minHeight: '500px', objectFit: 'cover', borderRadius: '8px' }} />
                     </div>
                   </div>
                 </div>
@@ -678,7 +700,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/products/products-1-1.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/cotton_home.jpg" alt="Cotton lint close-up" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -706,7 +728,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/products/products-1-2.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/field_crop_home.jpg" alt="Field crops assortment" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -734,7 +756,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/products/products-1-3.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/pulses_home.jpg" alt="Pulses and grains assortment" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -762,7 +784,7 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="/assets/images/products/products-1-4.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/vegetable_home.jpg" alt="Vegetable seeds assortment" />
                       </div>
                     </div>
                     <div className="products-one__content">
@@ -1167,14 +1189,14 @@ export function HomeContent() {
                 <div className="col-xl-4">
                   <div className="do-and-donts__left wow fadeInLeft" data-wow-delay="100ms">
                     <div className="do-and-donts__single-title">
-                      <span>Do’s</span>
+                      <span>{t('homeExtra.doDonts.dosTitle')}</span>
                     </div>
                     <div className="do-and-donts__single do-and-donts__single-1">
                       <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Use natural fertilizers &amp; compost</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do1')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1184,7 +1206,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Irrigate crops with clean water</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do2')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1194,7 +1216,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Rotate crops<br /> for soil<br /> health</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do3')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1204,7 +1226,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Practice sustainable farming</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do4')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1214,7 +1236,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Choose fresh, and organic produce</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do5')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1231,18 +1253,16 @@ export function HomeContent() {
                         <div className="section-title__shape-1">
                           <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                         </div>
-                        <h6 className="section-title__tagline">Do’s &amp; Don’ts</h6>
+                        <h6 className="section-title__tagline">{t('homeExtra.doDonts.tagline')}</h6>
                         <div className="section-title__shape-1">
                           <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                         </div>
                       </div>
-                      <h3 className="section-title__title title-animation">Simple Guidelines For Better Harvest
-                        And A Healthier Planet
-                      </h3>
+                      <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('homeExtra.doDonts.title') }} />
                     </div>
-                    <p className="do-and-donts__middle-text">At Farmology, we bring you the purest and freshest
-                      products straight from our fields. every product is cultivated naturally, ensuring 100%
-                      farm-fresh goodness.</p>
+                    <p className="do-and-donts__middle-text">
+                      {t('homeExtra.doDonts.intro')}
+                    </p>
                     <div className="do-and-donts__btn-box">
                       <a className="thm-btn" href="/about">Grow With Us
                         <i className="fal fa-long-arrow-right" />
@@ -1257,14 +1277,14 @@ export function HomeContent() {
                 <div className="col-xl-4">
                   <div className="do-and-donts__right wow fadeInRight" data-wow-delay="100ms">
                     <div className="do-and-donts__single-title">
-                      <span>Don’ts</span>
+                      <span>{t('homeExtra.doDonts.dontsTitle')}</span>
                     </div>
                     <div className="do-and-donts__single-one do-and-donts__single-6">
                       <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">Don’t overuse chemical pesticides</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont1')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1274,7 +1294,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">no waste water during irrigation</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont2')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1284,7 +1304,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">Don’t<br /> ignore soil<br /> testing</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont3')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1294,7 +1314,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">Don’t compromise on quality</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont4')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1304,7 +1324,7 @@ export function HomeContent() {
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">no use harmful packaging</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont5')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1339,11 +1359,10 @@ export function HomeContent() {
                           <p className="faq-one__author-sub-title">Founder</p>
                         </div>
                       </div>
-                      <h3 className="faq-one__contact-title">Do you have more questions?</h3>
-                      <p className="faq-one__contact-text">Have any questions about our farm, products, or
-                        activities? Don’t hesitate to reach out!
-                        Our team is always ready to assist you with details about fresh produce, farm tours,
-                        or partnership opportunities.</p>
+                      <h3 className="faq-one__contact-title">{t('homeExtra.faq.contactTitle')}</h3>
+                      <p className="faq-one__contact-text">
+                        {t('homeExtra.faq.contactText')}
+                      </p>
                       <div className="faq-one__contact-social">
                         <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
                         <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><span className="fab fa-youtube" /></a>
@@ -1371,70 +1390,61 @@ export function HomeContent() {
                         <div className="section-title__shape-1">
                           <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                         </div>
-                        <h6 className="section-title__tagline">Got Questions?</h6>
+                        <h6 className="section-title__tagline">{t('homeExtra.faq.tagline')}</h6>
                         <div className="section-title__shape-1">
                           <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                         </div>
                       </div>
-                      <h3 className="section-title__title title-animation">We’ve Got The Answers<br /> You Need.
-                      </h3>
+                      <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('homeExtra.faq.title') }} />
                     </div>
                     <div className="accrodion-grp" data-grp-name="faq-one-accrodion">
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>Are your fruits and vegetables organic?</h4>
+                          <h4>{t('homeExtra.faq.q1')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>Yes, we strictly follow organic farming methods without harmful
-                              chemicals.
-                            </p>
+                            <p>{t('homeExtra.faq.a1')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion active wow fadeInRight" data-wow-delay="100ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>Do you deliver products at home?</h4>
+                          <h4>{t('homeExtra.faq.q2')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>Yes, we provide safe and fast home delivery within selected areas. Don’t
-                              hesitate to reach out!
-                            </p>
+                            <p>{t('homeExtra.faq.a2')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>What payment methods do you accept?</h4>
+                          <h4>{t('homeExtra.faq.q3')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>We accept cash on delivery, mobile banking, and online payments.
-                            </p>
+                            <p>{t('homeExtra.faq.a3')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>How can I visit your farm?</h4>
+                          <h4>{t('homeExtra.faq.q4')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>You can book a farm tour from our website or contact us directly.
-                            </p>
+                            <p>{t('homeExtra.faq.a4')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>Where are your farm products sourced from?</h4>
+                          <h4>{t('homeExtra.faq.q5')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>All of our products are directly harvested from our own organic farm to
-                              ensure freshness.
-                            </p>
+                            <p>{t('homeExtra.faq.a5')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
@@ -1447,21 +1457,19 @@ export function HomeContent() {
           {/*Faq One End*/}
           {/*Testimonial One Start*/}
           {false && <section className="testimonial-one">
-            <div className="testimonial-one__bg jarallax" data-jarallax data-speed="0.2" data-imgposition="50% 0%" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
+            <div className="testimonial-one__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Client Feedback</h6>
+                  <h6 className="section-title__tagline">{t('homeExtra.testimonials.tagline')}</h6>
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Real Stories Of Trust, Freshness<br /> And
-                  Satisfaction.
-                </h3>
+                <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('homeExtra.testimonials.title') }} />
               </div>
               <div className="testimonial-one__inner">
                 <div className="testimonial-one__carousel swiper-container">
@@ -1475,9 +1483,8 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><Link href="/about">Adam
-                                Smith</Link></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t1Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t1Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1494,12 +1501,8 @@ export function HomeContent() {
                           <div className="testimonial-one__single-shape-1">
                             <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t1Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1514,8 +1517,8 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><Link href="/about">Rowena E. Smith</Link></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t2Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t2Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1532,12 +1535,8 @@ export function HomeContent() {
                           <div className="testimonial-one__single-shape-1">
                             <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t2Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1552,8 +1551,8 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><Link href="/about">David J. Mahmoud</Link></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t3Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t3Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1570,12 +1569,8 @@ export function HomeContent() {
                           <div className="testimonial-one__single-shape-1">
                             <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t3Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1590,8 +1585,8 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><Link href="/about">James S. Adams</Link></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t4Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t4Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1608,12 +1603,8 @@ export function HomeContent() {
                           <div className="testimonial-one__single-shape-1">
                             <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t4Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1628,9 +1619,8 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><Link href="/about">Iris
-                                W. Jackson</Link></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t5Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t5Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1647,12 +1637,8 @@ export function HomeContent() {
                           <div className="testimonial-one__single-shape-1">
                             <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t5Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1667,8 +1653,8 @@ export function HomeContent() {
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><Link href="/about">Herman G. McClure</Link></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t6Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t6Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1685,12 +1671,8 @@ export function HomeContent() {
                           <div className="testimonial-one__single-shape-1">
                             <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t6Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1921,6 +1903,532 @@ export function HomeContent() {
             </div>
           </section>}
           {/*Blog One End */}
+
+          {/*Do And Donts Start*/}
+          <section className="do-and-donts">
+            <div className="do-and-donts__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
+            </div>
+            <div className="container">
+              <div className="row">
+                <div className="col-xl-4">
+                  <div className="do-and-donts__left">
+                    <div className="do-and-donts__single-title">
+                      <span>{t('homeExtra.doDonts.dosTitle')}</span>
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-1">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do1')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-2">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do2')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-3">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do3')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-4">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do4')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-5">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do5')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4">
+                  <div className="do-and-donts__middle">
+                    <div className="do-and-donts__img">
+                      {/* Image removed as requested */}
+                    </div>
+                    <div className="section-title text-center sec-title-animation animation-style1">
+                      <div className="section-title__tagline-box">
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="section shape left" />
+                        </div>
+                        <h6 className="section-title__tagline">{t('homeExtra.doDonts.tagline')}</h6>
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="section shape right" />
+                        </div>
+                      </div>
+                      <h3
+                        className="section-title__title title-animation"
+                        dangerouslySetInnerHTML={{ __html: t('homeExtra.doDonts.title') }}
+                      />
+                    </div>
+                    <p className="do-and-donts__middle-text">
+                      {t('homeExtra.doDonts.intro')}
+                    </p>
+                    <div className="do-and-donts__btn-box">
+                      <a className="thm-btn" href="/about">Grow With Us
+                        <i className="fal fa-long-arrow-right" />
+                        <span className="hover-btn hover-bx" />
+                        <span className="hover-btn hover-bx2" />
+                        <span className="hover-btn hover-bx3" />
+                        <span className="hover-btn hover-bx4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4">
+                  <div className="do-and-donts__right">
+                    <div className="do-and-donts__single-title">
+                      <span>{t('homeExtra.doDonts.dontsTitle')}</span>
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-6">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont1')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-7">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont2')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-8">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont3')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-9">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont4')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-10">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont5')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/*Do And Donts End*/}
+
+          {/*Faq One Start*/}
+          <section className="faq-one">
+            <div className="container">
+              <div className="row">
+                <div className="col-xl-6 col-lg-5">
+                  <div className="faq-one__left">
+                    <div className="faq-one__contact-box">
+                      <div className="faq-one__contact-box-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/faq-one-contact-box-bg-shape.png)' }}>
+                      </div>
+                      <div className="faq-one__contact-shape-1">
+                        <img src="/assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
+                      </div>
+                      <div className="faq-one__author-box-inner">
+                        <div className="faq-one__author-shape-1">
+                          <img src="/assets/images/shapes/faq-one-author-shape-1.png" alt="" />
+                        </div>
+                        <div className="faq-one__author-box">
+                          <div className="faq-one__author-img">
+                            <img src="/assets/images/resources/faq-one-author-img.png" alt="" />
+                          </div>
+                          <h4 className="faq-one__author-name"><a href="/about">Adam Smith</a></h4>
+                          <p className="faq-one__author-sub-title">Founder</p>
+                        </div>
+                      </div>
+                      <h3 className="faq-one__contact-title">{t('homeExtra.faq.contactTitle')}</h3>
+                      <p className="faq-one__contact-text">
+                        {t('homeExtra.faq.contactText')}
+                      </p>
+                      <div className="faq-one__contact-social">
+                        <a href="/#"><span className="fab fa-facebook-f" /></a>
+                        <a href="/#"><span className="fab fa-twitter" /></a>
+                        <a href="/#"><span className="fab fa-pinterest-p" /></a>
+                        <a href="/#"><span className="fab fa-instagram" /></a>
+                      </div>
+                      <div className="faq-one__contact-number">
+                        <a href="tel:+918888866031">+91 88888 66031</a>
+                      </div>
+                      <div className="faq-one__contact-btn">
+                        <a className="thm-btn" href="/contact">Shoot a Direct Call
+                          <i className="fal fa-long-arrow-right" />
+                          <span className="hover-btn hover-bx" />
+                          <span className="hover-btn hover-bx2" />
+                          <span className="hover-btn hover-bx3" />
+                          <span className="hover-btn hover-bx4" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-6 col-lg-7">
+                  <div className="faq-one__right">
+                    <div className="section-title text-left sec-title-animation animation-style2">
+                      <div className="section-title__tagline-box">
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
+                        </div>
+                        <h6 className="section-title__tagline">{t('homeExtra.faq.tagline')}</h6>
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
+                        </div>
+                      </div>
+                      <h3
+                        className="section-title__title title-animation"
+                        dangerouslySetInnerHTML={{ __html: t('homeExtra.faq.title') }}
+                      />
+                    </div>
+                    <div className="accrodion-grp" data-grp-name="faq-one-accrodion">
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q1')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a1')}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="accrodion active">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q2')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a2')}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q3')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a3')}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q4')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a4')}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q5')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a5')}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/*Faq One End*/}
+
+          {/*Testimonial One Start*/}
+          <section className="testimonial-one">
+            <div className="testimonial-one__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
+            <div className="container">
+              <div className="section-title text-center sec-title-animation animation-style1">
+                <div className="section-title__tagline-box">
+                  <div className="section-title__shape-1">
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
+                  </div>
+                  <h6 className="section-title__tagline">{t('homeExtra.testimonials.tagline')}</h6>
+                  <div className="section-title__shape-1">
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
+                  </div>
+                </div>
+                <h3
+                  className="section-title__title title-animation"
+                  dangerouslySetInnerHTML={{ __html: t('homeExtra.testimonials.title') }}
+                />
+              </div>
+              <div className="testimonial-one__inner">
+                <div className="testimonial-one__carousel swiper-container">
+                  <div className="swiper-wrapper">
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-1.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t1Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t1Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t1Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-2.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t2Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t2Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t2Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-3.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t3Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t3Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t3Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-4.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t4Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t4Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t4Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-5.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t5Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t5Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t5Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-6.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t6Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t6Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t6Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                  </div>
+                  <div className="testimonial-one__nav">
+                    <div className="swiper-button-next1">
+                      <i className="fas fa-arrow-left" />
+                    </div>
+                    <div className="swiper-button-prev1">
+                      <i className="fas fa-arrow-right" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/*Testimonial One End*/}
+
           {/*Site Footer Start*/}
           <footer className="site-footer">
             <div className="site-footer__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/site-footer-bg.jpg)' }}>

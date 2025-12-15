@@ -113,16 +113,16 @@
       "fieldsOfGrowth": "Fields of Growth"
     },
     "products": {
-      "tagline": "Our Fresh Products",
-      "title": "Bringing Nature's Best Harvest<br />Straight To You.",
-      "freshVegetables": "Fresh Vegetables",
-      "freshVegetablesDesc": "Our vegetables are cultivated naturally to bring you the best of every season.",
-      "dairyProduct": "Dairy Product",
-      "dairyProductDesc": "From fresh milk to our dairy products ensure farm-fresh quality every day.",
-      "livestockProduct": "Livestock Product",
-      "livestockProductDesc": "From organic eggs, our Livestock Product ensure farm-fresh quality every day.",
-      "organicFruits": "Organic Fruits",
-      "organicFruitsDesc": "Handpicked from our orchards fruits are packed with freshness and nutrients."
+      "tagline": "Our Seed Portfolio",
+      "title": "High-Performance Hybrids<br />For Indian Farming Success",
+      "freshVegetables": "Cotton Hybrids",
+      "freshVegetablesDesc": "High-yielding Desi and American cotton hybrids developed and tested across multiple zones.",
+      "dairyProduct": "Field Crops",
+      "dairyProductDesc": "Wheat and other field crop varieties bred for strong standability, grain quality and reliable returns.",
+      "livestockProduct": "Oilseeds & Pulses",
+      "livestockProductDesc": "Oilseed and pulse seeds suited to diverse agro-climatic conditions and farmer practices.",
+      "organicFruits": "Vegetable Seeds",
+      "organicFruitsDesc": "Selected vegetable hybrids and varieties designed for better vigor, uniformity and marketable yield."
     }
   },
   "footer": {
@@ -362,6 +362,63 @@
   "blog": {
     "pageTitle": "Blog",
     "breadcrumb": "Home / Blog"
+  },
+  "homeExtra": {
+    "doDonts": {
+      "tagline": "Do’s & Don’ts",
+      "title": "Practical Guidelines for Better Yield<br />And Stronger Farms",
+      "intro": "Green Gold Seeds works with Indian farmers to deliver reliable, high-yielding hybrids. Follow these simple do’s and don’ts to make the most of every acre you cultivate.",
+      "dosTitle": "Do’s",
+      "dontsTitle": "Don’ts",
+      "do1": "Use natural fertilizers &amp; compost",
+      "do2": "Irrigate crops with clean water",
+      "do3": "Rotate crops regularly to maintain soil health",
+      "do4": "Adopt recommended and sustainable farming practices",
+      "do5": "Choose quality-certified seed for every season",
+      "dont1": "Don’t overuse chemical pesticides",
+      "dont2": "Don’t waste water during irrigation",
+      "dont3": "Don’t ignore soil testing before sowing",
+      "dont4": "Don’t compromise on seed or input quality",
+      "dont5": "Don’t use unsafe or harmful packaging and storage"
+    },
+    "faq": {
+      "contactTitle": "Need help with our seeds or services?",
+      "contactText": "Have questions about Green Gold Seeds products, diagnostics, or distribution? Our team is ready to guide you with the right hybrid choice and agronomy support.",
+      "tagline": "Got Questions?",
+      "title": "We’ve Got The Answers<br />You Need.",
+      "q1": "What crops do Green Gold Seeds offer?",
+      "a1": "We provide high-performing hybrids and varieties in cotton, wheat, maize, pulses and oilseeds tailored to different agro-climatic zones.",
+      "q2": "Where can I buy Green Gold Seeds products?",
+      "a2": "Our seeds are available through authorized dealers and distributors across India. You can also contact us directly for dealer details in your area.",
+      "q3": "Do you provide agronomy or field support?",
+      "a3": "Yes, our field team advises farmers on sowing, nutrition, crop protection and best agronomic practices for each hybrid.",
+      "q4": "Are your seeds tested for quality?",
+      "a4": "Every seed lot goes through stringent field, laboratory and grow-out tests to ensure genetic purity and strong germination before packing.",
+      "q5": "How can I contact Green Gold Seeds?",
+      "a5": "You can reach us at +91 88888 66031 or email us at greengoldseeds@rediffmail.com for product or technical support."
+    },
+    "testimonials": {
+      "tagline": "Client Feedback",
+      "title": "What Farmers &amp; Partners<br />Say About Us",
+      "t1Role": "Progressive Farmer",
+      "t1Region": "Maharashtra",
+      "t1Text": "Green Gold Seeds hybrids have given us consistent yields and better returns, even in challenging seasons. Their quality and field support build confidence year after year.",
+      "t2Role": "Dealer Partner",
+      "t2Region": "Madhya Pradesh",
+      "t2Text": "Our farmers trust Green Gold Seeds for timely supply and strong-performing hybrids. The company stands firmly behind its products in the field.",
+      "t3Role": "Seed Producer",
+      "t3Region": "Gujarat",
+      "t3Text": "Working with Green Gold Seeds has been smooth and professional. Their focus on quality at every stage reflects in the performance of seeds at farmer level.",
+      "t4Role": "Cotton Grower",
+      "t4Region": "Telangana",
+      "t4Text": "Green Gold cotton hybrids have helped us achieve good boll setting and fibre quality. The brand has become a preferred choice in our village.",
+      "t5Role": "Wheat Farmer",
+      "t5Region": "Rajasthan",
+      "t5Text": "Green Gold wheat varieties have given us bold grains and stable yields with limited irrigation. It has improved our profitability over the years.",
+      "t6Role": "Channel Partner",
+      "t6Region": "Karnataka",
+      "t6Text": "Green Gold Seeds is responsive to market needs and farmer feedback. Their product range and support help us grow our business responsibly."
+    }
   },
   "faq": {
     "pageTitle": "FAQ",

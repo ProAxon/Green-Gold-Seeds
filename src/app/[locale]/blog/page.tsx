@@ -1,4 +1,3 @@
-/* Commented out - Blog page temporarily disabled
 import { getTranslations } from 'next-intl/server';
 import type { Metadata } from "next";
 import { BlogContent } from "@/components/pages/BlogContent";
@@ -18,10 +17,4 @@ export async function generateMetadata({
 
 export default async function BlogPage() {
   return <BlogContent />;
-}
-*/
-
-// Placeholder export to keep file as valid module
-export default function BlogPage() {
-  return null;
 }
