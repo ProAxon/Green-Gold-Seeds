@@ -203,7 +203,7 @@ export function ContactContent() {
                 <div className="col-xl-4 col-lg-4 wow fadeInLeft" data-wow-delay="100ms">
                   <div className="contact-info__single">
                     <div className="contact-info__icon">
-                      <span className="icon-call" />
+                      <span className="icon-pin" />
                     </div>
                     <p>{t('contact.title')}</p>
                     <h3><a href="tel:+918888866031">+91 88888 66031</a></h3>
@@ -225,7 +225,7 @@ export function ContactContent() {
                 <div className="col-xl-4 col-lg-4 wow fadeInRight" data-wow-delay="300ms">
                   <div className="contact-info__single">
                     <div className="contact-info__icon">
-                      <span className="icon-pin" />
+                      <span className="icon-call" />
                     </div>
                     <p>{t('contact.ourOfficeLocation')}</p>
                     <h3>{t('contact.location')}</h3>

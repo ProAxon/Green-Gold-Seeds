@@ -220,6 +220,7 @@ export function ServicesContent() {
                         <Link href="/diagnostics-test">{t('common.readMore')}<span className="fas fa-arrow-right" /></Link>
                       </div>
                     </div>
+
                   </div>
                 </div>
                 {/*Diagnostics Test Single End*/}

@@ -1753,13 +1753,12 @@ export function HomeContent() {
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Client Feedback</h6>
+                  <h6 className="section-title__tagline">News & Events</h6>
                   <div className="section-title__shape-1">
                     <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Real Stories Of Trust, Freshness<br /> And
-                  Satisfaction.
+                <h3 className="section-title__title title-animation">Latest News & Events
                 </h3>
               </div>
               <div className="row">
