@@ -1,11 +1,268 @@
+"use client";
+
+import dynamic from 'next/dynamic';
+const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslations, useLocale } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { useEffect, useState } from 'react';
+
+interface Product {
+  id: number;
+  documentId: string;
+  locale: string;
+  Name: string;
+  Description: string;
+  Variety_Name: string;
+  Image: any;
+}
+
+interface ProductsResponse {
+  data: Product[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}
+
 export function ProductsContent() {
+  const t = useTranslations();
+  const locale = useLocale();
+  const [showPreloader, setShowPreloader] = useState(true);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    pageSize: 25,
+    pageCount: 1,
+    total: 0
+  });
+  
+  const fetchProducts = async (page: number = 1) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+      const baseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
+      const headers: HeadersInit = {};
+      
+      if (apiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+      
+      const response = await fetch(
+        `${baseUrl}/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
+        {
+          headers,
+        }
+      );
+      
+      if (!response.ok) {
+        throw new Error('Failed to fetch products');
+      }
+      
+      const data: ProductsResponse = await response.json();
+      setProducts(data.data);
+      console.log(data.data);
+      setPagination(data.meta.pagination);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('Error fetching products:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts(currentPage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale, currentPage]);
+
+  useEffect(() => {
+    // Hide preloader after component mounts
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+    
+    // Hide immediately if DOM is ready
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+      // Fallback timeout
+      setTimeout(hidePreloader, 1000);
+    }
+  }, []);
+
+  const getProductImage = (product: Product) => {
+    // Handle both populated Strapi media objects and simple media objects with url
+    const nestedUrl = product.Image?.data?.attributes?.url;
+    if (nestedUrl) {
+      return `/strapi${nestedUrl}`;
+    }
+
+    const flatUrl = (product.Image as { url?: string } | undefined)?.url;
+    if (flatUrl) {
+      return `/strapi${flatUrl}`;
+    }
+
+    // Fallback to default product image
+    return '/assets/images/backgrounds/1-1.png';
+  };
+
+  const renderGridProduct = (product: Product, index: number) => {
+    const imageUrl = getProductImage(product);
+    const imageIndex = (index % 12) + 1;
+    
+    return (
+      <div key={product.id} className="col-xl-4 col-lg-6 col-md-6">
+        <div className="single-product-style1">
+          <div className="single-product-style1__img">
+            <img src={imageUrl} alt={product.Name} />
+            <img src={imageUrl} alt={product.Name} />
+            {index % 3 === 0 && (
+              <ul className="single-product-style1__overlay">
+                <li>
+                  <p>New</p>
+                </li>
+              </ul>
+            )}
+            <ul className="single-product-style1__info">
+              <li>
+                <a href="/products#" title="Add to Wishlist">
+                  <i className="fa fa-regular fa-heart" />
+                </a>
+              </li>
+              <li>
+                <a href="/products#" title="Add to cart">
+                  <i className="fa fa-solid fa-cart-plus" />
+                </a>
+              </li>
+              <li>
+                <a href="/products#" title="Quick View">
+                  <i className="fa fa-regular fa-eye" />
+                </a>
+              </li>
+              <li>
+                <a href="/products#" title="Compare">
+                  <i className="fa fa-solid fa-repeat" />
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="single-product-style1__content">
+            <div className="single-product-style1__content-left">
+              <h4>
+                <a href="/products">
+                  {product.Variety_Name || product.Name}
+                </a>
+              </h4>
+              <p>{product.Name}</p>
+            </div>
+            <div className="single-product-style1__content-right">
+              <div className="single-product-style1__review">
+                <i className="fa fa-star" />
+                <p>4.{(5 + index % 5).toFixed(1)}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderListProduct = (product: Product, index: number) => {
+    const imageUrl = getProductImage(product);
+    const imageIndex = (index % 12) + 1;
+    
+    return (
+      <div key={product.id} className="col-xl-6 col-lg-6">
+        <div className="single-product-style2">
+          <div className="row">
+            <div className="col-xl-6 col-lg-6 col-md-6">
+              <div className="single-product-style2__img">
+                <img src={imageUrl} alt={product.Name} />
+                <img src={imageUrl} alt={product.Name} />
+                {index % 3 === 0 && (
+                  <ul className="single-product-style1__overlay">
+                    <li>
+                      <p>New</p>
+                    </li>
+                  </ul>
+                )}
+              </div>
+            </div>
+            <div className="col-xl-6 col-lg-6 col-md-6">
+              <div className="single-product-style2__content">
+                <div className="single-product-style2__review">
+                  <i className="fa fa-star" />
+                  <i className="fa fa-star" />
+                  <i className="fa fa-star" />
+                  <i className="fa fa-star" />
+                  <i className="fa fa-star" />
+                </div>
+                <div className="single-product-style2__text">
+                  <h4>
+                    <a href="/products">
+                      {product.Variety_Name || product.Name}
+                    </a>
+                  </h4>
+                  <p>{product.Name}</p>
+                </div>
+                <ul className="single-product-style2__info">
+                  <li>
+                    <a href="/products#" title="Add to Wishlist">
+                      <i className="fa fa-regular fa-heart" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/products#" title="Add to cart">
+                      <i className="fa fa-solid fa-cart-plus" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/products#" title="Quick View">
+                      <i className="fa fa-regular fa-eye" />
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/products#" title="Compare">
+                      <i className="fa fa-solid fa-repeat" />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        <div id="preloader">
+        <div 
+          id="preloader" 
+          suppressHydrationWarning
+          style={{ 
+            opacity: showPreloader ? 1 : 0, 
+            transition: 'opacity 0.5s ease',
+            pointerEvents: showPreloader ? 'auto' : 'none',
+            display: showPreloader ? 'block' : 'none'
+          }}
+        >
           <div className="preloader">
             <span />
             <span />
@@ -18,19 +275,19 @@ export function ProductsContent() {
           <div className="popup-inner">
             <div className="close-chat"><i className="fa fa-times" /></div>
             <div className="chat-form">
-              <p>Please fill out the form below and we will get back to you as soon as possible.</p>
+              <p>{t('sidebar.pleaseFillForm')}</p>
               <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
                 <div className="form-group">
-                  <input type="text" name="name" placeholder="Your Name" required />
+                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
                 </div>
                 <div className="form-group">
-                  <input type="email" name="email" placeholder="Your Email" required />
+                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
                 </div>
                 <div className="form-group">
-                  <textarea name="message" placeholder="Your Text" required defaultValue={""} />
+                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
                 </div>
                 <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> Submit Now
+                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
                     <i className="fal fa-long-arrow-right" />
                     <span className="hover-btn hover-bx" />
                     <span className="hover-btn hover-bx2" />
@@ -54,7 +311,7 @@ export function ProductsContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
+                        <p><a href="tel:+918888866031">+91 88888 66031</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,16 +319,8 @@ export function ProductsContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                        <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                         </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="icon">
-                        <i className="icon-pin" />
-                      </div>
-                      <div className="text">
-                        <p>4124 Cimmaron Road, CA 92806</p>
                       </div>
                     </li>
                   </ul>
@@ -80,13 +329,12 @@ export function ProductsContent() {
                       <div className="main-menu-two__top-time-icon">
                         <span className="fas fa-clock" />
                       </div>
-                      <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
+                      <p className="main-menu-two__top-text">{t('common.businessHours')}</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="/products#"><i className="fab fa-twitter" /></a>
-                      <a href="/products#"><i className="fab fa-facebook-f" /></a>
-                      <a href="/products#"><i className="fab fa-pinterest-p" /></a>
-                      <a href="/products#"><i className="fab fa-instagram" /></a>
+                      <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+                      <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -98,250 +346,52 @@ export function ProductsContent() {
                   <div className="main-menu-two__wrapper-inner">
                     <div className="main-menu-two__left">
                       <div className="main-menu-two__logo">
-                        <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                        <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                       </div>
                     </div>
                     <div className="main-menu-two__main-menu-box">
                       <a href="/products#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
-                        <li className="dropdown megamenu">
-                          <a href="/products#">Home </a>
-                          <ul>
-                            <li>
-                              <section className="home-showcase">
-                                <div className="container">
-                                  <div className="home-showcase__inner">
-                                    <div className="row">
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            01</h3>
-                                          {/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            02
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            03
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            04
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                                Dark Home
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Dark Home
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                    </div>{/* /.row */}
-                                  </div>{/* /.home-showcase__inner */}
-                                </div>{/* /.container */}
-                              </section>
+                        <li>
+                          <Link href="/">{t('nav.home')}</Link>
                             </li>
+                          <li>
+                            <Link href="/about">{t('nav.about')}</Link>
+                        </li>
+                          {/* Services dropdown commented out - temporarily disabled
+                        <li className="dropdown">
+                            <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
+                          <ul className="shadow-box">
+                              <li><Link href="/services">{t('nav.services')}</Link></li>
+                              <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                           </ul>
                         </li>
+                          */}
                         <li className="dropdown">
-                          <a href="/products#">About</a>
+                          <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                           <ul className="shadow-box">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="history.html">History</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/products#">Pages</a>
-                          <ul className="shadow-box">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="/faq">FAQs</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/products#">services</a>
-                          <ul className="shadow-box">
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                            <li><a href="dairy-products.html">Dairy Products</a></li>
-                            <li><a href="livestock.html">Livestock</a></li>
-                            <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                            <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                            <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/products#">Shop</a>
-                          <ul className="shadow-box">
-                            <li><a href="/products">Products</a></li>
-                            <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
-                            <li><a href="login.html">Login</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/products#">Blog</a>
-                          <ul className="shadow-box">
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="/blog">Blog Details</a></li>
+                            <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                           </ul>
                         </li>
                         <li>
-                          <a href="/contact">Contact</a>
+                          <Link href="/blog">{t('nav.blog')}</Link>
+                        </li>
+                        <li>
+                          <Link href="/contact">{t('nav.contact')}</Link>
                         </li>
                       </ul>
                     </div>
                     <div className="main-menu-two__right">
-                      <div className="main-menu-two__search-box">
-                        <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
+                      <LanguageSwitcher />
+                      {/* Search, Cart, and Get A Quote components removed */}
                       </div>
-                      <div className="main-menu-two__cart">
-                        <a href="cart.html">
-                          <span className="fal fa-shopping-cart" />
-                          <span className="main-menu-two__cart-count">02</span>
-                        </a>
                       </div>
-                      <div className="main-menu-two__user">
-                        <a href="sign-up.html"><span className="far fa-users" /></a>
-                      </div>
-                      <div className="main-menu-two__btn-box">
-                        <a className="thm-btn" href="/contact">Get A Quote
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </nav>
@@ -351,16 +401,16 @@ export function ProductsContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
-                <h3>Porducts </h3>
+                <h3>{t('products.pageTitle')}</h3>
                 <div className="thm-breadcrumb__inner">
                   <ul className="thm-breadcrumb list-unstyled">
-                    <li><a href="/">Home</a></li>
+                    <li><Link href="/">{t('nav.home')}</Link></li>
                     <li><span className="fas fa-angle-right" /></li>
-                    <li>Porducts </li>
+                    <li>{t('products.pageTitle')}</li>
                   </ul>
                 </div>
               </div>
@@ -377,15 +427,15 @@ export function ProductsContent() {
                       <div className="col-xl-12">
                         <div className="product__showing-result">
                           <div className="product__showing-text-box">
-                            <p className="product__showing-text">Showing 1–12/14 of 14 results</p>
+                            <p className="product__showing-text">{t('products.showingResults')}</p>
                           </div>
                           <div className="product__showing-sort">
                             <div className="select-box">
                               <select className="wide">
-                                <option data-display="Sort by popular">Sort by popular</option>
-                                <option value={1}>Sort by popular</option>
-                                <option value={2}>Sort by Price</option>
-                                <option value={3}>Sort by Ratings</option>
+                                <option data-display={t('products.sortByPopular')}>{t('products.sortByPopular')}</option>
+                                <option value={1}>{t('products.sortByPopular')}</option>
+                                <option value={2}>{t('products.sortByPrice')}</option>
+                                <option value={3}>{t('products.sortByRatings')}</option>
                               </select>
                             </div>
                           </div>
@@ -396,12 +446,22 @@ export function ProductsContent() {
                       <div className="product__all-tab">
                         <div className="product__all-tab-button">
                           <ul className="tabs-button-box clearfix">
-                            <li data-tab="#grid" className="tab-btn-item active-btn-item">
+                            <li 
+                              data-tab="#grid" 
+                              className={`tab-btn-item ${viewMode === 'grid' ? 'active-btn-item' : ''}`}
+                              onClick={() => setViewMode('grid')}
+                              style={{ cursor: 'pointer' }}
+                            >
                               <div className="product__all-tab-button-icon one">
                                 <i className="fa fa-solid fa-bars" />
                               </div>
                             </li>
-                            <li data-tab="#list" className="tab-btn-item">
+                            <li 
+                              data-tab="#list" 
+                              className={`tab-btn-item ${viewMode === 'list' ? 'active-btn-item' : ''}`}
+                              onClick={() => setViewMode('list')}
+                              style={{ cursor: 'pointer' }}
+                            >
                               <div className="product__all-tab-button-icon">
                                 <i className="fa fa-solid fa-list-ul" />
                               </div>
@@ -411,1495 +471,52 @@ export function ProductsContent() {
                         {/*Start Tabs Content Box*/}
                         <div className="tabs-content-box">
                           {/*Start Tab*/}
-                          <div className="tab-content-box-item tab-content-box-item-active" id="grid">
+                          <div className={`tab-content-box-item ${viewMode === 'grid' ? 'tab-content-box-item-active' : ''}`} id="grid">
                             <div className="product__all-tab-content-box-item">
                               <div className="product__all-tab-single">
-                                <div className="row">
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-1.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-1.jpg" alt="" />
-                                        <ul className="single-product-style1__overlay">
-                                          <li>
-                                            <p>New</p>
-                                          </li>
-                                        </ul>
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
+                                {loading ? (
+                                  <div className="text-center" style={{ padding: '50px' }}>
+                                    <p>{t('common.loading') || 'Loading...'}</p>
                                       </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Chicken Eggs (12P)
-                                            </a>
-                                          </h4>
-                                          <p>$33.00</p>
+                                ) : error ? (
+                                  <div className="text-center" style={{ padding: '50px' }}>
+                                    <p style={{ color: 'red' }}>{error}</p>
                                         </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.9</p>
+                                ) : products.length === 0 ? (
+                                  <div className="text-center" style={{ padding: '50px' }}>
+                                    <p>{t('products.noProducts') || 'No products found'}</p>
                                           </div>
+                                ) : (
+                                  <div className="row">
+                                    {products.map((product, index) => renderGridProduct(product, index))}
                                         </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-2.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-2.jpg" alt="" />
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Golden Ginger
-                                            </a>
-                                          </h4>
-                                          <p>$50.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>5.0</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-3.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-3.jpg" alt="" />
-                                        <ul className="single-product-style1__overlay">
-                                          <li>
-                                            <p>5% Off</p>
-                                          </li>
-                                        </ul>
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Sweet Orange
-                                            </a>
-                                          </h4>
-                                          <p><del>$33.00</del> $28.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.5</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-4.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-4.jpg" alt="" />
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Cow Fresh Milk (1L)
-                                            </a>
-                                          </h4>
-                                          <p>$40.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.8</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-5.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-5.jpg" alt="" />
-                                        <ul className="single-product-style1__overlay">
-                                          <li>
-                                            <p>5% Off</p>
-                                          </li>
-                                        </ul>
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Crunchy Almonds
-                                            </a>
-                                          </h4>
-                                          <p><del>$25.00</del>$20.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.9</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-6.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-6.jpg" alt="" />
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Organic Honey
-                                            </a>
-                                          </h4>
-                                          <p>$35.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.7</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-7.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-7.jpg" alt="" />
-                                        <ul className="single-product-style1__overlay">
-                                          <li>
-                                            <p>New</p>
-                                          </li>
-                                        </ul>
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Fresh Broccoli
-                                            </a>
-                                          </h4>
-                                          <p>$27.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.6</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-8.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-8.jpg" alt="" />
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Fresh Strawberries
-                                            </a>
-                                          </h4>
-                                          <p>$44.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>5.0</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-9.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-9.jpg" alt="" />
-                                        <ul className="single-product-style1__overlay">
-                                          <li>
-                                            <p>3% Off</p>
-                                          </li>
-                                        </ul>
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Sweet Corn
-                                            </a>
-                                          </h4>
-                                          <p><del>$49.00</del>$52.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.9</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-10.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-10.jpg" alt="" />
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Wheat Flour (12KG)
-                                            </a>
-                                          </h4>
-                                          <p>$25.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.7</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-11.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-11.jpg" alt="" />
-                                        <ul className="single-product-style1__overlay">
-                                          <li>
-                                            <p>New</p>
-                                          </li>
-                                          <li>
-                                            <p>7% Off</p>
-                                          </li>
-                                        </ul>
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Crisp Carrots
-                                            </a>
-                                          </h4>
-                                          <p><del>$36.00</del>$43.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.9</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-4 col-lg-6 col-md-6">
-                                    <div className="single-product-style1">
-                                      <div className="single-product-style1__img">
-                                        <img src="assets/images/shop/shop-product-1-12.jpg" alt="" />
-                                        <img src="assets/images/shop/shop-product-1-12.jpg" alt="" />
-                                        <ul className="single-product-style1__info">
-                                          <li>
-                                            <a href="/products#" title="Add to Wishlist">
-                                              <i className="fa fa-regular fa-heart" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Add to cart">
-                                              <i className="fa fa-solid fa-cart-plus" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Quick View">
-                                              <i className="fa fa-regular fa-eye" />
-                                            </a>
-                                          </li>
-                                          <li>
-                                            <a href="/products#" title="Compare">
-                                              <i className="fa fa-solid fa-repeat" />
-                                            </a>
-                                          </li>
-                                        </ul>
-                                      </div>
-                                      <div className="single-product-style1__content">
-                                        <div className="single-product-style1__content-left">
-                                          <h4>
-                                            <a href="product-details.html">
-                                              Organic Beetroot
-                                            </a>
-                                          </h4>
-                                          <p>$28.00</p>
-                                        </div>
-                                        <div className="single-product-style1__content-right">
-                                          <div className="single-product-style1__review">
-                                            <i className="fa fa-star" />
-                                            <p>4.6</p>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single End*/}
-                                </div>
+                                )}
                               </div>
                             </div>
                           </div>
                           {/*End Tab*/}
                           {/*Start Tab*/}
-                          <div className="tab-content-box-item" id="list">
+                          <div className={`tab-content-box-item ${viewMode === 'list' ? 'tab-content-box-item-active' : ''}`} id="list">
                             <div className="product__all-tab-content-box-item">
                               <div className="product__all-tab-single">
-                                <div className="row">
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
+                                {loading ? (
+                                  <div className="text-center" style={{ padding: '50px' }}>
+                                    <p>{t('common.loading') || 'Loading...'}</p>
+                                          </div>
+                                ) : error ? (
+                                  <div className="text-center" style={{ padding: '50px' }}>
+                                    <p style={{ color: 'red' }}>{error}</p>
+                                        </div>
+                                ) : products.length === 0 ? (
+                                  <div className="text-center" style={{ padding: '50px' }}>
+                                    <p>{t('products.noProducts') || 'No products found'}</p>
+                                            </div>
+                                ) : (
                                       <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
-                                            <ul className="single-product-style1__overlay">
-                                              <li>
-                                                <p>New</p>
-                                              </li>
-                                            </ul>
+                                    {products.map((product, index) => renderListProduct(product, index))}
                                           </div>
+                                )}
                                         </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Chicken Eggs (12P)
-                                                </a>
-                                              </h4>
-                                              <p>$33.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Golden Ginger
-                                                </a>
-                                              </h4>
-                                              <p>$50.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-3.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-3.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Sweet Orange
-                                                </a>
-                                              </h4>
-                                              <p>$40.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-4.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-4.jpg" alt="" />
-                                          </div>
-                                          <ul className="single-product-style1__overlay">
-                                            <li>
-                                              <p>5% Off</p>
-                                            </li>
-                                          </ul>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Cow Fresh Milk (1L)
-                                                </a>
-                                              </h4>
-                                              <p><del>$33.00</del>$28.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-5.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-5.jpg" alt="" />
-                                          </div>
-                                          <ul className="single-product-style1__overlay">
-                                            <li>
-                                              <p>5% Off</p>
-                                            </li>
-                                          </ul>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Crunchy Almonds
-                                                </a>
-                                              </h4>
-                                              <p><del>$25.00</del>$20.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-6.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-6.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Organic Honey
-                                                </a>
-                                              </h4>
-                                              <p>$35.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-7.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-7.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Fresh Broccoli
-                                                </a>
-                                              </h4>
-                                              <p>$44.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-8.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-8.jpg" alt="" />
-                                            <ul className="single-product-style1__overlay">
-                                              <li>
-                                                <p>New</p>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Fresh Strawberries
-                                                </a>
-                                              </h4>
-                                              <p>$27.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-9.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-9.jpg" alt="" />
-                                            <ul className="single-product-style1__overlay">
-                                              <li>
-                                                <p>3% Off</p>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Sweet Corn
-                                                </a>
-                                              </h4>
-                                              <p><del>$49.00</del>$52.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-10.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-10.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Wheat Flour (12KG)
-                                                </a>
-                                              </h4>
-                                              <p><del>$33.00</del>$28.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-11.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-11.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Crisp Carrots
-                                                </a>
-                                              </h4>
-                                              <p>$40.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-12.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-12.jpg" alt="" />
-                                          </div>
-                                          <ul className="single-product-style1__overlay">
-                                            <li>
-                                              <p>New</p>
-                                            </li>
-                                            <li>
-                                              <p>7% Off</p>
-                                            </li>
-                                          </ul>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Organic Beetroot
-                                                </a>
-                                              </h4>
-                                              <p><del>$36.00</del>$43.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-1.jpg" alt="" />
-                                            <ul className="single-product-style1__overlay">
-                                              <li>
-                                                <p>New</p>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Chicken Eggs (12P)
-                                                </a>
-                                              </h4>
-                                              <p>$55.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                  {/*Product All Single Start*/}
-                                  <div className="col-xl-6 col-lg-6">
-                                    <div className="single-product-style2">
-                                      <div className="row">
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__img">
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
-                                            <img src="assets/images/shop/shop-product-2-2.jpg" alt="" />
-                                          </div>
-                                        </div>
-                                        <div className="col-xl-6 col-lg-6 col-md-6">
-                                          <div className="single-product-style2__content">
-                                            <div className="single-product-style2__review">
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                              <i className="fa fa-star" />
-                                            </div>
-                                            <div className="single-product-style2__text">
-                                              <h4>
-                                                <a href="product-details.html">
-                                                  Golden Ginger
-                                                </a>
-                                              </h4>
-                                              <p>$80.00</p>
-                                            </div>
-                                            <ul className="single-product-style2__info">
-                                              <li>
-                                                <a href="/products#" title="Add to Wishlist">
-                                                  <i className="fa fa-regular fa-heart">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Add to cart">
-                                                  <i className="fa fa-solid fa-cart-plus">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Quick View">
-                                                  <i className="fa fa-regular fa-eye">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                              <li>
-                                                <a href="/products#" title="Compare">
-                                                  <i className="fa fa-solid fa-repeat">
-                                                  </i>
-                                                </a>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  {/*Product All Single Start*/}
-                                </div>
-                              </div>
                             </div>
                           </div>
                           {/*End Tab*/}
@@ -1907,16 +524,46 @@ export function ProductsContent() {
                         {/*End Tabs Content Box*/}
                       </div>
                       <ul className="styled-pagination text-center clearfix list-unstyled">
-                        <li className="arrow prev active">
-                          <a href="/products#">
+                        <li className={`arrow prev ${currentPage === 1 ? 'active' : ''}`}>
+                          <a 
+                            href="/products#" 
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage > 1) {
+                                setCurrentPage(currentPage - 1);
+                              }
+                            }}
+                          >
                             <span className="fas fa-angle-left" />
                           </a>
                         </li>
-                        <li><a href="/products#">1</a></li>
-                        <li><a href="/products#">2</a></li>
-                        <li><a href="/products#">3</a></li>
-                        <li className="arrow next">
-                          <a href="/products#">
+                        {Array.from({ length: pagination.pageCount }, (_, i) => i + 1).map((page) => (
+                          <li key={page}>
+                            <a 
+                              href="/products#"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentPage(page);
+                              }}
+                              style={{ 
+                                fontWeight: currentPage === page ? 'bold' : 'normal',
+                                color: currentPage === page ? '#ff6b35' : 'inherit'
+                              }}
+                            >
+                              {page}
+                            </a>
+                          </li>
+                        ))}
+                        <li className={`arrow next ${currentPage === pagination.pageCount ? 'active' : ''}`}>
+                          <a 
+                            href="/products#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              if (currentPage < pagination.pageCount) {
+                                setCurrentPage(currentPage + 1);
+                              }
+                            }}
+                          >
                             <span className="fas fa-angle-right" />
                           </a>
                         </li>
@@ -1927,13 +574,13 @@ export function ProductsContent() {
                 <div className="col-xl-3 col-lg-12">
                   <div className="product__sidebar">
                     <div className="shop-search product__sidebar-single">
-                      <form action="products.html#">
-                        <input type="text" placeholder="Search" />
+                      <form action="/products">
+                        <input type="text" placeholder={t('products.search')} />
                         <button type="submit"><i className="fa fa-search" /></button>
                       </form>
                     </div>
                     <div className="product__price-ranger product__sidebar-single">
-                      <h3 className="product__sidebar-title">Price</h3>
+                      <h3 className="product__sidebar-title">{t('products.price')}</h3>
                       <div className="price-ranger">
                         <div id="slider-range" />
                         <div className="ranger-min-max-block">
@@ -1945,29 +592,32 @@ export function ProductsContent() {
                       </div>
                     </div>
                     <div className="shop-category product__sidebar-single">
-                      <h3 className="product__sidebar-title">Categories</h3>
+                      <h3 className="product__sidebar-title">{t('footer.categories')}</h3>
                       <ul className="list-unstyled">
-                        <li><a href="/products#">Crop Cultivation</a></li>
-                        <li className="active"><a href="/products#">Tips &amp; Tricks</a></li>
-                        <li><a href="/products#">Technology</a></li>
-                        <li><a href="/products#">Animal care</a></li>
-                        <li><a href="/products#">Natural &amp; Organic</a></li>
+                        <li><Link href="/products#">{t('products.cropCultivation')}</Link></li>
+                        <li className="active"><Link href="/products#">{t('footer.tipsTricks')}</Link></li>
+                        <li><Link href="/products#">{t('footer.technology')}</Link></li>
+                        <li><Link href="/products#">{t('products.animalCare')}</Link></li>
+                        <li><Link href="/products#">{t('footer.naturalOrganic')}</Link></li>
                       </ul>
                     </div>
                     <div className="shop-product-recent-products product__sidebar-single">
-                      <h3 className="product__sidebar-title">Recent Products</h3>
+                      <h3 className="product__sidebar-title">{t('products.recentProducts')}</h3>
                       <ul className="clearfix list-unstyled">
-                        <li>
+                        {products.slice(0, 4).map((product, index) => {
+                          const imageUrl = getProductImage(product);
+                          return (
+                            <li key={product.id}>
                           <div className="img">
-                            <img src="assets/images/shop/product-thumb-1.jpg" alt="Product" />
-                            <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
+                                <img src={imageUrl} alt={product.Name} />
+                                <Link href="/products#"><i className="fa fa-link" aria-hidden="true" /></Link>
                           </div>
                           <div className="content">
                             <div className="title">
-                              <h5><a href="/products#">Organic Capsicum</a></h5>
+                                  <h5><Link href="/products#">{product.Variety_Name || product.Name}</Link></h5>
                             </div>
                             <div className="price">
-                              <p>$33.00</p>
+                                  <p>{product.Name}</p>
                             </div>
                             <div className="review">
                               <i className="fa fa-star" />
@@ -1978,85 +628,24 @@ export function ProductsContent() {
                             </div>
                           </div>
                         </li>
-                        <li>
-                          <div className="img">
-                            <img src="assets/images/shop/product-thumb-2.jpg" alt="Product" />
-                            <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
-                          </div>
-                          <div className="content">
-                            <div className="title">
-                              <h5><a href="/products#">Natural Green Peas</a></h5>
-                            </div>
-                            <div className="price">
-                              <p>$39.00</p>
-                            </div>
-                            <div className="review">
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star color" />
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="img">
-                            <img src="assets/images/shop/product-thumb-3.jpg" alt="Product" />
-                            <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
-                          </div>
-                          <div className="content">
-                            <div className="title">
-                              <h5><a href="/products#">Natural Lemon</a></h5>
-                            </div>
-                            <div className="price">
-                              <p>$54.00</p>
-                            </div>
-                            <div className="review">
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star color" />
-                            </div>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="img">
-                            <img src="assets/images/shop/product-thumb-4.jpg" alt="Product" />
-                            <a href="/products#"><i className="fa fa-link" aria-hidden="true" /></a>
-                          </div>
-                          <div className="content">
-                            <div className="title">
-                              <h5><a href="/products#">Organic Mango</a></h5>
-                            </div>
-                            <div className="price">
-                              <p>$44.00</p>
-                            </div>
-                            <div className="review">
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star color" />
-                            </div>
-                          </div>
-                        </li>
+                          );
+                        })}
                       </ul>
                     </div>
                     <div className="shop-product-tags product__sidebar-single">
-                      <h3 className="product__sidebar-title">Product Tags</h3>
+                      <h3 className="product__sidebar-title">{t('products.productTags')}</h3>
                       <div className="shop-product__tags-list">
-                        <a href="/products#">Aggrotech</a>
-                        <a href="/products#">Crop</a>
-                        <a href="/products#">Grain</a>
-                        <a href="/products#">Organic</a>
-                        <a href="/products#">Cultivation</a>
-                        <a href="/products#">Agro</a>
+                        <Link href="/products#">{t('footer.tags.aggrotech')}</Link>
+                        <Link href="/products#">{t('footer.tags.crop')}</Link>
+                        <Link href="/products#">{t('footer.tags.grain')}</Link>
+                        <Link href="/products#">{t('footer.tags.organic')}</Link>
+                        <Link href="/products#">{t('products.cultivation')}</Link>
+                        <Link href="/products#">{t('footer.tags.agro')}</Link>
                       </div>
                     </div>
                     {/*Start Products Style1 Single Sidear */}
                     <div className="shop-product-tags product__sidebar-single style">
-                      <h3 className="product__sidebar-title">Reviews</h3>
+                      <h3 className="product__sidebar-title">{t('footer.reviews')}</h3>
                       <div className="sidebar-rating-box sidebar-rating-box--style2">
                         <ul className="list-unstyled">
                           <li>
@@ -2129,16 +718,14 @@ export function ProductsContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
-                  <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
-                    Get
-                    Latest Update</h3>
+                  <h3 className="footer-widget-two__newsletter-title" dangerouslySetInnerHTML={{ __html: t('footer.newsletter.title') }} />
                   <form className="footer-widget-two__newsletter-form mc-form" data-url="MC_FORM_URL" noValidate>
                     <div className="footer-widget-two__newsletter-form-input-box">
                       <input type="email" placeholder="Enter email" name="EMAIL" />
                     </div>
-                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">Subscribe
+                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">{t('common.subscribe')}
                       <i className="fal fa-long-arrow-right" />
                       <span className="hover-btn hover-bx" />
                       <span className="hover-btn hover-bx2" />
@@ -2149,130 +736,11 @@ export function ProductsContent() {
                 </div>
               </div>
             </div>
-            <div className="site-footer-two__middle">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                    <div className="footer-widget-two__working-box">
-                      <h3 className="footer-widget-two__working-title">opening time:</h3>
-                      <ul className="footer-widget-two__working-hour list-unstyled">
-                        <li>
-                          <p>Mon - Fri<span>9:00 AM - 5:00 PM</span></p>
-                        </li>
-                        <li>
-                          <p>Saturday<span>8:00 AM - 6:00 PM</span></p>
-                        </li>
-                        <li>
-                          <p>Sunday<span>Closed</span></p>
-                        </li>
-                      </ul>
-                      <div className="site-footer-two__social">
-                        <a href="/products#"><i className="fab fa-facebook-f" /></a>
-                        <a href="/products#"><i className="fab fa-twitter" /></a>
-                        <a href="/products#"><i className="fab fa-instagram" /></a>
-                        <a href="/products#"><i className="fab fa-pinterest-p" /></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                    <div className="footer-widget-two__column footer-widget-two__usefull-link">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Quick Links</h3>
-                      </div>
-                      <div className="footer-widget-two__link-box">
-                        <ul className="footer-widget-two__link list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Portfolio</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/blog">Blog</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/services">Services</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/contact">Contact</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                    <div className="footer-widget-two__column footer-widget-two__products">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Our Products</h3>
-                      </div>
-                      <ul className="footer-widget-two__link list-unstyled">
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                          Produce</a></li>
-                        <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                          Products</a>
-                        </li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                          Products</a></li>
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                          Farming</a></li>
-                        <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                          Grains</a></li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                    <div className="footer-widget-two__instagram">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">instagram</h3>
-                      </div>
-                      <ul className="footer-widget-two__instagram-list list-unstyled clearfix">
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-1.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-2.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-3.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-4.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-5.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-6.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="footer-widget-two__logo">
-                  <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
-                </div>
-              </div>
-            </div>
+            {/* site-footer-two__middle section removed */}
             <div className="site-footer-two__bottom">
               <div className="container">
                 <div className="site-footer-two__bottom-inner">
-                  <p className="site-footer-two__bottom-text">Copyright@ 2025 <a href="/">Farmology</a>. All
-                    Rights Reserved.</p>
-                  <ul className="list-unstyled site-footer-two__bottom-menu">
-                    <li><a href="/contact">Support</a></li>
-                    <li><a href="/about">Terms and Condition</a></li>
-                    <li><a href="/about">Privacy and Policy</a></li>
-                  </ul>
+                  <p className="site-footer-two__bottom-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
                 </div>
               </div>
             </div>
@@ -2285,7 +753,7 @@ export function ProductsContent() {
           <div className="mobile-nav__content">
             <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
             <div className="logo-box">
-              <a href="/" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width={150} alt="" /></a>
+              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-1.png" width={150} alt="" /></Link>
             </div>
             {/* /.logo-box */}
             <div className="mobile-nav__container" />
@@ -2293,19 +761,18 @@ export function ProductsContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+918888866031">+91 88888 66031</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/products#" className="fab fa-twitter" />
-                <a href="/products#" className="fab fa-facebook-square" />
-                <a href="/products#" className="fab fa-pinterest-p" />
-                <a href="/products#" className="fab fa-instagram" />
+                <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
+                <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
@@ -2313,21 +780,11 @@ export function ProductsContent() {
         </div>
         {/* /.mobile-nav__wrapper */}
         {/* Search Popup */}
-        <div className="search-popup">
-          <div className="color-layer" />
-          <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
-            <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
-              <button type="submit"><i className="fas fa-search" /></button>
-            </div>
-          </form>
-        </div>
-        {/* End Search Popup */}
-        <a href="/products#" data-target="html" className="scroll-to-target scroll-to-top">
+        {/* Search Popup removed */}
+        <Link href="/products#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
-          <span className="scroll-to-top__text"> Go Back Top</span>
-        </a>
+          <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
+        </Link>
         {/* template js */}
       </div>
 

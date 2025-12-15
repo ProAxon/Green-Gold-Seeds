@@ -1,11 +1,49 @@
+"use client";
+
+import dynamic from 'next/dynamic';
+const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { useEffect, useState } from 'react';
+
 export function HomeContent() {
+  const t = useTranslations();
+  const [showPreloader, setShowPreloader] = useState(true);
+  
+  useEffect(() => {
+    // Hide preloader after component mounts
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+    
+    // Hide immediately if DOM is ready
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+      // Fallback timeout
+      setTimeout(hidePreloader, 1000);
+    }
+  }, []);
+  
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        <div id="preloader">
+        <div 
+          id="preloader" 
+          suppressHydrationWarning
+          style={{ 
+            opacity: showPreloader ? 1 : 0, 
+            transition: 'opacity 0.5s ease',
+            pointerEvents: showPreloader ? 'auto' : 'none',
+            display: showPreloader ? 'block' : 'none'
+          }}
+        >
           <div className="preloader">
             <span />
             <span />
@@ -18,19 +56,19 @@ export function HomeContent() {
           <div className="popup-inner">
             <div className="close-chat"><i className="fa fa-times" /></div>
             <div className="chat-form">
-              <p>Please fill out the form below and we will get back to you as soon as possible.</p>
+              <p>{t('sidebar.pleaseFillForm')}</p>
               <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
                 <div className="form-group">
-                  <input type="text" name="name" placeholder="Your Name" required />
+                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
                 </div>
                 <div className="form-group">
-                  <input type="email" name="email" placeholder="Your Email" required />
+                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
                 </div>
                 <div className="form-group">
-                  <textarea name="message" placeholder="Your Text" required defaultValue={""} />
+                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
                 </div>
                 <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> Submit Now
+                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
                     <i className="fal fa-long-arrow-right" />
                     <span className="hover-btn hover-bx" />
                     <span className="hover-btn hover-bx2" />
@@ -55,70 +93,42 @@ export function HomeContent() {
                 <div className="sidebar-info-contents">
                   <div className="content-inner">
                     <div className="logo">
-                      <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                      <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                     </div>
                     <div className="content-box">
-                      <h4>About Us</h4>
+                      <h4>{t('sidebar.aboutUs')}</h4>
                       <div className="inner-text">
-                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has
-                          roots in a piece of classical Latin literature from 45 BC, making it over
-                          2000 years old.
+                        <p>{t('sidebar.sidebarAboutText')}
                         </p>
                       </div>
                     </div>
-                    <div className="form-inner">
-                      <h4>Get a free quote</h4>
-                      <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
-                        <div className="form-group">
-                          <input type="text" name="name" placeholder="Name" required />
-                        </div>
-                        <div className="form-group">
-                          <input type="email" name="email" placeholder="Email" required />
-                        </div>
-                        <div className="form-group">
-                          <textarea name="message" placeholder="Message..." required defaultValue={""} />
-                        </div>
-                        <div className="form-group message-btn">
-                          <button className="thm-btn" data-text="Submit Now +" type="submit" data-loading-text="Please wait...">Submit Now
-                            <i className="fal fa-long-arrow-right" />
-                            <span className="hover-btn hover-bx" />
-                            <span className="hover-btn hover-bx2" />
-                            <span className="hover-btn hover-bx3" />
-                            <span className="hover-btn hover-bx4" />
-                          </button>
-                        </div>
-                        <div className="result" />
-                      </form>
-                    </div>
+                    {/* Get A Free Quote form removed */}
                     <div className="sidebar-contact-info">
-                      <h4>Contact Info</h4>
+                      <h4>{t('sidebar.contactInfo')}</h4>
                       <ul className="list-unstyled">
                         <li>
-                          <span className="icon-pin" /> 88 broklyn street, New York
+                          <span className="icon-pin" /> {t('contact.location')}
                         </li>
                         <li>
                           <span className="icon-call" />
-                          <a href="tel:123456789">+1 555-9990-153</a>
+                          <a href="tel:+918888866031">+91 88888 66031</a>
                         </li>
                         <li>
                           <span className="icon-email" />
-                          <a href="mailto:info@example.com">info@example.com</a>
+                          <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                         </li>
                       </ul>
                     </div>
                     <div className="thm-social-link1">
                       <ul className="social-box list-unstyled">
                         <li>
-                          <a href="/#"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
+                          <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="/#"><i className="fab fa-twitter" aria-hidden="true" /></a>
+                          <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" aria-hidden="true" /></a>
                         </li>
                         <li>
-                          <a href="/#"><i className="fab fa-pinterest-p" aria-hidden="true" /></a>
-                        </li>
-                        <li>
-                          <a href="/#"><i className="fab fa-instagram" aria-hidden="true" /></a>
+                          <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" aria-hidden="true" /></a>
                         </li>
                       </ul>
                     </div>
@@ -139,28 +149,18 @@ export function HomeContent() {
                       <i className="icon-email" />
                     </div>
                     <div className="text">
-                      <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                      <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                       </p>
                     </div>
                   </li>
-                  <li>
-                    <div className="icon">
-                      <i className="icon-pin" />
-                    </div>
-                    <div className="text">
-                      <p>4124 Cimmaron Road, CA 92806</p>
-                    </div>
-                  </li>
                 </ul>
-                <p className="main-menu__top-welcome-text">Welcome to Farmology
-                  our Best Farming HTML5 Template</p>
+                {/* Welcome text header removed */}
                 <div className="main-menu__top-right">
-                  <p className="main-menu__social-title">Follow Us On:</p>
+                  <p className="main-menu__social-title">{t('topBar.followUsOn')}</p>
                   <div className="main-menu__social">
-                    <a href="/#"><i className="fab fa-twitter" /></a>
-                    <a href="/#"><i className="fab fa-facebook-f" /></a>
-                    <a href="/#"><i className="fab fa-pinterest-p" /></a>
-                    <a href="/#"><i className="fab fa-instagram" /></a>
+                    <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+                    <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                    <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                   </div>
                 </div>
               </div>
@@ -170,223 +170,44 @@ export function HomeContent() {
                 <div className="main-menu__wrapper-inner">
                   <div className="main-menu__left">
                     <div className="main-menu__logo">
-                      <a href="/"><img src="assets/images/resources/logo-2.png" alt="" /></a>
+                      <Link href="/"><img src="/assets/images/resources/logo-2.png" alt="" /></Link>
                     </div>
                   </div>
                   <div className="main-menu__main-menu-box">
                     <a href="/#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                     <ul className="main-menu__list">
-                      <li className="dropdown megamenu">
-                        <a href="/#">Home </a>
-                        <ul>
-                          <li>
-                            <section className="home-showcase">
-                              <div className="container">
-                                <div className="home-showcase__inner">
-                                  <div className="row">
-                                    <div className="col-lg-3">
-                                      <div className="home-showcase__item">
-                                        <div className="home-showcase__image">
-                                          <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                          <div className="home-showcase__buttons">
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              Multi Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              One Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                          </div>
-                                          {/* /.home-showcase__buttons */}
-                                        </div>{/* /.home-showcase__image */}
-                                        <h3 className="home-showcase__title">Home
-                                          Page
-                                          01</h3>
-                                        {/* /.home-showcase__title */}
-                                      </div>{/* /.home-showcase__item */}
-                                    </div>{/* /.col-lg-3 */}
-                                    <div className="col-lg-3">
-                                      <div className="home-showcase__item">
-                                        <div className="home-showcase__image">
-                                          <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                          <div className="home-showcase__buttons">
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              Multi Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              One Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                          </div>
-                                          {/* /.home-showcase__buttons */}
-                                        </div>{/* /.home-showcase__image */}
-                                        <h3 className="home-showcase__title">Home
-                                          Page
-                                          02
-                                        </h3>{/* /.home-showcase__title */}
-                                      </div>{/* /.home-showcase__item */}
-                                    </div>{/* /.col-lg-3 */}
-                                    <div className="col-lg-3">
-                                      <div className="home-showcase__item">
-                                        <div className="home-showcase__image">
-                                          <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                          <div className="home-showcase__buttons">
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              Multi Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              One Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                          </div>
-                                          {/* /.home-showcase__buttons */}
-                                        </div>{/* /.home-showcase__image */}
-                                        <h3 className="home-showcase__title">Home
-                                          Page
-                                          03
-                                        </h3>{/* /.home-showcase__title */}
-                                      </div>{/* /.home-showcase__item */}
-                                    </div>{/* /.col-lg-3 */}
-                                    <div className="col-lg-3">
-                                      <div className="home-showcase__item">
-                                        <div className="home-showcase__image">
-                                          <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                          <div className="home-showcase__buttons">
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              Multi Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                            <a href="/" className="thm-btn home-showcase__buttons__item">
-                                              One Page
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                          </div>
-                                          {/* /.home-showcase__buttons */}
-                                        </div>{/* /.home-showcase__image */}
-                                        <h3 className="home-showcase__title">Home
-                                          Page
-                                          04
-                                        </h3>{/* /.home-showcase__title */}
-                                      </div>{/* /.home-showcase__item */}
-                                    </div>{/* /.col-lg-3 */}
-                                    <div className="col-lg-3">
-                                      <div className="home-showcase__item">
-                                        <div className="home-showcase__image">
-                                          <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                          <div className="home-showcase__buttons">
-                                            <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                              Dark Home
-                                              <i className="fal fa-long-arrow-right" />
-                                              <span className="hover-btn hover-bx" />
-                                              <span className="hover-btn hover-bx2" />
-                                              <span className="hover-btn hover-bx3" />
-                                              <span className="hover-btn hover-bx4" />
-                                            </a>
-                                          </div>
-                                          {/* /.home-showcase__buttons */}
-                                        </div>{/* /.home-showcase__image */}
-                                        <h3 className="home-showcase__title">Dark Home
-                                        </h3>{/* /.home-showcase__title */}
-                                      </div>{/* /.home-showcase__item */}
-                                    </div>{/* /.col-lg-3 */}
-                                  </div>{/* /.row */}
-                                </div>{/* /.home-showcase__inner */}
-                              </div>{/* /.container */}
-                            </section>
-                          </li>
+                      <li>
+                        <Link href="/">{t('nav.home')}</Link>
+                      </li>
+                      <li>
+                        <Link href="/about">{t('nav.about')}</Link>
+                      </li>
+                      {/* Services dropdown commented out - temporarily disabled
+                      <li className="dropdown">
+                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
+                        <ul className="shadow-box">
+                          <li><Link href="/services">{t('nav.services')}</Link></li>
+                          <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                         </ul>
                       </li>
+                      */}
                       <li className="dropdown">
-                        <a href="/#">About</a>
+                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                         <ul className="shadow-box">
-                          <li><a href="/about">About</a></li>
-                          <li><a href="history.html">History</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown">
-                        <a href="/#">Pages</a>
-                        <ul className="shadow-box">
-                          <li><a href="team.html">Team</a></li>
-                          <li><a href="team-details.html">Team Details</a></li>
-                          <li><a href="projects.html">Projects</a></li>
-                          <li><a href="project-details.html">Project Details</a></li>
-                          <li><a href="testimonials.html">Testimonials</a></li>
-                          <li><a href="pricing.html">Pricing</a></li>
-                          <li><a href="/faq">FAQs</a></li>
-                          <li><a href="404.html">404 Error</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown">
-                        <a href="/#">services</a>
-                        <ul className="shadow-box">
-                          <li><a href="/services">Services</a></li>
-                          <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                          <li><a href="dairy-products.html">Dairy Products</a></li>
-                          <li><a href="livestock.html">Livestock</a></li>
-                          <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                          <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                          <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown">
-                        <a href="/#">Shop</a>
-                        <ul className="shadow-box">
-                          <li><a href="/products">Products</a></li>
-                          <li><a href="product-details.html">Product Details</a></li>
-                          <li><a href="cart.html">Cart</a></li>
-                          <li><a href="checkout.html">Checkout</a></li>
-                          <li><a href="wishlist.html">Wishlist</a></li>
-                          <li><a href="sign-up.html">Sign Up</a></li>
-                          <li><a href="login.html">Login</a></li>
-                        </ul>
-                      </li>
-                      <li className="dropdown">
-                        <a href="/#">Blog</a>
-                        <ul className="shadow-box">
-                          <li><a href="/blog">Blog</a></li>
-                          <li><a href="blog-standard.html">Blog Standard</a></li>
-                          <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                          <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                          <li><a href="/blog">Blog Details</a></li>
+                          <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
+                          <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                         </ul>
                       </li>
                       <li>
-                        <a href="/contact">Contact</a>
+                        <Link href="/blog">{t('nav.blog')}</Link>
+                      </li>
+                      <li>
+                        <Link href="/contact">{t('nav.contact')}</Link>
                       </li>
                     </ul>
                   </div>
@@ -396,23 +217,12 @@ export function HomeContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="main-menu__call-content">
-                        <p className="main-menu__call-sub-title">Call Anytime</p>
-                        <h5 className="main-menu__call-number"><a href="tel:+919922933999">+91-9922933999</a></h5>
+                        <p className="main-menu__call-sub-title">{t('common.callAnytime')}</p>
+                        <h5 className="main-menu__call-number"><a href="tel:+918888866031">+91 88888 66031</a></h5>
                       </div>
                     </div>
-                    <div className="main-menu__search-cart-box">
-                      <div className="main-menu__search-cart-box">
-                        <div className="main-menu__search-box">
-                          <a href="/#" className="main-menu__search searcher-toggler-box fal fa-search" />
-                        </div>
-                        <div className="main-menu__cart-box">
-                          <a href="cart.html" className="main-menu__cart">
-                            <span className="fal fa-shopping-cart" />
-                            <span className="main-menu__cart-count">02</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
+                    <LanguageSwitcher />
+                    {/* Search and Cart components removed */}
                     <div className="main-menu__nav-sidebar-icon">
                       <a className="navSidebar-button" href="/#">
                         <span className="icon-dots-menu-one" />
@@ -420,15 +230,7 @@ export function HomeContent() {
                         <span className="icon-dots-menu-three" />
                       </a>
                     </div>
-                    <div className="main-menu__btn-box">
-                      <a className="thm-btn" href="/contact">Get A Quote
-                        <i className="fal fa-long-arrow-right" />
-                        <span className="hover-btn hover-bx" />
-                        <span className="hover-btn hover-bx2" />
-                        <span className="hover-btn hover-bx3" />
-                        <span className="hover-btn hover-bx4" />
-                      </a>
-                    </div>
+                    {/* Get A Quote button removed */}
                   </div>
                 </div>
               </div>
@@ -439,22 +241,22 @@ export function HomeContent() {
           </div>{/* /.stricky-header */}
           {/* Banner One Start */}
           <section className="banner-one">
-            <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(assets/images/shapes/banner-one-shape-bg.png)' }}>
+            <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
             </div>
             <div className="banner-one__shape-4 float-bob-x">
-              <img src="assets/images/shapes/banner-one-shape-4.png" alt="" />
+              <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
             </div>
             <div className="banner-one__shape-5 float-bob-y">
-              <img src="assets/images/shapes/banner-one-shape-5.png" alt="" />
+              <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
             </div>
             <div className="banner-one__shape-6">
-              <img src="assets/images/shapes/banner-one-shape-6.png" alt="" />
+              <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
             </div>
             <div className="banner-one__shape-7 img-bounce">
-              <img src="assets/images/shapes/banner-one-shape-7.png" alt="" />
+              <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
             </div>
             <div className="banner-one__shape-8 float-bob-y">
-              <img src="assets/images/shapes/banner-one-shape-8.png" alt="" />
+              <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
             </div>
             <div className="container">
               <div className="banner-one__inner">
@@ -462,31 +264,23 @@ export function HomeContent() {
                   <div className="col-xl-6 col-lg-6">
                     <div className="banner-one__left">
                       <div className="banner-one__title-box">
-                        <div className="banner-one__sub-title">
-                          <p>get to know about us</p>
-                        </div>
-                        <h2 className="banner-one__title">Welcome to <span>Ajeet Seeds</span><br />Pvt. Ltd.
-                        </h2>
+                      <div className="banner-one__sub-title">
+                        <p>{t('home.banner.subtitle')}</p>
                       </div>
-                      <p className="banner-one__text">Ajeet Seeds plays a vital role in producing and supplying high-quality hybrid seeds to farmers at affordable prices.</p>
+                      <h2 className="banner-one__title">{t('home.banner.title')}</h2>
+                      </div>
+                    <p className="banner-one__text">
+                      {t('home.banner.description')}
+                    </p>
                       <div className="banner-one__thm-and-other-btn-box">
                         <div className="banner-one__btn-box">
-                          <a className="thm-btn" href="/about">Discover More
+                          <Link className="thm-btn" href="/about#our-history">{t('common.exploreOurJourney')}
                             <i className="fal fa-long-arrow-right" />
                             <span className="hover-btn hover-bx" />
                             <span className="hover-btn hover-bx2" />
                             <span className="hover-btn hover-bx3" />
                             <span className="hover-btn hover-bx4" />
-                          </a>
-                        </div>
-                        <div className="banner-one__video-link">
-                          <a href="https://www.youtube.com/watch?v=Get7rqXYrbQ" className="video-popup">
-                            <div className="banner-one__video-icon">
-                              <span className="fa fa-play" />
-                              <i className="ripple" />
-                            </div>
-                          </a>
-                          <h4 className="banner-one__video-title">Watch Video</h4>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -495,68 +289,32 @@ export function HomeContent() {
                     <div className="banner-one__right">
                       <div className="banner-one__img-box">
                         <div className="banner-one__img">
-                          <img src="assets/images/resources/banner-one-img-1.png" alt="" />
+                          <img
+                            className="img-bounce"
+                            src="/assets/images/backgrounds/1-removebg-preview.png"
+                            alt={t('home.banner.title')}
+                            style={{
+                              width: '100%',
+                              height: 'auto',
+                              objectFit: 'contain',
+                              maxWidth: 540,
+                              maxHeight: 520,
+                              margin: '0 auto',
+                              display: 'block',
+                            }}
+                          />
                           <div className="banner-one__img-shape-box rotate-me">
                             <div className="banner-one__img-shape-1">
                               <div className="banner-one__img-shape-2" />
                             </div>
                             <div className="banner-one__shape-1">
-                              <img src="assets/images/shapes/banner-one-shape-1.png" alt="" />
+                              <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
                             </div>
                             <div className="banner-one__shape-2 rotate-me">
-                              <img src="assets/images/shapes/banner-one-shape-2.png" alt="" />
+                              <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
                             </div>
                             <div className="banner-one__shape-3">
-                              <img src="assets/images/shapes/banner-one-shape-3.png" alt="" />
-                            </div>
-                          </div>
-                          <div className="banner-one__discount-box">
-                            <h3>50%</h3>
-                            <p>Discount</p>
-                          </div>
-                          <div className="banner-one__client-review">
-                            <div className="banner-one__client-review-img">
-                              <img src="assets/images/resources/banner-one-review-img.jpg" alt="" />
-                            </div>
-                            <div className="banner-one__client-review-text">
-                              <h4>Review</h4>
-                            </div>
-                            <div className="banner-one__client-review-client-info">
-                              <p className="banner-one__client-review-client-name">Alisa Olivia/</p>
-                              <div className="banner-one__client-review-star">
-                                <span className="icon-pointed-star" />
-                                <span className="icon-pointed-star" />
-                                <span className="icon-pointed-star" />
-                                <span className="icon-pointed-star" />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="banner-one__happy-customer">
-                            <ul className="list-unstyled banner-one__happy-customer-list">
-                              <li>
-                                <div className="banner-one__happy-customer-img">
-                                  <img src="assets/images/resources/banner-one-happy-customer-img-1-1.jpg" alt="" />
-                                </div>
-                              </li>
-                              <li>
-                                <div className="banner-one__happy-customer-img">
-                                  <img src="assets/images/resources/banner-one-happy-customer-img-1-2.jpg" alt="" />
-                                </div>
-                              </li>
-                              <li>
-                                <div className="banner-one__happy-customer-img">
-                                  <div className="banner-one__happy-customer-plus">
-                                    <i className="fas fa-plus" />
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                            <div className="banner-one__happy-customer-count-box">
-                              <div className="banner-one__happy-customer-count-box-inner count-box">
-                                <p className="count-text" data-stop={2000} data-speed={3000}>00</p>
-                                <span>+</span>
-                              </div>
-                              <p className="banner-one__happy-customer-text">Happy Customers</p>
+                              <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
                             </div>
                           </div>
                         </div>
@@ -569,7 +327,7 @@ export function HomeContent() {
           </section>
           {/*Banner One End */}
           {/*Feature One Start */}
-          <section className="feature-one">
+          {false && <section className="feature-one">
             <div className="container">
               <div className="row">
                 {/*Feature One Single Start*/}
@@ -589,7 +347,7 @@ export function HomeContent() {
                 <div className="col-xl-4 col-lg-4">
                   <div className="feature-one__single-two wow fadeInUp" data-wow-delay="100ms">
                     <div className="feature-one__single-two-bg-color">
-                      <div className="feature-one__single-two-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/feature-one-single-two-bg.jpg)' }}>
+                      <div className="feature-one__single-two-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/feature-one-single-two-bg.jpg)' }}>
                       </div>
                     </div>
                     <ul className="feature-one__ratting list-unstyled">
@@ -604,10 +362,10 @@ export function HomeContent() {
                       </li>
                     </ul>
                     <div className="feature-one__single-two-shape-1">
-                      <img src="assets/images/shapes/feature-one-single-two-shape-1.png" alt="feature-one-single-two-shape-1" />
+                      <img src="/assets/images/shapes/feature-one-single-two-shape-1.png" alt="feature-one-single-two-shape-1" />
                     </div>
                     <div className="feature-one__single-two-shape-2">
-                      <img src="assets/images/shapes/feature-one-single-two-shape-2.png" alt="feature-one-single-two-shape-2" />
+                      <img src="/assets/images/shapes/feature-one-single-two-shape-2.png" alt="feature-one-single-two-shape-2" />
                     </div>
                     <div className="feature-one__icon-two">
                       <span className="icon-trophy" />
@@ -632,39 +390,16 @@ export function HomeContent() {
                 {/*Feature One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Feature One End */}
           {/*About One Start */}
           <section className="about-one">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6">
-                  <div className="about-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
-                    <div className="about-one__img">
-                      <img src="assets/images/resources/about-one-image-1.jpg" alt="about-one-image-1" />
-                      <div className="about-one__crop-harvest">
-                        <div className="about-one__crop-harvest-icon">
-                          <span className="icon-tractor" />
-                        </div>
-                        <h3 className="about-one__crop-harvest-title">Crops<br /> Harvested</h3>
-                        <div className="about-one__crop-harvest-count count-box">
-                          <h3 className="count-text" data-stop="6.9" data-speed={1500} />
-                          <span>M+</span>
-                        </div>
-                      </div>
-                      <div className="about-one__img-shape-1 float-bob-y">
-                        <img src="assets/images/shapes/about-one-img-shape-1.png" alt="about-one-img-shape-1" />
-                      </div>
-                      <div className="about-one__shape-1 float-bob-x">
-                        <img src="assets/images/shapes/about-one-shape-1.png" alt="about-one-shape-1" />
-                      </div>
-                    </div>
-                    <div className="about-one__field-box">
-                      <div className="about-one__count-box count-box">
-                        <h3 className="count-text" data-stop={600} data-speed={1500} />
-                        <span>+</span>
-                      </div>
-                      <p className="about-one__field-text">Fields of Growth</p>
+                  <div className="about-one__left">
+                    <div className="about-one__img" style={{ width: '100%', height: '100%', minHeight: '500px' }}>
+                      <img src="/assets/images/backgrounds/homepage_1.jpg" alt="Tractor tilling field" style={{ width: '100%', height: '100%', minHeight: '500px', objectFit: 'cover', borderRadius: '8px' }} />
                     </div>
                   </div>
                 </div>
@@ -673,69 +408,60 @@ export function HomeContent() {
                     <div className="section-title text-left sec-title-animation animation-style2">
                       <div className="section-title__tagline-box">
                         <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="section-title-shape-1" />
                         </div>
-                        <h6 className="section-title__tagline">get to know about us</h6>
+                        <h6 className="section-title__tagline">{t('home.about.ourStory')}</h6>
                         <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="section-title-shape-2" />
                         </div>
                       </div>
-                      <h3 className="section-title__title title-animation">Welcome to Ajeet Seeds<br />Pvt. Ltd.
-                      </h3>
+                      <h3 className="section-title__title title-animation">{t('home.about.growingWithFarmers')}</h3>
                     </div>
-                    <p className="about-one__text">Ajeet Seeds plays a vital role in producing and supplying high-quality hybrid seeds to farmers at affordable prices. Ajeet Seeds markets premium quality seeds for Cotton, Corn, Rice, Millet, Wheat, Pulses, Oilseeds, and a complete spectrum of vegetables.</p>
-                    <p className="about-one__text" style={{ marginTop: '20px' }}>Ajeet Seeds Pvt. Ltd. (ASPL), the flagship company of the Padmakar Mulay Group of Companies, had a humble beginning on May 13, 1986. Over the years, our portfolio has expanded to include a wide range of vegetables, corn, and rice.</p>
-                    <h4 className="about-one__title-1">With a strong commitment</h4>
-                    <div className="about-one__points-box-and-since">
-                      <ul className="about-one__points list-unstyled">
+                    <p className="about-one__text">
+                      {t('home.about.storyText1')}
+                    </p>
+                    <p className="about-one__text">
+                      {t('home.about.storyText2')}
+                    </p>
+                    <h4 className="about-one__title-1">{t('home.about.highlightsAtGlance')}</h4>
+                    <div className="about-one__points-box-and-since" style={{ display: 'flex', alignItems: 'flex-start', gap: '60px', flexWrap: 'wrap' }}>
+                      <ul className="about-one__points list-unstyled" style={{ flex: '1', minWidth: '250px' }}>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Premium quality seeds, eco<br />-friendly fertilizers</p>
+                          <p dangerouslySetInnerHTML={{ __html: t('home.about.highlight1') }} />
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Automation to maximize yield<br /> and efficiency.</p>
+                          <p dangerouslySetInnerHTML={{ __html: t('home.about.highlight2') }} />
                         </li>
                         <li>
                           <div className="icon">
                             <span className="fas fa-wheat" />
                           </div>
-                          <p>Building strong communities<br /> with training</p>
+                          <p dangerouslySetInnerHTML={{ __html: t('home.about.highlight3') }} />
                         </li>
                       </ul>
-                      <div className="about-one__since-box">
+                      <div className="about-one__since-box" style={{ flexShrink: 0 }}>
                         <div className="about-one__since-icon">
                           <span className="icon-harvester" />
                         </div>
-                        <h5 className="about-one__since-title">Harvesting since</h5>
-                        <h4 className="about-one__since-year">2000</h4>
+                        <h5 className="about-one__since-title">{t('home.about.progressSince')}</h5>
+                        <h4 className="about-one__since-year">2001</h4>
                       </div>
                     </div>
                     <div className="about-one__btn-and-video">
                       <div className="about-one__btn-box">
-                        <a className="thm-btn" href="/about">More About Us
+                        <Link className="thm-btn" href="/about#our-history">{t('common.exploreOurJourney')}
                           <i className="fal fa-long-arrow-right" />
                           <span className="hover-btn hover-bx" />
                           <span className="hover-btn hover-bx2" />
                           <span className="hover-btn hover-bx3" />
                           <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
-                      <div className="about-one__video-box">
-                        <div className="about-one__video-link">
-                          <a href="https://www.youtube.com/watch?v=Get7rqXYrbQ" className="video-popup">
-                            <div className="about-one__video-icon">
-                              <span className="fas fa-play" />
-                              <i className="ripple" />
-                            </div>
-                          </a>
-                        </div>
-                        <p className="about-one__video-text">
-                          Watch Our Story</p>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -748,76 +474,32 @@ export function HomeContent() {
           <section className="author-one">
             <div className="container">
               <div className="row">
-                <div className="col-xl-3">
+                <div className="col-xl-4">
                   <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">Vision & Mission </h4>
+                    <h4 className="author-one__Vission-mission-title">{t('about.ourVision')}</h4>
                     <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p><b>Our Vision:</b> To acquire and apply the latest technologies to enhance crop productivity.</p>
-                      </li>
-                      <li>
-                        <p><b>Our Mission:</b> To provide high-quality seeds with the right genotype, at the right time, and at an affordable price.</p>
+                        <p dangerouslySetInnerHTML={{ __html: t('about.visionText') }} />
                       </li>
                     </ul>
                   </div>
                 </div>
-                <div className="col-xl-6">
-                  <div className="author-one__img-box">
-                    <div className="author-one__img">
-                      <img src="assets/images/resources/author-one-img-1.png" alt="author-one-img-1" />
-                    </div>
-                    <div className="author-one__text-box">
-                      <div className="author-one__text-box-shape-1">
-                        <img src="assets/images/shapes/author-one-text-box-shape-1.png" alt="author-one-text-box-shape-1" />
-                      </div>
-                      <p className="author-one__text">Driving Excellence in Agriculture</p>
-                      <div className="author-one__info">
-                        <h4>Sameer Mulay</h4>
-                        <p>MANAGING DIRECTOR</p>
-                      </div>
-                      <div className="author-one__sign">
-                        {/* <img src="assets/images/resources/author-one-sign.png" alt="author-one-sign" /> */}
-                      </div>
-                    </div>
-                    <div className="author-one__img-shape">
-                      <img src="assets/images/shapes/author-one-img-shape.png" alt="author-one-img-shape" />
-                    </div>
-                    <div className="author-one__ratting-box">
-                      <div className="author-one__ratting-box-shape float-bob-x">
-                        <img src="assets/images/shapes/author-one-ratting-box-shape.png" alt="author-one-ratting-box-shape" />
-                      </div>
-                      <div className="author-one__ratting-box-content">
-                        <span className="author-one__ratting-title">Top Rated</span>
-                        <div className="author-one__ratting">
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                          <span className="icon-pointed-star" />
-                        </div>
-                        <p className="author-one__ratting-text count-box">From <span className="count-text" data-stop="2.5" data-speed={1500} />Million<br /> Customers</p>
-                        <div className="author-one__ratting-text-two">
-                          <span>4.9 out of 5</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-3">
+                <div className="col-xl-4">
                   <div className="author-one__Vission-mission">
-                    <h4 className="author-one__Vission-mission-title">Our Mission </h4>
+                    <h4 className="author-one__Vission-mission-title">{t('about.ourMission')}</h4>
                     <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p>Ensure efficient use of resources</p>
+                        <p dangerouslySetInnerHTML={{ __html: t('about.missionText') }} />
                       </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="col-xl-4">
+                  <div className="author-one__Vission-mission">
+                    <h4 className="author-one__Vission-mission-title">{t('home.values.title')}</h4>
+                    <ul className="author-one__Vission-mission-point list-unstyled">
                       <li>
-                        <p>Help farmers grow better crops</p>
-                      </li>
-                      <li>
-                        <p>Make sustainable farming easy</p>
-                      </li>
-                      <li>
-                        <p>Provide tools &amp; knowledge</p>
+                        <p>{t('home.values.description')}</p>
                       </li>
                     </ul>
                   </div>
@@ -827,16 +509,16 @@ export function HomeContent() {
           </section>
           {/*Author One End */}
           {/*Services One Start */}
-          <section className="services-one">
+          {false && <section className="services-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
                   <h6 className="section-title__tagline">What We Do</h6>
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
                 <h3 className="section-title__title title-animation">Delivering Smart Sustainable And<br /> Innovative
@@ -847,7 +529,7 @@ export function HomeContent() {
                 <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
                   <div className="services-one__single">
                     <div className="services-one__single-inner">
-                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/services-one-single-bg-1.jpg)' }}>
+                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/services-one-single-bg-1.jpg)' }}>
                       </div>
                       <div className="services-one__btn-box">
                         <a className="thm-btn" href="/about">Read More
@@ -858,13 +540,13 @@ export function HomeContent() {
                           <span className="hover-btn hover-bx4" />
                         </a>
                       </div>
-                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-one-single-bg-shape.png)' }}>
+                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/services-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="services-one__icon">
                         <span className="icon-farming" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">Organic Farming
-                        Solutions</a></h3>
+                      <h3 className="services-one__title"><Link href="/services">Organic Farming
+                        Solutions</Link></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
                         water conservation &amp; renewable methods.</p>
@@ -879,7 +561,7 @@ export function HomeContent() {
                 <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
                   <div className="services-one__single">
                     <div className="services-one__single-inner">
-                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/services-one-single-bg-2.jpg)' }}>
+                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/services-one-single-bg-2.jpg)' }}>
                       </div>
                       <div className="services-one__btn-box">
                         <a className="thm-btn" href="/about">Read More
@@ -890,13 +572,13 @@ export function HomeContent() {
                           <span className="hover-btn hover-bx4" />
                         </a>
                       </div>
-                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-one-single-bg-shape.png)' }}>
+                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/services-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="services-one__icon">
                         <span className="icon-precision-agriculture" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">Smart Agriculture
-                        Technology</a></h3>
+                      <h3 className="services-one__title"><Link href="/services">Smart Agriculture
+                        Technology</Link></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
                         water conservation &amp; renewable methods.</p>
@@ -911,7 +593,7 @@ export function HomeContent() {
                 <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
                   <div className="services-one__single">
                     <div className="services-one__single-inner">
-                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/services-one-single-bg-3.jpg)' }}>
+                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/services-one-single-bg-3.jpg)' }}>
                       </div>
                       <div className="services-one__btn-box">
                         <a className="thm-btn" href="/about">Read More
@@ -922,13 +604,13 @@ export function HomeContent() {
                           <span className="hover-btn hover-bx4" />
                         </a>
                       </div>
-                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-one-single-bg-shape.png)' }}>
+                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/services-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="services-one__icon">
                         <span className="icon-seeding" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">High-Quality Seeds &amp;
-                        Crops</a></h3>
+                      <h3 className="services-one__title"><Link href="/services">High-Quality Seeds &amp;
+                        Crops</Link></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
                         water conservation &amp; renewable methods.</p>
@@ -943,7 +625,7 @@ export function HomeContent() {
                 <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
                   <div className="services-one__single">
                     <div className="services-one__single-inner">
-                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/services-one-single-bg-4.jpg)' }}>
+                      <div className="services-one__single-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/services-one-single-bg-4.jpg)' }}>
                       </div>
                       <div className="services-one__btn-box">
                         <a className="thm-btn" href="/about">Read More
@@ -954,13 +636,13 @@ export function HomeContent() {
                           <span className="hover-btn hover-bx4" />
                         </a>
                       </div>
-                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/services-one-single-bg-shape.png)' }}>
+                      <div className="services-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/services-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="services-one__icon">
                         <span className="icon-farmer" />
                       </div>
-                      <h3 className="services-one__title"><a href="https://dreamlayout.mnsithub.com/html/farmology/main-html/services-details.html">Farmer Training &amp;
-                        Support</a></h3>
+                      <h3 className="services-one__title"><Link href="/services">Farmer Training &amp;
+                        Support</Link></h3>
                       <p className="services-one__text">Eco-friendly fertilizers &amp; natural crop protection. Soil
                         care,
                         water conservation &amp; renewable methods.</p>
@@ -973,99 +655,44 @@ export function HomeContent() {
                 {/*Services One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Services One End */}
-          {/*Video One Start*/}
-          <section className="video-one">
-            <div className="video-one__bg jarallax" data-jarallax data-speed="0.2" data-imgposition="50% 0%" style={{ backgroundImage: 'url(assets/images/backgrounds/video-one-bg.jpg)' }} />
+          {/*Distributors Network Start*/}
+          <section id="distributors" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
             <div className="container">
+              <div className="section-title text-center">
+                <h2 style={{ fontSize: '36px', fontWeight: '700', color: '#190f06', marginBottom: '50px' }}>{t('home.distributorsNetwork.title')}</h2>
+              </div>
               <div className="row">
                 <div className="col-xl-12">
-                  <div className="video-one__inner">
-                    <div className="video-one__video-link">
-                      <a href="https://www.youtube.com/watch?v=3Ww2TP_tU7o" className="video-popup">
-                        <div className="video-one__icon">
-                          <span className="fa fa-play" />
-                          <i className="ripple" />
-                        </div>
-                      </a>
-                    </div>
-                    <p className="video-one__sub-title">Watch the video</p>
-                    <h2 className="video-one__title">Agriculture Matters to the<br /> Future of Development
-                    </h2>
-                    <div className="video-one__round-text">
-                      <div className="video-one__curved-circle">
-                        Always 100% Fresh from Our Fields
-                      </div>
-                    </div>
-                    <div className="video-one__round-text-2">
-                      <div className="video-one__curved-circle-2">
-                        Always 100% Fresh from Our Fields
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="brand-one">
-                <div className="brand-one__carousel swiper-container">
-                  <div className="swiper-wrapper">
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-1.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-2.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-3.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-4.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
-                    {/*Start Brand One Single*/}
-                    <div className="swiper-slide">
-                      <div className="brand-one__single">
-                        <a href="/#"><img src="assets/images/brand/brand-1-5.png" alt="" /></a>
-                      </div>
-                    </div>
-                    {/*End Brand One Single*/}
+                  <div style={{ width: '100%', height: '550px', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                    <iframe 
+                      src="/map.html" 
+                      width="100%" 
+                      height="100%" 
+                      style={{ border: 'none' }}
+                      title={t('home.distributorsNetwork.title')}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </section>
-          {/*Video One End*/}
+          {/*Distributors Network End*/}
           {/*Products One Start*/}
           <section className="products-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Our Fresh Products</h6>
+                  <h6 className="section-title__tagline">{t('home.products.tagline')}</h6>
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Bringing Nature’s Best Harvest
-                  <br />Straight To You.
-                </h3>
+                <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('home.products.title') }} />
               </div>
               <div className="row">
                 {/*Products One Single Start*/}
@@ -1073,24 +700,23 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="assets/images/products/products-1-1.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/cotton_home.jpg" alt="Cotton lint close-up" />
                       </div>
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Fresh Vegetables</a>
+                        <h3 className="products-one__title"><Link href="/products">{t('home.products.freshVegetables')}</Link>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-vegetable" />
                         </div>
                       </div>
                       <div className="products-one__text-and-read-more">
-                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(assets/images/shapes/products-one-text-bg.png)' }}>
+                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
                         </div>
-                        <p className="products-one__text">Our vegetables are cultivated naturally to bring you
-                          the best of every season.</p>
+                        <p className="products-one__text">{t('home.products.freshVegetablesDesc')}</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <Link href="/products">{t('common.readMore')}<span className="fas fa-arrow-right" /></Link>
                         </div>
                       </div>
                     </div>
@@ -1102,24 +728,23 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="assets/images/products/products-1-2.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/field_crop_home.jpg" alt="Field crops assortment" />
                       </div>
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Dairy Product</a>
+                        <h3 className="products-one__title"><Link href="/products">{t('home.products.dairyProduct')}</Link>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-cow" />
                         </div>
                       </div>
                       <div className="products-one__text-and-read-more">
-                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(assets/images/shapes/products-one-text-bg.png)' }}>
+                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
                         </div>
-                        <p className="products-one__text">From fresh milk to our dairy products ensure
-                          farm-fresh quality every day.</p>
+                        <p className="products-one__text">{t('home.products.dairyProductDesc')}</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <Link href="/products">{t('common.readMore')}<span className="fas fa-arrow-right" /></Link>
                         </div>
                       </div>
                     </div>
@@ -1131,25 +756,23 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="assets/images/products/products-1-3.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/pulses_home.jpg" alt="Pulses and grains assortment" />
                       </div>
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Livestock
-                          Product</a>
+                        <h3 className="products-one__title"><Link href="/products">{t('home.products.livestockProduct')}</Link>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-hen-1" />
                         </div>
                       </div>
                       <div className="products-one__text-and-read-more">
-                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(assets/images/shapes/products-one-text-bg.png)' }}>
+                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
                         </div>
-                        <p className="products-one__text">From organic eggs, our Livestock Product ensure
-                          farm-fresh quality every day.</p>
+                        <p className="products-one__text">{t('home.products.livestockProductDesc')}</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <Link href="/products">{t('common.readMore')}<span className="fas fa-arrow-right" /></Link>
                         </div>
                       </div>
                     </div>
@@ -1161,24 +784,23 @@ export function HomeContent() {
                   <div className="products-one__single">
                     <div className="products-one__img-box">
                       <div className="products-one__img">
-                        <img src="assets/images/products/products-1-4.jpg" alt="" />
+                        <img src="/assets/images/backgrounds/vegetable_home.jpg" alt="Vegetable seeds assortment" />
                       </div>
                     </div>
                     <div className="products-one__content">
                       <div className="products-one__icon-and-title">
-                        <h3 className="products-one__title"><a href="product-details.html">Organic Fruits</a>
+                        <h3 className="products-one__title"><Link href="/products">{t('home.products.organicFruits')}</Link>
                         </h3>
                         <div className="products-one__icon">
                           <span className="icon-healthy-food" />
                         </div>
                       </div>
                       <div className="products-one__text-and-read-more">
-                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(assets/images/shapes/products-one-text-bg.png)' }}>
+                        <div className="products-one__text-and-read-more-bg" style={{ backgroundImage: 'url(/assets/images/shapes/products-one-text-bg.png)' }}>
                         </div>
-                        <p className="products-one__text">Handpicked from our orchards fruits are packed with
-                          freshness and nutrients.</p>
+                        <p className="products-one__text">{t('home.products.organicFruitsDesc')}</p>
                         <div className="products-one__read-more">
-                          <a href="product-details.html">Read More<span className="fas fa-arrow-right" /></a>
+                          <Link href="/products">{t('common.readMore')}<span className="fas fa-arrow-right" /></Link>
                         </div>
                       </div>
                     </div>
@@ -1204,10 +826,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Happy Farmers</h3>
+                      <h3 className="counter-one__title">{t('home.counter.happyFarmers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={1200} data-speed={1500} />
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={340000} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -1221,11 +842,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Crops Harvested</h3>
+                      <h3 className="counter-one__title">{t('home.counter.dealers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop="1.5" data-speed={1500} />
-                        <span>M</span>
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={943} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -1239,10 +858,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Sustainable Practices</h3>
+                      <h3 className="counter-one__title">{t('home.counter.hardWorkers')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop={100} data-speed={1500} />
-                        <span>%</span>
+                        <h3 className="count-text" data-stop={1463} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -1255,11 +873,9 @@ export function HomeContent() {
                         <div className="counter-one__icon-shape-1" />
                         <div className="counter-one__icon-shape-2" />
                       </div>
-                      <h3 className="counter-one__title">Livestock Raised</h3>
+                      <h3 className="counter-one__title">{t('home.counter.products')}</h3>
                       <div className="counter-one__count-box count-box">
-                        <h3 className="count-text" data-stop="1.2" data-speed={1500} />
-                        <span>M</span>
-                        <span>+</span>
+                        <h3 className="count-text" data-stop={47} data-speed={1500}></h3>
                       </div>
                     </div>
                   </div>
@@ -1270,16 +886,16 @@ export function HomeContent() {
           </section>
           {/*Counter One End*/}
           {/*Why Choose One Start*/}
-          <section className="why-choose-one">
+          {false && <section className="why-choose-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
                   <h6 className="section-title__tagline">Why Choose Us</h6>
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
                 <h3 className="section-title__title title-animation">Freshness, Trust &amp; Care<br /> In Every Step
@@ -1287,19 +903,19 @@ export function HomeContent() {
               </div>
               <div className="why-choose-one__inner">
                 <div className="why-choose-one__img float-bob-x">
-                  <img src="assets/images/resources/why-choose-one-img-1.png" alt="" />
+                  <img src="/assets/images/resources/why-choose-one-img-1.png" alt="" />
                 </div>
                 <div className="why-choose-one__shape-1 float-bob-y">
-                  <img src="assets/images/shapes/why-choose-one-shape-1.png" alt="" />
+                  <img src="/assets/images/shapes/why-choose-one-shape-1.png" alt="" />
                 </div>
                 <div className="why-choose-one__shape-2">
-                  <img src="assets/images/shapes/why-choose-one-shape-2.png" alt="" />
+                  <img src="/assets/images/shapes/why-choose-one-shape-2.png" alt="" />
                 </div>
                 <div className="row">
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-satisfication" />
@@ -1313,7 +929,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-sustainable" />
@@ -1327,7 +943,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-farmer" />
@@ -1341,7 +957,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-guarantee" />
@@ -1355,7 +971,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-product" />
@@ -1369,7 +985,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="200ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-trusted" />
@@ -1383,7 +999,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="100ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-planting" />
@@ -1397,7 +1013,7 @@ export function HomeContent() {
                   {/*Why Choose One Single Start*/}
                   <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="200ms">
                     <div className="why-choose-one__single">
-                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
+                      <div className="why-choose-one__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/why-choose-one-single-bg-shape.png)' }}>
                       </div>
                       <div className="why-choose-one__icon">
                         <span className="icon-honesty" />
@@ -1411,19 +1027,19 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Why Choose One End*/}
           {/*Project One Start*/}
-          <section className="project-one">
+          {false && <section className="project-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
                   <h6 className="section-title__tagline">Our Recent Projects</h6>
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
                 <h3 className="section-title__title title-animation">Real Projects That Bring<br /> Growth, Quality, And
@@ -1436,21 +1052,21 @@ export function HomeContent() {
                   <div className="project-one__single">
                     <div className="project-one__img-box">
                       <div className="project-one__img">
-                        <img src="assets/images/project/project-1-1.jpg" alt="" />
+                        <img src="/assets/images/project/project-1-1.jpg" alt="" />
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Vegetable</p>
-                        <h3 className="project-one__title"><a href="project-details.html">Organic Farming
-                          Projects</a></h3>
+                        <h3 className="project-one__title"><Link href="/services">Organic Farming
+                          Projects</Link></h3>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Vegetable</p>
-                        <h4 className="project-one__title-2"><a href="project-details.html">Organic Farming
-                          Projects</a></h4>
+                        <h4 className="project-one__title-2"><Link href="/services">Organic Farming
+                          Projects</Link></h4>
                         <p className="project-one__text">Blending tradition with technology for smarter
                           agriculture</p>
                         <div className="project-one__arrow">
-                          <a href="assets/images/project/project-1-1.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
+                          <a href="/assets/images/project/project-1-1.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -1462,21 +1078,21 @@ export function HomeContent() {
                   <div className="project-one__single">
                     <div className="project-one__img-box">
                       <div className="project-one__img">
-                        <img src="assets/images/project/project-1-2.jpg" alt="" />
+                        <img src="/assets/images/project/project-1-2.jpg" alt="" />
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Dairy</p>
-                        <h3 className="project-one__title"><a href="project-details.html">Dairy Delight
-                          Project</a></h3>
+                        <h3 className="project-one__title"><Link href="/services">Dairy Delight
+                          Project</Link></h3>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Dairy</p>
-                        <h4 className="project-one__title-2"><a href="project-details.html">Dairy Delight
-                          Project</a></h4>
+                        <h4 className="project-one__title-2"><Link href="/services">Dairy Delight
+                          Project</Link></h4>
                         <p className="project-one__text">Proper health, and feeding, essential for productivity.
                         </p>
                         <div className="project-one__arrow">
-                          <a href="assets/images/project/project-1-2.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
+                          <a href="/assets/images/project/project-1-2.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -1488,20 +1104,20 @@ export function HomeContent() {
                   <div className="project-one__single">
                     <div className="project-one__img-box">
                       <div className="project-one__img">
-                        <img src="assets/images/project/project-1-3.jpg" alt="" />
+                        <img src="/assets/images/project/project-1-3.jpg" alt="" />
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">NutriHarvest</p>
-                        <h3 className="project-one__title"><a href="project-details.html">Healthy Harvest
-                          Initiative</a></h3>
+                        <h3 className="project-one__title"><Link href="/services">Healthy Harvest
+                          Initiative</Link></h3>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">NutriHarvest</p>
-                        <h4 className="project-one__title-2"><a href="project-details.html">Healthy Harvest
-                          Initiative</a></h4>
+                        <h4 className="project-one__title-2"><Link href="/services">Healthy Harvest
+                          Initiative</Link></h4>
                         <p className="project-one__text">Dedicated to every stage of farming excellence</p>
                         <div className="project-one__arrow">
-                          <a href="assets/images/project/project-1-3.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
+                          <a href="/assets/images/project/project-1-3.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -1513,21 +1129,21 @@ export function HomeContent() {
                   <div className="project-one__single">
                     <div className="project-one__img-box">
                       <div className="project-one__img">
-                        <img src="assets/images/project/project-1-4.jpg" alt="" />
+                        <img src="/assets/images/project/project-1-4.jpg" alt="" />
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Livestock</p>
-                        <h4 className="project-one__title"><a href="project-details.html">Livestock Farming
-                          Projects</a></h4>
+                        <h4 className="project-one__title"><Link href="/services">Livestock Farming
+                          Projects</Link></h4>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Livestock</p>
-                        <h3 className="project-one__title-2"><a href="project-details.html">Livestock Farming
-                          Projects</a></h3>
+                        <h3 className="project-one__title-2"><Link href="/services">Livestock Farming
+                          Projects</Link></h3>
                         <p className="project-one__text">Blending tradition with technology for smarter
                           agriculture</p>
                         <div className="project-one__arrow">
-                          <a href="assets/images/project/project-1-4.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
+                          <a href="/assets/images/project/project-1-4.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -1539,21 +1155,21 @@ export function HomeContent() {
                   <div className="project-one__single">
                     <div className="project-one__img-box">
                       <div className="project-one__img">
-                        <img src="assets/images/project/project-1-5.jpg" alt="" />
+                        <img src="/assets/images/project/project-1-5.jpg" alt="" />
                       </div>
                       <div className="project-one__content">
                         <p className="project-one__sub-title">Agri-Tech</p>
-                        <h4 className="project-one__title"><a href="project-details.html">Agri-Tech Innovation
-                        </a></h4>
+                        <h4 className="project-one__title"><Link href="/services">Agri-Tech Innovation
+                        </Link></h4>
                       </div>
                       <div className="project-one__content-2">
                         <p className="project-one__sub-title-2">Agri-Tech</p>
-                        <h3 className="project-one__title-2"><a href="project-details.html">Agri-Tech
-                          Innovation</a></h3>
+                        <h3 className="project-one__title-2"><Link href="/services">Agri-Tech
+                          Innovation</Link></h3>
                         <p className="project-one__text">Eco-friendly fertilizers &amp; natural crop protection.
                         </p>
                         <div className="project-one__arrow">
-                          <a href="assets/images/project/project-1-5.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
+                          <a href="/assets/images/project/project-1-5.jpg" className="img-popup"><span className="fas fa-arrow-right" /></a>
                         </div>
                       </div>
                     </div>
@@ -1562,65 +1178,65 @@ export function HomeContent() {
                 {/*Project One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Project One End*/}
           {/*Do And Donts Start*/}
-          <section className="do-and-donts">
-            <div className="do-and-donts__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
+          {false && <section className="do-and-donts">
+            <div className="do-and-donts__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="row">
                 <div className="col-xl-4">
                   <div className="do-and-donts__left wow fadeInLeft" data-wow-delay="100ms">
                     <div className="do-and-donts__single-title">
-                      <span>Do’s</span>
+                      <span>{t('homeExtra.doDonts.dosTitle')}</span>
                     </div>
                     <div className="do-and-donts__single do-and-donts__single-1">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Use natural fertilizers &amp; compost</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do1')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single do-and-donts__single-2">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Irrigate crops with clean water</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do2')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single do-and-donts__single-3">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Rotate crops<br /> for soil<br /> health</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do3')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single do-and-donts__single-4">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Practice sustainable farming</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do4')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single do-and-donts__single-5">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-checked-1" />
-                        <h4 className="do-and-donts__text">Choose fresh, and organic produce</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do5')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1630,25 +1246,23 @@ export function HomeContent() {
                 <div className="col-xl-4">
                   <div className="do-and-donts__middle">
                     <div className="do-and-donts__img">
-                      <img src="assets/images/resources/do-and-donts-img-1.png" alt="" />
+                      <img src="/assets/images/resources/do-and-donts-img-1.png" alt="" />
                     </div>
                     <div className="section-title text-center sec-title-animation animation-style1">
                       <div className="section-title__tagline-box">
                         <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                         </div>
-                        <h6 className="section-title__tagline">Do’s &amp; Don’ts</h6>
+                        <h6 className="section-title__tagline">{t('homeExtra.doDonts.tagline')}</h6>
                         <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                         </div>
                       </div>
-                      <h3 className="section-title__title title-animation">Simple Guidelines For Better Harvest
-                        And A Healthier Planet
-                      </h3>
+                      <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('homeExtra.doDonts.title') }} />
                     </div>
-                    <p className="do-and-donts__middle-text">At Farmology, we bring you the purest and freshest
-                      products straight from our fields. every product is cultivated naturally, ensuring 100%
-                      farm-fresh goodness.</p>
+                    <p className="do-and-donts__middle-text">
+                      {t('homeExtra.doDonts.intro')}
+                    </p>
                     <div className="do-and-donts__btn-box">
                       <a className="thm-btn" href="/about">Grow With Us
                         <i className="fal fa-long-arrow-right" />
@@ -1663,54 +1277,54 @@ export function HomeContent() {
                 <div className="col-xl-4">
                   <div className="do-and-donts__right wow fadeInRight" data-wow-delay="100ms">
                     <div className="do-and-donts__single-title">
-                      <span>Don’ts</span>
+                      <span>{t('homeExtra.doDonts.dontsTitle')}</span>
                     </div>
                     <div className="do-and-donts__single-one do-and-donts__single-6">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">Don’t overuse chemical pesticides</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont1')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single-one do-and-donts__single-7">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">no waste water during irrigation</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont2')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single-one do-and-donts__single-8">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">Don’t<br /> ignore soil<br /> testing</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont3')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single-one do-and-donts__single-9">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">Don’t compromise on quality</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont4')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
                     </div>
                     <div className="do-and-donts__single-one do-and-donts__single-10">
-                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
                       </div>
                       <div className="do-and-donts__icon">
                         <span className="icon-cross" />
-                        <h4 className="do-and-donts__text">no use harmful packaging</h4>
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont5')}</h4>
                       </div>
                       <div className="do-and-donts__single-shape-1" />
                       <div className="do-and-donts__single-shape-2" />
@@ -1719,45 +1333,43 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Do And Donts End*/}
           {/*Faq One Start*/}
-          <section className="faq-one">
+          {false && <section className="faq-one">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6 col-lg-5">
                   <div className="faq-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
                     <div className="faq-one__contact-box">
-                      <div className="faq-one__contact-box-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/faq-one-contact-box-bg-shape.png)' }}>
+                      <div className="faq-one__contact-box-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/faq-one-contact-box-bg-shape.png)' }}>
                       </div>
                       <div className="faq-one__contact-shape-1">
-                        <img src="assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
+                        <img src="/assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
                       </div>
                       <div className="faq-one__author-box-inner">
                         <div className="faq-one__author-shape-1">
-                          <img src="assets/images/shapes/faq-one-author-shape-1.png" alt="" />
+                          <img src="/assets/images/shapes/faq-one-author-shape-1.png" alt="" />
                         </div>
                         <div className="faq-one__author-box">
                           <div className="faq-one__author-img">
-                            <img src="assets/images/resources/faq-one-author-img.png" alt="" />
+                            <img src="/assets/images/resources/faq-one-author-img.png" alt="" />
                           </div>
-                          <h4 className="faq-one__author-name"><a href="/about">Adam Smith</a></h4>
+                          <h4 className="faq-one__author-name"><Link href="/about">Adam Smith</Link></h4>
                           <p className="faq-one__author-sub-title">Founder</p>
                         </div>
                       </div>
-                      <h3 className="faq-one__contact-title">Do you have more questions?</h3>
-                      <p className="faq-one__contact-text">Have any questions about our farm, products, or
-                        activities? Don’t hesitate to reach out!
-                        Our team is always ready to assist you with details about fresh produce, farm tours,
-                        or partnership opportunities.</p>
+                      <h3 className="faq-one__contact-title">{t('homeExtra.faq.contactTitle')}</h3>
+                      <p className="faq-one__contact-text">
+                        {t('homeExtra.faq.contactText')}
+                      </p>
                       <div className="faq-one__contact-social">
-                        <a href="/#"><span className="fab fa-facebook-f" /></a>
-                        <a href="/#"><span className="fab fa-twitter" /></a>
-                        <a href="/#"><span className="fab fa-pinterest-p" /></a>
-                        <a href="/#"><span className="fab fa-instagram" /></a>
+                        <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
+                        <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><span className="fab fa-youtube" /></a>
+                        <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><span className="fab fa-instagram" /></a>
                       </div>
                       <div className="faq-one__contact-number">
-                        <a href="tel:885747546027">+88 574 7546 027</a>
+                        <a href="tel:+918888866031">+91 88888 66031</a>
                       </div>
                       <div className="faq-one__contact-btn">
                         <a className="thm-btn" href="/contact">Shoot a Direct Call
@@ -1776,72 +1388,63 @@ export function HomeContent() {
                     <div className="section-title text-left sec-title-animation animation-style2">
                       <div className="section-title__tagline-box">
                         <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                         </div>
-                        <h6 className="section-title__tagline">Got Questions?</h6>
+                        <h6 className="section-title__tagline">{t('homeExtra.faq.tagline')}</h6>
                         <div className="section-title__shape-1">
-                          <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                         </div>
                       </div>
-                      <h3 className="section-title__title title-animation">We’ve Got The Answers<br /> You Need.
-                      </h3>
+                      <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('homeExtra.faq.title') }} />
                     </div>
                     <div className="accrodion-grp" data-grp-name="faq-one-accrodion">
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>Are your fruits and vegetables organic?</h4>
+                          <h4>{t('homeExtra.faq.q1')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>Yes, we strictly follow organic farming methods without harmful
-                              chemicals.
-                            </p>
+                            <p>{t('homeExtra.faq.a1')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion active wow fadeInRight" data-wow-delay="100ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>Do you deliver products at home?</h4>
+                          <h4>{t('homeExtra.faq.q2')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>Yes, we provide safe and fast home delivery within selected areas. Don’t
-                              hesitate to reach out!
-                            </p>
+                            <p>{t('homeExtra.faq.a2')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>What payment methods do you accept?</h4>
+                          <h4>{t('homeExtra.faq.q3')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>We accept cash on delivery, mobile banking, and online payments.
-                            </p>
+                            <p>{t('homeExtra.faq.a3')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>How can I visit your farm?</h4>
+                          <h4>{t('homeExtra.faq.q4')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>You can book a farm tour from our website or contact us directly.
-                            </p>
+                            <p>{t('homeExtra.faq.a4')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
                       <div className="accrodion wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
                         <div className="accrodion-title">
-                          <h4>Where are your farm products sourced from?</h4>
+                          <h4>{t('homeExtra.faq.q5')}</h4>
                         </div>
                         <div className="accrodion-content">
                           <div className="inner">
-                            <p>All of our products are directly harvested from our own organic farm to
-                              ensure freshness.
-                            </p>
+                            <p>{t('homeExtra.faq.a5')}</p>
                           </div>{/* /.inner */}
                         </div>
                       </div>
@@ -1850,25 +1453,23 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Faq One End*/}
           {/*Testimonial One Start*/}
-          <section className="testimonial-one">
-            <div className="testimonial-one__bg jarallax" data-jarallax data-speed="0.2" data-imgposition="50% 0%" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
+          {false && <section className="testimonial-one">
+            <div className="testimonial-one__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
-                  <h6 className="section-title__tagline">Client Feedback</h6>
+                  <h6 className="section-title__tagline">{t('homeExtra.testimonials.tagline')}</h6>
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
-                <h3 className="section-title__title title-animation">Real Stories Of Trust, Freshness<br /> And
-                  Satisfaction.
-                </h3>
+                <h3 className="section-title__title title-animation" dangerouslySetInnerHTML={{ __html: t('homeExtra.testimonials.title') }} />
               </div>
               <div className="testimonial-one__inner">
                 <div className="testimonial-one__carousel swiper-container">
@@ -1878,13 +1479,12 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="assets/images/testimonial/testimonial-1-1.jpg" alt="" />
+                            <img src="/assets/images/testimonial/testimonial-1-1.jpg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Adam
-                                Smith</a></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t1Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t1Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1896,17 +1496,13 @@ export function HomeContent() {
                           </div>
                         </div>
                         <div className="testimonial-one__text-box">
-                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
                           </div>
                           <div className="testimonial-one__single-shape-1">
-                            <img src="assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t1Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1917,12 +1513,12 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="assets/images/testimonial/testimonial-1-2.jpg" alt="" />
+                            <img src="/assets/images/testimonial/testimonial-1-2.jpg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Rowena E. Smith</a></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t2Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t2Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1934,17 +1530,13 @@ export function HomeContent() {
                           </div>
                         </div>
                         <div className="testimonial-one__text-box">
-                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
                           </div>
                           <div className="testimonial-one__single-shape-1">
-                            <img src="assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t2Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1955,12 +1547,12 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="assets/images/testimonial/testimonial-1-3.jpg" alt="" />
+                            <img src="/assets/images/testimonial/testimonial-1-3.jpg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">David J. Mahmoud</a></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t3Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t3Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -1972,17 +1564,13 @@ export function HomeContent() {
                           </div>
                         </div>
                         <div className="testimonial-one__text-box">
-                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
                           </div>
                           <div className="testimonial-one__single-shape-1">
-                            <img src="assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t3Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -1993,12 +1581,12 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="assets/images/testimonial/testimonial-1-4.jpg" alt="" />
+                            <img src="/assets/images/testimonial/testimonial-1-4.jpg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">James S. Adams</a></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t4Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t4Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -2010,17 +1598,13 @@ export function HomeContent() {
                           </div>
                         </div>
                         <div className="testimonial-one__text-box">
-                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
                           </div>
                           <div className="testimonial-one__single-shape-1">
-                            <img src="assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t4Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -2031,13 +1615,12 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="assets/images/testimonial/testimonial-1-5.jpg" alt="" />
+                            <img src="/assets/images/testimonial/testimonial-1-5.jpg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Iris
-                                W. Jackson</a></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t5Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t5Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -2049,17 +1632,13 @@ export function HomeContent() {
                           </div>
                         </div>
                         <div className="testimonial-one__text-box">
-                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
                           </div>
                           <div className="testimonial-one__single-shape-1">
-                            <img src="assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t5Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -2070,12 +1649,12 @@ export function HomeContent() {
                       <div className="testimonial-one__single">
                         <div className="testimonial-one__client-info">
                           <div className="testimonial-one__client-img">
-                            <img src="assets/images/testimonial/testimonial-1-6.jpg" alt="" />
+                            <img src="/assets/images/testimonial/testimonial-1-6.jpg" alt="" />
                           </div>
                           <div className="testimonial-one__client-content">
                             <div className="testimonial-one__client-name-box">
-                              <h4 className="testimonial-one__client-name"><a href="testimonials.html">Herman G. McClure</a></h4>
-                              <p className="testimonial-one__client-sub-title">Ceo Agency</p>
+                              <h4 className="testimonial-one__client-name"><Link href="/about">{t('homeExtra.testimonials.t6Role')}</Link></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t6Region')}</p>
                             </div>
                             <div className="testimonial-one__ratting">
                               <span className="icon-pointed-star" />
@@ -2087,17 +1666,13 @@ export function HomeContent() {
                           </div>
                         </div>
                         <div className="testimonial-one__text-box">
-                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
                           </div>
                           <div className="testimonial-one__single-shape-1">
-                            <img src="assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
                           </div>
-                          <p className="testimonial-one__text"><span className="fas fa-quote-left" /> At
-                            Farmology,
-                            we bring you the purest and
-                            freshest
-                            products straight from our fields. every product is cultivated naturally,
-                            ensuring 100% farm-fresh goodness. <span className="fas fa-quote-right quote-two" />
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t6Text')} <span className="fas fa-quote-right quote-two" />
                           </p>
                         </div>
                       </div>
@@ -2115,21 +1690,21 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*Testimonial One End*/}
           {/*Start Cta One*/}
-          <section className="cta-one">
+          {false && <section className="cta-one">
             <div className="container">
               <div className="cta-one__inner">
                 <div className="cta-one__img">
-                  <img src="assets/images/resources/cta-one-img-1.png" alt="" />
+                  <img src="/assets/images/resources/cta-one-img-1.png" alt="" />
                 </div>
                 <div className="cta-one__content">
-                  <div className="cta-one__shape-1" style={{ backgroundImage: 'url(assets/images/shapes/cta-one-shape-1.png)' }} />
+                  <div className="cta-one__shape-1" style={{ backgroundImage: 'url(/assets/images/shapes/cta-one-shape-1.png)' }} />
                   <div className="cta-one__shape-2 float-bob-x">
-                    <img src="assets/images/shapes/cta-one-shape-2.png" alt="" />
+                    <img src="/assets/images/shapes/cta-one-shape-2.png" alt="" />
                   </div>
-                  <div className="cta-one__shape-bg" style={{ backgroundImage: 'url(assets/images/shapes/cta-one-shape-bg.png)' }} />
+                  <div className="cta-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/cta-one-shape-bg.png)' }} />
                   <h2>Recognized as One of The <br /> Leading <span>Farming!</span></h2>
                   <p className="cta-one__text-1">Thousands of families choose us for healthy, safe, and farm-fresh<br />
                     products every day.Trusted by Families &amp; Food Lovers.</p>
@@ -2139,7 +1714,7 @@ export function HomeContent() {
                   <ul className="cta-one__app-list list-unstyled">
                     <li>
                       <div className="icon">
-                        <img src="assets/images/icon/app-1.png" alt="" />
+                        <img src="/assets/images/icon/app-1.png" alt="" />
                       </div>
                       <div className="content">
                         <p>Play Store</p>
@@ -2148,7 +1723,7 @@ export function HomeContent() {
                     </li>
                     <li>
                       <div className="icon">
-                        <img src="assets/images/icon/app-2.png" alt="" />
+                        <img src="/assets/images/icon/app-2.png" alt="" />
                       </div>
                       <div className="content">
                         <p>App Store</p>
@@ -2168,19 +1743,19 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </section>}
           {/*End Cta One*/}
           {/*Blog One Start */}
-          <section className="blog-one">
+          {false && <section className="blog-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-1.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
                   </div>
                   <h6 className="section-title__tagline">News & Events</h6>
                   <div className="section-title__shape-1">
-                    <img src="assets/images/resources/section-title-shape-2.png" alt="" />
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
                   </div>
                 </div>
                 <h3 className="section-title__title title-animation">Latest News & Events
@@ -2193,7 +1768,7 @@ export function HomeContent() {
                     <div className="blog-one__single-inner">
                       <div className="blog-one__img-box">
                         <div className="blog-one__img">
-                          <img src="assets/images/blog/blog-1-1.jpg" alt="" />
+                          <img src="/assets/images/blog/blog-1-1.jpg" alt="" />
                           <div className="blog-one__plus">
                             <a href="/blog"><i className="fas fa-plus" /></a>
                           </div>
@@ -2206,7 +1781,7 @@ export function HomeContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -2239,7 +1814,7 @@ export function HomeContent() {
                     <div className="blog-one__single-inner">
                       <div className="blog-one__img-box">
                         <div className="blog-one__img">
-                          <img src="assets/images/blog/blog-1-2.jpg" alt="" />
+                          <img src="/assets/images/blog/blog-1-2.jpg" alt="" />
                           <div className="blog-one__plus">
                             <a href="/blog"><i className="fas fa-plus" /></a>
                           </div>
@@ -2252,7 +1827,7 @@ export function HomeContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -2284,7 +1859,7 @@ export function HomeContent() {
                     <div className="blog-one__single-inner">
                       <div className="blog-one__img-box">
                         <div className="blog-one__img">
-                          <img src="assets/images/blog/blog-1-3.jpg" alt="" />
+                          <img src="/assets/images/blog/blog-1-3.jpg" alt="" />
                           <div className="blog-one__plus">
                             <a href="/blog"><i className="fas fa-plus" /></a>
                           </div>
@@ -2297,7 +1872,7 @@ export function HomeContent() {
                         </div>
                       </div>
                       <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(assets/images/shapes/blog-one-content-bg-shape.png)' }}>
+                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/blog-one-content-bg-shape.png)' }}>
                         </div>
                         <ul className="blog-one__meta list-unstyled">
                           <li>
@@ -2325,107 +1900,546 @@ export function HomeContent() {
                 {/*Blog One Single End*/}
               </div>
             </div>
-          </section>
+          </section>}
           {/*Blog One End */}
-          {/*Site Footer Start*/}
-          <footer className="site-footer">
-            <div className="site-footer__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/site-footer-bg.jpg)' }}>
+
+          {/*Do And Donts Start*/}
+          <section className="do-and-donts">
+            <div className="do-and-donts__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
             </div>
-            <div className="site-footer__top">
-              <div className="container">
-                <div className="site-footer__top-inner">
-                  <div className="row">
-                    <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                      <div className="footer-widget__about">
-                        <div className="footer-widget__about-logo">
-                          <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+            <div className="container">
+              <div className="row">
+                <div className="col-xl-4">
+                  <div className="do-and-donts__left">
+                    <div className="do-and-donts__single-title">
+                      <span>{t('homeExtra.doDonts.dosTitle')}</span>
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-1">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do1')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-2">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do2')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-3">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do3')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-4">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do4')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single do-and-donts__single-5">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-checked-1" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.do5')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4">
+                  <div className="do-and-donts__middle">
+                    <div className="do-and-donts__img">
+                      {/* Image removed as requested */}
+                    </div>
+                    <div className="section-title text-center sec-title-animation animation-style1">
+                      <div className="section-title__tagline-box">
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="section shape left" />
                         </div>
-                        <p className="footer-widget__about-text">Believe that great food starts with great
-                          farming. For 40 years, our farm has been committed to sustainable, eco-friendly
-                          and full of goodness.</p>
-                        <div className="footer-widget__payment">
-                          <h3>We Accept</h3>
-                          <div className="footer-widget__payment-card">
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-1.jpg" alt="" /></a>
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-2.jpg" alt="" /></a>
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-3.jpg" alt="" /></a>
-                            <a href="checkout.html"><img src="assets/images/resources/footer-widget-payment-card-4.jpg" alt="" /></a>
+                        <h6 className="section-title__tagline">{t('homeExtra.doDonts.tagline')}</h6>
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="section shape right" />
+                        </div>
+                      </div>
+                      <h3
+                        className="section-title__title title-animation"
+                        dangerouslySetInnerHTML={{ __html: t('homeExtra.doDonts.title') }}
+                      />
+                    </div>
+                    <p className="do-and-donts__middle-text">
+                      {t('homeExtra.doDonts.intro')}
+                    </p>
+                    <div className="do-and-donts__btn-box">
+                      <a className="thm-btn" href="/about">Grow With Us
+                        <i className="fal fa-long-arrow-right" />
+                        <span className="hover-btn hover-bx" />
+                        <span className="hover-btn hover-bx2" />
+                        <span className="hover-btn hover-bx3" />
+                        <span className="hover-btn hover-bx4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4">
+                  <div className="do-and-donts__right">
+                    <div className="do-and-donts__single-title">
+                      <span>{t('homeExtra.doDonts.dontsTitle')}</span>
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-6">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont1')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-7">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont2')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-8">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont3')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-9">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont4')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                    <div className="do-and-donts__single-one do-and-donts__single-10">
+                      <div className="do-and-donts__single-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/do-and-donts-single-bg-shape.png)' }}>
+                      </div>
+                      <div className="do-and-donts__icon">
+                        <span className="icon-cross" />
+                        <h4 className="do-and-donts__text">{t('homeExtra.doDonts.dont5')}</h4>
+                      </div>
+                      <div className="do-and-donts__single-shape-1" />
+                      <div className="do-and-donts__single-shape-2" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/*Do And Donts End*/}
+
+          {/*Faq One Start*/}
+          <section className="faq-one">
+            <div className="container">
+              <div className="row">
+                <div className="col-xl-6 col-lg-5">
+                  <div className="faq-one__left">
+                    <div className="faq-one__contact-box">
+                      <div className="faq-one__contact-box-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/faq-one-contact-box-bg-shape.png)' }}>
+                      </div>
+                      <div className="faq-one__contact-shape-1">
+                        <img src="/assets/images/shapes/faq-one-contact-shape-1.png" alt="" />
+                      </div>
+                      <div className="faq-one__author-box-inner">
+                        <div className="faq-one__author-shape-1">
+                          <img src="/assets/images/shapes/faq-one-author-shape-1.png" alt="" />
+                        </div>
+                        <div className="faq-one__author-box">
+                          <div className="faq-one__author-img">
+                            <img src="/assets/images/resources/faq-one-author-img.png" alt="" />
+                          </div>
+                          <h4 className="faq-one__author-name"><a href="/about">Adam Smith</a></h4>
+                          <p className="faq-one__author-sub-title">Founder</p>
+                        </div>
+                      </div>
+                      <h3 className="faq-one__contact-title">{t('homeExtra.faq.contactTitle')}</h3>
+                      <p className="faq-one__contact-text">
+                        {t('homeExtra.faq.contactText')}
+                      </p>
+                      <div className="faq-one__contact-social">
+                        <a href="/#"><span className="fab fa-facebook-f" /></a>
+                        <a href="/#"><span className="fab fa-twitter" /></a>
+                        <a href="/#"><span className="fab fa-pinterest-p" /></a>
+                        <a href="/#"><span className="fab fa-instagram" /></a>
+                      </div>
+                      <div className="faq-one__contact-number">
+                        <a href="tel:+918888866031">+91 88888 66031</a>
+                      </div>
+                      <div className="faq-one__contact-btn">
+                        <a className="thm-btn" href="/contact">Shoot a Direct Call
+                          <i className="fal fa-long-arrow-right" />
+                          <span className="hover-btn hover-bx" />
+                          <span className="hover-btn hover-bx2" />
+                          <span className="hover-btn hover-bx3" />
+                          <span className="hover-btn hover-bx4" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-6 col-lg-7">
+                  <div className="faq-one__right">
+                    <div className="section-title text-left sec-title-animation animation-style2">
+                      <div className="section-title__tagline-box">
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
+                        </div>
+                        <h6 className="section-title__tagline">{t('homeExtra.faq.tagline')}</h6>
+                        <div className="section-title__shape-1">
+                          <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
+                        </div>
+                      </div>
+                      <h3
+                        className="section-title__title title-animation"
+                        dangerouslySetInnerHTML={{ __html: t('homeExtra.faq.title') }}
+                      />
+                    </div>
+                    <div className="accrodion-grp" data-grp-name="faq-one-accrodion">
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q1')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a1')}</p>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                      <div className="footer-widget__links">
-                        <h4 className="footer-widget__title">Quick links</h4>
-                        <ul className="footer-widget__links-list list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="team.html">Meet Our Team</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Our Projects</a>
-                          </li>
-                          <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/contact">Contact Us</a></li>
-                        </ul>
+                      <div className="accrodion active">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q2')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a2')}</p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                      <div className="footer-widget__services">
-                        <h4 className="footer-widget__title">PM Group</h4>
-                        <ul className="footer-widget__links-list list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="/#">Gangamai Industries & Construction Ltd.</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/#">Arya Hybrid Seeds Ltd.</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/#">ASPL Nature Pure Pvt. Ltd.</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/#">Omkara Techno Infra Pvt. Ltd.</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/#">C.S.M.S.S</a></li>
-                        </ul>
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q3')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a3')}</p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                      <div className="footer-widget__contact">
-                        <h3 className="footer-widget__title">Contact Us</h3>
-                        <ul className="footer-widget__contact-list list-unstyled">
-                          <li>
-                            <div className="icon">
-                              <span className="icon-pin" />
-                            </div>
-                            <p>Gut No. 233, Chitegaon, Tq. Paithan, Dist. Chhatrapati Sambhaji Nagar (Aurangabad) - 431105 (Maharashtra)</p>
-                          </li>
-                          <li>
-                            <div className="icon">
-                              <span className="icon-call" />
-                            </div>
-                            <p>
-                              <a href="tel:919922933999">+91-9922933999</a>
-                            </p>
-                          </li>
-                          <li>
-                            <div className="icon">
-                              <span className="icon-email" />
-                            </div>
-                            <p>
-                              <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
-                            </p>
-                          </li>
-                        </ul>
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q4')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a4')}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="accrodion">
+                        <div className="accrodion-title">
+                          <h4>{t('homeExtra.faq.q5')}</h4>
+                        </div>
+                        <div className="accrodion-content">
+                          <div className="inner">
+                            <p>{t('homeExtra.faq.a5')}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </section>
+          {/*Faq One End*/}
+
+          {/*Testimonial One Start*/}
+          <section className="testimonial-one">
+            <div className="testimonial-one__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
+            <div className="container">
+              <div className="section-title text-center sec-title-animation animation-style1">
+                <div className="section-title__tagline-box">
+                  <div className="section-title__shape-1">
+                    <img src="/assets/images/resources/section-title-shape-1.png" alt="" />
+                  </div>
+                  <h6 className="section-title__tagline">{t('homeExtra.testimonials.tagline')}</h6>
+                  <div className="section-title__shape-1">
+                    <img src="/assets/images/resources/section-title-shape-2.png" alt="" />
+                  </div>
+                </div>
+                <h3
+                  className="section-title__title title-animation"
+                  dangerouslySetInnerHTML={{ __html: t('homeExtra.testimonials.title') }}
+                />
+              </div>
+              <div className="testimonial-one__inner">
+                <div className="testimonial-one__carousel swiper-container">
+                  <div className="swiper-wrapper">
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-1.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t1Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t1Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t1Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-2.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t2Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t2Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t2Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-3.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t3Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t3Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t3Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-4.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t4Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t4Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t4Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-5.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t5Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t5Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t5Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                    {/*Testimonial One Single Start*/}
+                    <div className="swiper-slide">
+                      <div className="testimonial-one__single">
+                        <div className="testimonial-one__client-info">
+                          <div className="testimonial-one__client-img">
+                            <img src="/assets/images/testimonial/testimonial-1-6.jpg" alt="" />
+                          </div>
+                          <div className="testimonial-one__client-content">
+                            <div className="testimonial-one__client-name-box">
+                              <h4 className="testimonial-one__client-name"><a href="/testimonials">{t('homeExtra.testimonials.t6Role')}</a></h4>
+                              <p className="testimonial-one__client-sub-title">{t('homeExtra.testimonials.t6Region')}</p>
+                            </div>
+                            <div className="testimonial-one__ratting">
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                              <span className="icon-pointed-star" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="testimonial-one__text-box">
+                          <div className="testimonial-one__text-box-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-text-box-bg.jpg)' }}>
+                          </div>
+                          <div className="testimonial-one__single-shape-1">
+                            <img src="/assets/images/shapes/testimonial-one-single-shape-1.png" alt="" />
+                          </div>
+                          <p className="testimonial-one__text">
+                            <span className="fas fa-quote-left" /> {t('homeExtra.testimonials.t6Text')} <span className="fas fa-quote-right quote-two" />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    {/*Testimonial One Single End*/}
+                  </div>
+                  <div className="testimonial-one__nav">
+                    <div className="swiper-button-next1">
+                      <i className="fas fa-arrow-left" />
+                    </div>
+                    <div className="swiper-button-prev1">
+                      <i className="fas fa-arrow-right" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {/*Testimonial One End*/}
+
+          {/*Site Footer Start*/}
+          <footer className="site-footer">
+            <div className="site-footer__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/site-footer-bg.jpg)' }}>
+            </div>
+            {/* site-footer__top section removed */}
             <div className="site-footer__bottom">
               <div className="container">
                 <div className="row">
                   <div className="col-xl-12">
                     <div className="site-footer__bottom-inner">
                       <div className="site-footer__copyright">
-                        <p className="site-footer__copyright-text">Copyright@ 2025 <a href="/">Farmology</a>. All Rights Reserved.</p>
-                      </div>
-                      <div className="site-footer__bottom-menu-box">
-                        <ul className="list-unstyled site-footer__bottom-menu">
-                          <li><a href="/about">Terms of Service</a></li>
-                          <li><a href="/about">Privacy policy</a></li>
-                          <li><a href="/about">Support</a></li>
-                        </ul>
+                        <p className="site-footer__copyright-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
                       </div>
                     </div>
                   </div>
@@ -2441,7 +2455,7 @@ export function HomeContent() {
           <div className="mobile-nav__content">
             <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
             <div className="logo-box">
-              <a href="/" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width={150} alt="" /></a>
+              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-1.png" width={150} alt="" /></Link>
             </div>
             {/* /.logo-box */}
             <div className="mobile-nav__container" />
@@ -2449,40 +2463,28 @@ export function HomeContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+918888866031">+91 88888 66031</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/#" className="fab fa-twitter" />
-                <a href="/#" className="fab fa-facebook-square" />
-                <a href="/#" className="fab fa-pinterest-p" />
-                <a href="/#" className="fab fa-instagram" />
+                <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
+                <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
           {/* /.mobile-nav__content */}
         </div>
         {/* /.mobile-nav__wrapper */}
-        {/* Search Popup */}
-        <div className="search-popup">
-          <div className="color-layer" />
-          <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
-            <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
-              <button type="submit"><i className="fas fa-search" /></button>
-            </div>
-          </form>
-        </div>
-        {/* End Search Popup */}
+        {/* Search Popup removed */}
         <a href="/#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
-          <span className="scroll-to-top__text"> Go Back Top</span>
+          <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
         </a>
         {/* template js */}
       </div>

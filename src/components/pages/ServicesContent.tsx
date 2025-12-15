@@ -1,11 +1,46 @@
+"use client";
+
+import dynamic from 'next/dynamic';
+const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { useEffect, useState } from 'react';
+
 export function ServicesContent() {
+  const t = useTranslations();
+  const [showPreloader, setShowPreloader] = useState(true);
+  
+  useEffect(() => {
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+    
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
+      setTimeout(hidePreloader, 1000);
+    }
+  }, []);
+  
   return (
     <>
+      <NavHighlighter />
       <div>
         <div className="custom-cursor__cursor" />
         <div className="custom-cursor__cursor-two" />
         {/*Start Preloader*/}
-        <div id="preloader">
+        <div 
+          id="preloader" 
+          suppressHydrationWarning
+          style={{ 
+            opacity: showPreloader ? 1 : 0, 
+            transition: 'opacity 0.5s ease',
+            pointerEvents: showPreloader ? 'auto' : 'none',
+            display: showPreloader ? 'block' : 'none'
+          }}
+        >
           <div className="preloader">
             <span />
             <span />
@@ -18,19 +53,19 @@ export function ServicesContent() {
           <div className="popup-inner">
             <div className="close-chat"><i className="fa fa-times" /></div>
             <div className="chat-form">
-              <p>Please fill out the form below and we will get back to you as soon as possible.</p>
+              <p>{t('sidebar.pleaseFillForm')}</p>
               <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
                 <div className="form-group">
-                  <input type="text" name="name" placeholder="Your Name" required />
+                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
                 </div>
                 <div className="form-group">
-                  <input type="email" name="email" placeholder="Your Email" required />
+                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
                 </div>
                 <div className="form-group">
-                  <textarea name="message" placeholder="Your Text" required defaultValue={""} />
+                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
                 </div>
                 <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> Submit Now
+                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
                     <i className="fal fa-long-arrow-right" />
                     <span className="hover-btn hover-bx" />
                     <span className="hover-btn hover-bx2" />
@@ -54,7 +89,7 @@ export function ServicesContent() {
                         <i className="icon-call" />
                       </div>
                       <div className="text">
-                        <p><a href="tel:+919922933999">+91-9922933999</a></p>
+                        <p><a href="tel:+918888866031">+91 88888 66031</a></p>
                       </div>
                     </li>
                     <li>
@@ -62,16 +97,8 @@ export function ServicesContent() {
                         <i className="icon-email" />
                       </div>
                       <div className="text">
-                        <p><a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a>
+                        <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
                         </p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="icon">
-                        <i className="icon-pin" />
-                      </div>
-                      <div className="text">
-                        <p>4124 Cimmaron Road, CA 92806</p>
                       </div>
                     </li>
                   </ul>
@@ -80,13 +107,12 @@ export function ServicesContent() {
                       <div className="main-menu-two__top-time-icon">
                         <span className="fas fa-clock" />
                       </div>
-                      <p className="main-menu-two__top-text">Mon - Fri: 09:00 - 05:00</p>
+                      <p className="main-menu-two__top-text">{t('common.businessHours')}</p>
                     </div>
                     <div className="main-menu-two__social">
-                      <a href="/services#"><i className="fab fa-twitter" /></a>
-                      <a href="/services#"><i className="fab fa-facebook-f" /></a>
-                      <a href="/services#"><i className="fab fa-pinterest-p" /></a>
-                      <a href="/services#"><i className="fab fa-instagram" /></a>
+                      <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
+                      <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
+                      <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
                     </div>
                   </div>
                 </div>
@@ -98,248 +124,50 @@ export function ServicesContent() {
                   <div className="main-menu-two__wrapper-inner">
                     <div className="main-menu-two__left">
                       <div className="main-menu-two__logo">
-                        <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
+                        <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
                       </div>
                     </div>
                     <div className="main-menu-two__main-menu-box">
                       <a href="/services#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
                       <ul className="main-menu__list">
-                        <li className="dropdown megamenu">
-                          <a href="/services#">Home </a>
-                          <ul>
-                            <li>
-                              <section className="home-showcase">
-                                <div className="container">
-                                  <div className="home-showcase__inner">
-                                    <div className="row">
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-1.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            01</h3>
-                                          {/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-2.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            02
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-3.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            03
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-4.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                Multi Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                              <a href="/" className="thm-btn home-showcase__buttons__item">
-                                                One Page
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Home
-                                            Page
-                                            04
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                      <div className="col-lg-3">
-                                        <div className="home-showcase__item">
-                                          <div className="home-showcase__image">
-                                            <img src="assets/images/home-showcase/home-showcase-1-5.jpg" alt="" />
-                                            <div className="home-showcase__buttons">
-                                              <a href="index-dark.html" className="thm-btn home-showcase__buttons__item">
-                                                Dark Home
-                                                <i className="fal fa-long-arrow-right" />
-                                                <span className="hover-btn hover-bx" />
-                                                <span className="hover-btn hover-bx2" />
-                                                <span className="hover-btn hover-bx3" />
-                                                <span className="hover-btn hover-bx4" />
-                                              </a>
-                                            </div>
-                                            {/* /.home-showcase__buttons */}
-                                          </div>{/* /.home-showcase__image */}
-                                          <h3 className="home-showcase__title">Dark Home
-                                          </h3>{/* /.home-showcase__title */}
-                                        </div>{/* /.home-showcase__item */}
-                                      </div>{/* /.col-lg-3 */}
-                                    </div>{/* /.row */}
-                                  </div>{/* /.home-showcase__inner */}
-                                </div>{/* /.container */}
-                              </section>
-                            </li>
+                        <li>
+                          <Link href="/">{t('nav.home')}</Link>
+                        </li>
+                        <li>
+                          <Link href="/about">{t('nav.about')}</Link>
+                        </li>
+                        {/* Services dropdown commented out - temporarily disabled
+                        <li className="dropdown">
+                          <a href="/services#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
+                          <ul className="shadow-box">
+                            <li><Link href="/services">{t('nav.services')}</Link></li>
+                            <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
                           </ul>
                         </li>
+                        */}
                         <li className="dropdown">
-                          <a href="/services#">About</a>
+                          <a href="/services#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                           <ul className="shadow-box">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="history.html">History</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/services#">Pages</a>
-                          <ul className="shadow-box">
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="team-details.html">Team Details</a></li>
-                            <li><a href="projects.html">Projects</a></li>
-                            <li><a href="project-details.html">Project Details</a></li>
-                            <li><a href="testimonials.html">Testimonials</a></li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="/faq">FAQs</a></li>
-                            <li><a href="404.html">404 Error</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/services#">services</a>
-                          <ul className="shadow-box">
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="fresh-produce.html">Fresh Produce</a></li>
-                            <li><a href="dairy-products.html">Dairy Products</a></li>
-                            <li><a href="livestock.html">Livestock</a></li>
-                            <li><a href="poultry-eggs.html">Poultry &amp; Eggs</a></li>
-                            <li><a href="grains-cereals.html">Grains &amp; Cereals</a></li>
-                            <li><a href="herbs-spices.html">Herbs &amp; Spices</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/services#">Shop</a>
-                          <ul className="shadow-box">
-                            <li><a href="/products">Products</a></li>
-                            <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="sign-up.html">Sign Up</a></li>
-                            <li><a href="login.html">Login</a></li>
-                          </ul>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/services#">Blog</a>
-                          <ul className="shadow-box">
-                            <li><a href="/blog">Blog</a></li>
-                            <li><a href="blog-standard.html">Blog Standard</a></li>
-                            <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                            <li><a href="/blog">Blog Details</a></li>
+                            <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
+                            <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
                           </ul>
                         </li>
                         <li>
-                          <a href="/contact">Contact</a>
+                          <Link href="/blog">{t('nav.blog')}</Link>
+                        </li>
+                        <li>
+                          <Link href="/contact">{t('nav.contact')}</Link>
                         </li>
                       </ul>
                     </div>
                     <div className="main-menu-two__right">
-                      <div className="main-menu-two__search-box">
-                        <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
-                      </div>
-                      <div className="main-menu-two__cart">
-                        <a href="cart.html">
-                          <span className="fal fa-shopping-cart" />
-                          <span className="main-menu-two__cart-count">02</span>
-                        </a>
-                      </div>
-                      <div className="main-menu-two__user">
-                        <a href="sign-up.html"><span className="far fa-users" /></a>
-                      </div>
-                      <div className="main-menu-two__btn-box">
-                        <a className="thm-btn" href="/contact">Get A Quote
-                          <i className="fal fa-long-arrow-right" />
-                          <span className="hover-btn hover-bx" />
-                          <span className="hover-btn hover-bx2" />
-                          <span className="hover-btn hover-bx3" />
-                          <span className="hover-btn hover-bx4" />
-                        </a>
-                      </div>
+                      <LanguageSwitcher />
+                      {/* Search, Cart, and Get A Quote components removed */}
                     </div>
                   </div>
                 </div>
@@ -351,16 +179,16 @@ export function ServicesContent() {
           </div>{/* /.stricky-header */}
           {/*Page Header Start*/}
           <section className="page-header">
-            <div className="page-header__bg" style={{ backgroundImage: 'url(assets/images/backgrounds/page-header-bg.jpg)' }}>
+            <div className="page-header__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/page-header-bg.jpg)' }}>
             </div>
             <div className="container">
               <div className="page-header__inner">
-                <h3>Services </h3>
+                <h3>{t('services.diagnosticsTest')}</h3>
                 <div className="thm-breadcrumb__inner">
                   <ul className="thm-breadcrumb list-unstyled">
-                    <li><a href="/">Home</a></li>
+                    <li><Link href="/">{t('nav.home')}</Link></li>
                     <li><span className="fas fa-angle-right" /></li>
-                    <li>Services </li>
+                    <li>{t('services.diagnosticsTest')}</li>
                   </ul>
                 </div>
               </div>
@@ -370,161 +198,32 @@ export function ServicesContent() {
           {/*Services Page Start*/}
           <section className="services-page">
             <div className="container">
-              <div className="row">
-                <div className="col-xl-12">
-                  <div className="about-one__right">
-
-                    <div className="section-title text-left">
-                      <h3 className="section-title__title">Diagnostics Test</h3>
-                      <span className="section-title__tagline">Home Diagnostics Test</span>
-                    </div>
-
-                    <p className="about-one__text">The Success of the seed company is correlated with the consistency in the quality. Obviously, Quality Assurance Department is the backbone of the seed business.</p>
-                    <p className="about-one__text">Quality Assurance Department functions at farm level to ensure the genetic purity during seed production and second wing i.e., Seed Testing Laboratory ensures the Physical purity, Germination, Viability/Vigour, Seed Health and the ‘n’ number of Qualitative parameters.</p>
-                    <p className="about-one__text">We are strictly adhered to maintain the Indian Minimum Seed Certification Standards and also ISTA norms. Once the samples goes through stringent testing activities and qualifies in all the parameters then only released for the marketing.</p>
-                    <p className="about-one__text">A well established Seed Testing Laboratory with ultra-modern equipments with all facilities, trained and dedicated manpower are the strength of the Quality Assurance Department of Ajeet Seeds Private Limited. To maintain the sanctity of seed quality, obviously Quality Assurance Department is working round the clock with due emphasis on Physical Purity, Seed Health, Germination, Viability/Vigour tests, Genetic Purity and Trait Purity as per ISTA standards.</p>
-                    <p className="about-one__text">Quality Assurance not only assures the quality of the seeds but also assures the quality during Processing, Treatment, Packing, Logistics and finally the dispatches to the market till it goes in the hands of the end user i.e., FARMER. It also ensures the performance in the farmer’s fields by visiting randomly to Re-reassurance and farmer’s satisfaction.</p>
-
-                    <br />
-                    <div className="section-title text-left">
-                      <h3 className="section-title__title">Ajeet Seeds</h3>
-                    </div>
-                    <p className="about-one__text"><strong>Plant Biotechnology Research Centre (PBRC), Ajeet Seeds Pvt. Ltd.</strong></p>
-                    <p className="about-one__text">24 Jan, 2022<br />NABL (ISO/IEC 17025:2017) accredited Laboratory (Conformity Assessment Body) since 2022</p>
-                    <p className="about-one__text">10 May, 2022<br />Department of Scientific and Industrial Research (DSIR) recognized Laboratory since 2000</p>
-                    <p className="about-one__text">27 July, 2021<br />Dr. Babasaheb Ambedkar Marathwada University’s Ph.D. research Laboratory</p>
-
-                    <br />
-                    <div className="section-title text-left">
-                      <h3 className="section-title__title">Research Centre</h3>
-                      <span className="section-title__tagline">Ajeet Seeds Pvt. Ltd.</span>
-                    </div>
-                    <p className="about-one__text"><strong>Research and Development (Crop Improvement for Biotic and Abiotic Stresses)</strong></p>
-                    <p className="about-one__text">ASPL has developed a state-of-the-art facility for research in biotechnology for crop improvement.</p>
-
-                    <ul className="about-one__points list-unstyled">
-                      <li>
-                        <div className="icon"><span className="fa fa-check" /></div>
-                        <div className="text"><p>Protein Diagnostic Laboratory (ELISA/LFS)</p></div>
-                      </li>
-                      <li>
-                        <div className="icon"><span className="fa fa-check" /></div>
-                        <div className="text"><p>DNA Diagnostic Laboratory (M-GOT, Hybrid Purity, Parental Line purity, DNA Fingerprinting)</p></div>
-                      </li>
-                    </ul>
-
-                    <br />
-                    <div className="section-title text-left">
-                      <h3 className="section-title__title">Testing Services</h3>
-                    </div>
-                    <p className="about-one__text">DNA Testing services at PBRC include DNA based Hybrid purity (M-GOT), Line purity, DNA Fingerprinting etc.</p>
-                    <p className="about-one__text">ELISA Testing services at PBRC include detection of Bt-genes (Cry1Ac, Cry2Ab/Aa, VIP3a), RRF- CP4EPSPS using Double antibody Sandwich ELISA (DAS-ELISA) and Lateral Flow Strips (LFS)</p>
-
-                    <br />
-                    <div className="section-title text-left">
-                      <h3 className="section-title__title">Quality Policy</h3>
-                      <span className="section-title__tagline">and Objectives</span>
-                    </div>
-                    <h4 className="about-one__title-1">NABL Scope of Accreditation</h4>
-                    <h4 className="about-one__title-1">Diagnostic Testing Services</h4>
-
-                    <br />
-                    <h5 className="about-one__text"><strong>1. DNA Diagnostic Services (Testing) at PBRC</strong></h5>
-                    <div className="table-responsive">
-                      <table className="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                            <th>Sr.No</th>
-                            <th>DNA Diagnostic Services</th>
-                            <th>Service Code</th>
-                            <th>Details</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr><td>1</td><td>GMO testing for presence of genetic materials (End point PCR method)</td><td>ASPL-SRV-006</td><td>NABL accredited (Check crop list)</td></tr>
-                          <tr><td>2</td><td>Determination of hybrid purity (Molecular GOT / M-GOT)</td><td>ASPL-SRV-007</td><td>NABL accredited (Check crop list)</td></tr>
-                          <tr><td>3</td><td>DNA Fingerprinting for crop plants</td><td>ASPL-SRV-008</td><td>NABL accredited (Check crop list)</td></tr>
-                          <tr><td>4</td><td>Parental line purity analysis using Molecular markers</td><td>ASPL-SRV-009</td><td>NABL accredited (Check crop list)</td></tr>
-                          <tr><td>5</td><td>Screening of Tomato for Tomato Yellow Leaf curl virus) (TY) using molecular markers</td><td>ASPL-SRV-010</td><td>Project mode</td></tr>
-                          <tr><td>6</td><td>Customized screening of germplasm for selective traits</td><td>ASPL-SRV-011</td><td>Project mode, Check feasibility</td></tr>
-                          <tr><td>7</td><td>Assistance in molecular marker assisted breeding</td><td>ASPL-SRV-012</td><td>Project mode, Check feasibility</td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <br />
-                    <h5 className="about-one__text"><strong>2. ELISA Diagnostic Services (Testing) at PBRC</strong></h5>
-                    <div className="table-responsive">
-                      <table className="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                            <th>Sr.No</th>
-                            <th>ELISA Diagnostic Services</th>
-                            <th>Service Code</th>
-                            <th>Details</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr><td>1</td><td>Trait Purity (Cotton) by ELISA (Cry1Ac)</td><td>ASPL-SRV-001</td><td>NABL accredited</td></tr>
-                          <tr><td>2</td><td>Trait Purity (Cotton) by ELISA (Cry2Ab)</td><td>ASPL-SRV-002</td><td>NABL accredited</td></tr>
-                          <tr><td>3</td><td>Trait Purity (Cotton) by ELISA (CP4EPSPS)</td><td>ASPL-SRV-003</td><td>NABL accredited</td></tr>
-                          <tr><td>4</td><td>Quantitative ELISA for Cry1Ac</td><td>ASPL-SRV-004</td><td>NABL accredited</td></tr>
-                          <tr><td>5</td><td>Quantitative ELISA for Cry2Ab</td><td>ASPL-SRV-005</td><td>NABL accredited</td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <br />
-                    <h5 className="about-one__text"><strong>3. ELISA Diagnostic Products</strong></h5>
-                    <div className="table-responsive">
-                      <table className="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                            <th>Sr.No</th>
-                            <th>ELISA Diagnostic Products</th>
-                            <th>Product Code</th>
-                            <th>Details</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr><td>1</td><td>Qualitative ELISA kit for Cry1Ac (05 plates)</td><td>ASPL-001</td><td>Sample kits available</td></tr>
-                          <tr><td>2</td><td>Qualitative ELISA kit for Cry2Ab (05 plates)</td><td>ASPL-002</td><td>Sample kits available</td></tr>
-                          <tr><td>3</td><td>Qualitative ELISA kit for Cry1Ac/Cry2Ab (05 plates)</td><td>ASPL-003</td><td>Sample kits available</td></tr>
-                          <tr><td>4</td><td>Lateral Flow strip for detection of Cry1Ac (50 Strips)</td><td>ASPL-004</td><td>Sample kits available</td></tr>
-                          <tr><td>5</td><td>Lateral Flow strip for detection of Cry2Ab (50 Strips)</td><td>ASPL-005</td><td>Sample kits available</td></tr>
-                          <tr><td>6</td><td>Lateral Flow strip for detection of CP4EPSPS (50 Strips)</td><td>ASPL-006</td><td>Sample kits available</td></tr>
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <br />
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="section-title text-left">
-                          <h3 className="section-title__title">Address</h3>
-                        </div>
-                        <p className="about-one__text">
-                          <a href="tel:+919922933999">+91-9922933999</a><br />
-                          <a href="mailto:aurangabad@ajeetseed.co.in">aurangabad@ajeetseed.co.in</a><br />
-                          Gut No. 233, Chitegaon, Tq. Paithan, Dist. Chhatrapati Sambhaji Nagar (Aurangabad) - 431105 (Maharashtra)
-                        </p>
+              <div className="row justify-content-center">
+                {/*Diagnostics Test Single Start*/}
+                <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0ms">
+                  <div className="services-two__single">
+                    <div className="services-two__img-box">
+                      <div className="services-two__img">
+                        <img src="/assets/images/backgrounds/qualityassurance.png" alt={t('services.diagnosticsTest')} />
                       </div>
-                      <div className="col-md-6">
-                        <div className="section-title text-left">
-                          <h3 className="section-title__title">PM Group</h3>
-                        </div>
-                        <ul className="about-one__points list-unstyled">
-                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>Gangamai Industries & Construction Ltd.</p></div></li>
-                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>Arya Hybrid Seeds Ltd.</p></div></li>
-                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>ASPL Nature Pure Pvt. Ltd.</p></div></li>
-                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>Omkara Techno Infra Pvt. Ltd.</p></div></li>
-                          <li><div className="icon"><span className="fa fa-check" /></div><div className="text"><p>C.S.M.S.S</p></div></li>
-                        </ul>
+                    </div>
+                    <div className="services-two__content">
+                      <div className="services-two__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/services-two-content-bg-shape.png)' }}>
+                      </div>
+                      <div className="services-two__icon">
+                        <span className="icon-precision-agriculture" />
+                      </div>
+                      <h3 className="services-two__title"><Link href="/diagnostics-test">{t('services.diagnosticsTest')}</Link>
+                      </h3>
+                      <p className="services-two__text">{t('services.diagnosticsTestDescription')}</p>
+                      <div className="services-two__read-more">
+                        <Link href="/diagnostics-test">{t('common.readMore')}<span className="fas fa-arrow-right" /></Link>
                       </div>
                     </div>
 
                   </div>
                 </div>
+                {/*Diagnostics Test Single End*/}
               </div>
             </div>
           </section>
@@ -534,16 +233,14 @@ export function ServicesContent() {
             <div className="site-footer-two__top">
               <div className="container">
                 <div className="footer-widget-two__newsletter wow fadeInUp" data-wow-delay="200ms">
-                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
+                  <div className="footer-widget-two__newsletter-bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/footer-widget-two-newsletter-bg.jpg)' }}>
                   </div>
-                  <h3 className="footer-widget-two__newsletter-title">Subscribe To Our Newsletter To<br />
-                    Get
-                    Latest Update</h3>
+                  <h3 className="footer-widget-two__newsletter-title" dangerouslySetInnerHTML={{ __html: t('footer.newsletter.title') }} />
                   <form className="footer-widget-two__newsletter-form mc-form" data-url="MC_FORM_URL" noValidate>
                     <div className="footer-widget-two__newsletter-form-input-box">
-                      <input type="email" placeholder="Enter email" name="EMAIL" />
+                      <input type="email" placeholder={t('about.enterEmail')} name="EMAIL" />
                     </div>
-                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">Subscribe
+                    <button type="submit" className="footer-widget-two__newsletter-btn thm-btn">{t('common.subscribe')}
                       <i className="fal fa-long-arrow-right" />
                       <span className="hover-btn hover-bx" />
                       <span className="hover-btn hover-bx2" />
@@ -554,130 +251,11 @@ export function ServicesContent() {
                 </div>
               </div>
             </div>
-            <div className="site-footer-two__middle">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                    <div className="footer-widget-two__working-box">
-                      <h3 className="footer-widget-two__working-title">opening time:</h3>
-                      <ul className="footer-widget-two__working-hour list-unstyled">
-                        <li>
-                          <p>Mon - Fri<span>9:00 AM - 5:00 PM</span></p>
-                        </li>
-                        <li>
-                          <p>Saturday<span>8:00 AM - 6:00 PM</span></p>
-                        </li>
-                        <li>
-                          <p>Sunday<span>Closed</span></p>
-                        </li>
-                      </ul>
-                      <div className="site-footer-two__social">
-                        <a href="/services#"><i className="fab fa-facebook-f" /></a>
-                        <a href="/services#"><i className="fab fa-twitter" /></a>
-                        <a href="/services#"><i className="fab fa-instagram" /></a>
-                        <a href="/services#"><i className="fab fa-pinterest-p" /></a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                    <div className="footer-widget-two__column footer-widget-two__usefull-link">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Quick Links</h3>
-                      </div>
-                      <div className="footer-widget-two__link-box">
-                        <ul className="footer-widget-two__link list-unstyled">
-                          <li><span className="fas fa-wheat" /><a href="/about">About Us</a></li>
-                          <li><span className="fas fa-wheat" /><a href="projects.html">Portfolio</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/faq">Help &amp; FAQs</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/blog">Blog</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/services">Services</a></li>
-                          <li><span className="fas fa-wheat" /><a href="/contact">Contact</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                    <div className="footer-widget-two__column footer-widget-two__products">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">Our Products</h3>
-                      </div>
-                      <ul className="footer-widget-two__link list-unstyled">
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Fresh
-                          Produce</a></li>
-                        <li><span className="fas fa-wheat" /><a href="dairy-products.html">Dairy
-                          Products</a>
-                        </li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Livestock
-                          Products</a></li>
-                        <li><span className="fas fa-wheat" /><a href="fresh-produce.html">Organic
-                          Farming</a></li>
-                        <li><span className="fas fa-wheat" /><a href="grains-cereals.html">Crops &amp;
-                          Grains</a></li>
-                        <li><span className="fas fa-wheat" /><a href="livestock.html">Poultry</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
-                    <div className="footer-widget-two__instagram">
-                      <div className="footer-widget-two__title-box">
-                        <h3 className="footer-widget-two__title">instagram</h3>
-                      </div>
-                      <ul className="footer-widget-two__instagram-list list-unstyled clearfix">
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-1.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-2.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-3.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-4.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-5.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                        <li>
-                          <div className="footer-widget-two__instagram-img">
-                            <img src="assets/images/project/footer-widget-instagram-img-6.jpg" alt="" />
-                            <a href="project-details.html"><span className="fab fa-instagram" /></a>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="footer-widget-two__logo">
-                  <a href="/"><img src="assets/images/resources/logo-1.png" alt="" /></a>
-                </div>
-              </div>
-            </div>
+            {/* site-footer-two__middle section removed */}
             <div className="site-footer-two__bottom">
               <div className="container">
                 <div className="site-footer-two__bottom-inner">
-                  <p className="site-footer-two__bottom-text">Copyright@ 2025 <a href="/">Farmology</a>. All
-                    Rights Reserved.</p>
-                  <ul className="list-unstyled site-footer-two__bottom-menu">
-                    <li><a href="/contact">Support</a></li>
-                    <li><a href="/about">Terms and Condition</a></li>
-                    <li><a href="/about">Privacy and Policy</a></li>
-                  </ul>
+                  <p className="site-footer-two__bottom-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
                 </div>
               </div>
             </div>
@@ -690,7 +268,7 @@ export function ServicesContent() {
           <div className="mobile-nav__content">
             <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
             <div className="logo-box">
-              <a href="/" aria-label="logo image"><img src="assets/images/resources/logo-1.png" width={150} alt="" /></a>
+              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-1.png" width={150} alt="" /></Link>
             </div>
             {/* /.logo-box */}
             <div className="mobile-nav__container" />
@@ -698,19 +276,18 @@ export function ServicesContent() {
             <ul className="mobile-nav__contact list-unstyled">
               <li>
                 <i className="fa fa-envelope" />
-                <a href="mailto:needhelp@packageName__.com">needhelp@Farmology.com</a>
+                <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
               </li>
               <li>
                 <i className="fas fa-phone" />
-                <a href="tel:666-888-0000">666 888 0000</a>
+                <a href="tel:+918888866031">+91 88888 66031</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
-                <a href="/services#" className="fab fa-twitter" />
-                <a href="/services#" className="fab fa-facebook-square" />
-                <a href="/services#" className="fab fa-pinterest-p" />
-                <a href="/services#" className="fab fa-instagram" />
+                <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
+                <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
+                <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
               </div>{/* /.mobile-nav__social */}
             </div>{/* /.mobile-nav__top */}
           </div>
@@ -718,24 +295,15 @@ export function ServicesContent() {
         </div>
         {/* /.mobile-nav__wrapper */}
         {/* Search Popup */}
-        <div className="search-popup">
-          <div className="color-layer" />
-          <button className="close-search"><span className="far fa-times fa-fw" /></button>
-          <form method="post" action="blog.html">
-            <div className="form-group">
-              <input type="search" name="search-field" defaultValue="" placeholder="Search Here" required />
-              <button type="submit"><i className="fas fa-search" /></button>
-            </div>
-          </form>
-        </div>
-        {/* End Search Popup */}
-        <a href="/services#" data-target="html" className="scroll-to-target scroll-to-top">
+        {/* Search Popup removed */}
+        <Link href="/services#" data-target="html" className="scroll-to-target scroll-to-top">
           <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
-          <span className="scroll-to-top__text"> Go Back Top</span>
-        </a>
+          <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
+        </Link>
         {/* template js */}
       </div>
 
     </>
   );
 }
+
