@@ -49,8 +49,18 @@ export function ProductsContent() {
     try {
       setLoading(true);
       setError(null);
+      const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+      const headers: HeadersInit = {};
+      
+      if (apiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+      
       const response = await fetch(
-        `http://localhost:1337/api/products?locale=${locale}&populate=Image&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&pagination[page]=${page}&pagination[pageSize]=25`
+        `/strapi/api/products?locale=${locale}&populate=Image&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&pagination[page]=${page}&pagination[pageSize]=25`,
+        {
+          headers,
+        }
       );
       
       if (!response.ok) {
@@ -91,7 +101,7 @@ export function ProductsContent() {
 
   const getProductImage = (product: Product) => {
     if (product.Image?.data?.attributes?.url) {
-      return `http://localhost:1337${product.Image.data.attributes.url}`;
+      return `/strapi${product.Image.data.attributes.url}`;
     }
     // Fallback to default product image
     return '/assets/images/shop/shop-product-1-1.jpg';

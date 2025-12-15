@@ -55,7 +55,8 @@
     "subscribe": "सदस्यता घ्या",
     "subscribeToNewsletter": "आमच्या न्यूजलेटरची सदस्यता घ्या<br />नवीनतम अपडेट मिळवण्यासाठी",
     "ifYouNeedAnyHelp": "जर तुम्हाला काही मदत हवी असेल",
-    "contactWithUs": "आमच्याशी संपर्क साधा"
+    "contactWithUs": "आमच्याशी संपर्क साधा",
+    "loading": "लोड होत आहे..."
   },
   "home": {
     "banner": {
@@ -287,7 +288,8 @@
     "organicMango": "सेंद्रिय आंबा",
     "showingResults": "14 परिणामांपैकी 1–12/14 दर्शवित आहे",
     "price": "किंमत",
-    "search": "शोधा"
+    "search": "शोधा",
+    "noProducts": "उत्पादने सापडली नाहीत"
   },
   "services": {
     "pageTitle": "सेवा",

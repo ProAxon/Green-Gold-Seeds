@@ -55,7 +55,8 @@
     "subscribe": "सदस्यता लें",
     "subscribeToNewsletter": "हमारे न्यूज़लेटर की सदस्यता लें<br />नवीनतम अपडेट प्राप्त करने के लिए",
     "ifYouNeedAnyHelp": "यदि आपको किसी सहायता की आवश्यकता है",
-    "contactWithUs": "हमसे संपर्क करें"
+    "contactWithUs": "हमसे संपर्क करें",
+    "loading": "लोड हो रहा है..."
   },
   "home": {
     "banner": {
@@ -287,7 +288,8 @@
     "organicMango": "जैविक आम",
     "showingResults": "14 परिणामों में से 1–12/14 दिखा रहे हैं",
     "price": "मूल्य",
-    "search": "खोजें"
+    "search": "खोजें",
+    "noProducts": "कोई उत्पाद नहीं मिला"
   },
   "services": {
     "pageTitle": "सेवाएं",

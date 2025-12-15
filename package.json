@@ -17,7 +17,8 @@
     "start:frontend": "next start",
     "start:strapi": "cd strapi && npm run start",
     "lint": "eslint",
-    "install:all": "npm install && cd strapi && npm install"
+    "install:all": "npm install && cd strapi && npm install",
+    "postinstall": "mkdir -p node_modules/@strapi && ln -sfn ../../strapi/node_modules/@strapi/strapi node_modules/@strapi/strapi || true"
   },
   "dependencies": {
     "next": "16.0.10",
