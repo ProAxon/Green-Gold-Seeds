@@ -160,9 +160,9 @@ export function ProductsContent() {
           <div className="single-product-style1__content">
             <div className="single-product-style1__content-left">
               <h4>
-                <a href="/products">
+                <Link href={`/products/${product.documentId || product.id}`}>
                   {product.Variety_Name || product.Name}
-                </a>
+                </Link>
               </h4>
               <p>{product.Name}</p>
             </div>
@@ -210,9 +210,9 @@ export function ProductsContent() {
                 </div>
                 <div className="single-product-style2__text">
                   <h4>
-                    <a href="/products">
+                    <Link href={`/products/${product.documentId || product.id}`}>
                       {product.Variety_Name || product.Name}
-                    </a>
+                    </Link>
                   </h4>
                   <p>{product.Name}</p>
                 </div>
@@ -610,11 +610,11 @@ export function ProductsContent() {
                             <li key={product.id}>
                           <div className="img">
                                 <img src={imageUrl} alt={product.Name} />
-                                <Link href="/products#"><i className="fa fa-link" aria-hidden="true" /></Link>
+                                <Link href={`/products/${product.documentId || product.id}`}><i className="fa fa-link" aria-hidden="true" /></Link>
                           </div>
                           <div className="content">
                             <div className="title">
-                                  <h5><Link href="/products#">{product.Variety_Name || product.Name}</Link></h5>
+                                  <h5><Link href={`/products/${product.documentId || product.id}`}>{product.Variety_Name || product.Name}</Link></h5>
                             </div>
                             <div className="price">
                                   <p>{product.Name}</p>

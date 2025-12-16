@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "products": "Products",
+    "productDetails": "Product Details",
     "services": "Services",
     "diagnosticsTest": "Diagnostic Test",
     "blog": "Blog",
@@ -423,6 +424,73 @@
   "faq": {
     "pageTitle": "FAQ",
     "breadcrumb": "Home / FAQ"
+  },
+  "productDetails": {
+    "title": "Product Details",
+    "productName": "Fresh Capsicum",
+    "price": "$86.00",
+    "reviews": "{count} customer reviews",
+    "description": "The power to be found between the pages of a book is formidable, indeed. And these 80 inspiring quotes about books and importance of reading are here to remind you of that. From beloved bestsellers to iconic celebrities, these quotes exemplify the benefits of reading and of a good books to comfort, challenge, and inspire you.",
+    "reference": "REF. 4231/406",
+    "availability": "Available in store",
+    "size": "Size",
+    "quantity": "Quantity",
+    "addToWishlist": "Add to Wishlist",
+    "addToCart": "Add to Cart",
+    "shareWithFriends": "Share with friends",
+    "tabs": {
+      "description": "Description",
+      "additionalInfo": "Additional information",
+      "reviews": "Reviews ({count})"
+    },
+    "tabContent": {
+      "description1": "I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences",
+      "descriptionList1": "Nam at elit nec neque suscipit gravida.",
+      "descriptionList2": "Aenean egestas orci eu maximus tincidunt.",
+      "descriptionList3": "Curabitur vel turpis id tellus cursus laoreet.",
+      "description2": "Quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo",
+      "additionalInfo1": "Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some injected or words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrang hidden in the middle of text.",
+      "additionalInfo2": "Quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo"
+    },
+    "reviewsTitle": "{count} Reviews",
+    "review1": {
+      "name": "Kevin martin",
+      "date": "20 Oct, 2025 . 4:00 pm",
+      "text": "Lorem ipsum dolor sit amet, cibo mundi ea duo, vim exerci phaedrum. There are many variations of passages of Lorem Ipsum available, but the majority have alteration in some injected or words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrang hidden in the middle of text."
+    },
+    "review2": {
+      "name": "Sarah albert",
+      "date": "20 Oct, 2025 . 4:00 pm",
+      "text": "It has survived not only five centuries, but also the leap into electronic typesetting unchanged. It was popularised in the sheets containing lorem ipsum is simply free text. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Vestibulum sollicitudin varius mauris non dignissim."
+    },
+    "addReview": "Add a review",
+    "rateProduct": "Rate this product?",
+    "writeComment": "Write a comment",
+    "emailAddress": "Email address",
+    "submitReview": "Submit a review",
+    "relatedProducts": "Related Products",
+    "relatedProductsDesc": "Interdum et malesuada fames ac ante ipsum primis in faucibus.",
+    "new": "New",
+    "quickView": "Quick View",
+    "compare": "Compare",
+    "discount": "{percent}% Off",
+    "relatedProduct1": {
+      "name": "Chicken Eggs (12P)",
+      "price": "$33.00"
+    },
+    "relatedProduct2": {
+      "name": "Golden Ginger",
+      "price": "$50.00"
+    },
+    "relatedProduct3": {
+      "name": "Sweet Orange",
+      "oldPrice": "$33.00",
+      "newPrice": "$28.00"
+    },
+    "relatedProduct4": {
+      "name": "Cow Fresh Milk (1L)",
+      "price": "$40.00"
+    }
   },
   "sidebar": {
     "aboutUs": "About Us",
