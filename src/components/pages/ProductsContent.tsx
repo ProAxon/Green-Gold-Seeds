@@ -50,15 +50,15 @@ export function ProductsContent() {
       setLoading(true);
       setError(null);
       const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+      const baseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
       const headers: HeadersInit = {};
       
       if (apiKey) {
         headers['Authorization'] = `Bearer ${apiKey}`;
       }
       
-      // Use /strapi which is rewritten to http://localhost:1337 via next.config.ts
       const response = await fetch(
-        `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
+        `${baseUrl}/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
         {
           headers,
         }
