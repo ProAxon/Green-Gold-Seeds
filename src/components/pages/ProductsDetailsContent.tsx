@@ -1,13 +1,114 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ResponsiveLanguageSwitcher } from "@/components/ResponsiveLanguageSwitcher";
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+
+// Function to format description with bullet points
+const formatDescription = (description: string | null | undefined): JSX.Element | null => {
+  if (!description) return null;
+  
+  // Handle escape characters and normalize line breaks
+  let normalizedDesc = description
+    .replace(/\\n/g, '\n')      // Convert \n to actual newline
+    .replace(/\\r/g, '\r')      // Convert \r to carriage return
+    .replace(/\\t/g, '\t');     // Convert \t to tab
+  
+  // Split by lines and process
+  const lines = normalizedDesc.split(/\r?\n/).filter(line => line.trim());
+  const formattedContent: JSX.Element[] = [];
+  let currentList: string[] = [];
+  
+  const flushList = () => {
+    if (currentList.length > 0) {
+      formattedContent.push(
+        <ul key={`list-${formattedContent.length}`} className="product-details__features-list" style={{ 
+          listStyle: 'none', 
+          paddingLeft: '0',
+          marginTop: '15px',
+          marginBottom: '15px'
+        }}>
+          {currentList.map((item, index) => (
+            <li key={index} style={{ 
+              marginBottom: '10px',
+              paddingLeft: '25px',
+              position: 'relative',
+              lineHeight: '1.6'
+            }}>
+              <span style={{ 
+                position: 'absolute',
+                left: '0',
+                color: '#f5cb4b',
+                fontSize: '18px',
+                fontWeight: 'bold'
+              }}>•</span>
+              {item.trim()}
+            </li>
+          ))}
+        </ul>
+      );
+      currentList = [];
+    }
+  };
+  
+  lines.forEach((line, index) => {
+    const trimmedLine = line.trim();
+    
+    // Check if line starts with bullet point (• or -)
+    if (trimmedLine.startsWith('•') || trimmedLine.startsWith('-')) {
+      // Remove the bullet and add to current list
+      const itemText = trimmedLine.replace(/^[•\-]\s*/, '').trim();
+      if (itemText) {
+        currentList.push(itemText);
+      }
+    } else if (trimmedLine.includes(':') && trimmedLine.length < 100 && !trimmedLine.startsWith('•') && !trimmedLine.startsWith('-')) {
+      // This might be a section heading (e.g., "Special Features :")
+      flushList();
+      if (trimmedLine.endsWith(':')) {
+        formattedContent.push(
+          <p key={`heading-${index}`} style={{ 
+            marginTop: '20px',
+            marginBottom: '10px',
+            fontSize: '18px',
+            lineHeight: '1.6'
+          }}>
+            {trimmedLine}
+          </p>
+        );
+      } else {
+        // Regular text line
+        if (currentList.length > 0) {
+          flushList();
+        }
+        formattedContent.push(
+          <p key={`text-${index}`} style={{ marginBottom: '10px', lineHeight: '1.6' }}>
+            {trimmedLine}
+          </p>
+        );
+      }
+    } else if (trimmedLine) {
+      // Regular text line
+      if (currentList.length > 0) {
+        flushList();
+      }
+      formattedContent.push(
+        <p key={`text-${index}`} style={{ marginBottom: '10px', lineHeight: '1.6' }}>
+          {trimmedLine}
+        </p>
+      );
+    }
+  });
+  
+  // Flush any remaining list items
+  flushList();
+  
+  return formattedContent.length > 0 ? <div>{formattedContent}</div> : null;
+};
 
 interface Product {
   id: number;
@@ -84,7 +185,6 @@ export function ProductsDetailsContent() {
           
           // Strictly verify the product locale matches the current locale
           if (dataById.data && dataById.data.locale !== locale) {
-            console.warn(`Product locale (${dataById.data.locale}) does not match current locale (${locale}). Product may not be available in ${locale}.`);
             // Don't set the product if locale doesn't match - show error instead
             throw new Error(`Product not available in ${locale} locale. Available in ${dataById.data.locale}.`);
           }
@@ -98,7 +198,6 @@ export function ProductsDetailsContent() {
             
             // Strictly verify the product locale matches the current locale
             if (product.locale !== locale) {
-              console.warn(`Product locale (${product.locale}) does not match current locale (${locale}). Product may not be available in ${locale}.`);
               // Don't set the product if locale doesn't match - show error instead
               throw new Error(`Product not available in ${locale} locale. Available in ${product.locale}.`);
             }
@@ -110,8 +209,6 @@ export function ProductsDetailsContent() {
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
-        console.error('Error fetching product:', err);
-        console.error('Locale:', locale, 'ProductId:', productId);
       } finally {
         setLoading(false);
       }
@@ -233,11 +330,14 @@ export function ProductsDetailsContent() {
                   <div className="main-menu-two__wrapper-inner">
                     <div className="main-menu-two__left">
                       <div className="main-menu-two__logo">
-                        <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
+                        <Link href="/"><img src="/assets/images/resources/logo-11.png" alt="" /></Link>
                       </div>
                     </div>
                     <div className="main-menu-two__main-menu-box">
-                      <a href="/products#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <a href="/products#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
+                        <ResponsiveLanguageSwitcher variant="mobile" />
+                      </div>
                       <ul className="main-menu__list">
                         <li>
                           <Link href="/">{t('nav.home')}</Link>
@@ -269,7 +369,7 @@ export function ProductsDetailsContent() {
                       <div className="main-menu-two__search-box">
                         <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
                       </div>
-                      <LanguageSwitcher />
+                      <ResponsiveLanguageSwitcher variant="desktop" />
                     </div>
                   </div>
                 </div>
@@ -387,9 +487,11 @@ export function ProductsDetailsContent() {
                         )}
                       </div>
                       <div className="product-details__content">
-                        <p className="product-details__content-text1">
-                          {product.Description || t('productDetails.description')}
-                        </p>
+                        <div className="product-details__content-text1">
+                          {formatDescription(product.Description) || (
+                            <p>{t('productDetails.description')}</p>
+                          )}
+                        </div>
                       </div>
                   </div>
                   </div>

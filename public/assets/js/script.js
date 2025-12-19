@@ -1010,10 +1010,11 @@
   }
 
   // Run the function if the main menu exists
-  if ($(".main-menu__list").length) {
-    let mainNavUL = $(".main-menu__list");
-    dynamicCurrentMenuClass(mainNavUL);
-  }
+  // Disabled - NavHighlighter React component handles this now
+  // if ($(".main-menu__list").length) {
+  //   let mainNavUL = $(".main-menu__list");
+  //   dynamicCurrentMenuClass(mainNavUL);
+  // }
 
 
   if ($(".main-menu__list").length && $(".mobile-nav__container").length) {

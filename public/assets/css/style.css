@@ -1407,6 +1407,12 @@ xs sidebar
   padding: 25px 0;
 }
 
+.main-menu__logo img {
+  width: 160px;
+  height: 50px;
+  object-fit: contain;
+}
+
 .main-menu__main-menu-box {
   display: block;
 }
@@ -1978,9 +1984,44 @@ xs sidebar
   color: var(--farmology-base);
 }
 
+/* Responsive Language Switcher */
+.responsive-language-switcher-desktop {
+  display: block;
+}
+
+.responsive-language-switcher-mobile {
+  display: none;
+}
+
 @media (min-width: 1200px) {
   .main-menu .mobile-nav__toggler {
     display: none;
+  }
+  .responsive-language-switcher-desktop {
+    display: block;
+  }
+  .responsive-language-switcher-mobile {
+    display: none !important;
+  }
+  /* Legacy classes - can be removed after migration */
+  .mobile-language-switcher-container {
+    display: none !important;
+  }
+  .mobile-only-language-switcher {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  .responsive-language-switcher-desktop {
+    display: none !important;
+  }
+  .responsive-language-switcher-mobile {
+    display: block;
+  }
+  /* Legacy classes - can be removed after migration */
+  .mobile-only-language-switcher {
+    display: block;
   }
 }
 
@@ -2717,6 +2758,19 @@ xs sidebar
   position: relative;
   display: block;
   padding: 25px 0;
+}
+
+.main-menu-two__logo img {
+  width: 200px;
+  height: 65px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.7)) brightness(1.2) contrast(1.1);
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .main-menu-two__main-menu-box {
@@ -16061,11 +16115,11 @@ Cta One
 }
 
 .page-header__inner h3 {
-  font-size: 60px;
+  font-size: 72px;
   color: var(--farmology-white);
   line-height: 1em;
   font-weight: 600;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
 }
 
 .thm-breadcrumb__inner {
@@ -16081,9 +16135,9 @@ Cta One
 .thm-breadcrumb li {
   position: relative;
   display: inline-block;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 22px;
   color: var(--farmology-base);
   font-family: var(--farmology-font-two);
   text-transform: capitalize;
@@ -16098,9 +16152,9 @@ Cta One
 .thm-breadcrumb li a {
   position: relative;
   display: inline-block;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
-  line-height: 18px;
+  line-height: 22px;
   color: var(--farmology-white);
   font-family: var(--farmology-font-two);
   text-transform: capitalize;
@@ -16114,7 +16168,7 @@ Cta One
 }
 
 .thm-breadcrumb li span {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--farmology-base);
   font-weight: 700;
   position: relative;

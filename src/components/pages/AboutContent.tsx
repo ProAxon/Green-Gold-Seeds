@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ResponsiveLanguageSwitcher } from "@/components/ResponsiveLanguageSwitcher";
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { useEffect, useState } from 'react';
@@ -129,11 +129,14 @@ export function AboutContent() {
                   <div className="main-menu-two__wrapper-inner">
                     <div className="main-menu-two__left">
                       <div className="main-menu-two__logo">
-                        <Link href="/"><img src="/assets/images/resources/logo-1.png" alt="" /></Link>
+                        <Link href="/"><img src="/assets/images/resources/logo-11.png" alt="" /></Link>
                       </div>
                     </div>
                     <div className="main-menu-two__main-menu-box">
-                      <a href="/about#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <a href="/about#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
+                        <ResponsiveLanguageSwitcher variant="mobile" />
+                      </div>
                       <ul className="main-menu__list">
                         <li>
                           <Link href="/">{t('nav.home')}</Link>
@@ -171,7 +174,7 @@ export function AboutContent() {
                       </ul>
                     </div>
                     <div className="main-menu-two__right">
-                      <LanguageSwitcher />
+                      <ResponsiveLanguageSwitcher variant="desktop" />
                       {/* Search, Cart, and Get A Quote components removed */}
                     </div>
                   </div>
@@ -594,7 +597,7 @@ export function AboutContent() {
           <div className="mobile-nav__content">
             <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
             <div className="logo-box">
-              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-1.png" width={150} alt="" /></Link>
+              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-11.png" width={150} alt="" /></Link>
             </div>
             {/* /.logo-box */}
             <div className="mobile-nav__container" />
@@ -609,6 +612,9 @@ export function AboutContent() {
                 <a href="tel:+918888866031">+91 88888 66031</a>
               </li>
             </ul>{/* /.mobile-nav__contact */}
+            <div style={{ padding: '15px 20px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
+              <ResponsiveLanguageSwitcher variant="mobile" />
+            </div>
             <div className="mobile-nav__top">
               <div className="mobile-nav__social">
                 <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
