@@ -1,16 +1,14 @@
 "use client";
 
-import dynamic from 'next/dynamic';
-import { ResponsiveLanguageSwitcher } from "@/components/ResponsiveLanguageSwitcher";
-import { useTranslations, useLocale } from 'next-intl';
+import React, { useEffect, useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
-const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
+import { useTranslations, useLocale } from 'next-intl';
+import { PageLayout } from '@/components/layout/PageLayout';
+import { IMAGE_PATHS } from '@/config/images';
 
 // Function to format description with bullet points
-const formatDescription = (description: string | null | undefined): JSX.Element | null => {
+const formatDescription = (description: string | null | undefined): React.JSX.Element | null => {
   if (!description) return null;
   
   // Handle escape characters and normalize line breaks
@@ -21,7 +19,7 @@ const formatDescription = (description: string | null | undefined): JSX.Element 
   
   // Split by lines and process
   const lines = normalizedDesc.split(/\r?\n/).filter(line => line.trim());
-  const formattedContent: JSX.Element[] = [];
+  const formattedContent: React.JSX.Element[] = [];
   let currentList: string[] = [];
   
   const flushList = () => {
@@ -120,31 +118,15 @@ interface Product {
   Image: any;
 }
 
+// ===== MAIN COMPONENT =====
 export function ProductsDetailsContent() {
   const t = useTranslations();
   const locale = useLocale();
   const params = useParams();
   const productId = params?.id as string;
-  const [showPreloader, setShowPreloader] = useState(true);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  
-  useEffect(() => {
-    // Hide preloader after component mounts
-    const hidePreloader = () => {
-      setShowPreloader(false);
-    };
-    
-    // Hide immediately if DOM is ready
-    if (document.readyState === 'complete') {
-      setTimeout(hidePreloader, 300);
-    } else {
-      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
-      // Fallback timeout
-      setTimeout(hidePreloader, 1000);
-    }
-  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -237,161 +219,19 @@ export function ProductsDetailsContent() {
 
 
   return (
-    <>
-      <NavHighlighter />
-      <div>
-        <div className="custom-cursor__cursor" />
-        <div className="custom-cursor__cursor-two" />
-        {/*Start Preloader*/}
-        <div 
-          id="preloader" 
-          suppressHydrationWarning
-          style={{ 
-            opacity: showPreloader ? 1 : 0, 
-            transition: 'opacity 0.5s ease',
-            pointerEvents: showPreloader ? 'auto' : 'none',
-            display: showPreloader ? 'block' : 'none'
-          }}
-        >
-          <div className="preloader">
-            <span />
-            <span />
-          </div>
+    <PageLayout variant="two" currentPage="/products">
+      {/*Page Header Start*/}
+      <section className="page-header">
+        <div className="page-header__bg" style={{ backgroundImage: `url(${IMAGE_PATHS.pageHeaderBg})` }}>
         </div>
-        {/*End Preloader*/}
-        <div className="chat-icon"><button type="button" className="chat-toggler"><i className="fa fa-comment" /></button></div>
-        {/*Chat Popup*/}
-        <div id="chat-popup" className="chat-popup">
-          <div className="popup-inner">
-            <div className="close-chat"><i className="fa fa-times" /></div>
-            <div className="chat-form">
-              <p>{t('sidebar.pleaseFillForm')}</p>
-              <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
-                <div className="form-group">
-                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
-                </div>
-                <div className="form-group">
-                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
-                </div>
-                <div className="form-group">
-                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
-                </div>
-                <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
-                    <i className="fal fa-long-arrow-right" />
-                    <span className="hover-btn hover-bx" />
-                    <span className="hover-btn hover-bx2" />
-                    <span className="hover-btn hover-bx3" />
-                    <span className="hover-btn hover-bx4" />
-                  </button>
-                </div>
-                <div className="result" />
-              </form>
-            </div>
-          </div>
-        </div>
-        <div className="page-wrapper">
-          <header className="main-header-two">
-            <div className="main-menu-two__top">
-              <div className="container">
-                <div className="main-menu-two__top-inner">
-                  <ul className="list-unstyled main-menu-two__contact-list">
-                    <li>
-                      <div className="icon">
-                        <i className="icon-call" />
-                      </div>
-                      <div className="text">
-                        <p><a href="tel:+918888866031">+91 88888 66031</a></p>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="icon">
-                        <i className="icon-email" />
-                      </div>
-                      <div className="text">
-                        <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
-                        </p>
-                      </div>
-                    </li>
-                  </ul>
-                  <div className="main-menu-two__top-right">
-                    <div className="main-menu-two__social">
-                      <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
-                      <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
-                      <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <nav className="main-menu main-menu-two">
-              <div className="main-menu-two__wrapper">
-                <div className="container">
-                  <div className="main-menu-two__wrapper-inner">
-                    <div className="main-menu-two__left">
-                      <div className="main-menu-two__logo">
-                        <Link href="/"><img src="/assets/images/resources/logo-11.png" alt="" /></Link>
-                      </div>
-                    </div>
-                    <div className="main-menu-two__main-menu-box">
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                        <a href="/products#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
-                        <ResponsiveLanguageSwitcher variant="mobile" />
-                      </div>
-                      <ul className="main-menu__list">
-                        <li>
-                          <Link href="/">{t('nav.home')}</Link>
-                        </li>
-                        <li>
-                          <Link href="/about">{t('nav.about')}</Link>
-                        </li>
-                        <li className="dropdown">
-                          <a href="/products#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
-                          <ul className="shadow-box">
-                            <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
-                            <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
-                            <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
-                            <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
-                            <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
-                            <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
-                            <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
-                          </ul>
-                        </li>
-                        <li>
-                          <Link href="/blog">{t('nav.blog')}</Link>
-                        </li>
-                        <li>
-                          <Link href="/contact">{t('nav.contact')}</Link>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="main-menu-two__right">
-                      <div className="main-menu-two__search-box">
-                        <span className="main-menu-two__search searcher-toggler-box fal fa-search" />
-                      </div>
-                      <ResponsiveLanguageSwitcher variant="desktop" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </nav>
-          </header>
-          <div className="stricky-header stricked-menu main-menu main-menu-two">
-            <div className="sticky-header__content" />
-          </div>
-
-          {/*Page Header Start*/}
-          <section className="page-header">
-            <div className="page-header__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/page-header-bg.jpg)' }}>
-            </div>
-            <div className="container">
-              <div className="page-header__inner">
-                <h3>{product ? (product.Variety_Name || product.Name) : t('productDetails.title')}</h3>
-                <div className="thm-breadcrumb__inner">
-                  <ul className="thm-breadcrumb list-unstyled">
-                    <li><Link href="/">{t('nav.home')}</Link></li>
-                    <li><span className="fas fa-angle-right" /></li>
-                    <li><Link href="/products">{t('nav.products')}</Link></li>
+        <div className="container">
+          <div className="page-header__inner">
+            <h3>{product ? (product.Variety_Name || product.Name) : t('productDetails.title')}</h3>
+            <div className="thm-breadcrumb__inner">
+              <ul className="thm-breadcrumb list-unstyled">
+                <li><Link href="/">{t('nav.home')}</Link></li>
+                <li><span className="fas fa-angle-right" /></li>
+                <li><Link href="/products">{t('nav.products')}</Link></li>
                     <li><span className="fas fa-angle-right" /></li>
                     <li>{product ? (product.Variety_Name || product.Name) : t('productDetails.title')}</li>
                   </ul>
@@ -499,31 +339,7 @@ export function ProductsDetailsContent() {
               )}
             </div>
           </section>
-          {/*End Product Details*/}
-
-          {/*Site Footer Start*/}
-          <footer className="site-footer">
-            <div className="site-footer__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/site-footer-bg.jpg)' }}>
-            </div>
-            <div className="site-footer__bottom">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-12">
-                    <div className="site-footer__bottom-inner">
-                      <div className="site-footer__copyright">
-                        <p className="site-footer__copyright-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-          {/*Site Footer End*/}
-        </div>
-        {/* /.page-wrapper */}
-      </div>
-    </>
+    </PageLayout>
   );
 }
 

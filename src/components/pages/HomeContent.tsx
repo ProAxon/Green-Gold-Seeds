@@ -1,241 +1,27 @@
 "use client";
 
-import dynamic from 'next/dynamic';
-const NavHighlighter = dynamic(() => import("@/components/NavHighlighter").then(mod => ({ default: mod.NavHighlighter })), { ssr: false });
-import { ResponsiveLanguageSwitcher } from "@/components/ResponsiveLanguageSwitcher";
-import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
-import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { PageLayout } from '@/components/layout/PageLayout';
+import { CONTACT_INFO, SOCIAL_LINKS } from '@/config/constants';
+import { IMAGE_PATHS } from '@/config/images';
+
+const BANNER_IMAGE_STYLES = {
+  width: '100%',
+  height: 'auto',
+  objectFit: 'contain',
+  maxWidth: 540,
+  maxHeight: 520,
+  margin: '0 auto',
+  display: 'block',
+} as const;
 
 export function HomeContent() {
   const t = useTranslations();
-  const [showPreloader, setShowPreloader] = useState(true);
-  
-  useEffect(() => {
-    // Hide preloader after component mounts
-    const hidePreloader = () => {
-      setShowPreloader(false);
-    };
-    
-    // Hide immediately if DOM is ready
-    if (document.readyState === 'complete') {
-      setTimeout(hidePreloader, 300);
-    } else {
-      window.addEventListener('load', () => setTimeout(hidePreloader, 300));
-      // Fallback timeout
-      setTimeout(hidePreloader, 1000);
-    }
-  }, []);
   
   return (
-    <>
-      <NavHighlighter />
-      <div>
-        <div className="custom-cursor__cursor" />
-        <div className="custom-cursor__cursor-two" />
-        {/*Start Preloader*/}
-        <div 
-          id="preloader" 
-          suppressHydrationWarning
-          style={{ 
-            opacity: showPreloader ? 1 : 0, 
-            transition: 'opacity 0.5s ease',
-            pointerEvents: showPreloader ? 'auto' : 'none',
-            display: showPreloader ? 'block' : 'none'
-          }}
-        >
-          <div className="preloader">
-            <span />
-            <span />
-          </div>
-        </div>
-        {/*End Preloader*/}
-        <div className="chat-icon"><button type="button" className="chat-toggler"><i className="fa fa-comment" /></button></div>
-        {/*Chat Popup*/}
-        <div id="chat-popup" className="chat-popup">
-          <div className="popup-inner">
-            <div className="close-chat"><i className="fa fa-times" /></div>
-            <div className="chat-form">
-              <p>{t('sidebar.pleaseFillForm')}</p>
-              <form action="https://dreamlayout.mnsithub.com/html/farmology/main-html/assets/inc/sendemail.php" method="POST" className="contact-form-validated">
-                <div className="form-group">
-                  <input type="text" name="name" placeholder={t('contact.yourName')} required />
-                </div>
-                <div className="form-group">
-                  <input type="email" name="email" placeholder={t('contact.yourEmail')} required />
-                </div>
-                <div className="form-group">
-                  <textarea name="message" placeholder={t('contact.yourText')} required defaultValue={""} />
-                </div>
-                <div className="form-group message-btn">
-                  <button type="submit" className="thm-btn"> {t('common.submitNow')}
-                    <i className="fal fa-long-arrow-right" />
-                    <span className="hover-btn hover-bx" />
-                    <span className="hover-btn hover-bx2" />
-                    <span className="hover-btn hover-bx3" />
-                    <span className="hover-btn hover-bx4" />
-                  </button>
-                </div>
-                <div className="result" />
-              </form>
-            </div>
-          </div>
-        </div>
-        {/* Start sidebar widget content */}
-        <div className="xs-sidebar-group info-group info-sidebar">
-          <div className="xs-overlay xs-bg-black" />
-          <div className="xs-sidebar-widget">
-            <div className="sidebar-widget-container">
-              <div className="widget-heading">
-                <a href="/#" className="close-side-widget">X</a>
-              </div>
-              <div className="sidebar-textwidget">
-                <div className="sidebar-info-contents">
-                  <div className="content-inner">
-                    <div className="logo">
-                      <Link href="/"><img src="/assets/images/resources/logo-11.png" alt="" /></Link>
-                    </div>
-                    <div className="content-box">
-                      <h4>{t('sidebar.aboutUs')}</h4>
-                      <div className="inner-text">
-                        <p>{t('sidebar.sidebarAboutText')}
-                        </p>
-                      </div>
-                    </div>
-                    {/* Get A Free Quote form removed */}
-                    <div className="sidebar-contact-info">
-                      <h4>{t('sidebar.contactInfo')}</h4>
-                      <ul className="list-unstyled">
-                        <li>
-                          <span className="icon-pin" /> {t('contact.location')}
-                        </li>
-                        <li>
-                          <span className="icon-call" />
-                          <a href="tel:+918888866031">+91 88888 66031</a>
-                        </li>
-                        <li>
-                          <span className="icon-email" />
-                          <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="thm-social-link1">
-                      <ul className="social-box list-unstyled">
-                        <li>
-                          <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" aria-hidden="true" /></a>
-                        </li>
-                        <li>
-                          <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" aria-hidden="true" /></a>
-                        </li>
-                        <li>
-                          <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" aria-hidden="true" /></a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* End sidebar widget content */}
-        <div className="page-wrapper">
-          <header className="main-header">
-            <div className="main-menu__top">
-              <div className="main-menu__top-inner">
-                <ul className="list-unstyled main-menu__contact-list">
-                  <li>
-                    <div className="icon">
-                      <i className="icon-email" />
-                    </div>
-                    <div className="text">
-                      <p><a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-                {/* Welcome text header removed */}
-                <div className="main-menu__top-right">
-                  <p className="main-menu__social-title">{t('topBar.followUsOn')}</p>
-                  <div className="main-menu__social">
-                    <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><i className="fab fa-youtube" /></a>
-                    <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f" /></a>
-                    <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram" /></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <nav className="main-menu">
-              <div className="main-menu__wrapper">
-                <div className="main-menu__wrapper-inner">
-                  <div className="main-menu__left">
-                    <div className="main-menu__logo">
-                      <Link href="/"><img src="/assets/images/resources/logo-22.png" alt="" /></Link>
-                    </div>
-                  </div>
-                  <div className="main-menu__main-menu-box">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                      <a href="/#" className="mobile-nav__toggler"><i className="fa fa-bars" /></a>
-                      <ResponsiveLanguageSwitcher variant="mobile" />
-                    </div>
-                    <ul className="main-menu__list">
-                      <li>
-                        <Link href="/">{t('nav.home')}</Link>
-                      </li>
-                      <li>
-                        <Link href="/about">{t('nav.about')}</Link>
-                      </li>
-                      {/* Services dropdown commented out - temporarily disabled
-                      <li className="dropdown">
-                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.services')}</a>
-                        <ul className="shadow-box">
-                          <li><Link href="/services">{t('nav.services')}</Link></li>
-                          <li><Link href="/diagnostics-test">{t('nav.diagnosticTest')}</Link></li>
-                        </ul>
-                      </li>
-                      */}
-                      <li className="dropdown">
-                        <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
-                        <ul className="shadow-box">
-                          <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
-                          <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
-                          <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
-                          <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
-                          <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
-                          <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
-                          <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
-                        </ul>
-                      </li>
-                      <li>
-                        <Link href="/blog">{t('nav.blog')}</Link>
-                      </li>
-                      <li>
-                        <Link href="/contact">{t('nav.contact')}</Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="main-menu__right">
-                    <ResponsiveLanguageSwitcher variant="desktop" />
-                    <div className="main-menu__call">
-                      <div className="main-menu__call-icon">
-                        <i className="icon-call" />
-                      </div>
-                      <div className="main-menu__call-content">
-                        <p className="main-menu__call-sub-title">{t('common.callAnytime')}</p>
-                        <h5 className="main-menu__call-number"><a href="tel:+918888866031">+91 88888 66031</a></h5>
-                      </div>
-                    </div>
-                    {/* Search and Cart components removed */}
-                    {/* Get A Quote button removed */}
-                  </div>
-                </div>
-              </div>
-            </nav>
-          </header>
-          <div className="stricky-header stricked-menu main-menu">
-            <div className="sticky-header__content" />{/* /.sticky-header__content */}
-          </div>{/* /.stricky-header */}
-          {/* Banner One Start */}
+    <PageLayout variant="default" currentPage="/" showSidebar={true}>
+      {/* ===== BANNER SECTION ===== */}
           <section className="banner-one">
             <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
             </div>
@@ -287,17 +73,9 @@ export function HomeContent() {
                         <div className="banner-one__img">
                           <img
                             className="img-bounce"
-                            src="/assets/images/backgrounds/1-removebg-preview.png"
+                            src={IMAGE_PATHS.bannerImage}
                             alt={t('home.banner.title')}
-                            style={{
-                              width: '100%',
-                              height: 'auto',
-                              objectFit: 'contain',
-                              maxWidth: 540,
-                              maxHeight: 520,
-                              margin: '0 auto',
-                              display: 'block',
-                            }}
+                            style={BANNER_IMAGE_STYLES}
                           />
                           <div className="banner-one__img-shape-box rotate-me">
                             <div className="banner-one__img-shape-1">
@@ -321,8 +99,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Banner One End */}
-          {/*Feature One Start */}
+          {/* ===== FEATURE SECTION ===== */}
           {false && <section className="feature-one">
             <div className="container">
               <div className="row">
@@ -387,15 +164,14 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Feature One End */}
-          {/*About One Start */}
+          {/* ===== ABOUT SECTION ===== */}
           <section className="about-one">
             <div className="container">
               <div className="row">
                 <div className="col-xl-6">
                   <div className="about-one__left">
                     <div className="about-one__img" style={{ width: '100%', height: '100%', minHeight: '500px' }}>
-                      <img src="/assets/images/backgrounds/homepage_1.jpg" alt="Tractor tilling field" style={{ width: '100%', height: '100%', minHeight: '500px', objectFit: 'cover', borderRadius: '8px' }} />
+                      <img src={IMAGE_PATHS.homepageImage} alt="Tractor tilling field" style={{ width: '100%', height: '100%', minHeight: '500px', objectFit: 'cover', borderRadius: '8px' }} />
                     </div>
                   </div>
                 </div>
@@ -465,8 +241,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*About One End */}
-          {/*Author One Start */}
+          {/* ===== AUTHOR/VISION/MISSION SECTION ===== */}
           <section className="author-one">
             <div className="container">
               <div className="row">
@@ -503,8 +278,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Author One End */}
-          {/*Services One Start */}
+          {/* ===== SERVICES SECTION ===== */}
           {false && <section className="services-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -652,8 +426,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Services One End */}
-          {/*Distributors Network Start*/}
+          {/* ===== DISTRIBUTORS NETWORK SECTION ===== */}
           <section id="distributors" style={{ padding: '80px 0', backgroundColor: '#faf8f0' }}>
             <div className="container">
               <div className="section-title text-center">
@@ -674,8 +447,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Distributors Network End*/}
-          {/*Products One Start*/}
+          {/* ===== PRODUCTS SECTION ===== */}
           <section className="products-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -806,8 +578,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Products One End*/}
-          {/*Counter One Start*/}
+          {/* ===== COUNTER SECTION ===== */}
           <section className="counter-one">
             <div className="counter-one__bg-color" />
             <div className="container">
@@ -880,8 +651,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Counter One End*/}
-          {/*Why Choose One Start*/}
+          {/* ===== WHY CHOOSE SECTION ===== */}
           {false && <section className="why-choose-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -1024,8 +794,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Why Choose One End*/}
-          {/*Project One Start*/}
+          {/* ===== PROJECT SECTION ===== */}
           {false && <section className="project-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -1175,8 +944,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Project One End*/}
-          {/*Do And Donts Start*/}
+          {/* ===== DO'S AND DON'TS SECTION ===== */}
           {false && <section className="do-and-donts">
             <div className="do-and-donts__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
             </div>
@@ -1330,8 +1098,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Do And Donts End*/}
-          {/*Faq One Start*/}
+          {/* ===== FAQ SECTION ===== */}
           {false && <section className="faq-one">
             <div className="container">
               <div className="row">
@@ -1360,13 +1127,13 @@ export function HomeContent() {
                         {t('homeExtra.faq.contactText')}
                       </p>
                       <div className="faq-one__contact-social">
-                        <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
-                        <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer"><span className="fab fa-youtube" /></a>
-                        <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer"><span className="fab fa-instagram" /></a>
+                        <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer"><span className="fab fa-facebook-f" /></a>
+                        <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer"><span className="fab fa-youtube" /></a>
+                        <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer"><span className="fab fa-instagram" /></a>
                       </div>
                       <div className="faq-one__contact-number">
-                        <a href="tel:+918888866031">+91 88888 66031</a>
-                      </div>
+                        <a href={CONTACT_INFO.phoneHref}>{CONTACT_INFO.phoneDisplay}</a>
+                    </div>
                       <div className="faq-one__contact-btn">
                         <a className="thm-btn" href="/contact">Shoot a Direct Call
                           <i className="fal fa-long-arrow-right" />
@@ -1450,8 +1217,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Faq One End*/}
-          {/*Testimonial One Start*/}
+          {/* ===== TESTIMONIALS SECTION ===== */}
           {false && <section className="testimonial-one">
             <div className="testimonial-one__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
             <div className="container">
@@ -1687,8 +1453,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Testimonial One End*/}
-          {/*Start Cta One*/}
+          {/* ===== CTA SECTION ===== */}
           {false && <section className="cta-one">
             <div className="container">
               <div className="cta-one__inner">
@@ -1740,8 +1505,7 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*End Cta One*/}
-          {/*Blog One Start */}
+          {/* ===== BLOG SECTION ===== */}
           {false && <section className="blog-one">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
@@ -1898,9 +1662,8 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/*Blog One End */}
 
-          {/*Do And Donts Start*/}
+          {/* ===== DO'S AND DON'TS SECTION ===== */}
           <section className="do-and-donts">
             <div className="do-and-donts__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/do-and-donts-bg.jpg)' }}>
             </div>
@@ -2057,9 +1820,8 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Do And Donts End*/}
 
-          {/*Faq One Start*/}
+          {/* ===== FAQ SECTION ===== */}
           <section className="faq-one">
             <div className="container">
               <div className="row">
@@ -2094,7 +1856,7 @@ export function HomeContent() {
                         <a href="/#"><span className="fab fa-instagram" /></a>
                       </div>
                       <div className="faq-one__contact-number">
-                        <a href="tel:+918888866031">+91 88888 66031</a>
+                        <a href={CONTACT_INFO.phoneHref}>{CONTACT_INFO.phoneDisplay}</a>
                       </div>
                       <div className="faq-one__contact-btn">
                         <a className="thm-btn" href="/contact">Shoot a Direct Call
@@ -2182,9 +1944,8 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Faq One End*/}
 
-          {/*Testimonial One Start*/}
+          {/* ===== TESTIMONIALS SECTION ===== */}
           <section className="testimonial-one">
             <div className="testimonial-one__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/testimonial-one-bg.jpg)' }} />
             <div className="container">
@@ -2423,72 +2184,6 @@ export function HomeContent() {
               </div>
             </div>
           </section>
-          {/*Testimonial One End*/}
-
-          {/*Site Footer Start*/}
-          <footer className="site-footer">
-            <div className="site-footer__bg" style={{ backgroundImage: 'url(/assets/images/backgrounds/site-footer-bg.jpg)' }}>
-            </div>
-            {/* site-footer__top section removed */}
-            <div className="site-footer__bottom">
-              <div className="container">
-                <div className="row">
-                  <div className="col-xl-12">
-                    <div className="site-footer__bottom-inner">
-                      <div className="site-footer__copyright">
-                        <p className="site-footer__copyright-text">© Copyright GREEN GOLD SEEDS PRIVATE LIMITED. All Rights Reserved</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </footer>
-          {/*Site Footer End*/}
-        </div>{/* /.page-wrapper */}
-        <div className="mobile-nav__wrapper">
-          <div className="mobile-nav__overlay mobile-nav__toggler" />
-          {/* /.mobile-nav__overlay */}
-          <div className="mobile-nav__content">
-            <span className="mobile-nav__close mobile-nav__toggler"><i className="fa fa-times" /></span>
-            <div className="logo-box">
-              <Link href="/" aria-label="logo image"><img src="/assets/images/resources/logo-11.png" width={150} alt="" /></Link>
-            </div>
-            {/* /.logo-box */}
-            <div className="mobile-nav__container" />
-            {/* /.mobile-nav__container */}
-            <ul className="mobile-nav__contact list-unstyled">
-              <li>
-                <i className="fa fa-envelope" />
-                <a href="mailto:greengoldseeds@rediffmail.com">greengoldseeds@rediffmail.com</a>
-              </li>
-              <li>
-                <i className="fas fa-phone" />
-                <a href="tel:+918888866031">+91 88888 66031</a>
-              </li>
-            </ul>{/* /.mobile-nav__contact */}
-            <div style={{ padding: '15px 20px', borderTop: '1px solid rgba(255, 255, 255, 0.1)', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
-              <ResponsiveLanguageSwitcher variant="mobile" />
-            </div>
-            <div className="mobile-nav__top">
-              <div className="mobile-nav__social">
-                <a href="https://www.youtube.com/channel/UCuKrb0ndVNn2LeV5Mawb0OQ/featured" target="_blank" rel="noopener noreferrer" className="fab fa-youtube" />
-                <a href="https://www.facebook.com/GreenGoldSeedsAurangabad" target="_blank" rel="noopener noreferrer" className="fab fa-facebook-square" />
-                <a href="https://www.instagram.com/greegoldseeds/" target="_blank" rel="noopener noreferrer" className="fab fa-instagram" />
-              </div>{/* /.mobile-nav__social */}
-            </div>{/* /.mobile-nav__top */}
-          </div>
-          {/* /.mobile-nav__content */}
-        </div>
-        {/* /.mobile-nav__wrapper */}
-        {/* Search Popup removed */}
-        <a href="/#" data-target="html" className="scroll-to-target scroll-to-top">
-          <span className="scroll-to-top__wrapper"><span className="scroll-to-top__inner" /></span>
-          <span className="scroll-to-top__text"> {t('common.goBackTop')}</span>
-        </a>
-        {/* template js */}
-      </div>
-
-    </>
+    </PageLayout>
   );
 }
