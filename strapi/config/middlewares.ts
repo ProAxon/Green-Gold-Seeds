@@ -5,7 +5,12 @@ export default [
   {
     name: 'strapi::cors',
     config: {
-      origin: ['http://localhost:3000', 'http://46.62.128.100:3000'],
+      origin: [
+        'http://localhost:3000',
+        'http://46.62.128.100:3000',
+        'https://ggs.proaxon.in',
+        'https://www.ggs.proaxon.in',
+      ],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
     },
   },

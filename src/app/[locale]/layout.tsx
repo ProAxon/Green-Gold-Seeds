@@ -61,6 +61,16 @@ export const metadata: Metadata = {
   },
   description:
     "Green Gold Seeds - Leading seed company providing quality seeds for better harvests.",
+  icons: {
+    icon: [
+      { url: '/assets/images/resources/logo-11.png', type: 'image/png' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/assets/images/resources/logo-11.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export function generateStaticParams() {
@@ -91,12 +101,19 @@ export default async function LocaleLayout({
         <link
           rel="apple-touch-icon"
           sizes="180x180"
-          href="/assets/images/resources/logo-11.png"
+          href="/apple-icon.png"
         />
         <link
           rel="icon"
           type="image/png"
-          href="/assets/images/resources/logo-11.png"
+          sizes="32x32"
+          href="/icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/icon.png"
         />
         <link rel="manifest" href="/assets/images/favicons/site.webmanifest" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

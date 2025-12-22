@@ -49,15 +49,15 @@ export function ProductsContent() {
       setLoading(true);
       setError(null);
       const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
-      const baseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
       const headers: HeadersInit = {};
       
       if (apiKey) {
         headers['Authorization'] = `Bearer ${apiKey}`;
       }
       
+      // Use Next.js proxy to avoid CORS issues and mixed content (HTTPS -> HTTP)
       const response = await fetch(
-        `${baseUrl}/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
+        `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
         {
           headers,
         }
