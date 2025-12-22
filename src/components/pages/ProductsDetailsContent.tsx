@@ -127,6 +127,9 @@ export function ProductsDetailsContent() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [relatedLoading, setRelatedLoading] = useState(false);
+  const [relatedError, setRelatedError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -147,6 +150,12 @@ export function ProductsDetailsContent() {
         // Add locale filter to ensure we only get products in the requested locale
         const apiUrl = `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&filters[documentId][$eq]=${productId}&filters[locale][$eq]=${locale}&populate[Image][fields][1]=url`;
         
+        console.log('[ProductDetails] Fetching product', {
+          productId,
+          locale,
+          apiUrl,
+        });
+
         const response = await fetch(apiUrl, {
           headers,
         });
@@ -155,6 +164,13 @@ export function ProductsDetailsContent() {
           // If documentId doesn't work, try fetching by id
           const apiUrlById = `/strapi/api/products/${productId}?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url`;
           
+          console.log('[ProductDetails] Fetching product by ID fallback', {
+            productId,
+            locale,
+            apiUrlById,
+            status: response.status,
+          });
+
           const responseById = await fetch(apiUrlById, {
             headers,
           });
@@ -164,6 +180,7 @@ export function ProductsDetailsContent() {
           }
           
           const dataById = await responseById.json();
+          console.log('[ProductDetails] Product by ID response', dataById);
           
           // Strictly verify the product locale matches the current locale
           if (dataById.data && dataById.data.locale !== locale) {
@@ -174,6 +191,7 @@ export function ProductsDetailsContent() {
           setProduct(dataById.data);
         } else {
           const data = await response.json();
+          console.log('[ProductDetails] Product by documentId response', data);
           if (data.data && data.data.length > 0) {
             // Filter to only get products that match the current locale
             const product = data.data.find((p: Product) => p.locale === locale) || data.data[0];
@@ -190,6 +208,7 @@ export function ProductsDetailsContent() {
           }
         }
       } catch (err) {
+        console.error('[ProductDetails] Error fetching product', err);
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setLoading(false);
@@ -198,6 +217,28 @@ export function ProductsDetailsContent() {
 
     fetchProduct();
   }, [productId, locale]);
+
+  useEffect(() => {
+    if (!product) {
+      console.log('[RelatedProducts] No product loaded yet, skipping related fetch');
+      setRelatedProducts([]);
+      return;
+    }
+
+    const baseName = (product.Name || product.Variety_Name || '').trim();
+    console.log('[RelatedProducts] Derived baseName', {
+      baseName,
+      productName: product.Name,
+      varietyName: product.Variety_Name,
+    });
+    if (!baseName) {
+      setRelatedProducts([]);
+      return;
+    }
+
+    fetchRelatedProducts(baseName, product);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product, locale]);
 
   const getProductImage = (product: Product | null) => {
     if (!product) return '/assets/images/backgrounds/1-1.png';
@@ -215,6 +256,84 @@ export function ProductsDetailsContent() {
 
     // Fallback to default product image (same as ProductsContent)
     return '/assets/images/backgrounds/1-1.png';
+  };
+
+  const fetchRelatedProducts = async (baseName: string, currentProduct: Product) => {
+    if (!baseName) return;
+
+    try {
+      setRelatedLoading(true);
+      setRelatedError(null);
+
+      const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+      const baseUrl = process.env.NEXT_PUBLIC_STRAPI_BASE_URL;
+      const headers: HeadersInit = {};
+
+      if (apiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+
+      if (!baseUrl) {
+        // If base URL is not configured, silently skip related products
+        console.warn('[RelatedProducts] Missing NEXT_PUBLIC_STRAPI_BASE_URL, skipping fetch');
+        setRelatedProducts([]);
+        return;
+      }
+
+      const encodedName = encodeURIComponent(baseName);
+      const relatedUrl = `${baseUrl}/api/products?locale=${locale}&filters[Name][$eq]=${encodedName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=25`;
+      console.log('[RelatedProducts] Fetching related products', {
+        baseName,
+        encodedName,
+        locale,
+        relatedUrl,
+        currentKey: currentProduct.documentId || String(currentProduct.id),
+      });
+
+      const response = await fetch(
+        relatedUrl,
+        {
+          headers,
+        }
+      );
+
+      if (!response.ok) {
+        console.error('[RelatedProducts] Non-OK response', {
+          status: response.status,
+          statusText: response.statusText,
+        });
+        throw new Error('Failed to fetch related products');
+      }
+
+      const data = await response.json();
+      const items: Product[] = data?.data ?? [];
+      console.log('[RelatedProducts] Raw related items', {
+        count: items.length,
+        ids: items.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name })),
+      });
+
+      const currentKey = currentProduct.documentId || String(currentProduct.id);
+      const filtered = items
+        .filter((p) => (p.documentId || String(p.id)) !== currentKey)
+        .slice(0, 4);
+      console.log('[RelatedProducts] Filtered related items', {
+        currentKey,
+        filteredCount: filtered.length,
+        filteredIds: filtered.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name })),
+      });
+
+      setRelatedProducts(filtered);
+    } catch (err) {
+      console.error('[RelatedProducts] Error fetching related products', err);
+      setRelatedError(
+        err instanceof Error
+          ? err.message
+          : 'An error occurred while loading related products'
+      );
+      setRelatedProducts([]);
+    } finally {
+      setRelatedLoading(false);
+    }
   };
 
 
@@ -333,12 +452,86 @@ export function ProductsDetailsContent() {
                           )}
                         </div>
                       </div>
-                  </div>
-                  </div>
-                </div>
-              )}
+              </div>
+              </div>
             </div>
-          </section>
+          )}
+          {!loading && !error && !relatedLoading && relatedProducts.length > 0 && (
+            <section className="related-products" style={{ marginTop: '60px' }}>
+              <div className="container">
+                <div className="related-products__title text-center">
+                  <h3 style={{ marginBottom: '10px' }}>Related Products</h3>
+                  <p style={{ color: '#666' }}>You might also like these.</p>
+                </div>
+                <div className="row">
+                  {relatedProducts.map((item, index) => {
+                    const imageUrl = getProductImage(item);
+                    return (
+                      <div
+                        key={item.id}
+                        className="col-xl-3 col-lg-4 col-md-6"
+                        style={{ display: 'flex', justifyContent: 'center' }}
+                      >
+                        <div className="single-product-style1" style={{ maxWidth: 370, width: '100%' }}>
+                          <div className="single-product-style1__img">
+                            <img src={imageUrl} alt={item.Name} />
+                            <img src={imageUrl} alt={item.Name} />
+                            {index % 3 === 0 && (
+                              <ul className="single-product-style1__overlay">
+                                <li>
+                                  <p>New</p>
+                                </li>
+                              </ul>
+                            )}
+                            <ul className="single-product-style1__info">
+                              <li>
+                                <a href="/products#" title="Add to Wishlist">
+                                  <i className="fa fa-regular fa-heart" />
+                                </a>
+                              </li>
+                              <li>
+                                <a href="/products#" title="Add to cart">
+                                  <i className="fa fa-solid fa-cart-plus" />
+                                </a>
+                              </li>
+                              <li>
+                                <a href="/products#" title="Quick View">
+                                  <i className="fa fa-regular fa-eye" />
+                                </a>
+                              </li>
+                              <li>
+                                <a href="/products#" title="Compare">
+                                  <i className="fa fa-solid fa-repeat" />
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div className="single-product-style1__content">
+                            <div className="single-product-style1__content-left">
+                              <h4>
+                                <Link href={`/products/${item.documentId || item.id}`}>
+                                  {item.Variety_Name || item.Name}
+                                </Link>
+                              </h4>
+                              <p>{item.Name}</p>
+                            </div>
+                            <div className="single-product-style1__content-right">
+                              <div className="single-product-style1__review">
+                                <i className="fa fa-star" />
+                                <p>4.{(5 + (index % 5)).toFixed(1)}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </section>
+          )}
+        </div>
+      </section>
     </PageLayout>
   );
 }
