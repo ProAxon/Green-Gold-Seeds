@@ -19,7 +19,7 @@
 
 # production
 /build
-
+/venv
 # misc
 .DS_Store
 *.pem

@@ -48,7 +48,7 @@ export function ProductsContent() {
     try {
       setLoading(true);
       setError(null);
-      const apiKey = process.env.NEXT_PUBLIC_STRAPI_API_KEY;
+      const apiKey = process.env.NEXT_STRAPI_API_KEY;
       const headers: HeadersInit = {};
       
       if (apiKey) {
