@@ -49,11 +49,20 @@
           "localized": false
         }
       },
-      "multiple": false,
+      "multiple": true,
       "allowedTypes": [
         "files",
         "images"
       ]
+    },
+    "Group_Name": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
     }
   }
 }

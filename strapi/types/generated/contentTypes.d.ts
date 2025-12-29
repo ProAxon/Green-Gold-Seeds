@@ -456,7 +456,14 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    Image: Schema.Attribute.Media<'files' | 'images'> &
+    Group_Name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    Image: Schema.Attribute.Media<'files' | 'images', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: false;
