@@ -1642,6 +1642,133 @@
 
   $('select:not(.ignore)').niceSelect();
 
+  // Social Posts Stacked Carousel
+  (function() {
+    const carousel = document.getElementById('social-posts-carousel');
+    if (!carousel) return;
+
+    const items = carousel.querySelectorAll('.social-post-stacked-item');
+    const prevBtn = document.getElementById('social-posts-prev');
+    const nextBtn = document.getElementById('social-posts-next');
+    
+    if (items.length === 0) return;
+
+    let currentIndex = 2; // Start with middle item (index 2)
+    const totalItems = items.length;
+
+    function updateCarousel() {
+      const isMobile = window.innerWidth <= 767;
+      const translateX = isMobile ? 180 : 300;
+      const scaleSmall = isMobile ? 0.7 : 0.8;
+      const scaleMedium = isMobile ? 0.85 : 0.9;
+      
+      items.forEach((item, index) => {
+        let newIndex = index - currentIndex;
+        
+        // Handle wrapping
+        if (newIndex < -2) newIndex += totalItems;
+        if (newIndex > 2) newIndex -= totalItems;
+        
+        // Remove all position classes
+        item.classList.remove('slide-prev-2', 'slide-prev', 'slide-active', 'slide-next', 'slide-next-2');
+        
+        // Add appropriate class based on position
+        if (newIndex === -2) {
+          item.classList.add('slide-prev-2');
+          item.style.transform = `translateX(-${translateX * 2}px) translateZ(-200px) scale(${scaleSmall})`;
+          item.style.opacity = '0.5';
+          item.style.zIndex = '1';
+        } else if (newIndex === -1) {
+          item.classList.add('slide-prev');
+          item.style.transform = `translateX(-${translateX}px) translateZ(-100px) scale(${scaleMedium})`;
+          item.style.opacity = '0.7';
+          item.style.zIndex = '2';
+        } else if (newIndex === 0) {
+          item.classList.add('slide-active');
+          item.style.transform = 'translateX(0) translateZ(0) scale(1)';
+          item.style.opacity = '1';
+          item.style.zIndex = '5';
+        } else if (newIndex === 1) {
+          item.classList.add('slide-next');
+          item.style.transform = `translateX(${translateX}px) translateZ(-100px) scale(${scaleMedium})`;
+          item.style.opacity = '0.7';
+          item.style.zIndex = '2';
+        } else if (newIndex === 2) {
+          item.classList.add('slide-next-2');
+          item.style.transform = `translateX(${translateX * 2}px) translateZ(-200px) scale(${scaleSmall})`;
+          item.style.opacity = '0.5';
+          item.style.zIndex = '1';
+        }
+      });
+    }
+    
+    // Update on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateCarousel, 250);
+    });
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalItems;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+      updateCarousel();
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', nextSlide);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', prevSlide);
+    }
+
+    // Initialize carousel
+    updateCarousel();
+
+    // Auto-play (optional)
+    let autoPlayInterval = setInterval(nextSlide, 5000);
+
+    // Pause on hover
+    if (carousel) {
+      carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoPlayInterval);
+      });
+      carousel.addEventListener('mouseleave', () => {
+        autoPlayInterval = setInterval(nextSlide, 5000);
+      });
+    }
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (carousel) {
+      carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+    }
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      if (touchEndX < touchStartX - swipeThreshold) {
+        nextSlide();
+      }
+      if (touchEndX > touchStartX + swipeThreshold) {
+        prevSlide();
+      }
+    }
+  })();
+
 
 
 })(jQuery);

@@ -1505,8 +1505,8 @@ export function HomeContent() {
               </div>
             </div>
           </section>}
-          {/* ===== BLOG SECTION ===== */}
-          {false && <section className="blog-one">
+          {/* ===== BLOG SECTION (Social Posts Style - Stacked Carousel) ===== */}
+          <section className="blog-one social-posts-section">
             <div className="container">
               <div className="section-title text-center sec-title-animation animation-style1">
                 <div className="section-title__tagline-box">
@@ -1522,146 +1522,212 @@ export function HomeContent() {
                   Satisfaction.
                 </h3>
               </div>
-              <div className="row">
-                {/*Blog One Single Start*/}
-                <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
-                  <div className="blog-one__single">
-                    <div className="blog-one__single-inner">
-                      <div className="blog-one__img-box">
-                        <div className="blog-one__img">
-                          <img src="/assets/images/blog/blog-1-1.jpg" alt="" />
-                          <div className="blog-one__plus">
-                            <a href="/blog"><i className="fas fa-plus" /></a>
+              <div className="social-posts-stacked-carousel" id="social-posts-carousel" style={{ maxWidth: '100%', width: '100%' }}>
+                <div className="social-posts-stacked-wrapper">
+                  <div className="social-posts-stacked-list" id="social-posts-list">
+                    {/* Post 1 */}
+                    <div className="social-post-stacked-item" data-index="0">
+                      <div className="social-post">
+                        <div className="social-post__header">
+                          <div className="social-post__avatar">
+                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
                           </div>
-                          <div className="blog-one__tag">
-                            <a href="/blog">Organic</a>
+                          <div className="social-post__user-info">
+                            <h4 className="social-post__username">Green Gold Seeds</h4>
+                            <span className="social-post__time">25 Mar</span>
                           </div>
+                          <div className="social-post__tag">Organic</div>
                         </div>
-                        <div className="blog-one__date">
-                          <p>25 <span>Mar</span></p>
+                        <div className="social-post__image">
+                          <img src="/assets/images/blog/blog-1-1.jpg" alt="Why Fresh, Organic Vegetables Matter" />
+                        </div>
+                        <div className="social-post__actions">
+                          <button className="social-post__action-btn">
+                            <i className="far fa-heart" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-comment" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-share-square" />
+                          </button>
+                        </div>
+                        <div className="social-post__content">
+                          <p className="social-post__likes">1,234 likes</p>
+                          <p className="social-post__caption">
+                            <strong>Green Gold Seeds</strong> Why Fresh, Organic Vegetables Matter
+                            <br />
+                            Learn how organic vegetables benefit your health and the planet at the same time.
+                          </p>
+                          <a href="/blog" className="social-post__view-comments">View all 45 comments</a>
                         </div>
                       </div>
-                      <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/blog-one-content-bg-shape.png)' }}>
+                    </div>
+                    {/* Post 2 */}
+                    <div className="social-post-stacked-item" data-index="1">
+                      <div className="social-post">
+                        <div className="social-post__header">
+                          <div className="social-post__avatar">
+                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
+                          </div>
+                          <div className="social-post__user-info">
+                            <h4 className="social-post__username">Green Gold Seeds</h4>
+                            <span className="social-post__time">05 Jun</span>
+                          </div>
+                          <div className="social-post__tag">FreshProduce</div>
                         </div>
-                        <ul className="blog-one__meta list-unstyled">
-                          <li>
-                            <a href="/blog">
-                              <span className="fas fa-user" />Admin
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/blog">
-                              <span className="fas fa-comments" />Comment
-                            </a>
-                          </li>
-                        </ul>
-                        <h3 className="blog-one__title"><a href="/blog">Why Fresh, Organic
-                          Vegetables
-                          Matter</a></h3>
-                        <p className="blog-one__text">Learn how organic vegetables benefit your health and the
-                          planet at the same time.</p>
+                        <div className="social-post__image">
+                          <img src="/assets/images/blog/blog-1-2.jpg" alt="Health Benefits of Organic Vegetables" />
+                        </div>
+                        <div className="social-post__actions">
+                          <button className="social-post__action-btn">
+                            <i className="far fa-heart" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-comment" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-share-square" />
+                          </button>
+                        </div>
+                        <div className="social-post__content">
+                          <p className="social-post__likes">892 likes</p>
+                          <p className="social-post__caption">
+                            <strong>Green Gold Seeds</strong> Health Benefits of Organic Vegetables
+                            <br />
+                            Learn how organic vegetables benefit your health and the planet at the same time.
+                          </p>
+                          <a href="/blog" className="social-post__view-comments">View all 32 comments</a>
+                        </div>
                       </div>
-                      <div className="blog-one__read-more">
-                        <a href="/blog">Read More<span className="fas fa-arrow-right" /></a>
+                    </div>
+                    {/* Post 3 */}
+                    <div className="social-post-stacked-item" data-index="2">
+                      <div className="social-post">
+                        <div className="social-post__header">
+                          <div className="social-post__avatar">
+                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
+                          </div>
+                          <div className="social-post__user-info">
+                            <h4 className="social-post__username">Green Gold Seeds</h4>
+                            <span className="social-post__time">13 Aug</span>
+                          </div>
+                          <div className="social-post__tag">AgriTech</div>
+                        </div>
+                        <div className="social-post__image">
+                          <img src="/assets/images/blog/blog-1-3.jpg" alt="How Technology is Changing Farming" />
+                        </div>
+                        <div className="social-post__actions">
+                          <button className="social-post__action-btn">
+                            <i className="far fa-heart" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-comment" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-share-square" />
+                          </button>
+                        </div>
+                        <div className="social-post__content">
+                          <p className="social-post__likes">2,156 likes</p>
+                          <p className="social-post__caption">
+                            <strong>Green Gold Seeds</strong> How Technology is Changing Farming
+                            <br />
+                            Learn how organic vegetables benefit your health and the planet at the same time.
+                          </p>
+                          <a href="/blog" className="social-post__view-comments">View all 67 comments</a>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Post 4 */}
+                    <div className="social-post-stacked-item" data-index="3">
+                      <div className="social-post">
+                        <div className="social-post__header">
+                          <div className="social-post__avatar">
+                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
+                          </div>
+                          <div className="social-post__user-info">
+                            <h4 className="social-post__username">Green Gold Seeds</h4>
+                            <span className="social-post__time">20 Sep</span>
+                          </div>
+                          <div className="social-post__tag">Sustainability</div>
+                        </div>
+                        <div className="social-post__image">
+                          <img src="/assets/images/blog/blog-1-4.jpg" alt="Sustainable Farming Practices" />
+                        </div>
+                        <div className="social-post__actions">
+                          <button className="social-post__action-btn">
+                            <i className="far fa-heart" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-comment" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-share-square" />
+                          </button>
+                        </div>
+                        <div className="social-post__content">
+                          <p className="social-post__likes">1,567 likes</p>
+                          <p className="social-post__caption">
+                            <strong>Green Gold Seeds</strong> Sustainable Farming Practices
+                            <br />
+                            Discover how we're committed to eco-friendly farming methods that protect our environment.
+                          </p>
+                          <a href="/blog" className="social-post__view-comments">View all 52 comments</a>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Post 5 */}
+                    <div className="social-post-stacked-item" data-index="4">
+                      <div className="social-post">
+                        <div className="social-post__header">
+                          <div className="social-post__avatar">
+                            <img src="/assets/images/resources/logo-11.png" alt="Green Gold Seeds" />
+                          </div>
+                          <div className="social-post__user-info">
+                            <h4 className="social-post__username">Green Gold Seeds</h4>
+                            <span className="social-post__time">15 Oct</span>
+                          </div>
+                          <div className="social-post__tag">Quality</div>
+                        </div>
+                        <div className="social-post__image">
+                          <img src="/assets/images/blog/blog-1-5.jpg" alt="Quality Seeds for Better Harvests" />
+                        </div>
+                        <div className="social-post__actions">
+                          <button className="social-post__action-btn">
+                            <i className="far fa-heart" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-comment" />
+                          </button>
+                          <button className="social-post__action-btn">
+                            <i className="far fa-share-square" />
+                          </button>
+                        </div>
+                        <div className="social-post__content">
+                          <p className="social-post__likes">3,421 likes</p>
+                          <p className="social-post__caption">
+                            <strong>Green Gold Seeds</strong> Quality Seeds for Better Harvests
+                            <br />
+                            Our premium quality seeds ensure maximum yield and better crop performance for farmers.
+                          </p>
+                          <a href="/blog" className="social-post__view-comments">View all 89 comments</a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/*Blog One Single End*/}
-                {/*Blog One Single Start*/}
-                <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                  <div className="blog-one__single">
-                    <div className="blog-one__single-inner">
-                      <div className="blog-one__img-box">
-                        <div className="blog-one__img">
-                          <img src="/assets/images/blog/blog-1-2.jpg" alt="" />
-                          <div className="blog-one__plus">
-                            <a href="/blog"><i className="fas fa-plus" /></a>
-                          </div>
-                          <div className="blog-one__tag">
-                            <a href="/blog">FreshProduce</a>
-                          </div>
-                        </div>
-                        <div className="blog-one__date">
-                          <p>05 <span>Jun</span></p>
-                        </div>
-                      </div>
-                      <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/blog-one-content-bg-shape.png)' }}>
-                        </div>
-                        <ul className="blog-one__meta list-unstyled">
-                          <li>
-                            <a href="/blog">
-                              <span className="fas fa-user" />Admin
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/blog">
-                              <span className="fas fa-comments" />Comment
-                            </a>
-                          </li>
-                        </ul>
-                        <h3 className="blog-one__title"><a href="/blog">Health Benefits of Organic
-                          Vegetables</a></h3>
-                        <p className="blog-one__text">Learn how organic vegetables benefit your health and the
-                          planet at the same time.</p>
-                      </div>
-                      <div className="blog-one__read-more">
-                        <a href="/blog">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
+                <div className="social-posts-nav">
+                  <button className="social-posts-nav-btn social-posts-nav-prev" id="social-posts-prev">
+                    <i className="fas fa-chevron-left" />
+                  </button>
+                  <button className="social-posts-nav-btn social-posts-nav-next" id="social-posts-next">
+                    <i className="fas fa-chevron-right" />
+                  </button>
                 </div>
-                {/*Blog One Single End*/}
-                {/*Blog One Single Start*/}
-                <div className="col-xl-4 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="300ms">
-                  <div className="blog-one__single">
-                    <div className="blog-one__single-inner">
-                      <div className="blog-one__img-box">
-                        <div className="blog-one__img">
-                          <img src="/assets/images/blog/blog-1-3.jpg" alt="" />
-                          <div className="blog-one__plus">
-                            <a href="/blog"><i className="fas fa-plus" /></a>
-                          </div>
-                          <div className="blog-one__tag">
-                            <a href="/blog">AgriTech</a>
-                          </div>
-                        </div>
-                        <div className="blog-one__date">
-                          <p>13 <span>Aug</span></p>
-                        </div>
-                      </div>
-                      <div className="blog-one__content">
-                        <div className="blog-one__content-bg-shape" style={{ backgroundImage: 'url(/assets/images/shapes/blog-one-content-bg-shape.png)' }}>
-                        </div>
-                        <ul className="blog-one__meta list-unstyled">
-                          <li>
-                            <a href="/blog">
-                              <span className="fas fa-user" />Admin
-                            </a>
-                          </li>
-                          <li>
-                            <a href="/blog">
-                              <span className="fas fa-comments" />Comment
-                            </a>
-                          </li>
-                        </ul>
-                        <h3 className="blog-one__title"><a href="/blog">How Technology is Changing
-                          Farming</a></h3>
-                        <p className="blog-one__text">Learn how organic vegetables benefit your health and the
-                          planet at the same time.</p>
-                      </div>
-                      <div className="blog-one__read-more">
-                        <a href="/blog">Read More<span className="fas fa-arrow-right" /></a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/*Blog One Single End*/}
               </div>
             </div>
-          </section>}
+          </section>
 
           {/* ===== DO'S AND DON'TS SECTION ===== */}
           <section className="do-and-donts">
