@@ -5,6 +5,7 @@ import { Link } from '@/i18n/routing';
 import { useTranslations, useLocale } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
+const qs = require('qs');
 
 // ===== TYPES =====
 interface Product {
@@ -48,34 +49,52 @@ export function ProductsContent() {
     try {
       setLoading(true);
       setError(null);
+  
       const apiKey = process.env.NEXT_STRAPI_API_KEY;
-      const headers: HeadersInit = {};
-      
-      if (apiKey) {
-        headers['Authorization'] = `Bearer ${apiKey}`;
-      }
-      
-      // Use Next.js proxy to avoid CORS issues and mixed content (HTTPS -> HTTP)
-      const response = await fetch(
-        `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=${page}&pagination[pageSize]=25`,
+      const headers: HeadersInit = apiKey
+        ? { Authorization: `Bearer ${apiKey}` }
+        : {};
+  
+      const query = qs.stringify(
         {
-          headers,
-        }
+          fields: ['Name', 'Description', 'Variety_Name','Group_Name'],
+          populate: {
+            Image: {
+              fields: ['url'],
+            },
+          },
+          pagination: {
+            page,
+            pageSize: 25,
+          },
+        },
+        { encodeValuesOnly: true }
       );
-      
+  
+      const response = await fetch(
+        `/strapi/api/products?locale=${locale}&${query}`,
+        { headers }
+      );
+  
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }
-      
       const data: ProductsResponse = await response.json();
+      console.log('Products data:', data);
+      // Log first product's Image structure for debugging
+      if (data.data && data.data.length > 0) {
+        console.log('First product Image:', data.data[0].Image);
+      }
       setProducts(data.data);
       setPagination(data.meta.pagination);
+  
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchProducts(currentPage);
@@ -83,20 +102,44 @@ export function ProductsContent() {
   }, [locale, currentPage]);
 
   const getProductImage = (product: Product) => {
-    // Handle both populated Strapi media objects and simple media objects with url
-    const nestedUrl = product.Image?.data?.attributes?.url;
-    if (nestedUrl) {
-      return `/strapi${nestedUrl}`;
+    if (!product.Image) {
+      return '/assets/images/backgrounds/1-1.png';
     }
 
-    const flatUrl = (product.Image as { url?: string } | undefined)?.url;
-    if (flatUrl) {
-      return `/strapi${flatUrl}`;
+    // Handle array of image objects: Image[0].url (most common in Strapi v5)
+    if (Array.isArray(product.Image) && product.Image.length > 0) {
+      const firstImage = product.Image[0];
+      if (firstImage && typeof firstImage === 'object' && 'url' in firstImage) {
+        const imageUrl = (firstImage as { url: string }).url;
+        if (imageUrl) {
+          return `/strapi${imageUrl}`;
+        }
+      }
     }
 
-    // Fallback to default product image
+    // Handle Strapi v5 nested structure: Image.data[0].attributes.url
+    const nestedArrayUrl = (product.Image as any)?.data?.[0]?.attributes?.url;
+    if (nestedArrayUrl) {
+      return `/strapi${nestedArrayUrl}`;
+    }
+
+    // Handle Strapi v5 nested single structure: Image.data.attributes.url
+    const nestedSingleUrl = (product.Image as any)?.data?.attributes?.url;
+    if (nestedSingleUrl) {
+      return `/strapi${nestedSingleUrl}`;
+    }
+
+    // Handle flat single structure: Image.url
+    const flatSingleUrl = (product.Image as { url?: string })?.url;
+    if (flatSingleUrl) {
+      return `/strapi${flatSingleUrl}`;
+    }
+
+    // Fallback to default image
+    console.warn('No image URL found for product:', product.id, 'Image data:', product.Image);
     return '/assets/images/backgrounds/1-1.png';
   };
+  
 
   const renderGridProduct = (product: Product, index: number) => {
     const imageUrl = getProductImage(product);

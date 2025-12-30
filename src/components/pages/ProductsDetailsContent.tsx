@@ -115,6 +115,7 @@ interface Product {
   Name: string;
   Description: string;
   Variety_Name: string;
+  Group_Name: string;
   Image: any;
 }
 
@@ -130,6 +131,9 @@ export function ProductsDetailsContent() {
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const [relatedLoading, setRelatedLoading] = useState(false);
   const [relatedError, setRelatedError] = useState<string | null>(null);
+  const [sameNameProducts, setSameNameProducts] = useState<Product[]>([]);
+  const [sameNameLoading, setSameNameLoading] = useState(false);
+  const [sameNameError, setSameNameError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -148,7 +152,7 @@ export function ProductsDetailsContent() {
         // Try to fetch by documentId first, then by id
         // Include locale and fields like ProductsContent for consistency
         // Add locale filter to ensure we only get products in the requested locale
-        const apiUrl = `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&filters[documentId][$eq]=${productId}&filters[locale][$eq]=${locale}&populate[Image][fields][1]=url`;
+        const apiUrl = `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&filters[documentId][$eq]=${productId}&filters[locale][$eq]=${locale}&populate[Image][fields][1]=url`;
         
         console.log('[ProductDetails] Fetching product', {
           productId,
@@ -162,7 +166,7 @@ export function ProductsDetailsContent() {
         
         if (!response.ok) {
           // If documentId doesn't work, try fetching by id
-          const apiUrlById = `/strapi/api/products/${productId}?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url`;
+          const apiUrlById = `/strapi/api/products/${productId}?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url`;
           
           console.log('[ProductDetails] Fetching product by ID fallback', {
             productId,
@@ -222,44 +226,226 @@ export function ProductsDetailsContent() {
     if (!product) {
       console.log('[RelatedProducts] No product loaded yet, skipping related fetch');
       setRelatedProducts([]);
+      setSameNameProducts([]);
       return;
     }
 
-    const baseName = (product.Name || product.Variety_Name || '').trim();
-    console.log('[RelatedProducts] Derived baseName', {
-      baseName,
-      productName: product.Name,
-      varietyName: product.Variety_Name,
-    });
-    if (!baseName) {
+    // Fetch products with same Group_Name
+    const groupName = product.Group_Name?.trim();
+    if (groupName) {
+      fetchRelatedProducts(groupName, product);
+    } else {
       setRelatedProducts([]);
-      return;
     }
 
-    fetchRelatedProducts(baseName, product);
+    // Fetch products with same Name
+    const productName = product.Name?.trim();
+    if (productName) {
+      fetchSameNameProducts(productName, product);
+    } else {
+      setSameNameProducts([]);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product, locale]);
 
+  // Re-initialize swiper when product images change
+  useEffect(() => {
+    if (!product) return;
+
+    const images = getAllProductImages(product);
+    if (images.length === 0) return;
+
+    // Wait for DOM to update, then re-initialize swiper
+    const timer = setTimeout(() => {
+      try {
+        const carouselEl = document.getElementById('shop-details-one__carousel');
+        const thumbEl = document.getElementById('shop-details-one__thumb');
+        
+        if (!carouselEl || !thumbEl) return;
+
+        // Check if Swiper is available globally
+        const Swiper = (window as any).Swiper;
+        if (!Swiper) {
+          console.warn('[Swiper] Swiper library not found, trying to trigger external initialization');
+          // Fallback: dispatch event for external script
+          window.dispatchEvent(new CustomEvent('swiper-reinit'));
+          return;
+        }
+
+        // Destroy existing swiper instances if they exist
+        if ((window as any).shopDetailsOneCarousel) {
+          try {
+            (window as any).shopDetailsOneCarousel.destroy(true, true);
+          } catch (e) {
+            console.warn('[Swiper] Error destroying carousel:', e);
+          }
+        }
+        if ((window as any).shopDetailsOneThumb) {
+          try {
+            (window as any).shopDetailsOneThumb.destroy(true, true);
+          } catch (e) {
+            console.warn('[Swiper] Error destroying thumb:', e);
+          }
+        }
+
+        // Initialize thumbnail swiper first
+        const shopDetailsThumb = new Swiper('#shop-details-one__thumb', {
+          slidesPerView: 3,
+          spaceBetween: 0,
+          speed: 1400,
+          watchSlidesVisibility: true,
+          watchSlidesProgress: true,
+          loop: images.length > 1,
+          autoplay: {
+            delay: 5000
+          }
+        });
+
+        // Initialize main carousel swiper
+        const shopDetailsCarousel = new Swiper('#shop-details-one__carousel', {
+          observer: true,
+          observeParents: true,
+          loop: images.length > 1,
+          speed: 1400,
+          mousewheel: false,
+          slidesPerView: 1,
+          autoplay: {
+            delay: 5000
+          },
+          thumbs: {
+            swiper: shopDetailsThumb
+          },
+          navigation: {
+            nextEl: '#product-details__swiper-button-next',
+            prevEl: '#product-details__swiper-button-prev'
+          },
+        });
+
+        // Store instances in window for cleanup
+        (window as any).shopDetailsOneCarousel = shopDetailsCarousel;
+        (window as any).shopDetailsOneThumb = shopDetailsThumb;
+
+        console.log('[Swiper] Re-initialized with', images.length, 'images');
+      } catch (err) {
+        console.warn('[Swiper] Error re-initializing swiper:', err);
+      }
+    }, 500); // Increased delay to ensure DOM is fully updated
+
+    return () => {
+      clearTimeout(timer);
+      // Cleanup: destroy swiper instances on unmount
+      if ((window as any).shopDetailsOneCarousel) {
+        try {
+          (window as any).shopDetailsOneCarousel.destroy(true, true);
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      }
+      if ((window as any).shopDetailsOneThumb) {
+        try {
+          (window as any).shopDetailsOneThumb.destroy(true, true);
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?.Image, product?.id]);
+
   const getProductImage = (product: Product | null) => {
-    if (!product) return '/assets/images/backgrounds/1-1.png';
-    
-    // Handle both populated Strapi media objects and simple media objects with url
-    const nestedUrl = product.Image?.data?.attributes?.url;
-    if (nestedUrl) {
-      return `/strapi${nestedUrl}`;
+    if (!product || !product.Image) {
+      return '/assets/images/backgrounds/1-1.png';
     }
 
-    const flatUrl = (product.Image as { url?: string } | undefined)?.url;
-    if (flatUrl) {
-      return `/strapi${flatUrl}`;
+    // Handle array of image objects: Image[0].url (most common in Strapi v5)
+    if (Array.isArray(product.Image) && product.Image.length > 0) {
+      const firstImage = product.Image[0];
+      if (firstImage && typeof firstImage === 'object' && 'url' in firstImage) {
+        const imageUrl = (firstImage as { url: string }).url;
+        if (imageUrl) {
+          return `/strapi${imageUrl}`;
+        }
+      }
     }
 
-    // Fallback to default product image (same as ProductsContent)
+    // Handle Strapi v5 nested structure: Image.data[0].attributes.url
+    const nestedArrayUrl = (product.Image as any)?.data?.[0]?.attributes?.url;
+    if (nestedArrayUrl) {
+      return `/strapi${nestedArrayUrl}`;
+    }
+
+    // Handle Strapi v5 nested single structure: Image.data.attributes.url
+    const nestedSingleUrl = (product.Image as any)?.data?.attributes?.url;
+    if (nestedSingleUrl) {
+      return `/strapi${nestedSingleUrl}`;
+    }
+
+    // Handle flat single structure: Image.url
+    const flatSingleUrl = (product.Image as { url?: string })?.url;
+    if (flatSingleUrl) {
+      return `/strapi${flatSingleUrl}`;
+    }
+
+    // Fallback to default image
+    console.warn('No image URL found for product:', product.id, 'Image data:', product.Image);
     return '/assets/images/backgrounds/1-1.png';
   };
 
-  const fetchRelatedProducts = async (baseName: string, currentProduct: Product) => {
-    if (!baseName) return;
+  const getAllProductImages = (product: Product | null): string[] => {
+    if (!product || !product.Image) {
+      return ['/assets/images/backgrounds/1-1.png'];
+    }
+
+    const images: string[] = [];
+
+    // Handle array of image objects: Image[].url (most common in Strapi v5)
+    if (Array.isArray(product.Image) && product.Image.length > 0) {
+      product.Image.forEach((img) => {
+        if (img && typeof img === 'object' && 'url' in img) {
+          const imageUrl = (img as { url: string }).url;
+          if (imageUrl) {
+            images.push(`/strapi${imageUrl}`);
+          }
+        }
+      });
+      if (images.length > 0) {
+        console.log(`[ProductImages] Found ${images.length} images for product ${product.id}:`, images);
+        return images;
+      }
+    }
+
+    // Handle Strapi v5 nested structure: Image.data[].attributes.url
+    const nestedArray = (product.Image as any)?.data;
+    if (Array.isArray(nestedArray) && nestedArray.length > 0) {
+      nestedArray.forEach((item: any) => {
+        const url = item?.attributes?.url;
+        if (url) {
+          images.push(`/strapi${url}`);
+        }
+      });
+      if (images.length > 0) {
+        return images;
+      }
+    }
+
+    // Handle Strapi v5 nested single structure: Image.data.attributes.url
+    const nestedSingleUrl = (product.Image as any)?.data?.attributes?.url;
+    if (nestedSingleUrl) {
+      return [`/strapi${nestedSingleUrl}`];
+    }
+
+    // Handle flat single structure: Image.url
+    const flatSingleUrl = (product.Image as { url?: string })?.url;
+    if (flatSingleUrl) {
+      return [`/strapi${flatSingleUrl}`];
+    }
+
+    // Fallback to default image
+    return ['/assets/images/backgrounds/1-1.png'];
+  };
+
+  const fetchRelatedProducts = async (groupName: string, currentProduct: Product) => {
+    if (!groupName) return;
 
     try {
       setRelatedLoading(true);
@@ -272,12 +458,12 @@ export function ProductsDetailsContent() {
         headers['Authorization'] = `Bearer ${apiKey}`;
       }
 
-      // Use Next.js proxy to avoid CORS issues and mixed content (HTTPS -> HTTP)
-      const encodedName = encodeURIComponent(baseName);
-      const relatedUrl = `/strapi/api/products?locale=${locale}&filters[Name][$eq]=${encodedName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=25`;
-      console.log('[RelatedProducts] Fetching related products', {
-        baseName,
-        encodedName,
+      // Fetch products with same Group_Name
+      const encodedGroupName = encodeURIComponent(groupName);
+      const relatedUrl = `/strapi/api/products?locale=${locale}&filters[Group_Name][$eq]=${encodedGroupName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=25`;
+      console.log('[RelatedProducts] Fetching related products by Group_Name', {
+        groupName,
+        encodedGroupName,
         locale,
         relatedUrl,
         currentKey: currentProduct.documentId || String(currentProduct.id),
@@ -302,7 +488,7 @@ export function ProductsDetailsContent() {
       const items: Product[] = data?.data ?? [];
       console.log('[RelatedProducts] Raw related items', {
         count: items.length,
-        ids: items.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name })),
+        ids: items.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, groupName: p.Group_Name })),
       });
 
       const currentKey = currentProduct.documentId || String(currentProduct.id);
@@ -326,6 +512,77 @@ export function ProductsDetailsContent() {
       setRelatedProducts([]);
     } finally {
       setRelatedLoading(false);
+    }
+  };
+
+  const fetchSameNameProducts = async (productName: string, currentProduct: Product) => {
+    if (!productName) return;
+
+    try {
+      setSameNameLoading(true);
+      setSameNameError(null);
+
+      const apiKey = process.env.NEXT_STRAPI_API_KEY;
+      const headers: HeadersInit = {};
+
+      if (apiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+
+      // Fetch products with same Name
+      const encodedName = encodeURIComponent(productName);
+      const sameNameUrl = `/strapi/api/products?locale=${locale}&filters[Name][$eq]=${encodedName}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url&pagination[page]=1&pagination[pageSize]=10`;
+      console.log('[SameNameProducts] Fetching products with same Name', {
+        productName,
+        encodedName,
+        locale,
+        sameNameUrl,
+        currentKey: currentProduct.documentId || String(currentProduct.id),
+      });
+
+      const response = await fetch(
+        sameNameUrl,
+        {
+          headers,
+        }
+      );
+
+      if (!response.ok) {
+        console.error('[SameNameProducts] Non-OK response', {
+          status: response.status,
+          statusText: response.statusText,
+        });
+        throw new Error('Failed to fetch same name products');
+      }
+
+      const data = await response.json();
+      const items: Product[] = data?.data ?? [];
+      console.log('[SameNameProducts] Raw same name items', {
+        count: items.length,
+        ids: items.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name, varietyName: p.Variety_Name })),
+      });
+
+      const currentKey = currentProduct.documentId || String(currentProduct.id);
+      const filtered = items
+        .filter((p) => (p.documentId || String(p.id)) !== currentKey)
+        .slice(0, 6); // Show up to 6 products with same name
+      console.log('[SameNameProducts] Filtered same name items', {
+        currentKey,
+        filteredCount: filtered.length,
+        filteredIds: filtered.map((p) => ({ id: p.id, documentId: p.documentId, name: p.Name })),
+      });
+
+      setSameNameProducts(filtered);
+    } catch (err) {
+      console.error('[SameNameProducts] Error fetching same name products', err);
+      setSameNameError(
+        err instanceof Error
+          ? err.message
+          : 'An error occurred while loading same name products'
+      );
+      setSameNameProducts([]);
+    } finally {
+      setSameNameLoading(false);
     }
   };
 
@@ -373,23 +630,19 @@ export function ProductsDetailsContent() {
                     <div className="product-details__left">
                       <div className="product-details__left-inner">
                         <div className="product-details__content-box">
-                          <div className="swiper-container" id="shop-details-one__carousel">
+                          <div 
+                            key={`carousel-${product.id}-${getAllProductImages(product).length}`}
+                            className="swiper-container" 
+                            id="shop-details-one__carousel"
+                          >
                             <div className="swiper-wrapper">
-                              <div className="swiper-slide">
-                                <div className="product-details__img">
-                                  <img src={getProductImage(product)} alt={product.Name} />
+                              {getAllProductImages(product).map((imageUrl, index) => (
+                                <div key={`${product.id}-img-${index}`} className="swiper-slide">
+                                  <div className="product-details__img">
+                                    <img src={imageUrl} alt={`${product.Name} - Image ${index + 1}`} />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="swiper-slide">
-                                <div className="product-details__img">
-                                  <img src={getProductImage(product)} alt={product.Name} />
-                                </div>
-                              </div>
-                              <div className="swiper-slide">
-                                <div className="product-details__img">
-                                  <img src={getProductImage(product)} alt={product.Name} />
-                                </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
                           <div className="product-details__nav">
@@ -402,23 +655,19 @@ export function ProductsDetailsContent() {
                           </div>
                         </div>
                         <div className="product-details__thumb-box">
-                          <div className="swiper-container" id="shop-details-one__thumb">
+                          <div 
+                            key={`thumb-${product.id}-${getAllProductImages(product).length}`}
+                            className="swiper-container" 
+                            id="shop-details-one__thumb"
+                          >
                             <div className="swiper-wrapper">
-                              <div className="swiper-slide">
-                                <div className="product-details__thumb-img">
-                                  <img src={getProductImage(product)} alt={product.Name} />
+                              {getAllProductImages(product).map((imageUrl, index) => (
+                                <div key={`${product.id}-thumb-${index}`} className="swiper-slide">
+                                  <div className="product-details__thumb-img">
+                                    <img src={imageUrl} alt={`${product.Name} - Thumbnail ${index + 1}`} />
+                                  </div>
                                 </div>
-                              </div>
-                              <div className="swiper-slide">
-                                <div className="product-details__thumb-img">
-                                  <img src={getProductImage(product)} alt={product.Name} />
-                                </div>
-                              </div>
-                              <div className="swiper-slide">
-                                <div className="product-details__thumb-img">
-                                  <img src={getProductImage(product)} alt={product.Name} />
-                                </div>
-                              </div>
+                              ))}
                             </div>
                           </div>
                         </div>
@@ -446,6 +695,46 @@ export function ProductsDetailsContent() {
                         </div>
                       </div>
               </div>
+              </div>
+            </div>
+          )}
+          {/* Same Name Products Section */}
+          {!loading && !error && !sameNameLoading && sameNameProducts.length > 0 && (
+            <div className="container" style={{ marginTop: '40px' }}>
+              <div className="row">
+                <div className="col-12">
+                  <h4 style={{ marginBottom: '20px', fontSize: '22px', fontWeight: 'bold' }}>
+                    More {product?.Name} Varieties
+                  </h4>
+                  <div className="row">
+                    {sameNameProducts.map((item, index) => {
+                      const imageUrl = getProductImage(item);
+                      return (
+                        <div
+                          key={item.id}
+                          className="col-xl-2 col-lg-3 col-md-4 col-sm-6"
+                          style={{ marginBottom: '20px' }}
+                        >
+                          <div className="single-product-style1" style={{ height: '100%' }}>
+                            <div className="single-product-style1__img">
+                              <img src={imageUrl} alt={item.Name} />
+                              <img src={imageUrl} alt={item.Name} />
+                            </div>
+                            <div className="single-product-style1__content">
+                              <div className="single-product-style1__content-left">
+                                <h4 style={{ fontSize: '14px', marginBottom: '5px' }}>
+                                  <Link href={`/products/${item.documentId || item.id}`}>
+                                    {item.Variety_Name || item.Name}
+                                  </Link>
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
           )}
