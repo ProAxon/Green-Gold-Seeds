@@ -709,13 +709,14 @@ export function ProductsDetailsContent() {
                   <div className="row">
                     {sameNameProducts.map((item, index) => {
                       const imageUrl = getProductImage(item);
+                      const productUrl = `/products/${item.documentId || item.id}`;
                       return (
                         <div
                           key={item.id}
                           className="col-xl-2 col-lg-3 col-md-4 col-sm-6"
                           style={{ marginBottom: '20px' }}
                         >
-                          <div className="single-product-style1" style={{ height: '100%' }}>
+                          <Link href={productUrl} className="single-product-style1" style={{ height: '100%', textDecoration: 'none', display: 'block', color: 'inherit' }}>
                             <div className="single-product-style1__img">
                               <img src={imageUrl} alt={item.Name} />
                               <img src={imageUrl} alt={item.Name} />
@@ -723,13 +724,11 @@ export function ProductsDetailsContent() {
                             <div className="single-product-style1__content">
                               <div className="single-product-style1__content-left">
                                 <h4 style={{ fontSize: '14px', marginBottom: '5px' }}>
-                                  <Link href={`/products/${item.documentId || item.id}`}>
-                                    {item.Variety_Name || item.Name}
-                                  </Link>
+                                  {item.Variety_Name || item.Name}
                                 </h4>
                               </div>
                             </div>
-                          </div>
+                          </Link>
                         </div>
                       );
                     })}
@@ -748,13 +747,14 @@ export function ProductsDetailsContent() {
                 <div className="row">
                   {relatedProducts.map((item, index) => {
                     const imageUrl = getProductImage(item);
+                    const productUrl = `/products/${item.documentId || item.id}`;
                     return (
                       <div
                         key={item.id}
                         className="col-xl-3 col-lg-4 col-md-6"
                         style={{ display: 'flex', justifyContent: 'center' }}
                       >
-                        <div className="single-product-style1" style={{ maxWidth: 370, width: '100%' }}>
+                        <Link href={productUrl} className="single-product-style1" style={{ maxWidth: 370, width: '100%', textDecoration: 'none', display: 'block', color: 'inherit' }}>
                           <div className="single-product-style1__img">
                             <img src={imageUrl} alt={item.Name} />
                             <img src={imageUrl} alt={item.Name} />
@@ -765,24 +765,24 @@ export function ProductsDetailsContent() {
                                 </li>
                               </ul>
                             )}
-                            <ul className="single-product-style1__info">
+                            <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
                               <li>
-                                <a href="/products#" title="Add to Wishlist">
+                                <a href="/products#" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
                                   <i className="fa fa-regular fa-heart" />
                                 </a>
                               </li>
                               <li>
-                                <a href="/products#" title="Add to cart">
+                                <a href="/products#" title="Add to cart" onClick={(e) => e.preventDefault()}>
                                   <i className="fa fa-solid fa-cart-plus" />
                                 </a>
                               </li>
                               <li>
-                                <a href="/products#" title="Quick View">
+                                <a href="/products#" title="Quick View" onClick={(e) => e.preventDefault()}>
                                   <i className="fa fa-regular fa-eye" />
                                 </a>
                               </li>
                               <li>
-                                <a href="/products#" title="Compare">
+                                <a href="/products#" title="Compare" onClick={(e) => e.preventDefault()}>
                                   <i className="fa fa-solid fa-repeat" />
                                 </a>
                               </li>
@@ -791,20 +791,14 @@ export function ProductsDetailsContent() {
                           <div className="single-product-style1__content">
                             <div className="single-product-style1__content-left">
                               <h4>
-                                <Link href={`/products/${item.documentId || item.id}`}>
-                                  {item.Variety_Name || item.Name}
-                                </Link>
+                                {item.Variety_Name || item.Name}
                               </h4>
-                              <p>{item.Name}</p>
-                            </div>
-                            <div className="single-product-style1__content-right">
-                              <div className="single-product-style1__review">
-                                <i className="fa fa-star" />
-                                <p>4.{(5 + (index % 5)).toFixed(1)}</p>
-                              </div>
+                              {item.Variety_Name && item.Name && item.Variety_Name !== item.Name && (
+                                <p>{item.Name}</p>
+                              )}
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </div>
                     );
                   })}

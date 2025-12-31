@@ -1,11 +1,22 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { useTranslations, useLocale } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
 const qs = require('qs');
+
+// ===== LAYOUT CONFIGURATION =====
+// Adjust these values to change products per row:
+// - col-12 = 1 product per row (full width)
+// - col-6 = 2 products per row (half width)
+// - col-4 = 3 products per row (one-third width)
+// - col-3 = 4 products per row (one-quarter width)
+const MOBILE_COLUMNS = 'col-6'; // 2 products per row on mobile (change to 'col-12' for 1, 'col-4' for 3, etc.)
+const TABLET_COLUMNS = 'col-md-6'; // 2 products per row on tablet
+const DESKTOP_COLUMNS = 'col-lg-6'; // 2 products per row on desktop
+const LARGE_DESKTOP_COLUMNS = 'col-xl-4'; // 3 products per row on large desktop
 
 // ===== TYPES =====
 interface Product {
@@ -30,9 +41,17 @@ interface ProductsResponse {
   };
 }
 
-export function ProductsContent() {
+interface ProductsContentProps {
+  category?: string;
+  subcategory?: string;
+  search?: string;
+}
+
+export function ProductsContent({ category, subcategory, search: initialSearch }: ProductsContentProps) {
   const t = useTranslations();
   const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -44,6 +63,12 @@ export function ProductsContent() {
     pageCount: 1,
     total: 0
   });
+  const [subCategories, setSubCategories] = useState<string[]>([]);
+  const [subCategoriesLoading, setSubCategoriesLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState<string>(initialSearch || '');
+  const [categories, setCategories] = useState<string[]>([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
   const fetchProducts = async (page: number = 1) => {
     try {
@@ -55,21 +80,66 @@ export function ProductsContent() {
         ? { Authorization: `Bearer ${apiKey}` }
         : {};
   
-      const query = qs.stringify(
-        {
-          fields: ['Name', 'Description', 'Variety_Name','Group_Name'],
-          populate: {
-            Image: {
-              fields: ['url'],
-            },
-          },
-          pagination: {
-            page,
-            pageSize: 25,
+      const queryParams: any = {
+        fields: ['Name', 'Description', 'Variety_Name','Group_Name'],
+        populate: {
+          Image: {
+            fields: ['url'],
           },
         },
-        { encodeValuesOnly: true }
-      );
+        pagination: {
+          page,
+          pageSize: 25,
+        },
+      };
+
+      // Build filters object
+      const filters: any = {};
+      const filterConditions: any[] = [];
+      
+      // Add category filter if provided
+      if (category && category.trim()) {
+        filterConditions.push({
+          Group_Name: {
+            $eq: category.trim(),
+          },
+        });
+      }
+      
+      // Add subcategory filter if provided
+      if (subcategory && subcategory.trim()) {
+        filterConditions.push({
+          Name: {
+            $eq: subcategory.trim(),
+          },
+        });
+      }
+      
+      // Add search filter if provided
+      if (searchQuery && searchQuery.trim()) {
+        const searchTerm = searchQuery.trim();
+        filterConditions.push({
+          $or: [
+            { Name: { $containsi: searchTerm } },
+            { Description: { $containsi: searchTerm } },
+            { Variety_Name: { $containsi: searchTerm } },
+            { Group_Name: { $containsi: searchTerm } },
+          ],
+        });
+      }
+      
+      // Build final filters structure
+      if (filterConditions.length === 1) {
+        // Single condition - use it directly
+        queryParams.filters = filterConditions[0];
+      } else if (filterConditions.length > 1) {
+        // Multiple conditions - combine with $and
+        queryParams.filters = {
+          $and: filterConditions,
+        };
+      }
+  
+      const query = qs.stringify(queryParams, { encodeValuesOnly: true });
   
       const response = await fetch(
         `/strapi/api/products?locale=${locale}&${query}`,
@@ -96,10 +166,198 @@ export function ProductsContent() {
   };
   
 
+  const fetchCategories = async () => {
+    try {
+      setCategoriesLoading(true);
+      const apiKey = process.env.NEXT_STRAPI_API_KEY;
+      const headers: HeadersInit = apiKey
+        ? { Authorization: `Bearer ${apiKey}` }
+        : {};
+
+      // Try custom endpoint first
+      try {
+        const response = await fetch(
+          `/strapi/api/products/categories?locale=${locale}`,
+          { headers }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.data && Array.isArray(data.data)) {
+            setCategories(data.data);
+            setCategoriesLoading(false);
+            return;
+          }
+        }
+      } catch (endpointError) {
+        console.warn('Custom categories endpoint failed, using fallback:', endpointError);
+      }
+
+      // Fallback: fetch products and extract categories
+      const query = qs.stringify(
+        {
+          fields: ['Group_Name'],
+          pagination: {
+            page: 1,
+            pageSize: 1000, // Large page size to get all categories
+          },
+        },
+        { encodeValuesOnly: true }
+      );
+
+      const response = await fetch(
+        `/strapi/api/products?locale=${locale}&${query}`,
+        { headers }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products for categories');
+      }
+
+      const data = await response.json();
+      const products = data.data || [];
+
+      // Extract unique Group_Name values
+      const categoriesSet = new Set<string>();
+      products.forEach((product: any) => {
+        if (product.Group_Name && typeof product.Group_Name === 'string') {
+          categoriesSet.add(product.Group_Name.trim());
+        }
+      });
+
+      // Convert to sorted array
+      const sortedCategories = Array.from(categoriesSet).sort();
+      setCategories(sortedCategories);
+    } catch (err) {
+      console.error('Error fetching categories:', err);
+      setCategories([]);
+    } finally {
+      setCategoriesLoading(false);
+    }
+  };
+
+  const fetchSubCategories = async () => {
+    if (!category || !category.trim()) {
+      setSubCategories([]);
+      return;
+    }
+
+    try {
+      setSubCategoriesLoading(true);
+      const apiKey = process.env.NEXT_STRAPI_API_KEY;
+      const headers: HeadersInit = apiKey
+        ? { Authorization: `Bearer ${apiKey}` }
+        : {};
+
+      // Try custom endpoint first
+      try {
+        const encodedCategory = encodeURIComponent(category.trim());
+        const response = await fetch(
+          `/strapi/api/products/subcategories?locale=${locale}&category=${encodedCategory}`,
+          { headers }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.data && Array.isArray(data.data)) {
+            setSubCategories(data.data);
+            setSubCategoriesLoading(false);
+            return;
+          }
+        }
+      } catch (endpointError) {
+        console.warn('Custom subcategories endpoint failed, using fallback:', endpointError);
+      }
+
+      // Fallback: fetch products and extract Name
+      const query = qs.stringify(
+        {
+          fields: ['Name', 'Group_Name'],
+          filters: {
+            Group_Name: {
+              $eq: category.trim(),
+            },
+          },
+          pagination: {
+            page: 1,
+            pageSize: 1000, // Large page size to get all sub-categories
+          },
+        },
+        { encodeValuesOnly: true }
+      );
+
+      const response = await fetch(
+        `/strapi/api/products?locale=${locale}&${query}`,
+        { headers }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products for sub-categories');
+      }
+
+      const data = await response.json();
+      const products = data.data || [];
+
+      // Extract unique Name values
+      const subCategoriesSet = new Set<string>();
+      products.forEach((product: any) => {
+        if (product.Name && typeof product.Name === 'string') {
+          subCategoriesSet.add(product.Name.trim());
+        }
+      });
+
+      // Convert to sorted array
+      const sortedSubCategories = Array.from(subCategoriesSet).sort();
+      setSubCategories(sortedSubCategories);
+    } catch (err) {
+      console.error('Error fetching sub-categories:', err);
+      setSubCategories([]);
+    } finally {
+      setSubCategoriesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    // Reset to page 1 when category, subcategory, or search query changes
+    setCurrentPage(1);
+  }, [category, subcategory, searchQuery]);
+
   useEffect(() => {
     fetchProducts(currentPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [locale, currentPage]);
+  }, [locale, currentPage, category, subcategory, searchQuery]);
+
+  useEffect(() => {
+    fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
+
+  useEffect(() => {
+    fetchSubCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, locale]);
+
+  // Handle click outside to close dropdown on mobile
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as HTMLElement;
+      const dropdownWrapper = document.querySelector('.product__category-dropdown-wrapper');
+      
+      if (dropdownWrapper && !dropdownWrapper.contains(target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   const getProductImage = (product: Product) => {
     if (!product.Image) {
@@ -145,9 +403,13 @@ export function ProductsContent() {
     const imageUrl = getProductImage(product);
     const imageIndex = (index % 12) + 1;
     
+    // Combine all column classes for responsive layout
+    const columnClasses = `${MOBILE_COLUMNS} ${TABLET_COLUMNS} ${DESKTOP_COLUMNS} ${LARGE_DESKTOP_COLUMNS}`;
+    const productUrl = `/products/${product.documentId || product.id}`;
+    
     return (
-      <div key={product.id} className="col-xl-4 col-lg-6 col-md-6">
-        <div className="single-product-style1">
+      <div key={product.id} className={columnClasses}>
+        <Link href={productUrl} className="single-product-style1" style={{ textDecoration: 'none', display: 'block', color: 'inherit' }}>
           <div className="single-product-style1__img">
             <img src={imageUrl} alt={product.Name} />
             <img src={imageUrl} alt={product.Name} />
@@ -158,24 +420,24 @@ export function ProductsContent() {
                 </li>
               </ul>
             )}
-            <ul className="single-product-style1__info">
+            <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
               <li>
-                <a href="/products#" title="Add to Wishlist">
+                <a href="/products#" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
                   <i className="fa fa-regular fa-heart" />
                 </a>
               </li>
               <li>
-                <a href="/products#" title="Add to cart">
+                <a href="/products#" title="Add to cart" onClick={(e) => e.preventDefault()}>
                   <i className="fa fa-solid fa-cart-plus" />
                 </a>
               </li>
               <li>
-                <a href="/products#" title="Quick View">
+                <a href="/products#" title="Quick View" onClick={(e) => e.preventDefault()}>
                   <i className="fa fa-regular fa-eye" />
                 </a>
               </li>
               <li>
-                <a href="/products#" title="Compare">
+                <a href="/products#" title="Compare" onClick={(e) => e.preventDefault()}>
                   <i className="fa fa-solid fa-repeat" />
                 </a>
               </li>
@@ -184,20 +446,14 @@ export function ProductsContent() {
           <div className="single-product-style1__content">
             <div className="single-product-style1__content-left">
               <h4>
-                <Link href={`/products/${product.documentId || product.id}`}>
-                  {product.Variety_Name || product.Name}
-                </Link>
+                {product.Variety_Name || product.Name}
               </h4>
-              <p>{product.Name}</p>
-            </div>
-            <div className="single-product-style1__content-right">
-              <div className="single-product-style1__review">
-                <i className="fa fa-star" />
-                <p>4.{(5 + index % 5).toFixed(1)}</p>
-              </div>
+              {product.Variety_Name && product.Name && product.Variety_Name !== product.Name && (
+                <p>{product.Name}</p>
+              )}
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     );
   };
@@ -205,10 +461,11 @@ export function ProductsContent() {
   const renderListProduct = (product: Product, index: number) => {
     const imageUrl = getProductImage(product);
     const imageIndex = (index % 12) + 1;
+    const productUrl = `/products/${product.documentId || product.id}`;
     
     return (
       <div key={product.id} className="col-xl-6 col-lg-6">
-        <div className="single-product-style2">
+        <Link href={productUrl} className="single-product-style2" style={{ textDecoration: 'none', display: 'block', color: 'inherit' }}>
           <div className="row">
             <div className="col-xl-6 col-lg-6 col-md-6">
               <div className="single-product-style2__img">
@@ -234,30 +491,30 @@ export function ProductsContent() {
                 </div>
                 <div className="single-product-style2__text">
                   <h4>
-                    <Link href={`/products/${product.documentId || product.id}`}>
-                      {product.Variety_Name || product.Name}
-                    </Link>
+                    {product.Variety_Name || product.Name}
                   </h4>
-                  <p>{product.Name}</p>
+                  {product.Variety_Name && product.Name && product.Variety_Name !== product.Name && (
+                    <p>{product.Name}</p>
+                  )}
                 </div>
-                <ul className="single-product-style2__info">
+                <ul className="single-product-style2__info" onClick={(e) => e.stopPropagation()}>
                   <li>
-                    <a href="/products#" title="Add to Wishlist">
+                    <a href="/products#" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
                       <i className="fa fa-regular fa-heart" />
                     </a>
                   </li>
                   <li>
-                    <a href="/products#" title="Add to cart">
+                    <a href="/products#" title="Add to cart" onClick={(e) => e.preventDefault()}>
                       <i className="fa fa-solid fa-cart-plus" />
                     </a>
                   </li>
                   <li>
-                    <a href="/products#" title="Quick View">
+                    <a href="/products#" title="Quick View" onClick={(e) => e.preventDefault()}>
                       <i className="fa fa-regular fa-eye" />
                     </a>
                   </li>
                   <li>
-                    <a href="/products#" title="Compare">
+                    <a href="/products#" title="Compare" onClick={(e) => e.preventDefault()}>
                       <i className="fa fa-solid fa-repeat" />
                     </a>
                   </li>
@@ -265,7 +522,7 @@ export function ProductsContent() {
               </div>
             </div>
           </div>
-        </div>
+        </Link>
       </div>
     );
   };
@@ -278,12 +535,39 @@ export function ProductsContent() {
         </div>
         <div className="container">
           <div className="page-header__inner">
-            <h3>{t('products.pageTitle')}</h3>
+            <h3>
+              {subcategory && category
+                ? `${subcategory} - ${category} - ${t('products.pageTitle')}`
+                : category 
+                  ? `${category} - ${t('products.pageTitle')}` 
+                  : t('products.pageTitle')
+              }
+            </h3>
             <div className="thm-breadcrumb__inner">
               <ul className="thm-breadcrumb list-unstyled">
                 <li><Link href="/">{t('nav.home')}</Link></li>
                 <li><span className="fas fa-angle-right" /></li>
-                <li>{t('products.pageTitle')}</li>
+                <li><Link href="/products">{t('products.pageTitle')}</Link></li>
+                {category && (
+                  <>
+                    <li><span className="fas fa-angle-right" /></li>
+                    <li>
+                      {subcategory ? (
+                        <Link href={`/products?category=${encodeURIComponent(category)}`}>
+                          {category}
+                        </Link>
+                      ) : (
+                        category
+                      )}
+                    </li>
+                  </>
+                )}
+                {subcategory && (
+                  <>
+                    <li><span className="fas fa-angle-right" /></li>
+                    <li>{subcategory}</li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
@@ -293,23 +577,139 @@ export function ProductsContent() {
       <section className="product">
             <div className="container">
               <div className="row">
-                <div className="col-xl-9 col-lg-12">
+                {/* Unified Filter Bar - appears first on mobile, last on desktop */}
+                <div className="col-xl-3 col-lg-12 order-1 order-xl-2">
+                  <div className="product-filter-bar">
+                    {/* Search Section */}
+                    <div className="product-filter-bar__search">
+                      <form 
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          // Update URL with search parameter
+                          const params = new URLSearchParams();
+                          if (category) params.set('category', category);
+                          if (subcategory) params.set('subcategory', subcategory);
+                          if (searchQuery.trim()) {
+                            params.set('search', searchQuery.trim());
+                          } else {
+                            params.delete('search');
+                          }
+                          const queryString = params.toString();
+                          const newUrl = queryString ? `${pathname}?${queryString}` : pathname;
+                          router.push(newUrl);
+                        }}
+                      >
+                        <div className={`product-filter-bar__search-input-wrapper ${searchQuery ? 'product-filter-bar__search-input-wrapper--has-clear' : ''}`}>
+                          <input 
+                            type="text" 
+                            placeholder={t('products.search')}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            autoComplete="off"
+                            className="product-filter-bar__search-input"
+                            aria-label="Search products"
+                          />
+                          {searchQuery && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setSearchQuery('');
+                                // Update URL to remove search parameter
+                                const params = new URLSearchParams();
+                                if (category) params.set('category', category);
+                                if (subcategory) params.set('subcategory', subcategory);
+                                const queryString = params.toString();
+                                const newUrl = queryString ? `${pathname}?${queryString}` : pathname;
+                                router.push(newUrl);
+                              }}
+                              className="product-filter-bar__clear-button"
+                              aria-label="Clear search"
+                              title="Clear search"
+                            >
+                              <i className="fa fa-times" aria-hidden="true" />
+                            </button>
+                          )}
+                          <button 
+                            type="submit" 
+                            className="product-filter-bar__submit-button"
+                            aria-label="Submit search"
+                          >
+                            <i className="fa fa-search" />
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                    {/* Categories Accordion Section */}
+                    <div className="product-filter-bar__categories">
+                      <button 
+                        className="product-filter-bar__categories-trigger"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        aria-expanded={isDropdownOpen}
+                        aria-controls="categories-accordion"
+                        role="button"
+                        tabIndex={0}
+                      >
+                        {t('footer.categories')}
+                        <i className={`fa fa-angle-${isDropdownOpen ? 'up' : 'down'}`} aria-hidden="true" />
+                      </button>
+                      <div 
+                        id="categories-accordion"
+                        className={`product-filter-bar__categories-accordion ${isDropdownOpen ? 'product-filter-bar__categories-accordion--open' : ''}`}
+                      >
+                        <ul className="product-filter-bar__categories-list">
+                          {!category ? (
+                            <li>
+                              <Link 
+                                href="/products"
+                                onClick={() => setIsDropdownOpen(false)}
+                                className={!category ? 'product-filter-bar__category-item--active' : ''}
+                              >
+                                {t('nav.productCategories.allProducts')}
+                              </Link>
+                            </li>
+                          ) : (
+                            <>
+                              <li>
+                                <Link 
+                                  href={`/products?category=${encodeURIComponent(category)}`}
+                                  onClick={() => setIsDropdownOpen(false)}
+                                  className={category && !subcategory ? 'product-filter-bar__category-item--active' : ''}
+                                >
+                                  All {category}
+                                </Link>
+                              </li>
+                              {subCategoriesLoading ? (
+                                <li><span className="product-filter-bar__loading-state">Loading...</span></li>
+                              ) : subCategories.length > 0 ? (
+                                subCategories.map((subCat) => (
+                                  <li key={subCat}>
+                                    <Link 
+                                      href={`/products?category=${encodeURIComponent(category)}&subcategory=${encodeURIComponent(subCat)}`}
+                                      onClick={() => setIsDropdownOpen(false)}
+                                      className={subcategory === subCat ? 'product-filter-bar__category-item--active' : ''}
+                                    >
+                                      {subCat}
+                                    </Link>
+                                  </li>
+                                ))
+                              ) : (
+                                <li><span className="product-filter-bar__empty-state">No sub-categories found</span></li>
+                              )}
+                            </>
+                          )}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Products List - appears second on mobile, first on desktop */}
+                <div className="col-xl-9 col-lg-12 order-2 order-xl-1">
                   <div className="product__items">
                     <div className="row">
                       <div className="col-xl-12">
                         <div className="product__showing-result">
                           <div className="product__showing-text-box">
                             <p className="product__showing-text">{t('products.showingResults')}</p>
-                          </div>
-                          <div className="product__showing-sort">
-                            <div className="select-box">
-                              <select className="wide">
-                                <option data-display={t('products.sortByPopular')}>{t('products.sortByPopular')}</option>
-                                <option value={1}>{t('products.sortByPopular')}</option>
-                                <option value={2}>{t('products.sortByPrice')}</option>
-                                <option value={3}>{t('products.sortByRatings')}</option>
-                              </select>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -323,6 +723,15 @@ export function ProductsContent() {
                               className={`tab-btn-item ${viewMode === 'grid' ? 'active-btn-item' : ''}`}
                               onClick={() => setViewMode('grid')}
                               style={{ cursor: 'pointer' }}
+                              role="button"
+                              aria-label="Grid view"
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  setViewMode('grid');
+                                }
+                              }}
                             >
                               <div className="product__all-tab-button-icon one">
                                 <i className="fa fa-solid fa-bars" />
@@ -333,6 +742,15 @@ export function ProductsContent() {
                               className={`tab-btn-item ${viewMode === 'list' ? 'active-btn-item' : ''}`}
                               onClick={() => setViewMode('list')}
                               style={{ cursor: 'pointer' }}
+                              role="button"
+                              aria-label="List view"
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                  e.preventDefault();
+                                  setViewMode('list');
+                                }
+                              }}
                             >
                               <div className="product__all-tab-button-icon">
                                 <i className="fa fa-solid fa-list-ul" />
@@ -441,144 +859,6 @@ export function ProductsContent() {
                         </li>
                       </ul>
                     </div>
-                  </div>
-                </div>
-                <div className="col-xl-3 col-lg-12">
-                  <div className="product__sidebar">
-                    <div className="shop-search product__sidebar-single">
-                      <form action="/products">
-                        <input type="text" placeholder={t('products.search')} />
-                        <button type="submit"><i className="fa fa-search" /></button>
-                      </form>
-                    </div>
-                    <div className="product__price-ranger product__sidebar-single">
-                      <h3 className="product__sidebar-title">{t('products.price')}</h3>
-                      <div className="price-ranger">
-                        <div id="slider-range" />
-                        <div className="ranger-min-max-block">
-                          <input type="text" readOnly className="min" />
-                          <span>-</span>
-                          <input type="text" readOnly className="max" />
-                          <input type="submit" defaultValue="Filter" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="shop-category product__sidebar-single">
-                      <h3 className="product__sidebar-title">{t('footer.categories')}</h3>
-                      <ul className="list-unstyled">
-                        <li><Link href="/products#">{t('products.cropCultivation')}</Link></li>
-                        <li className="active"><Link href="/products#">{t('footer.tipsTricks')}</Link></li>
-                        <li><Link href="/products#">{t('footer.technology')}</Link></li>
-                        <li><Link href="/products#">{t('products.animalCare')}</Link></li>
-                        <li><Link href="/products#">{t('footer.naturalOrganic')}</Link></li>
-                      </ul>
-                    </div>
-                    <div className="shop-product-recent-products product__sidebar-single">
-                      <h3 className="product__sidebar-title">{t('products.recentProducts')}</h3>
-                      <ul className="clearfix list-unstyled">
-                        {products.slice(0, 4).map((product, index) => {
-                          const imageUrl = getProductImage(product);
-                          return (
-                            <li key={product.id}>
-                          <div className="img">
-                                <img src={imageUrl} alt={product.Name} />
-                                <Link href={`/products/${product.documentId || product.id}`}><i className="fa fa-link" aria-hidden="true" /></Link>
-                          </div>
-                          <div className="content">
-                            <div className="title">
-                                  <h5><Link href={`/products/${product.documentId || product.id}`}>{product.Variety_Name || product.Name}</Link></h5>
-                            </div>
-                            <div className="price">
-                                  <p>{product.Name}</p>
-                            </div>
-                            <div className="review">
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star" />
-                              <i className="fa fa-star color" />
-                            </div>
-                          </div>
-                        </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                    <div className="shop-product-tags product__sidebar-single">
-                      <h3 className="product__sidebar-title">{t('products.productTags')}</h3>
-                      <div className="shop-product__tags-list">
-                        <Link href="/products#">{t('footer.tags.aggrotech')}</Link>
-                        <Link href="/products#">{t('footer.tags.crop')}</Link>
-                        <Link href="/products#">{t('footer.tags.grain')}</Link>
-                        <Link href="/products#">{t('footer.tags.organic')}</Link>
-                        <Link href="/products#">{t('products.cultivation')}</Link>
-                        <Link href="/products#">{t('footer.tags.agro')}</Link>
-                      </div>
-                    </div>
-                    {/*Start Products Style1 Single Sidear */}
-                    <div className="shop-product-tags product__sidebar-single style">
-                      <h3 className="product__sidebar-title">{t('footer.reviews')}</h3>
-                      <div className="sidebar-rating-box sidebar-rating-box--style2">
-                        <ul className="list-unstyled">
-                          <li>
-                            <input type="radio" id="fivestar" name="rating" defaultChecked />
-                            <label htmlFor="fivestar">
-                              <i />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                            </label>
-                          </li>
-                          <li>
-                            <input type="radio" id="fourstar" name="rating" />
-                            <label htmlFor="fourstar">
-                              <i />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star gray" />
-                            </label>
-                          </li>
-                          <li>
-                            <input type="radio" id="threestar" name="rating" />
-                            <label htmlFor="threestar">
-                              <i />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star gray" />
-                              <span className="fas fa-star gray" />
-                            </label>
-                          </li>
-                          <li>
-                            <input type="radio" id="twostar" name="rating" />
-                            <label htmlFor="twostar">
-                              <i />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star gray" />
-                              <span className="fas fa-star gray" />
-                              <span className="fas fa-star gray" />
-                            </label>
-                          </li>
-                          <li>
-                            <input type="radio" id="onestar" name="rating" />
-                            <label htmlFor="onestar">
-                              <i />
-                              <span className="fas fa-star" />
-                              <span className="fas fa-star gray" />
-                              <span className="fas fa-star gray" />
-                              <span className="fas fa-star gray" />
-                              <span className="fas fa-star gray" />
-                            </label>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/*End Products Style1 Single Sidear */}
                   </div>
                 </div>
               </div>

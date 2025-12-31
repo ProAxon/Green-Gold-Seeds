@@ -15,6 +15,15 @@ export async function generateMetadata({
 };
 }
 
-export default async function ProductsPage() {
-  return <ProductsContent />;
+export default async function ProductsPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string; subcategory?: string; search?: string; q?: string }>;
+}) {
+  const { category, subcategory, search, q } = await searchParams;
+  // Support both 'search' and 'q' query parameters
+  const searchQuery = search || q || undefined;
+  return <ProductsContent category={category} subcategory={subcategory} search={searchQuery} />;
 }

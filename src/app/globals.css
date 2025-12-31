@@ -333,3 +333,632 @@ body {
     flex-wrap: wrap;
   }
 }
+
+/* ===== PRODUCT FILTER BAR ===== */
+/* Spacing tokens */
+:root {
+  --filter-spacing-xs: 8px;
+  --filter-spacing-sm: 12px;
+  --filter-spacing-md: 16px;
+  --filter-spacing-lg: 20px;
+}
+
+/* Unified filter bar container */
+.product-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--filter-spacing-sm);
+  margin-top: var(--filter-spacing-sm);
+  margin-bottom: var(--filter-spacing-sm);
+}
+
+/* Search section */
+.product-filter-bar__search {
+  position: relative;
+  display: block;
+  background-color: var(--farmology-primary);
+  padding: var(--filter-spacing-md);
+  border-radius: var(--farmology-bdr-radius);
+}
+
+.product-filter-bar__search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.product-filter-bar__search-input {
+  width: 100%;
+  height: 45px;
+  background-color: var(--farmology-white);
+  padding-left: 15px;
+  padding-right: 50px;
+  font-size: 14px;
+  color: var(--farmology-gray);
+  font-family: var(--farmology-font);
+  border: none;
+  outline: none;
+  font-weight: 500;
+  border-radius: 3px;
+  transition: padding-right 0.2s ease;
+}
+
+.product-filter-bar__search-input-wrapper--has-clear .product-filter-bar__search-input {
+  padding-right: 75px;
+}
+
+.product-filter-bar__search-input::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+
+.product-filter-bar__submit-button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background-color: var(--farmology-base);
+  color: var(--farmology-white);
+  font-size: 14px;
+  border: none;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 500ms ease;
+}
+
+.product-filter-bar__submit-button:hover {
+  background-color: var(--farmology-extra);
+  color: var(--farmology-white);
+}
+
+.product-filter-bar__clear-button {
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #999;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.product-filter-bar__clear-button:hover {
+  color: #666;
+}
+
+/* Categories accordion section */
+.product-filter-bar__categories {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--farmology-primary);
+  padding: var(--filter-spacing-md);
+  border-radius: var(--farmology-bdr-radius);
+}
+
+.product-filter-bar__categories-trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 45px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--farmology-extra);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--farmology-font);
+  box-sizing: border-box;
+}
+
+.product-filter-bar__categories-trigger i {
+  font-size: 14px;
+  transition: transform 300ms ease;
+  margin-left: var(--filter-spacing-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.product-filter-bar__categories-trigger[aria-expanded="true"] i {
+  transform: rotate(180deg);
+}
+
+.product-filter-bar__categories-accordion {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease, padding 300ms ease;
+  padding: 0 var(--filter-spacing-md);
+  margin-top: var(--filter-spacing-sm);
+}
+
+.product-filter-bar__categories-accordion--open {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: var(--filter-spacing-sm) var(--filter-spacing-md);
+}
+
+.product-filter-bar__categories-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.product-filter-bar__categories-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.product-filter-bar__categories-list li a {
+  display: block;
+  padding: var(--filter-spacing-sm) 0;
+  font-size: 14px;
+  color: var(--farmology-gray);
+  text-decoration: none;
+  transition: all 200ms ease;
+  border-left: 3px solid transparent;
+  padding-left: var(--filter-spacing-sm);
+  margin-left: calc(-1 * var(--filter-spacing-md));
+}
+
+.product-filter-bar__categories-list li a:hover {
+  color: var(--farmology-base);
+}
+
+.product-filter-bar__category-item--active {
+  background-color: rgba(74, 155, 58, 0.1);
+  border-left: 3px solid var(--farmology-base) !important;
+  color: var(--farmology-base) !important;
+  font-weight: 600;
+}
+
+.product-filter-bar__loading-state,
+.product-filter-bar__empty-state {
+  display: block;
+  font-size: 12px;
+  padding: var(--filter-spacing-xs) 0;
+  color: #999;
+  text-align: left;
+  margin: 0;
+}
+
+/* Tighten vertical gaps */
+.product__showing-result {
+  margin-bottom: var(--filter-spacing-sm) !important;
+}
+
+.product__items {
+  margin-top: var(--filter-spacing-sm);
+}
+
+/* Mobile (≤767px) */
+@media (max-width: 767px) {
+  .product-filter-bar {
+    flex-direction: row;
+    gap: var(--filter-spacing-sm);
+  }
+
+  .product-filter-bar__search {
+    flex: 1;
+    padding: var(--filter-spacing-sm);
+  }
+
+  .product-filter-bar__categories {
+    flex: 1;
+    padding: var(--filter-spacing-sm);
+  }
+
+  .product-filter-bar__search-input {
+    height: 40px;
+    font-size: 14px;
+    padding-right: 45px;
+  }
+
+  .product-filter-bar__search-input-wrapper--has-clear .product-filter-bar__search-input {
+    padding-right: 70px;
+  }
+
+  .product-filter-bar__submit-button {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .product-filter-bar__clear-button {
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    right: 40px;
+  }
+
+  .product-filter-bar__categories-trigger {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .product-filter-bar__categories-trigger i {
+    font-size: 12px;
+  }
+
+  .product-filter-bar__categories-accordion {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--farmology-white);
+    border-radius: var(--farmology-bdr-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-top: var(--filter-spacing-xs);
+  }
+
+  .product-filter-bar__categories-accordion--open {
+    padding: var(--filter-spacing-sm) var(--filter-spacing-md);
+  }
+
+  .page-header__inner {
+    margin-bottom: var(--filter-spacing-sm);
+  }
+
+  .thm-breadcrumb__inner {
+    margin-bottom: var(--filter-spacing-sm);
+  }
+}
+
+/* Tablet (768px-991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .product-filter-bar {
+    flex-direction: row;
+    gap: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__search {
+    flex: 1;
+    padding: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__categories {
+    flex: 1;
+    padding: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__search-input {
+    height: 50px;
+    font-size: 15px;
+  }
+
+  .product-filter-bar__submit-button {
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .product-filter-bar__clear-button {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .product-filter-bar__categories-trigger {
+    height: 50px;
+    font-size: 17px;
+  }
+
+  .product-filter-bar__categories-trigger i {
+    font-size: 14px;
+  }
+}
+
+/* Desktop (≥992px) */
+@media (min-width: 992px) {
+  .product-filter-bar {
+    flex-direction: column;
+    gap: var(--filter-spacing-md);
+  }
+
+  .product-filter-bar__search {
+    padding: var(--filter-spacing-lg);
+  }
+
+  .product-filter-bar__categories {
+    padding: var(--filter-spacing-lg);
+  }
+
+  .product-filter-bar__search-input {
+    height: 55px;
+    font-size: 16px;
+    padding-right: 55px;
+  }
+
+  .product-filter-bar__search-input-wrapper--has-clear .product-filter-bar__search-input {
+    padding-right: 85px;
+  }
+
+  .product-filter-bar__submit-button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .product-filter-bar__clear-button {
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    right: 50px;
+  }
+
+  .product-filter-bar__categories-trigger {
+    height: 55px;
+    font-size: 18px;
+  }
+
+  .product-filter-bar__categories-trigger i {
+    font-size: 16px;
+  }
+
+  .product-filter-bar__categories-accordion {
+    position: relative;
+  }
+}
+
+/* ===== FOOTER MOBILE OPTIMIZATIONS ===== */
+@media (max-width: 767px) {
+  .site-footer__top-inner {
+    padding: 40px 0 50px !important;
+  }
+
+  .footer-widget__about-text {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .footer-widget__links,
+  .footer-widget__services {
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .footer-widget__title {
+    font-size: 16px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .footer-widget__links-list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .footer-widget__links-list li {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .footer-widget__links-list li a {
+    font-size: 13px;
+    line-height: 1.4;
+    word-wrap: break-word;
+  }
+
+  .footer-widget__links-list li span.fas {
+    font-size: 10px;
+    margin-right: 6px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* Unified wrapper for Quick Links and Our Products */
+  .footer-widget__links-services-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .footer-widget__links-services-wrapper .row {
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .footer-widget__links-services-wrapper .col-6 {
+    display: flex;
+    align-items: flex-start;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:first-child {
+    padding-left: 0;
+    padding-right: 12px;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:last-child {
+    padding-right: 0;
+    padding-left: 12px;
+  }
+
+  .footer-widget__links-services-wrapper .footer-widget__links,
+  .footer-widget__links-services-wrapper .footer-widget__services {
+    align-items: flex-start;
+    width: 100%;
+    margin: 0;
+  }
+
+  .footer-widget__links-services-wrapper .footer-widget__title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  .footer-widget__links-services-wrapper .footer-widget__links-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .site-footer__bottom-inner {
+    padding: 20px 0 !important;
+    gap: 12px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-footer__copyright-text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .site-footer__bottom-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .site-footer__bottom-menu li {
+    margin: 0;
+  }
+
+  .site-footer__bottom-menu li + li {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .site-footer__bottom-menu li a {
+    font-size: 12px;
+  }
+
+  .site-footer__copyright {
+    margin-bottom: 12px;
+  }
+
+  /* Contact Us section mobile optimizations */
+  .footer-widget__contact {
+    margin-top: 20px;
+  }
+
+  .footer-widget__contact .footer-widget__title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .footer-widget__contact-list {
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-widget__contact-list li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-widget__contact-list li .icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .footer-widget__contact-list li p {
+    font-size: 11px;
+    line-height: 1.4;
+    margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+  }
+
+  .footer-widget__contact-list li p a {
+    font-size: 11px;
+    line-height: 1.4;
+    display: block;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .footer-widget__contact-list li p br {
+    display: none;
+  }
+
+  /* Ensure contact info doesn't overflow */
+  .footer-widget__contact-list li {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  /* Copyright section mobile optimizations */
+  .site-footer__bottom {
+    padding: 15px 0;
+  }
+
+  .site-footer__bottom-inner {
+    padding: 15px 0 !important;
+    gap: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .site-footer__copyright-text {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    margin: 0;
+    word-wrap: break-word;
+  }
+
+  .site-footer__copyright-text a {
+    font-size: 11px;
+  }
+
+  .site-footer__bottom-menu-box {
+    width: 100%;
+  }
+
+  .site-footer__bottom-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .site-footer__bottom-menu li {
+    margin: 0;
+  }
+
+  .site-footer__bottom-menu li + li {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .site-footer__bottom-menu li a {
+    font-size: 11px !important;
+    line-height: 1.4;
+    padding: 2px 0;
+  }
+}
