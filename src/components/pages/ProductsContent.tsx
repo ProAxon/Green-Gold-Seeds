@@ -420,7 +420,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
                 </li>
               </ul>
             )}
-            <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
+            {/* <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
               <li>
                 <a href="/products#" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
                   <i className="fa fa-regular fa-heart" />
@@ -441,7 +441,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
                   <i className="fa fa-solid fa-repeat" />
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </div>
           <div className="single-product-style1__content">
             <div className="single-product-style1__content-left">
@@ -497,7 +497,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
                     <p>{product.Name}</p>
                   )}
                 </div>
-                <ul className="single-product-style2__info" onClick={(e) => e.stopPropagation()}>
+                {/* <ul className="single-product-style2__info" onClick={(e) => e.stopPropagation()}>
                   <li>
                     <a href="/products#" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
                       <i className="fa fa-regular fa-heart" />
@@ -518,7 +518,7 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
                       <i className="fa fa-solid fa-repeat" />
                     </a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>

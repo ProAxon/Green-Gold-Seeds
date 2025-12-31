@@ -752,12 +752,13 @@ export function ProductsDetailsContent() {
                       <div
                         key={item.id}
                         className="col-xl-3 col-lg-4 col-md-6"
-                        style={{ display: 'flex', justifyContent: 'center' }}
                       >
-                        <Link href={productUrl} className="single-product-style1" style={{ maxWidth: 370, width: '100%', textDecoration: 'none', display: 'block', color: 'inherit' }}>
-                          <div className="single-product-style1__img">
-                            <img src={imageUrl} alt={item.Name} />
-                            <img src={imageUrl} alt={item.Name} />
+                        <div className="single-product-style1" style={{ maxWidth: 370, width: '100%', margin: '0 auto' }}>
+                          <div className="single-product-style1__img" style={{ position: 'relative' }}>
+                            <Link href={productUrl} style={{ textDecoration: 'none', display: 'block', color: 'inherit' }}>
+                              <img src={imageUrl} alt={item.Name} />
+                              <img src={imageUrl} alt={item.Name} />
+                            </Link>
                             {index % 3 === 0 && (
                               <ul className="single-product-style1__overlay">
                                 <li>
@@ -767,38 +768,164 @@ export function ProductsDetailsContent() {
                             )}
                             <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
                               <li>
-                                <a href="/products#" title="Add to Wishlist" onClick={(e) => e.preventDefault()}>
+                                <button 
+                                  type="button"
+                                  title="Add to Wishlist" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-regular fa-heart" />
-                                </a>
+                                </button>
                               </li>
                               <li>
-                                <a href="/products#" title="Add to cart" onClick={(e) => e.preventDefault()}>
+                                <button 
+                                  type="button"
+                                  title="Add to cart" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-solid fa-cart-plus" />
-                                </a>
+                                </button>
                               </li>
                               <li>
-                                <a href="/products#" title="Quick View" onClick={(e) => e.preventDefault()}>
+                                <button 
+                                  type="button"
+                                  title="Quick View" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-regular fa-eye" />
-                                </a>
+                                </button>
                               </li>
                               <li>
-                                <a href="/products#" title="Compare" onClick={(e) => e.preventDefault()}>
+                                <button 
+                                  type="button"
+                                  title="Compare" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-solid fa-repeat" />
-                                </a>
+                                </button>
                               </li>
                             </ul>
                           </div>
                           <div className="single-product-style1__content">
                             <div className="single-product-style1__content-left">
-                              <h4>
-                                {item.Variety_Name || item.Name}
-                              </h4>
+                              <Link href={productUrl} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <h4>
+                                  {item.Variety_Name || item.Name}
+                                </h4>
+                              </Link>
                               {item.Variety_Name && item.Name && item.Variety_Name !== item.Name && (
                                 <p>{item.Name}</p>
                               )}
                             </div>
                           </div>
-                        </Link>
+                        </div>
                       </div>
                     );
                   })}

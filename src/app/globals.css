@@ -962,3 +962,88 @@ body {
     padding: 2px 0;
   }
 }
+
+/* ===== FOOTER DESKTOP ALIGNMENT ===== */
+@media (min-width: 768px) {
+  /* Ensure desktop footer maintains proper three-column layout */
+  .site-footer__top-inner {
+    padding: 111px 0 100px;
+  }
+
+  /* Reset footer-widget__about to block layout for desktop (not flex) */
+  .footer-widget__about {
+    display: block !important;
+    margin-right: 50px;
+    margin-top: 9px;
+  }
+
+  /* Ensure logo and text stack vertically on desktop */
+  .footer-widget__about-logo {
+    display: inline-block;
+    flex-shrink: unset;
+    margin: 0;
+  }
+
+  .footer-widget__about-logo img {
+    width: 160px !important;
+    height: 50px !important;
+    max-height: unset !important;
+    object-fit: contain !important;
+  }
+
+  /* Ensure about text has proper desktop spacing */
+  .footer-widget__about-text {
+    margin: 0;
+    padding-top: 24px;
+    padding-bottom: 17px;
+    font-size: inherit;
+    line-height: inherit;
+    flex: unset;
+    min-width: unset;
+  }
+
+  /* Ensure footer widgets maintain proper column alignment */
+  .footer-widget__links,
+  .footer-widget__services {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /* Reset links-services-wrapper for desktop - maintain Bootstrap grid */
+  .footer-widget__links-services-wrapper {
+    display: block;
+    width: auto;
+  }
+
+  .footer-widget__links-services-wrapper .row {
+    margin-left: -15px;
+    margin-right: -15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .footer-widget__links-services-wrapper .col-6 {
+    display: block;
+    padding-left: 15px;
+    padding-right: 15px;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:first-child {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .footer-widget__links-services-wrapper .col-6:last-child {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  /* Ensure contact section has proper desktop spacing */
+  .footer-widget__contact {
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
