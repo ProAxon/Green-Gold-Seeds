@@ -31,7 +31,7 @@ const formatKeyValuePair = (text: string): React.JSX.Element => {
     // Find where the value ends (next key pattern or end of string)
     const afterMatch = text.substring(keyEnd);
     const nextKeyMatch = afterMatch.match(/\b[A-Z][A-Za-z\s]{2,}?:\s*/);
-    const valueEnd = nextKeyMatch 
+    const valueEnd = nextKeyMatch && typeof nextKeyMatch.index === 'number'
       ? keyEnd + nextKeyMatch.index 
       : text.length;
     
