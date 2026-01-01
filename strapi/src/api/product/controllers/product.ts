@@ -32,8 +32,8 @@ export default factories.createCoreController('api::product.product', ({ strapi 
         });
 
         // Extract categories from current page
-        if (result.data && Array.isArray(result.data)) {
-          result.data.forEach((product: any) => {
+        if (result.results && Array.isArray(result.results)) {
+          result.results.forEach((product: any) => {
             if (product.Group_Name && typeof product.Group_Name === 'string') {
               categoriesSet.add(product.Group_Name.trim());
             }
@@ -71,6 +71,7 @@ export default factories.createCoreController('api::product.product', ({ strapi 
       let page = 1;
       let hasMore = true;
       const pageSize = 1000; // Reasonable page size
+      const categoryString = String(category);
 
       // Fetch all products with the given Group_Name by paginating through all pages
       while (hasMore) {
@@ -79,7 +80,7 @@ export default factories.createCoreController('api::product.product', ({ strapi 
           fields: ['Name', 'Group_Name'],
           filters: {
             Group_Name: {
-              $eq: category,
+              $eq: categoryString,
             },
           },
           pagination: {
@@ -90,8 +91,8 @@ export default factories.createCoreController('api::product.product', ({ strapi 
         });
 
         // Extract sub-categories from current page
-        if (result.data && Array.isArray(result.data)) {
-          result.data.forEach((product: any) => {
+        if (result.results && Array.isArray(result.results)) {
+          result.results.forEach((product: any) => {
             if (product.Name && typeof product.Name === 'string') {
               subCategoriesSet.add(product.Name.trim());
             }

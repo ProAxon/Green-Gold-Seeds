@@ -129,7 +129,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
               toggleBtn.innerHTML = "<i class='fa fa-angle-down'></i>";
               self.append(toggleBtn);
               
-              self.find('button').on('click', function(e: Event) {
+              self.find('button').on('click', function(this: HTMLElement, e: Event) {
                 e.preventDefault();
                 const btn = $(this);
                 btn.toggleClass('expanded');

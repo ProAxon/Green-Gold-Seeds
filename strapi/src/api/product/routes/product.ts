@@ -32,7 +32,7 @@ const customRoutes = {
 export default {
   ...defaultRouter,
   routes: [
-    ...defaultRouter.routes,
+    ...(Array.isArray(defaultRouter.routes) ? defaultRouter.routes : defaultRouter.routes()),
     ...customRoutes.routes,
   ],
 };
