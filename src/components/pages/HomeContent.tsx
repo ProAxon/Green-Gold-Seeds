@@ -22,75 +22,73 @@ export function HomeContent() {
   return (
     <PageLayout variant="default" currentPage="/" showSidebar={true}>
       {/* ===== BANNER SECTION ===== */}
-          <section className="banner-one">
-            <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
-            </div>
-            <div className="banner-one__shape-4 float-bob-x">
-              <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
-            </div>
-            <div className="banner-one__shape-5 float-bob-y">
-              <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
-            </div>
-            <div className="banner-one__shape-6">
-              <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
-            </div>
-            <div className="banner-one__shape-7 img-bounce">
-              <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
-            </div>
-            <div className="banner-one__shape-8 float-bob-y">
-              <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
-            </div>
-            <div className="container">
-              <div className="banner-one__inner">
-                <div className="row">
-                  <div className="col-xl-6 col-lg-6">
-                    <div className="banner-one__left">
-                      <div className="banner-one__title-box">
-                      <div className="banner-one__sub-title">
-                        <p>{t('home.banner.subtitle')}</p>
-                      </div>
-                      <h2 className="banner-one__title">{t('home.banner.title')}</h2>
-                      </div>
-                    <p className="banner-one__text">
-                      {t('home.banner.description')}
-                    </p>
-                      <div className="banner-one__thm-and-other-btn-box">
-                        <div className="banner-one__btn-box">
-                          <Link className="thm-btn" href="/about#our-history">{t('common.exploreOurJourney')}
-                            <i className="fal fa-long-arrow-right" />
-                            <span className="hover-btn hover-bx" />
-                            <span className="hover-btn hover-bx2" />
-                            <span className="hover-btn hover-bx3" />
-                            <span className="hover-btn hover-bx4" />
-                          </Link>
-                        </div>
-                      </div>
+      <section className="banner-one">
+        <div className="banner-one__shape-bg" style={{ backgroundImage: 'url(/assets/images/shapes/banner-one-shape-bg.png)' }}>
+        </div>
+        <div className="banner-one__shape-4 float-bob-x">
+          <img src="/assets/images/shapes/banner-one-shape-4.png" alt="" />
+        </div>
+        <div className="banner-one__shape-5 float-bob-y">
+          <img src="/assets/images/shapes/banner-one-shape-5.png" alt="" />
+        </div>
+        <div className="banner-one__shape-6">
+          <img src="/assets/images/shapes/banner-one-shape-6.png" alt="" />
+        </div>
+        <div className="banner-one__shape-7 img-bounce">
+          <img src="/assets/images/shapes/banner-one-shape-7.png" alt="" />
+        </div>
+        <div className="banner-one__shape-8 float-bob-y">
+          <img src="/assets/images/shapes/banner-one-shape-8.png" alt="" />
+        </div>
+        <div className="container">
+          <div className="banner-one__inner">
+            <div className="row">
+              <div className="col-xl-6 col-lg-6">
+                <div className="banner-one__left">
+                  <div className="banner-one__title-box">
+                    <div className="banner-one__sub-title">
+                      <p>{t('home.banner.subtitle')}</p>
+                    </div>
+                    <h2 className="banner-one__title">{t('home.banner.title')}</h2>
+                  </div>
+                  <p className="banner-one__text">
+                    {t('home.banner.description')}
+                  </p>
+                  <div className="banner-one__thm-and-other-btn-box">
+                    <div className="banner-one__btn-box">
+                      <Link className="thm-btn" href="/about#our-history">{t('common.exploreOurJourney')}
+                        <i className="fal fa-long-arrow-right" />
+                        <span className="hover-btn hover-bx" />
+                        <span className="hover-btn hover-bx2" />
+                        <span className="hover-btn hover-bx3" />
+                        <span className="hover-btn hover-bx4" />
+                      </Link>
                     </div>
                   </div>
-                  <div className="col-xl-6 col-lg-6">
-                    <div className="banner-one__right">
-                      <div className="banner-one__img-box">
-                        <div className="banner-one__img">
-                          <img
-                            className="img-bounce"
-                            src={IMAGE_PATHS.bannerImage}
-                            alt={t('home.banner.title')}
-                            style={BANNER_IMAGE_STYLES}
-                          />
-                          <div className="banner-one__img-shape-box rotate-me">
-                            <div className="banner-one__img-shape-1">
-                              <div className="banner-one__img-shape-2" />
-                            </div>
-                            <div className="banner-one__shape-1">
-                              <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
-                            </div>
-                            <div className="banner-one__shape-2 rotate-me">
-                              <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
-                            </div>
-                            <div className="banner-one__shape-3">
-                              <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
-                            </div>
-                          </div>
+                </div>
+              </div>
+              <div className="col-xl-6 col-lg-6">
+                <div className="banner-one__right">
+                  <div className="banner-one__img-box">
+                    <div className="banner-one__img">
+                      <img
+                        className="img-bounce"
+                        src={IMAGE_PATHS.bannerImage}
+                        alt={t('home.banner.title')}
+                        style={BANNER_IMAGE_STYLES}
+                      />
+                      <div className="banner-one__img-shape-box rotate-me">
+                        <div className="banner-one__img-shape-1">
+                          <div className="banner-one__img-shape-2" />
+                        </div>
+                        <div className="banner-one__shape-1">
+                          <img src="/assets/images/shapes/banner-one-shape-1.png" alt="" />
+                        </div>
+                        <div className="banner-one__shape-2 rotate-me">
+                          <img src="/assets/images/shapes/banner-one-shape-2.png" alt="" />
+                        </div>
+                        <div className="banner-one__shape-3">
+                          <img src="/assets/images/shapes/banner-one-shape-3.png" alt="" />
                         </div>
                       </div>
                     </div>
@@ -98,7 +96,9 @@ export function HomeContent() {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
+        </div>
+      </section>
           {/* ===== FEATURE SECTION ===== */}
           {false && <section className="feature-one">
             <div className="container">

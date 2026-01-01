@@ -109,38 +109,94 @@ export function SocialMediaPosts({ instagramUrl, youtubeUrl, facebookUrl }: Soci
       return;
     }
 
-    // Always use iframe embed for cleaner display (extract post ID from URL or HTML)
-    let postId: string | null = null;
-    
     // Check if it's HTML embed code
     if (isHtmlEmbed(instagramUrl)) {
-      // Extract URL from HTML embed code
-      const extractedUrl = extractInstagramUrlFromHtml(instagramUrl);
-      if (extractedUrl) {
-        postId = getInstagramPostId(extractedUrl);
+      // Remove script tag from HTML (we'll load it separately)
+      const htmlWithoutScript = instagramUrl.replace(/<script[^>]*>.*?<\/script>/gi, '').trim();
+      setInstagramHtml(htmlWithoutScript);
+    } else {
+      // It's a URL, extract post ID and create iframe HTML
+      const postId = getInstagramPostId(instagramUrl);
+      if (postId) {
+        setInstagramHtml(`<iframe src="https://www.instagram.com/p/${postId}/embed/" width="100%" height="600" frameborder="0" scrolling="no" allowtransparency="true" style="border: none; border-radius: 8px; display: block; margin: 0 auto;"></iframe>`);
+      } else {
+        setInstagramHtml(null);
       }
-    } else {
-      // It's a URL, extract post ID directly
-      postId = getInstagramPostId(instagramUrl);
-    }
-    
-    if (postId) {
-      // Use iframe embed for cleaner, consistent display
-      setInstagramHtml(`<iframe src="https://www.instagram.com/p/${postId}/embed/" width="100%" height="600" frameborder="0" scrolling="no" allowtransparency="true" style="border: none; border-radius: 8px; display: block; margin: 0 auto; max-width: 100%;"></iframe>`);
-    } else {
-      setInstagramHtml(null);
     }
   }, [instagramUrl]);
 
-  // Mark Instagram as loaded when HTML is set (iframe embeds don't need script processing)
+  // Load Instagram embed script after HTML is set
   useEffect(() => {
-    if (instagramHtml && instagramRef.current) {
-      // Iframe embeds load automatically, just mark as loaded after a short delay
-      const timer = setTimeout(() => {
-        setInstagramLoaded(true);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
+    if (!instagramHtml || !instagramRef.current) return;
+
+    // Reset loaded state when HTML changes
+    setInstagramLoaded(false);
+
+    // Load Instagram embed script if not already loaded
+    const loadInstagramScript = () => {
+      const existingScript = document.querySelector('script[src*="instagram.com/embed.js"]');
+      
+      if (!existingScript) {
+        const script = document.createElement('script');
+        script.src = 'https://www.instagram.com/embed.js';
+        script.async = true;
+        script.onload = () => {
+          // Wait for script to be fully ready and HTML to be rendered
+          setTimeout(() => {
+            try {
+              if ((window as any).instgrm && instagramRef.current) {
+                // Process all embeds in the container
+                (window as any).instgrm.Embeds.process();
+                setInstagramLoaded(true);
+              } else {
+                // Retry if instgrm not ready yet
+                setTimeout(() => {
+                  if ((window as any).instgrm && instagramRef.current) {
+                    (window as any).instgrm.Embeds.process();
+                  }
+                  setInstagramLoaded(true);
+                }, 500);
+              }
+            } catch (e) {
+              console.warn('Error processing Instagram embed:', e);
+              setInstagramLoaded(true);
+            }
+          }, 300);
+        };
+        script.onerror = () => {
+          console.warn('Failed to load Instagram embed script');
+          setInstagramLoaded(true);
+        };
+        document.body.appendChild(script);
+      } else {
+        // Script already loaded, process embeds after ensuring HTML is rendered
+        setTimeout(() => {
+          try {
+            if ((window as any).instgrm) {
+              // Process all embeds (Instagram will find them automatically)
+              (window as any).instgrm.Embeds.process();
+            }
+            setInstagramLoaded(true);
+          } catch (e) {
+            console.warn('Error processing Instagram embed:', e);
+            setInstagramLoaded(true);
+          }
+        }, 300);
+      }
+    };
+
+    // Wait a bit for React to render the HTML, then load script
+    const timer = setTimeout(() => {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadInstagramScript);
+      } else {
+        loadInstagramScript();
+      }
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [instagramHtml]);
 
   // Process Facebook URL and set HTML state

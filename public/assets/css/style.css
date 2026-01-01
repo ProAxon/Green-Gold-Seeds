@@ -20678,11 +20678,17 @@ Product Details
 
 .product-details__img {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
 }
 
 .product-details__img img {
   width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   border: 1px solid rgba(var(--farmology-black-rgb), .10);
   border-radius: 15px;
 }

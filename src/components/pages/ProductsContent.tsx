@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useRouter, usePathname } from '@/i18n/routing';
 import { useTranslations, useLocale } from 'next-intl';
+import Image from 'next/image';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
 const qs = require('qs');
@@ -411,8 +412,24 @@ export function ProductsContent({ category, subcategory, search: initialSearch }
       <div key={product.id} className={columnClasses}>
         <Link href={productUrl} className="single-product-style1" style={{ textDecoration: 'none', display: 'block', color: 'inherit' }}>
           <div className="single-product-style1__img">
-            <img src={imageUrl} alt={product.Name} />
-            <img src={imageUrl} alt={product.Name} />
+            <Image
+              src={imageUrl}
+              alt={product.Name}
+              fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              quality={85}
+              style={{ objectFit: 'contain', objectPosition: 'center' }}
+              className="single-product-style1__img-hover"
+            />
+            <Image
+              src={imageUrl}
+              alt={product.Name}
+              fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+              quality={85}
+              style={{ objectFit: 'contain', objectPosition: 'center' }}
+              className="single-product-style1__img-default"
+            />
             {index % 3 === 0 && (
               <ul className="single-product-style1__overlay">
                 <li>
