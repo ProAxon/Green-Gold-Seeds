@@ -1,10 +1,12 @@
 "use client";
 
+import { useState, useEffect } from 'react';
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { ResponsiveLanguageSwitcher } from "@/components/ResponsiveLanguageSwitcher";
 import { CONTACT_INFO, SOCIAL_LINKS } from '@/config/constants';
 import { IMAGE_PATHS } from '@/config/images';
+const qs = require('qs');
 
 const MOBILE_MENU_STYLES = {
   display: 'flex',
@@ -19,6 +21,151 @@ interface HeaderProps {
 
 export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
   const t = useTranslations();
+  const locale = useLocale();
+  const [categories, setCategories] = useState<string[]>([]);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
+
+  const fetchCategories = async () => {
+    try {
+      setCategoriesLoading(true);
+      const apiKey = process.env.NEXT_STRAPI_API_KEY;
+      const headers: HeadersInit = apiKey
+        ? { Authorization: `Bearer ${apiKey}` }
+        : {};
+
+      // Try custom endpoint first
+      try {
+        const response = await fetch(
+          `/strapi/api/products/categories?locale=${locale}`,
+          { headers }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.data && Array.isArray(data.data)) {
+            setCategories(data.data);
+            setCategoriesLoading(false);
+            return;
+          }
+        }
+      } catch (endpointError) {
+        console.warn('Custom categories endpoint failed, using fallback:', endpointError);
+      }
+
+      // Fallback: fetch products and extract categories
+      const query = qs.stringify(
+        {
+          fields: ['Group_Name'],
+          pagination: {
+            page: 1,
+            pageSize: 1000, // Large page size to get all categories
+          },
+        },
+        { encodeValuesOnly: true }
+      );
+
+      const response = await fetch(
+        `/strapi/api/products?locale=${locale}&${query}`,
+        { headers }
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch products for categories');
+      }
+
+      const data = await response.json();
+      const products = data.data || [];
+
+      // Extract unique Group_Name values
+      const categoriesSet = new Set<string>();
+      products.forEach((product: any) => {
+        if (product.Group_Name && typeof product.Group_Name === 'string') {
+          categoriesSet.add(product.Group_Name.trim());
+        }
+      });
+
+      // Convert to sorted array
+      const sortedCategories = Array.from(categoriesSet).sort();
+      setCategories(sortedCategories);
+    } catch (err) {
+      console.error('Error fetching categories:', err);
+      setCategories([]);
+    } finally {
+      setCategoriesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
+
+  // Update mobile menu after categories finish loading
+  useEffect(() => {
+    if (!categoriesLoading) {
+      // Wait for React to finish rendering the updated menu
+      const updateMobileMenu = () => {
+        const mainMenuList = document.querySelector('.main-menu__list');
+        const mobileNavContainer = document.querySelector('.mobile-nav__container');
+        
+        if (mainMenuList && mobileNavContainer) {
+          // Clone the updated menu HTML to mobile container
+          mobileNavContainer.innerHTML = mainMenuList.outerHTML;
+          
+          // Re-initialize dropdown functionality using jQuery (if available)
+          // This matches the behavior from script.js lines 1031-1051
+          if (typeof window !== 'undefined' && (window as any).jQuery) {
+            const $ = (window as any).jQuery;
+            const dropdownAnchor = $('.mobile-nav__container .main-menu__list .dropdown > a');
+            
+            // Remove existing buttons and handlers
+            dropdownAnchor.find('button').off('click').remove();
+            
+            // Re-add toggle buttons and handlers
+            dropdownAnchor.each(function(this: HTMLElement) {
+              const self = $(this);
+              const toggleBtn = document.createElement('BUTTON');
+              toggleBtn.setAttribute('aria-label', 'dropdown toggler');
+              toggleBtn.innerHTML = "<i class='fa fa-angle-down'></i>";
+              self.append(toggleBtn);
+              
+              self.find('button').on('click', function(this: HTMLElement, e: Event) {
+                e.preventDefault();
+                const btn = $(this);
+                btn.toggleClass('expanded');
+                btn.parent().toggleClass('expanded');
+                btn.parent().parent().children('ul').slideToggle();
+              });
+            });
+          }
+        }
+      };
+
+      // Use setTimeout to ensure DOM is updated after React render
+      const timeoutId = setTimeout(updateMobileMenu, 100);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [categoriesLoading]);
+
+  const renderCategoryDropdown = () => {
+    return (
+      <>
+        <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
+        {categoriesLoading ? (
+          <li><span style={{ padding: '10px', color: '#999' }}>Loading...</span></li>
+        ) : (
+          categories.map((category) => (
+            <li key={category}>
+              <Link href={`/products?category=${encodeURIComponent(category)}`}>
+                {category}
+              </Link>
+            </li>
+          ))
+        )}
+      </>
+    );
+  };
   
   if (variant === 'default') {
     return (
@@ -69,13 +216,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
                     <li className="dropdown">
                       <a href="/#" onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                       <ul className="shadow-box">
-                        <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
+                        {renderCategoryDropdown()}
                       </ul>
                     </li>
                     <li>
@@ -173,13 +314,7 @@ export function Header({ variant = 'two', currentPage = '#' }: HeaderProps) {
                     <li className="dropdown">
                       <a href={`${currentPage}#`} onClick={(e) => e.preventDefault()}>{t('nav.products')}</a>
                       <ul className="shadow-box">
-                        <li><Link href="/products">{t('nav.productCategories.allProducts')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.cottonSeeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.wheatSeeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.vegetableSeeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.oilseeds')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.pulses')}</Link></li>
-                        <li><Link href="/products">{t('nav.productCategories.cereals')}</Link></li>
+                        {renderCategoryDropdown()}
                       </ul>
                     </li>
                     <li>

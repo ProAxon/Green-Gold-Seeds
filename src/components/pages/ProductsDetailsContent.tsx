@@ -6,6 +6,103 @@ import { useParams } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { PageLayout } from '@/components/layout/PageLayout';
 import { IMAGE_PATHS } from '@/config/images';
+import { SocialMediaPosts } from '@/components/SocialMediaPosts';
+
+// Helper function to format key-value pairs with bold keys
+const formatKeyValuePair = (text: string): React.JSX.Element => {
+  // Split text by key-value pattern: "Key: Value" where Key starts with capital letter
+  // Pattern: Capital letter, followed by letters/spaces, then colon, then value until next key or end
+  const parts: React.JSX.Element[] = [];
+  let remainingText = text;
+  let hasMatches = false;
+  
+  // Find all key-value pairs: look for pattern like "Crop Period:", "Boll Shape:", etc.
+  // Key pattern: starts with capital, contains letters/spaces, ends with colon
+  const keyPattern = /\b([A-Z][A-Za-z\s]{2,}?):\s*/g;
+  const matches: Array<{ key: string; keyEnd: number; valueStart: number }> = [];
+  
+  let match;
+  keyPattern.lastIndex = 0;
+  
+  while ((match = keyPattern.exec(text)) !== null) {
+    const key = match[1].trim();
+    const keyEnd = match.index + match[0].length;
+    
+    // Find where the value ends (next key pattern or end of string)
+    const afterMatch = text.substring(keyEnd);
+    const nextKeyMatch = afterMatch.match(/\b[A-Z][A-Za-z\s]{2,}?:\s*/);
+    const valueEnd = nextKeyMatch && nextKeyMatch.index !== undefined
+      ? keyEnd + nextKeyMatch.index 
+      : text.length;
+    
+    matches.push({
+      key,
+      keyEnd: match.index,
+      valueStart: keyEnd
+    });
+  }
+  
+  // If we found matches, format them
+  if (matches.length > 0) {
+    hasMatches = true;
+    let lastIndex = 0;
+    
+    matches.forEach((matchInfo, index) => {
+      // Add text before this key-value pair
+      if (matchInfo.keyEnd > lastIndex) {
+        const beforeText = text.substring(lastIndex, matchInfo.keyEnd).trim();
+        if (beforeText) {
+          parts.push(<>{beforeText} </>);
+        }
+      }
+      
+      // Find value end (start of next key or end of text)
+      const valueEnd = index < matches.length - 1 
+        ? matches[index + 1].keyEnd 
+        : text.length;
+      const value = text.substring(matchInfo.valueStart, valueEnd).trim();
+      
+      // Add formatted key-value pair
+      parts.push(
+        <React.Fragment key={`kv-${matchInfo.keyEnd}`}>
+          <strong style={{ fontWeight: 'bold' }}>{matchInfo.key}</strong>: {value}
+        </React.Fragment>
+      );
+      
+      // Add space if not last
+      if (index < matches.length - 1) {
+        parts.push(<>{' '}</>);
+      }
+      
+      lastIndex = valueEnd;
+    });
+    
+    // Add any remaining text after last match
+    if (lastIndex < text.length) {
+      const remaining = text.substring(lastIndex).trim();
+      if (remaining) {
+        parts.push(<>{remaining}</>);
+      }
+    }
+    
+    return <>{parts}</>;
+  }
+  
+  // Fallback: try simple single key-value pattern
+  const simpleMatch = text.match(/^([^:]+):\s*(.+)$/);
+  if (simpleMatch) {
+    const key = simpleMatch[1].trim();
+    const value = simpleMatch[2].trim();
+    return (
+      <>
+        <strong style={{ fontWeight: 'bold' }}>{key}</strong>: {value}
+      </>
+    );
+  }
+  
+  // If no match, return original text
+  return <>{text}</>;
+};
 
 // Function to format description with bullet points
 const formatDescription = (description: string | null | undefined): React.JSX.Element | null => {
@@ -45,7 +142,7 @@ const formatDescription = (description: string | null | undefined): React.JSX.El
                 fontSize: '18px',
                 fontWeight: 'bold'
               }}>•</span>
-              {item.trim()}
+              {formatKeyValuePair(item.trim())}
             </li>
           ))}
         </ul>
@@ -79,13 +176,14 @@ const formatDescription = (description: string | null | undefined): React.JSX.El
           </p>
         );
       } else {
-        // Regular text line
+        // Check if this is a key-value pair (has colon but doesn't end with colon)
+        // Format with bold key
         if (currentList.length > 0) {
           flushList();
         }
         formattedContent.push(
           <p key={`text-${index}`} style={{ marginBottom: '10px', lineHeight: '1.6' }}>
-            {trimmedLine}
+            {formatKeyValuePair(trimmedLine)}
           </p>
         );
       }
@@ -117,6 +215,9 @@ interface Product {
   Variety_Name: string;
   Group_Name: string;
   Image: any;
+  Instagram_Post_URL?: string;
+  YouTube_Post_URL?: string;
+  Facebook_Post_URL?: string;
 }
 
 // ===== MAIN COMPONENT =====
@@ -152,7 +253,7 @@ export function ProductsDetailsContent() {
         // Try to fetch by documentId first, then by id
         // Include locale and fields like ProductsContent for consistency
         // Add locale filter to ensure we only get products in the requested locale
-        const apiUrl = `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&filters[documentId][$eq]=${productId}&filters[locale][$eq]=${locale}&populate[Image][fields][1]=url`;
+        const apiUrl = `/strapi/api/products?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&filters[documentId][$eq]=${productId}&filters[locale][$eq]=${locale}&populate[Image][fields][1]=url`;
         
         console.log('[ProductDetails] Fetching product', {
           productId,
@@ -166,7 +267,7 @@ export function ProductsDetailsContent() {
         
         if (!response.ok) {
           // If documentId doesn't work, try fetching by id
-          const apiUrlById = `/strapi/api/products/${productId}?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&populate[Image][fields][1]=url`;
+          const apiUrlById = `/strapi/api/products/${productId}?locale=${locale}&fields[0]=documentId&fields[1]=locale&fields[2]=Name&fields[3]=Description&fields[4]=Variety_Name&fields[5]=Group_Name&fields[6]=Instagram_Post_URL&fields[7]=YouTube_Post_URL&fields[8]=Facebook_Post_URL&populate[Image][fields][1]=url`;
           
           console.log('[ProductDetails] Fetching product by ID fallback', {
             productId,
@@ -185,6 +286,11 @@ export function ProductsDetailsContent() {
           
           const dataById = await responseById.json();
           console.log('[ProductDetails] Product by ID response', dataById);
+          console.log('[ProductDetails] Social Media URLs:', {
+            instagram: dataById.data?.Instagram_Post_URL,
+            youtube: dataById.data?.YouTube_Post_URL,
+            facebook: dataById.data?.Facebook_Post_URL
+          });
           
           // Strictly verify the product locale matches the current locale
           if (dataById.data && dataById.data.locale !== locale) {
@@ -197,6 +303,12 @@ export function ProductsDetailsContent() {
           const data = await response.json();
           console.log('[ProductDetails] Product by documentId response', data);
           if (data.data && data.data.length > 0) {
+            const productData = data.data.find((p: Product) => p.locale === locale) || data.data[0];
+            console.log('[ProductDetails] Social Media URLs:', {
+              instagram: productData?.Instagram_Post_URL,
+              youtube: productData?.YouTube_Post_URL,
+              facebook: productData?.Facebook_Post_URL
+            });
             // Filter to only get products that match the current locale
             const product = data.data.find((p: Product) => p.locale === locale) || data.data[0];
             
@@ -698,6 +810,16 @@ export function ProductsDetailsContent() {
               </div>
             </div>
           )}
+          {/* Social Media Posts Section */}
+          {product && !loading && !error && (
+            product.Instagram_Post_URL || product.YouTube_Post_URL || product.Facebook_Post_URL
+          ) && (
+            <SocialMediaPosts
+              instagramUrl={product.Instagram_Post_URL}
+              youtubeUrl={product.YouTube_Post_URL}
+              facebookUrl={product.Facebook_Post_URL}
+            />
+          )}
           {/* Same Name Products Section */}
           {!loading && !error && !sameNameLoading && sameNameProducts.length > 0 && (
             <div className="container" style={{ marginTop: '40px' }}>
@@ -709,13 +831,14 @@ export function ProductsDetailsContent() {
                   <div className="row">
                     {sameNameProducts.map((item, index) => {
                       const imageUrl = getProductImage(item);
+                      const productUrl = `/products/${item.documentId || item.id}`;
                       return (
                         <div
                           key={item.id}
                           className="col-xl-2 col-lg-3 col-md-4 col-sm-6"
                           style={{ marginBottom: '20px' }}
                         >
-                          <div className="single-product-style1" style={{ height: '100%' }}>
+                          <Link href={productUrl} className="single-product-style1" style={{ height: '100%', textDecoration: 'none', display: 'block', color: 'inherit' }}>
                             <div className="single-product-style1__img">
                               <img src={imageUrl} alt={item.Name} />
                               <img src={imageUrl} alt={item.Name} />
@@ -723,13 +846,11 @@ export function ProductsDetailsContent() {
                             <div className="single-product-style1__content">
                               <div className="single-product-style1__content-left">
                                 <h4 style={{ fontSize: '14px', marginBottom: '5px' }}>
-                                  <Link href={`/products/${item.documentId || item.id}`}>
-                                    {item.Variety_Name || item.Name}
-                                  </Link>
+                                  {item.Variety_Name || item.Name}
                                 </h4>
                               </div>
                             </div>
-                          </div>
+                          </Link>
                         </div>
                       );
                     })}
@@ -748,16 +869,18 @@ export function ProductsDetailsContent() {
                 <div className="row">
                   {relatedProducts.map((item, index) => {
                     const imageUrl = getProductImage(item);
+                    const productUrl = `/products/${item.documentId || item.id}`;
                     return (
                       <div
                         key={item.id}
                         className="col-xl-3 col-lg-4 col-md-6"
-                        style={{ display: 'flex', justifyContent: 'center' }}
                       >
-                        <div className="single-product-style1" style={{ maxWidth: 370, width: '100%' }}>
-                          <div className="single-product-style1__img">
-                            <img src={imageUrl} alt={item.Name} />
-                            <img src={imageUrl} alt={item.Name} />
+                        <div className="single-product-style1" style={{ maxWidth: 370, width: '100%', margin: '0 auto' }}>
+                          <div className="single-product-style1__img" style={{ position: 'relative' }}>
+                            <Link href={productUrl} style={{ textDecoration: 'none', display: 'block', color: 'inherit' }}>
+                              <img src={imageUrl} alt={item.Name} />
+                              <img src={imageUrl} alt={item.Name} />
+                            </Link>
                             {index % 3 === 0 && (
                               <ul className="single-product-style1__overlay">
                                 <li>
@@ -765,43 +888,163 @@ export function ProductsDetailsContent() {
                                 </li>
                               </ul>
                             )}
-                            <ul className="single-product-style1__info">
+                            <ul className="single-product-style1__info" onClick={(e) => e.stopPropagation()}>
                               <li>
-                                <a href="/products#" title="Add to Wishlist">
+                                <button 
+                                  type="button"
+                                  title="Add to Wishlist" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-regular fa-heart" />
-                                </a>
+                                </button>
                               </li>
                               <li>
-                                <a href="/products#" title="Add to cart">
+                                <button 
+                                  type="button"
+                                  title="Add to cart" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-solid fa-cart-plus" />
-                                </a>
+                                </button>
                               </li>
                               <li>
-                                <a href="/products#" title="Quick View">
+                                <button 
+                                  type="button"
+                                  title="Quick View" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-regular fa-eye" />
-                                </a>
+                                </button>
                               </li>
                               <li>
-                                <a href="/products#" title="Compare">
+                                <button 
+                                  type="button"
+                                  title="Compare" 
+                                  onClick={(e) => e.preventDefault()}
+                                  style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: '35px',
+                                    height: '35px',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'var(--farmology-white)',
+                                    boxShadow: '0px 0px 35px 0px rgba(0, 0, 0, .2)',
+                                    color: 'var(--farmology-base)',
+                                    fontSize: '15px',
+                                    lineHeight: 0,
+                                    border: 'none',
+                                    cursor: 'pointer',
+                                    transition: 'all 200ms linear',
+                                    transitionDelay: '0.1s',
+                                    padding: 0
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-white)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-base)';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = 'var(--farmology-base)';
+                                    e.currentTarget.style.backgroundColor = 'var(--farmology-white)';
+                                  }}
+                                >
                                   <i className="fa fa-solid fa-repeat" />
-                                </a>
+                                </button>
                               </li>
                             </ul>
                           </div>
                           <div className="single-product-style1__content">
                             <div className="single-product-style1__content-left">
-                              <h4>
-                                <Link href={`/products/${item.documentId || item.id}`}>
+                              <Link href={productUrl} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <h4>
                                   {item.Variety_Name || item.Name}
-                                </Link>
-                              </h4>
-                              <p>{item.Name}</p>
-                            </div>
-                            <div className="single-product-style1__content-right">
-                              <div className="single-product-style1__review">
-                                <i className="fa fa-star" />
-                                <p>4.{(5 + (index % 5)).toFixed(1)}</p>
-                              </div>
+                                </h4>
+                              </Link>
+                              {item.Variety_Name && item.Name && item.Variety_Name !== item.Name && (
+                                <p>{item.Name}</p>
+                              )}
                             </div>
                           </div>
                         </div>
